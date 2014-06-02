@@ -6,7 +6,7 @@
 #include "ei_event.h"
 #include "hw_interface.h"
 
-int ei_main(int argc, char** argv)
+int _ei_main(int argc, char** argv)
 {
 	ei_surface_t			main_window		= NULL;
 	ei_size_t			main_window_size;
