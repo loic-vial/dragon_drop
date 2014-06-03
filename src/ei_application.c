@@ -29,8 +29,6 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root.widget.screen_location.top_left.y = 0;
     root.widget.screen_location.size = *main_window_size;
     root.widget.content_rect = &root.widget.screen_location;
-
-    root.color = ei_default_background_color;
 }
 
 void draw_widget(ei_widget_t* widget)
