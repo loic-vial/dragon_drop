@@ -18,7 +18,8 @@ SOURCES += \
     ../tests/frame.c \
     ../src/ei_widget.c \
     ../src/ei_geometrymanager.c \
-    ../src/ei_widgetclass.c
+    ../src/ei_widgetclass.c \
+    ../src/ei_frame.c
 
 HEADERS += \
     ../include/ei_application.h \

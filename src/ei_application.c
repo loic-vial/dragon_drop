@@ -23,14 +23,17 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     frame.geomnotifyfunc=&geomnotifyfunc_frame;
     frame.next = NULL;
 
+    /* registers all classes of widget and all geometry managers*/
     ei_widgetclass_register(&frame); /* TODO mettre toutes les classes*/
+    ei_frame_register_class ();
 
-/* registers all classes of widget and all geometry managers*/
+
 surface_in = hw_create_window(main_window_size, (const ei_bool_t) fullscreen);
 }
 
 void ei_app_run()
 {
+
     getchar();
 }
 
