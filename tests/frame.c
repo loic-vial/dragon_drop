@@ -43,5 +43,7 @@ int ei_main(int argc, char** argv)
 	/* We just exited from the main loop. Terminate the application (cleanup). */
     ei_app_free();
 
+    getchar();
+
 	return (EXIT_SUCCESS);
 }

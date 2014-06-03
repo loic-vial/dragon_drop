@@ -8,8 +8,9 @@
 ei_widget_t*		ei_widget_create		(ei_widgetclass_name_t	class_name,
                              ei_widget_t*		parent)
 {
-
-    NULL;
+ei_widget_t* widget;
+   ei_widgetclass_t* name=ei_widgetclass_from_name (class_name);
+   return widget;
 }
 
 void			ei_widget_destroy		(ei_widget_t*		widget)
