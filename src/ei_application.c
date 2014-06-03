@@ -15,7 +15,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 
     /*creates the root widget to accress the root window. */
 
-   root.wclass = NULL;
+     root.wclass = NULL;
     root.pick_id=0xFFFFFF;
     root.pick_color=0xFFFFFF;
     root.parent=NULL;

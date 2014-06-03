@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ei_frame.h"
+#include "string.h"
 
 ei_widgetclass_t* first_class = NULL;
 
@@ -18,7 +19,12 @@ void ei_widgetclass_register (ei_widgetclass_t* widgetclass)
 
 ei_widgetclass_t*	ei_widgetclass_from_name	(ei_widgetclass_name_t name)
 {
-    NULL;
+    ei_widgetclass_t* tmp=first_class;
+    while ( strcmp ( name, tmp->name) !=0)
+    {
+       tmp=tmp->next;
+    }
+    return tmp;
 }
 
 void			ei_frame_register_class 	()
