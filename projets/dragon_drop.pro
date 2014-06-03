@@ -3,6 +3,8 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_CFLAGS += -std=c99
+
 INCLUDEPATH += ../include /usr/include/SDL
 
 LIBS += -L$$_PRO_FILE_PWD_/../lib/
