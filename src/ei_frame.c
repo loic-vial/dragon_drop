@@ -4,7 +4,7 @@
 
 void* allocfunc_frame ()
 {
-    ei_frame_t* e=malloc(sizeof(ei_frame_t));
+    ei_frame_t* e=calloc(1,sizeof(ei_frame_t));
     return e;
 }
 
