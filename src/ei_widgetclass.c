@@ -3,16 +3,17 @@
 #include <stdlib.h>
 #include "ei_frame.h"
 
-ei_widgetclass_t first_class;
+ei_widgetclass_t* first_class = NULL;
 
-void ei_widgetclass_register		(ei_widgetclass_t* widgetclass)
+void ei_widgetclass_register (ei_widgetclass_t* widgetclass)
 {
-    ei_widgetclass_t tmp=first_class;
-   /* while(tmp.next /= NULL)
+    ei_widgetclass_t* tmp=first_class;
+    while ( tmp->next != NULL)
     {
-       tmp=first_class.next;
+       tmp=tmp->next;
     }
-    tmp.next=widgetclass;*/
+    tmp->next=widgetclass;
+
 }
 
 ei_widgetclass_t*	ei_widgetclass_from_name	(ei_widgetclass_name_t name)

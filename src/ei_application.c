@@ -27,6 +27,8 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
         ei_rect_t		screen_location;///< Position and size of the widget expressed in the root window reference.
         ei_rect_t*		content_rect;	///< Where to place children, when this widget is used as a container. By defaults, points to the screen_location.
 */
+
+
     /* registers all classes of widget and all geometry managers*/
     /* TODO mettre toutes les classes*/
     ei_frame_register_class ();
@@ -36,11 +38,13 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     surface_in = hw_create_window(main_window_size, (const ei_bool_t) fullscreen);
 }
 
+
+
 void ei_app_run()
 {
-    // pour chaque widget
-    // on recupere la classe, donc la fonction de draw
-
+    ei_widget_t* root = ei_app_root_widget();
+    //parcours de la hiérarchie des widgets
+    while (root->children_head)
     getchar();
 }
 
