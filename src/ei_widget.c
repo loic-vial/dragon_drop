@@ -10,6 +10,27 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t	class_name, ei_widget_t* par
 {
     ei_widgetclass_t* widgetclass = ei_widgetclass_from_name(class_name);
     ei_widget_t* widget = (ei_widget_t*) widgetclass->allocfunc();
+    widget->wclass = widgetclass;
+    widget->pick_id = 0;
+    widget->pick_color = NULL;
+    widget->parent = parent;
+    widget->children_head = NULL;
+    widget->children_tail = NULL;
+    widget->next_sibling = NULL;
+    if (parent->children_tail == NULL)
+    {
+        parent->children_head = widget;
+        parent->children_tail = widget;
+    }
+    else
+    {
+        parent->children_tail->next_sibling = widget;
+        parent->children_tail = widget;
+    }
+    widget->geom_params = NULL;
+    widget->requested_size = ei_size_zero();
+    widget->screen_location = ei_rect_zero();
+    widget->content_rect = &widget->screen_location;
     widgetclass->setdefaultsfunc(widget);
     return widget;
 }
@@ -40,103 +61,74 @@ void			ei_frame_configure		(ei_widget_t*		widget,
                                          ei_rect_t**		img_rect,
                                          ei_anchor_t*		img_anchor)
 {
-   ei_frame_t* frame = (ei_frame_t*)widget;
-   /*initialisation de requested_size*/
-   if (requested_size != NULL)
-   {
-       if (requested_size->height != frame->requested_size.height || requested_size->width != frame->requested_size.width)
-       {
-           frame->requested_size = *requested_size;
-       }
-   }
-   else
-   {
-       if (frame->requested_size.height != 0 && frame->requested_size.width!=0)
-       {
-           frame->requested_size = *requested_size;
-       }
-       else
-       {
-           if (frame->text==NULL && frame->img==NULL)
-           {
-               frame->requested_size.width = 0;
-               frame->requested_size.height = 0;
-           }
-           else if (frame->img!=NULL && frame->text==NULL)
-           {
-               ei_size_t* size = (ei_size_t*)malloc(sizeof(ei_size_t));
-               *size = hw_surface_get_size(*frame->img);
-               frame->requested_size = *size;
-           }
-           else if (frame->img==NULL && frame->text!=NULL)
-           {
-               ei_size_t* size = malloc(sizeof(ei_size_t));
-               *size = hw_surface_get_size(hw_text_create_surface(frame->text, frame->text_font, &frame->text_color));
-               frame->requested_size = *size;
-           }
-       }
-   }
-  /*initialisation de color*/
-   if (color != NULL) {
-       frame->color = *color ;
-   }
+    ei_frame_t* frame = (ei_frame_t*)widget;
+    /*initialisation de requested_size*/
+    if (requested_size != NULL)
+    {
+        widget->requested_size = *requested_size;
+        widget->screen_location.size = *requested_size;
+    }
 
-  /*initialisation de border_width */
-   if (border_width != NULL )
-   {
-       frame->border_width = border_width ;
-   }
+    /*initialisation de color*/
+    if (color != NULL) {
+        frame->color = *color ;
+    }
 
-   /*initialisation de relief */
-   if (relief !=NULL )
-   {
-       frame->relief = *relief ;
-   }
+    /*initialisation de border_width */
+    if (border_width != NULL )
+    {
+        frame->border_width = border_width ;
+    }
+
+    /*initialisation de relief */
+    if (relief !=NULL )
+    {
+        frame->relief = *relief ;
+    }
 
 
-   /*initialisation du text*/
-   if (text !=NULL)
-   {
-       frame->text= text ;
-   }
+    /*initialisation du text*/
+    if (text !=NULL)
+    {
+        frame->text= text ;
+    }
 
 
-   /*initialisation du text_font*/
-   if (text_font !=NULL )
-   {
-       frame->text_font = text_font;
-   }
+    /*initialisation du text_font*/
+    if (text_font !=NULL )
+    {
+        frame->text_font = text_font;
+    }
 
-   /*initialisation du text_color*/
-   if (text_color !=NULL )
-   {
-       frame->text_color = *text_color;
-   }
+    /*initialisation du text_color*/
+    if (text_color !=NULL )
+    {
+        frame->text_color = *text_color;
+    }
 
+    /*initialisation du text_anchor*/
+    if (text_anchor !=NULL )
+    {
+        frame->text_anchor = *text_anchor;
+    }
 
-   /*initialisation du text_anchor*/
-   if (text_anchor !=NULL )
-   {
-       frame->text_anchor = *text_anchor;
-   }
+    /*initialisation du img */
+    if (img !=NULL)
+    {
+        frame->img = img;
+    }
 
-   /*initialisation du img */
-   if (img !=NULL && frame->img!= img)
-   {
-       frame->img = img;
-   }
+    /*initialisation du img_rect*/
+    if (img_rect !=NULL)
+    {
+        frame->img_rect = img_rect;
+    }
 
-   /*initialisation du img_rect*/
-   if (img_rect !=NULL && frame->img_rect!= img_rect)
-   {
-       frame->img_rect = img_rect;
-   }
-
-   /*initialisation du img_anchor*/
-   if (img_anchor !=NULL )
-   {
-       frame->img_anchor = *img_anchor;
-   }
+    /*initialisation du img_anchor*/
+    if (img_anchor !=NULL )
+    {
+        frame->img_anchor = *img_anchor;
+    }
 
 }
 
