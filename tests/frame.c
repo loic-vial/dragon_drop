@@ -32,16 +32,16 @@ int ei_main(int argc, char** argv)
 
 	/* Create, configure and place the frame on screen. */
     frame = ei_widget_create("frame", ei_app_root_widget());
-    //ei_frame_configure(frame, &frame_size, &frame_color,
-    //		    &frame_border_width, &frame_relief, NULL, NULL, NULL, NULL,
-    //		    NULL, NULL, NULL);
+    ei_frame_configure(frame, &frame_size, &frame_color,
+                &frame_border_width, &frame_relief, NULL, NULL, NULL, NULL,
+                NULL, NULL, NULL);
     //ei_place(frame, NULL, &frame_x, &frame_y, NULL, NULL, NULL, NULL, NULL, NULL );
 
 	/* Run the application's main loop. */
     ei_app_run();
 
 	/* We just exited from the main loop. Terminate the application (cleanup). */
-    //ei_app_free();
+    ei_app_free();
 
 	return (EXIT_SUCCESS);
 }

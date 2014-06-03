@@ -8,8 +8,9 @@
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t	class_name, ei_widget_t* parent)
 {
-    ei_widget_t* widget;
-    ei_widgetclass_t* name=ei_widgetclass_from_name (class_name);
+    ei_widgetclass_t* widgetclass = ei_widgetclass_from_name(class_name);
+    ei_widget_t* widget = (ei_widget_t*) widgetclass->allocfunc();
+    widgetclass->setdefaultsfunc(widget);
     return widget;
 }
 

@@ -2,15 +2,13 @@
 
 void* allocfunc_frame()
 {
-    ei_frame_t* e=calloc(1,sizeof(ei_frame_t));
-    return e;
+    return calloc(1, sizeof(ei_frame_t));
 }
 
 void releasefunc_frame(ei_widget_t*	widget)
 {
     NULL;
 }
-
 
 void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
                     ei_surface_t pick_surface, ei_rect_t* clipper)
