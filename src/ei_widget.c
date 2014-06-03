@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ei_widget.h"
+#include "ei_frame.h"
+#include "ei_types.h"
 
 ei_widget_t*		ei_widget_create		(ei_widgetclass_name_t	class_name,
                              ei_widget_t*		parent)
@@ -34,7 +36,38 @@ void			ei_frame_configure		(ei_widget_t*		widget,
                              ei_rect_t**		img_rect,
                              ei_anchor_t*		img_anchor)
 {
-    NULL;
+   ei_frame_t* frame = widget;
+   if (requested_size != NULL)
+   {
+       if (frame->requested_size != requested_size)
+       {
+           frame->requested_size = requested_size;
+       }
+   }
+   else
+   {
+       if (frame->requested_size != NULL)
+       {
+           frame->requested_size = requested_size;
+       }
+       else
+       {
+           if (frame->text==NULL && frame->img==NULL)
+           {
+               frame->requested_size->width = 0;
+               frame->requested_size->height = 0;
+           }
+       }
+   }
+   if (color != NULL && frame->color != color) {
+       frame->color = color ;
+   }
+   if (border_width != NULL && frame->border_width != border_width) {
+       frame->border_width = border_width ;
+   }
+   if (relief !=NULL && frame->relief != relief) {
+       frame->relief = relief ;
+   }
 
 }
 
