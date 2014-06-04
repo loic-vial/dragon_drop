@@ -25,7 +25,8 @@ SOURCES += \
     ../src/ei_placer.c \
     ../tests/button.c \
     ../src/ei_event.c \
-    ../src/ei_button.c
+    ../src/ei_button.c \
+    ../src/ei_toplevel.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -40,4 +41,5 @@ HEADERS += \
     ../include/hw_interface.h \
     ../src/ei_frame.h \
     ../src/ei_placer.h \
-    ../src/ei_button.h
+    ../src/ei_button.h \
+    ../src/ei_toplevel.h

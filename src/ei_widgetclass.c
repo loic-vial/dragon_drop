@@ -1,8 +1,10 @@
 #include "ei_widgetclass.h"
+#include "ei_frame.h"
+#include "ei_button.h"
+#include "ei_toplevel.h"
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ei_frame.h"
-#include <string.h>
 
 ei_widgetclass_t* first_class = NULL;
 
@@ -47,10 +49,26 @@ void ei_frame_register_class()
 
 void ei_button_register_class()
 {
-    NULL;
+    ei_widgetclass_t* buttonclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
+    strcpy(buttonclass->name, "button");
+    buttonclass->allocfunc = &allocfunc_button;
+    buttonclass->releasefunc = &releasefunc_button;
+    buttonclass->drawfunc = &drawfunc_button;
+    buttonclass->setdefaultsfunc = &setdefaultsfunc_button;
+    buttonclass->geomnotifyfunc = &geomnotifyfunc_button;
+    buttonclass->next = NULL;
+    ei_widgetclass_register(buttonclass);
 }
 
 void ei_toplevel_register_class()
 {
-    NULL;
+    ei_widgetclass_t* toplevelclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
+    strcpy(toplevelclass->name, "toplevel");
+    toplevelclass->allocfunc = &allocfunc_toplevel;
+    toplevelclass->releasefunc = &releasefunc_toplevel;
+    toplevelclass->drawfunc = &drawfunc_toplevel;
+    toplevelclass->setdefaultsfunc = &setdefaultsfunc_toplevel;
+    toplevelclass->geomnotifyfunc = &geomnotifyfunc_toplevel;
+    toplevelclass->next = NULL;
+    ei_widgetclass_register(toplevelclass);
 }

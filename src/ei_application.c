@@ -16,6 +16,8 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root_surface = hw_create_window(main_window_size, fullscreen);
 
     ei_frame_register_class();
+    ei_button_register_class();
+    ei_toplevel_register_class();
     ei_register_placer_manager();
 
     root.widget.wclass = ei_widgetclass_from_name("frame");
@@ -79,5 +81,5 @@ ei_surface_t ei_app_root_surface()
 
 void ei_app_free()
 {
-    NULL;
+    hw_quit();
 }
