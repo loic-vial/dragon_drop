@@ -1,5 +1,6 @@
 #include "ei_frame.h"
 #include "ei_utils.h"
+#include <stdlib.h>
 
 void* allocfunc_frame()
 {
