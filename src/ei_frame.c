@@ -7,9 +7,9 @@ void* allocfunc_frame()
     return calloc(1, sizeof(ei_frame_t));
 }
 
-void releasefunc_frame(ei_widget_t*	widget)
+void releasefunc_frame(ei_widget_t* widget)
 {
-    NULL;
+    free(widget);
 }
 
 void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
@@ -37,8 +37,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     hw_surface_unlock(surface);
 }
 
-
-void setdefaultsfunc_frame	(struct ei_widget_t*	widget)
+void setdefaultsfunc_frame(ei_widget_t* widget)
 {
     ei_frame_t* frame = (ei_frame_t*) widget;
     frame->color = ei_default_background_color;
@@ -53,8 +52,7 @@ void setdefaultsfunc_frame	(struct ei_widget_t*	widget)
     frame->img_anchor = ei_anc_center;
 }
 
-void geomnotifyfunc_frame	(struct ei_widget_t*	widget,
-                             ei_rect_t		rect)
+void geomnotifyfunc_frame(ei_widget_t* widget, ei_rect_t rect)
 {
-    NULL;
+
 }
