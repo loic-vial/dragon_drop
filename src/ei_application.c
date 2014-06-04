@@ -1,9 +1,10 @@
 #include "ei_application.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include "ei_frame.h"
 #include "ei_widgetclass.h"
-#include "string.h"
+#include "ei_geometrymanager.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static ei_frame_t root;
 static ei_surface_t root_surface;
@@ -15,6 +16,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root_surface = hw_create_window(main_window_size, fullscreen);
 
     ei_frame_register_class();
+    ei_register_placer_manager();
 
     root.widget.wclass = ei_widgetclass_from_name("frame");
     root.widget.pick_id = 0;
@@ -34,6 +36,9 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 void draw_widget(ei_widget_t* widget)
 {
     if (widget == NULL) return;
+    if (widget->geom_params != NULL) {
+        widget->geom_params->manager->runfunc(widget);
+    }
     widget->wclass->drawfunc(widget, root_surface, root_surface, NULL);
     ei_widget_t* current = widget->children_head;
     while (current != NULL)
