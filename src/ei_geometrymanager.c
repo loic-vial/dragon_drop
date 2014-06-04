@@ -1,11 +1,12 @@
 #include "ei_geometrymanager.h"
+#include "ei_placer.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "ei_placer.h"
+#include <string.h>
 
 ei_geometrymanager_t* first_manager = NULL;
 
-void ei_geometrymanager_register	(ei_geometrymanager_t* geometrymanager)
+void ei_geometrymanager_register (ei_geometrymanager_t* geometrymanager)
 {
     if (first_manager == NULL)
     {
@@ -17,11 +18,9 @@ void ei_geometrymanager_register	(ei_geometrymanager_t* geometrymanager)
         for (tmp = first_manager ; tmp->next != NULL ; tmp = tmp->next);
         tmp->next = geometrymanager;
     }
-
 }
 
-
-ei_geometrymanager_t*	ei_geometrymanager_from_name	(ei_geometrymanager_name_t name)
+ei_geometrymanager_t* ei_geometrymanager_from_name (ei_geometrymanager_name_t name)
 {
     for (ei_geometrymanager_t* tmp = first_manager ; tmp != NULL ; tmp = tmp->next)
     {
@@ -33,16 +32,12 @@ ei_geometrymanager_t*	ei_geometrymanager_from_name	(ei_geometrymanager_name_t na
     return NULL;
 }
 
-
-
-void			ei_geometrymanager_unmap	(ei_widget_t*		widget)
+void ei_geometrymanager_unmap(ei_widget_t* widget)
 {
-    NULL;
+    widget->geom_params->manager->releasefunc(widget);
 }
 
-
-
-void 			ei_register_placer_manager 	()
+void ei_register_placer_manager()
 {
     ei_geometrymanager_t* placer = (ei_geometrymanager_t*) malloc(sizeof(ei_geometrymanager_t));
     strcpy(placer->name, "placer");
@@ -53,16 +48,16 @@ void 			ei_register_placer_manager 	()
 }
 
 
-void			ei_place			(ei_widget_t*		widget,
-                             ei_anchor_t*		anchor,
-                             int*			x,
-                             int*			y,
-                             int*			width,
-                             int*			height,
-                             float*			rel_x,
-                             float*			rel_y,
-                             float*			rel_width,
-                             float*			rel_height)
+void   ei_place   (ei_widget_t*  widget,
+                             ei_anchor_t*  anchor,
+                             int*   x,
+                             int*   y,
+                             int*   width,
+                             int*   height,
+                             float*   rel_x,
+                             float*   rel_y,
+                             float*   rel_width,
+                             float*   rel_height)
 {
     if(widget->geom_params != NULL)
     {

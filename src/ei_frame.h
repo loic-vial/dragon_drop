@@ -1,3 +1,6 @@
+#ifndef EI_FRAME_H
+#define EI_FRAME_H
+
 #include "ei_widget.h"
 
 typedef struct ei_frame_t
@@ -29,3 +32,5 @@ void setdefaultsfunc_frame	(struct ei_widget_t*	widget);
 
 void geomnotifyfunc_frame	(struct ei_widget_t*	widget,
                              ei_rect_t		rect);
+
+#endif

@@ -66,7 +66,6 @@ void			ei_frame_configure		(ei_widget_t*		widget,
     if (requested_size != NULL)
     {
         widget->requested_size = *requested_size;
-        widget->screen_location.size = *requested_size;
     }
 
     /*initialisation de color*/
