@@ -1,7 +1,4 @@
 #include "ei_widget.h"
-#include "stdlib.h"
-#include "stdio.h"
-
 
 typedef struct ei_frame_t
 {
@@ -16,7 +13,6 @@ typedef struct ei_frame_t
     ei_surface_t*		img;
     ei_rect_t*		img_rect;
     ei_anchor_t		img_anchor;
-
 }
 ei_frame_t;
 

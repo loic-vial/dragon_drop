@@ -21,7 +21,8 @@ SOURCES += \
     ../src/ei_widget.c \
     ../src/ei_geometrymanager.c \
     ../src/ei_widgetclass.c \
-    ../src/ei_frame.c
+    ../src/ei_frame.c \
+    ../src/ei_placer.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -34,4 +35,5 @@ HEADERS += \
     ../include/ei_widget.h \
     ../include/ei_widgetclass.h \
     ../include/hw_interface.h \
-    ../src/ei_frame.h
+    ../src/ei_frame.h \
+    ../src/ei_placer.h
