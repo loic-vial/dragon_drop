@@ -64,7 +64,10 @@ void			ei_place			(ei_widget_t*		widget,
                              float*			rel_width,
                              float*			rel_height)
 {
-    NULL;
+    if(widget->geom_params != NULL)
+    {
+        ei_geometrymanager_unmap (widget);
+    }
 }
 
 
