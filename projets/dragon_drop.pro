@@ -3,7 +3,7 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-QMAKE_CFLAGS += -std=c99
+QMAKE_CFLAGS += -std=c99 -Wno-unused
 
 INCLUDEPATH += ../include /usr/include/SDL
 
@@ -26,7 +26,8 @@ SOURCES += \
     ../tests/button.c \
     ../src/ei_event.c \
     ../src/ei_button.c \
-    ../src/ei_toplevel.c
+    ../src/ei_toplevel.c \
+    ../src/ei_eventlist.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -42,4 +43,5 @@ HEADERS += \
     ../src/ei_frame.h \
     ../src/ei_placer.h \
     ../src/ei_button.h \
-    ../src/ei_toplevel.h
+    ../src/ei_toplevel.h \
+    ../src/ei_eventlist.h

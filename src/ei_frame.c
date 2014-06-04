@@ -1,5 +1,8 @@
 #include "ei_frame.h"
 #include "ei_utils.h"
+#include "ei_eventlist.h"
+//il faut include pour avoir la surface off-screen
+
 #include <stdlib.h>
 
 void* allocfunc_frame()
@@ -33,6 +36,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     fourth_point.next = NULL;
 
     ei_draw_polygon(surface, &first_point, frame->color, clipper);
+    ei_draw_polygon(pick_surface, &first_point, *widget->pick_color, clipper);
 }
 
 void setdefaultsfunc_frame(ei_widget_t* widget)

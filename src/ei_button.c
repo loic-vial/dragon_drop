@@ -33,6 +33,27 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
     fourth_point.next = NULL;
 
     ei_draw_polygon(surface, &first_point, button->color, clipper);
+
+    ei_anchor_t anchor = button->text_anchor;
+    if (anchor == ei_anc_northwest)
+    {
+
+    }
+    else
+    {
+        int text_width, text_height;
+        hw_text_compute_size(button->text, button->text_font, &text_width, &text_height);
+        ei_size_t widget_size = widget->screen_location.size;
+        ei_point_t top_left_corner = widget->screen_location.top_left;
+        top_left_corner.x += widget_size.width / 2;
+        top_left_corner.y += widget_size.height / 2;
+        top_left_corner.x -= text_width / 2;
+        top_left_corner.y -= text_height / 2;
+
+        ei_draw_text(surface, &top_left_corner, button->text, button->text_font, &button->text_color, clipper);
+    }
+
+    ei_draw_polygon(pick_surface, &first_point,*widget->pick_color, clipper);
 }
 
 void setdefaultsfunc_button(ei_widget_t* widget)
@@ -40,6 +61,7 @@ void setdefaultsfunc_button(ei_widget_t* widget)
     ei_button_t* button = (ei_button_t*) widget;
     button->color = ei_default_background_color;
     button->border_width = 0;
+    button->corner_radius = 0;
     button->relief = ei_relief_none;
     button->text = NULL;
     button->text_font = ei_default_font;
@@ -48,6 +70,8 @@ void setdefaultsfunc_button(ei_widget_t* widget)
     button->img = NULL;
     button->img_rect = NULL;
     button->img_anchor = ei_anc_center;
+    button->callback = NULL;
+    button->user_param = NULL;
 }
 
 void geomnotifyfunc_button(ei_widget_t* widget, ei_rect_t rect)

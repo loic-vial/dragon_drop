@@ -1,4 +1,5 @@
 #include "ei_toplevel.h"
+#include <stdlib.h>
 
 void* allocfunc_toplevel()
 {

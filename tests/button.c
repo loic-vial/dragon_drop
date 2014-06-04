@@ -27,7 +27,7 @@ ei_bool_t button_press(ei_widget_t* widget, ei_event_t* event, void* user_param)
  */
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-	if (event->param.key.key_sym == SDLK_ESCAPE) {
+    if (event->param.key.key_sym == SDLK_ESCAPE) {
 		ei_app_quit_request();
 		return EI_TRUE;
 	}
@@ -47,8 +47,8 @@ int ei_main(int argc, char** argv)
 
 	ei_widget_t*	button;
 	ei_size_t	button_size		= {300,200};
-	int		button_x		= 150;
-	int		button_y		= 200;
+    int		button_x		= 150;
+    int		button_y		= 200;
 	ei_color_t	button_color		= {0x88, 0x88, 0x88, 0xff};
 	char*		button_title		= "Mon premier Bouton !";
 	ei_color_t	button_text_color	= {0x00, 0x00, 0x00, 0xff};
