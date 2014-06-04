@@ -45,7 +45,7 @@ typedef struct ei_geometrymanager_t {
 	ei_geometrymanager_name_t		name;
 	ei_geometrymanager_runfunc_t		runfunc;
 	ei_geometrymanager_releasefunc_t	releasefunc;
-	struct ei_geometrymanager_t*		next;
+    struct ei_geometrymanager_t*		next;
 } ei_geometrymanager_t;
 
 /**

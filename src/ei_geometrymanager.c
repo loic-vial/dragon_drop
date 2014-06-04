@@ -1,17 +1,36 @@
 #include "ei_geometrymanager.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "ei_placer.h"
+
+ei_geometrymanager_t* first_manager = NULL;
 
 void ei_geometrymanager_register	(ei_geometrymanager_t* geometrymanager)
 {
-    NULL;
-}
+    if (first_manager == NULL)
+    {
+        first_manager = geometrymanager;
+    }
+    else
+    {
+        ei_geometrymanager_t* tmp;
+        for (tmp = first_manager ; tmp->next != NULL ; tmp = tmp->next);
+        tmp->next = geometrymanager;
+    }
 
+}
 
 
 ei_geometrymanager_t*	ei_geometrymanager_from_name	(ei_geometrymanager_name_t name)
 {
-    NULL;
+    for (ei_geometrymanager_t* tmp = first_manager ; tmp != NULL ; tmp = tmp->next)
+    {
+        if (strcmp(name, tmp->name) == 0)
+        {
+            return tmp;
+        }
+    }
+    return NULL;
 }
 
 
@@ -25,7 +44,12 @@ void			ei_geometrymanager_unmap	(ei_widget_t*		widget)
 
 void 			ei_register_placer_manager 	()
 {
-    NULL;
+    ei_geometrymanager_t* placer = (ei_geometrymanager_t*) malloc(sizeof(ei_geometrymanager_t));
+    strcpy(placer->name, "placer");
+    placer->runfunc = &ei_runfunc_placer;
+    placer->releasefunc = &ei_releasefunc_placer;
+    placer->next = NULL;
+    ei_geometrymanager_register(placer);
 }
 
 
