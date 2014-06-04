@@ -2,7 +2,6 @@
 #include "ei_utils.h"
 #include <stdlib.h>
 
-
 void* allocfunc_frame()
 {
     return calloc(1, sizeof(ei_frame_t));
@@ -13,10 +12,8 @@ void releasefunc_frame(ei_widget_t* widget)
     free(widget);
 }
 
-void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
-                    ei_surface_t pick_surface, ei_rect_t* clipper)
+void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface, ei_surface_t pick_surface, ei_rect_t* clipper)
 {
-    hw_surface_lock(surface);
     ei_frame_t* frame = (ei_frame_t*)widget;
     ei_linked_point_t first_point;
     ei_linked_point_t second_point;
@@ -35,7 +32,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     fourth_point.next = NULL;
 
     ei_draw_polygon(surface, &first_point, frame->color, clipper);
-    hw_surface_unlock(surface);
 }
 
 void setdefaultsfunc_frame(ei_widget_t* widget)
