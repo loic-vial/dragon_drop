@@ -45,7 +45,9 @@ void draw_widget(ei_widget_t* widget)
 
 void ei_app_run()
 {
+    hw_surface_lock(root_surface);
     draw_widget(&root.widget);
+    hw_surface_unlock(root_surface);
     hw_surface_update_rects(root_surface, NULL);
     getchar();
 }
