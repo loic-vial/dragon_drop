@@ -1,14 +1,8 @@
 #ifndef EI_PLACER_H
 #define EI_PLACER_H
 
-#include "ei_geometrymanager.h"
+void ei_runfunc_placer(ei_widget_t* widget);
 
-typedef struct ei_placer_t
-{
-
-}
-ei_placer_t;
-
-
+void ei_releasefunc_placer(ei_widget_t* widget);
 
 #endif

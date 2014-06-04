@@ -17,7 +17,7 @@ typedef struct ei_frame_t
 ei_frame_t;
 
 
-void* allocfunc_frame ();
+void* allocfunc_frame();
 
 void releasefunc_frame	(struct ei_widget_t*	widget);
 
