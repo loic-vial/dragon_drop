@@ -22,7 +22,10 @@ SOURCES += \
     ../src/ei_geometrymanager.c \
     ../src/ei_widgetclass.c \
     ../src/ei_frame.c \
-    ../src/ei_placer.c
+    ../src/ei_placer.c \
+    ../tests/button.c \
+    ../src/ei_event.c \
+    ../src/ei_button.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -36,4 +39,5 @@ HEADERS += \
     ../include/ei_widgetclass.h \
     ../include/hw_interface.h \
     ../src/ei_frame.h \
-    ../src/ei_placer.h
+    ../src/ei_placer.h \
+    ../src/ei_button.h
