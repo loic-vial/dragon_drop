@@ -4,8 +4,11 @@
 #include "ei_widgetclass.h"
 #include "ei_geometrymanager.h"
 #include "ei_event.h"
+#include "ei_utils.h"
+#include "ei_placer.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 void* allocfunc_toplevel()
 {
@@ -23,9 +26,50 @@ void drawfunc_toplevel(ei_widget_t* widget, ei_surface_t surface,
     drawfunc_frame(widget, surface, pick_surface, clipper);
 }
 
-ei_bool_t ei_callback_toplevel_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
+static ei_bool_t destroy_widget(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_widget_destroy(widget->parent->parent);
+    return true;
+}
+
+static bool is_dragging = false;
+static ei_point_t drag_mouse_position;
+
+static ei_bool_t drag_start(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    if (!is_dragging)
+    {
+        drag_mouse_position.x = event->param.mouse.where.x;
+        drag_mouse_position.y = event->param.mouse.where.y;
+        is_dragging = true;
+    }
+    return true;
+}
+
+static ei_bool_t drag(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_widget_t* toplevel = (ei_widget_t*) user_param;
+    if (is_dragging)
+    {
+        if (strcmp(toplevel->geom_params->manager->name, "placer") == 0)
+        {
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->parent->geom_params;
+            ei_point_t diff_position = ei_point_sub(event->param.mouse.where, drag_mouse_position);
+            placer->x += diff_position.x;
+            placer->y += diff_position.y;
+            drag_mouse_position = event->param.mouse.where;
+        }
+    }
+    return true;
+}
+
+static ei_bool_t drag_stop(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    drag(widget, event, user_param);
+    if (is_dragging)
+    {
+        is_dragging = false;
+    }
     return true;
 }
 
@@ -72,13 +116,20 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->button->color.blue=0;
     toplevel->button->text="X";
     toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 12);
-    ei_callback_t button_callback = ei_callback_toplevel_button;
+    ei_callback_t button_callback = destroy_widget;
     ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &button_callback, NULL);
 
 
     int x=4;
     int y=4;
     ei_place(&toplevel->button->widget, &button_anchor, &x, &y,NULL, NULL, NULL, NULL, NULL, NULL);
+
+    ei_callback_t _drag_start = drag_start;
+    ei_callback_t _drag = drag;
+    ei_callback_t _drag_stop = drag_stop;
+    ei_bind(ei_ev_mouse_buttondown, &toplevel->border->widget, NULL, _drag_start, NULL);
+    ei_bind(ei_ev_mouse_move, NULL, "all", _drag, &toplevel->border->widget);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, &toplevel->border->widget);
 }
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)

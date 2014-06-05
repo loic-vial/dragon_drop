@@ -84,15 +84,11 @@ void ei_app_run()
         {
             if (tmp->eventtype == event.type)
             {
-                if (strcmp(tmp->tag, "all") == 0)
-                {
-                    tmp->callback(tmp->widget, &event, tmp->user_param);
-                }
-                else
+                if (tmp->tag == NULL)
                 {
                     if (event.type == ei_ev_mouse_buttondown ||
-                         event.type == ei_ev_mouse_buttonup ||
-                         event.type == ei_ev_mouse_move)
+                        event.type == ei_ev_mouse_buttonup ||
+                        event.type == ei_ev_mouse_move)
                     {
                         if (ei_widget_pick(&event.param.mouse.where) == tmp->widget)
                         {
@@ -103,6 +99,14 @@ void ei_app_run()
                     {
                         tmp->callback(tmp->widget, &event, tmp->user_param);
                     }
+                }
+                else if (strcmp(tmp->tag, "all") == 0)
+                {
+                    tmp->callback(tmp->widget, &event, tmp->user_param);
+                }
+                else // ? faut verifier les classes
+                {
+
                 }
             }
         }

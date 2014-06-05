@@ -208,7 +208,7 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     if (callback != NULL)
     {
         button->callback = callback;
-        ei_bind(ei_ev_mouse_buttonup, widget, "button", *callback, NULL);
+        ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, NULL);
     }
 
     if (user_param != NULL)
