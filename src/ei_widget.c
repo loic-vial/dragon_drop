@@ -1,16 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "ei_widget.h"
 #include "ei_button.h"
 #include "ei_frame.h"
 #include "ei_toplevel.h"
 #include "ei_types.h"
 #include "ei_event.h"
-
 #include "hw_interface.h"
 #include "ei_utils.h"
+#include "ei_application.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-static int current_pick_id = 100;
+static int current_pick_id = 1;
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
 {
@@ -51,9 +52,43 @@ void ei_widget_destroy(ei_widget_t* widget)
 
 }
 
+bool is_same_color(ei_color_t color1, ei_color_t color2)
+{
+    return (color1.red == color2.red &&
+            color1.green == color2.green &&
+            color1.blue == color2.blue &&
+            color1.alpha == color2.alpha);
+}
+
+ei_widget_t* get_widget_with_pick_color(ei_widget_t* widget, ei_color_t color)
+{
+    if (widget == NULL) return NULL;
+    if (is_same_color(*widget->pick_color, color)) return widget;
+    ei_widget_t* current = widget->children_head;
+    while (current != NULL)
+    {
+        ei_widget_t* tmp = get_widget_with_pick_color(current, color);
+        if (tmp != NULL) return tmp;
+        current = current->next_sibling;
+    }
+    return NULL;
+}
+
+extern ei_surface_t offscreen_surface;
+
 ei_widget_t* ei_widget_pick(ei_point_t* where)
 {
-    return NULL;
+    uint8_t* buffer = hw_surface_get_buffer(offscreen_surface);
+    ei_size_t size = hw_surface_get_size(offscreen_surface);
+    buffer = &buffer[(where->x + where->y * size.width) * sizeof(ei_color_t)];
+    ei_color_t color;
+    int ir, ig, ib, ia;
+    hw_surface_get_channel_indices(offscreen_surface, &ir, &ig, &ib, &ia);
+    color.red = buffer[ir];
+    color.green = buffer[ig];
+    color.blue = buffer[ib];
+    color.alpha = 255;
+    return get_widget_with_pick_color(ei_app_root_widget(), color);
 }
 
 void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size,
