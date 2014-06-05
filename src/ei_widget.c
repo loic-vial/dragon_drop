@@ -237,7 +237,7 @@ void ei_toplevel_configure (ei_widget_t* widget,ei_size_t* requested_size,ei_col
 
  if(requested_size!=NULL)
  {
-     toplevel->requested_size=*requested_size;
+     toplevel->contains->widget.requested_size=*requested_size;
  }
 
  if (color!=NULL)
