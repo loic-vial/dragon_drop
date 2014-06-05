@@ -91,217 +91,132 @@ ei_widget_t* ei_widget_pick(ei_point_t* where)
     return get_widget_with_pick_color(ei_app_root_widget(), color);
 }
 
-void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size,
-                        const ei_color_t* color,
-                        int*   border_width,
-                        ei_relief_t*  relief,
-                        char**   text,
-                        ei_font_t*  text_font,
-                        ei_color_t*  text_color,
-                        ei_anchor_t*  text_anchor,
-                        ei_surface_t*  img,
-                        ei_rect_t**  img_rect,
-                        ei_anchor_t*  img_anchor)
+void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,
+                        int* border_width, ei_relief_t* relief, char** text,
+                        ei_font_t* text_font, ei_color_t* text_color, ei_anchor_t* text_anchor,
+                        ei_surface_t* img, ei_rect_t** img_rect, ei_anchor_t* img_anchor)
 {
-    ei_frame_t* frame = (ei_frame_t*)widget;
-    /*initialisation de requested_size*/
+    if (widget == NULL) return;
+
+    ei_frame_t* frame = (ei_frame_t*) widget;
+
     if (requested_size != NULL)
-    {
         widget->requested_size = *requested_size;
-    }
 
-    /*initialisation de color*/
-    if (color != NULL) {
+    if (color != NULL)
         frame->color = *color ;
-    }
 
-    /*initialisation de border_width */
-    if (border_width != NULL )
-    {
+    if (border_width != NULL)
         frame->border_width = *border_width ;
-    }
 
-    /*initialisation de relief */
-    if (relief !=NULL )
-    {
+    if (relief !=NULL)
         frame->relief = *relief ;
-    }
 
-
-    /*initialisation du text*/
-    if (text !=NULL)
-    {
+    if (text != NULL)
         frame->text= *text ;
-    }
 
+    if (text_font != NULL)
+        frame->text_font = *text_font;
 
-    /*initialisation du text_font*/
-    if (text_font !=NULL )
-    {
-        frame->text_font = text_font;
-    }
-
-    /*initialisation du text_color*/
-    if (text_color !=NULL )
-    {
+    if (text_color !=NULL)
         frame->text_color = *text_color;
-    }
 
-    /*initialisation du text_anchor*/
-    if (text_anchor !=NULL )
-    {
+    if (text_anchor !=NULL)
         frame->text_anchor = *text_anchor;
-    }
 
-    /*initialisation du img */
-    if (img !=NULL)
-    {
+    if (img != NULL)
         frame->img = img;
-    }
 
-    /*initialisation du img_rect*/
-    if (img_rect !=NULL)
-    {
+    if (img_rect != NULL)
         frame->img_rect = *img_rect;
-    }
 
-    /*initialisation du img_anchor*/
-    if (img_anchor !=NULL )
-    {
+    if (img_anchor != NULL)
         frame->img_anchor = *img_anchor;
-    }
-
 }
 
-void ei_button_configure (ei_widget_t*  widget,ei_size_t* requested_size,const ei_color_t* color,int* border_width,
-                          int* corner_radius,ei_relief_t* relief,char** text,ei_font_t* text_font, ei_color_t* text_color,
-                          ei_anchor_t* text_anchor,ei_surface_t* img, ei_rect_t** img_rect, ei_anchor_t* img_anchor,
-                          ei_callback_t*  callback,void**   user_param)
+void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,
+                         int* border_width, int* corner_radius, ei_relief_t* relief,
+                         char** text, ei_font_t* text_font, ei_color_t* text_color,
+                         ei_anchor_t* text_anchor, ei_surface_t* img, ei_rect_t** img_rect,
+                         ei_anchor_t* img_anchor, ei_callback_t* callback, void** user_param)
 {
+    if (widget == NULL) return;
+
     ei_button_t* button = (ei_button_t*)widget;
-    /*initialisation de requested_size*/
+
     if (requested_size != NULL)
-    {
         widget->requested_size = *requested_size;
-    }
-    /*initialisation de color*/
+
     if (color != NULL)
-    {
         button->color = *color;
-    }
-    /*initialisation de border_width */
+
     if (border_width != NULL)
-    {
         button->border_width = *border_width;
-    }
 
-    /*initialisation de corner_radius */
     if (corner_radius != NULL)
-    {
         button->corner_radius= *corner_radius;
-    }
 
-    /*initialisation de relief */
     if (relief != NULL)
-    {
         button->relief = *relief;
-    }
 
-    /*initialisation de text */
     if (text != NULL)
-    {
         button->text =*text;
-    }
 
-    /*initialisation de text_font */
     if (text_font != NULL)
-    {
         button->text_font = text_font;
-    }
 
-    /*initialisation de text_color */
     if (text_color != NULL)
-    {
         button->text_color = *text_color;
-    }
 
-    /*initialisation de text_anchor */
     if (text_anchor != NULL)
-    {
         button->text_anchor = *text_anchor;
-    }
 
-    /*initialisation de img */
     if (img != NULL)
-    {
         button->img = *img;
-    }
 
-    /*initialisation de img_rect*/
     if (img_rect != NULL)
-    {
         button->img_rect = *img_rect;
-    }
 
-    /*initialisation de img_anchor */
     if (img_anchor != NULL)
-    {
         button->img_anchor = *img_anchor;
-    }
 
-    /*initialisation de bcallback */
     if (callback != NULL)
     {
         button->callback = callback;
         ei_bind(ei_ev_mouse_buttonup, widget, "button", *callback, NULL);
     }
 
-    /*initialisation de user_param */
     if (user_param != NULL)
-    {
         button->user_param = user_param;
-    }
 
 }
 
-
-void ei_toplevel_configure (ei_widget_t* widget,ei_size_t* requested_size,ei_color_t* color,int* border_width,
-                            char** title,ei_bool_t* closable,ei_axis_set_t* resizable, ei_size_t** min_size)
+void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_color_t* color,
+                            int* border_width, char** title, ei_bool_t* closable,
+                            ei_axis_set_t* resizable, ei_size_t** min_size)
 {
- ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
+    if (widget == NULL) return;
 
- if(requested_size!=NULL)
- {
-     toplevel->contains->widget.requested_size=*requested_size;
- }
+    ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
 
- if (color!=NULL)
- {
-     toplevel->color=*color;
- }
+    if (requested_size != NULL)
+        toplevel->contains->widget.requested_size = *requested_size;
 
- if (border_width !=NULL)
- {
-     toplevel->border_width=*border_width;
- }
+    if (color != NULL)
+        toplevel->color = *color;
 
- if(title!=NULL)
- {
-     toplevel->title=*title;
- }
+    if (border_width != NULL)
+        toplevel->border_width = *border_width;
 
- if (closable!=NULL)
- {
-     toplevel->closable=*closable;
- }
+    if (title != NULL)
+        toplevel->title = *title;
 
- if(resizable!=NULL)
- {
-     toplevel->resizable=*resizable;
- }
+    if (closable != NULL)
+        toplevel->closable = *closable;
 
- if(min_size!=NULL)
- {
-     toplevel->min_size=*min_size;
- }
+    if (resizable != NULL)
+        toplevel->resizable = *resizable;
+
+    if (min_size != NULL)
+        toplevel->min_size = *min_size;
 }
