@@ -13,7 +13,7 @@
 
 static ei_frame_t root;
 static ei_surface_t root_surface;
-static ei_surface_t offscreen_surface;
+ei_surface_t offscreen_surface;
 static bool want_quit;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
@@ -63,43 +63,6 @@ void draw_widget(ei_widget_t* widget)
     }
 }
 
-bool is_same_color(ei_color_t color1, ei_color_t color2)
-{
-    return (color1.red == color2.red &&
-            color1.green == color2.green &&
-            color1.blue == color2.blue &&
-            color1.alpha == color2.alpha);
-}
-
-ei_widget_t* get_widget_with_pick_color(ei_widget_t* widget, ei_color_t color) // avec id cay plus classe
-{
-    if (widget == NULL) return NULL;
-    if (is_same_color(*widget->pick_color, color)) return widget;
-    ei_widget_t* current = widget->children_head;
-    while (current != NULL)
-    {
-        ei_widget_t* tmp = get_widget_with_pick_color(current, color);
-        if (tmp != NULL) return tmp;
-        current = current->next_sibling;
-    }
-    return NULL;
-}
-
-ei_widget_t* pick_widget(ei_point_t position)
-{
-    uint8_t* buffer = hw_surface_get_buffer(offscreen_surface);
-    ei_size_t size = hw_surface_get_size(offscreen_surface);
-    buffer = &buffer[(position.x + position.y * size.width) * sizeof(ei_color_t)];
-    ei_color_t color;
-    int ir, ig, ib, ia;
-    hw_surface_get_channel_indices(offscreen_surface, &ir, &ig, &ib, &ia);
-    color.red = buffer[ir];
-    color.green = buffer[ig];
-    color.blue = buffer[ib];
-    color.alpha = 255;
-    return get_widget_with_pick_color(&root.widget, color);
-}
-
 void ei_app_run()
 {
     ei_event_t event;
@@ -131,7 +94,7 @@ void ei_app_run()
                          event.type == ei_ev_mouse_buttonup ||
                          event.type == ei_ev_mouse_move)
                     {
-                        if (pick_widget(event.param.mouse.where) == tmp->widget)
+                        if (ei_widget_pick(&event.param.mouse.where) == tmp->widget)
                         {
                             tmp->callback(tmp->widget, &event, tmp->user_param);
                         }
