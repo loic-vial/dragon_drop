@@ -200,7 +200,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
 
     if (requested_size != NULL)
-        toplevel->requested_size = *requested_size;
+        toplevel->contains->widget.requested_size = *requested_size;
 
     if (color != NULL)
         toplevel->color = *color;
