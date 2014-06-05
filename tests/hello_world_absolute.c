@@ -78,12 +78,12 @@ int ei_main(int argc, char** argv)
 	ei_place(window, NULL, &(window_position.x), &(window_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
 
 	/* Create, configure and place a button as a descendant of the toplevel window. */
-	button = ei_widget_create("button", window);
+/*	button = ei_widget_create("button", window);
 	ei_button_configure(button, NULL, &button_color, 
 			    &button_border_width, NULL, &button_relief, &button_title, NULL, &button_text_color, NULL,
 			    NULL, NULL, NULL, &button_callback, NULL);
 	ei_place(button, NULL, &button_x, &button_y, &button_width, &button_height, NULL, NULL, NULL, NULL );
-
+*/
 	/* Hook the keypress callback to the event. */
 	ei_bind(ei_ev_keydown,		NULL, "all", process_key, NULL);
 

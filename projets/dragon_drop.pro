@@ -23,11 +23,11 @@ SOURCES += \
     ../src/ei_widgetclass.c \
     ../src/ei_frame.c \
     ../src/ei_placer.c \
-    ../tests/button.c \
     ../src/ei_event.c \
     ../src/ei_button.c \
     ../src/ei_toplevel.c \
-    ../src/ei_eventlist.c
+    ../src/ei_eventlist.c \
+    ../tests/hello_world_absolute.c
 
 HEADERS += \
     ../include/ei_application.h \
