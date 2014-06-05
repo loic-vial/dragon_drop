@@ -57,6 +57,7 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->close=malloc(sizeof(ei_button_t));
     toplevel->close->widget= *ei_widget_create("frame", widget);
     toplevel->close->widget.wclass->setdefaultsfunc;
+    ei_frame_configure((ei_widget_t*)toplevel->contains,toplevel->widget.requested_size,toplevel->color,&toplevel->border_width,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 }
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)
