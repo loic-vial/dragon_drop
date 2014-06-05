@@ -160,11 +160,17 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     if (relief != NULL)
         button->relief = *relief;
 
-    if (text != NULL && strcmp(*text, "") != 0)
-        button->text = *text;
-
     if (text_font != NULL)
         button->text_font = text_font;
+
+    if (text != NULL && strcmp(*text, "") != 0)
+    {
+        button->text = *text;
+        int width, height;
+        hw_text_compute_size(button->text, button->text_font, &width, &height);
+        widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
+        widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
+    }
 
     if (text_color != NULL)
         button->text_color = *text_color;

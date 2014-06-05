@@ -26,7 +26,7 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     setdefaultsfunc_frame(widget);
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
     toplevel->frame.widget.requested_size.width=320;
-    toplevel->frame.widget.requested_size.height=420;
+    toplevel->frame.widget.requested_size.height=240;
     toplevel->frame.color=ei_default_background_color;
     toplevel->frame.border_width=4;
     toplevel->title="Toplevel";
@@ -49,8 +49,9 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_anchor_t border_anchor = ei_anc_north;
     ei_anchor_t button_anchor = ei_anc_east;
 
+    int moins_vingt = -20;
     float un=1;
-    ei_place(&toplevel->border->widget, &border_anchor, NULL, NULL, NULL, NULL, NULL, NULL, &un,NULL);
+    ei_place(&toplevel->border->widget, &border_anchor, NULL, &moins_vingt, NULL, NULL, NULL, NULL, &un,NULL);
 
     toplevel->button = (ei_button_t*)ei_widget_create("button", &toplevel->border->widget);
 

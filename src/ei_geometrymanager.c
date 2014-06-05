@@ -97,12 +97,17 @@ void   ei_place   (ei_widget_t*  widget,
 
     if(x !=NULL)
     {
+
         place->x=*x;
     }
 
     if(y !=NULL)
     {
-        place->y=*y;
+        if(strcmp(widget->wclass->name,"toplevel")==0)
+        {
+            place->y=*y+20;
+        }
+        else place->y=*y;
     }
 
     if(width !=NULL)

@@ -46,8 +46,8 @@ int ei_main(int argc, char** argv)
 	ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
 
 	ei_widget_t*	button;
-	int		button_x		= 10;
-	int		button_y		= 10;	     
+    int		button_x		= 10;
+    int		button_y		= 10;
 	int		button_width		= 100;
 	int		button_height		= 40;	     
 	ei_color_t	button_color		= {0x88, 0x88, 0x88, 0xff};
@@ -64,7 +64,7 @@ int ei_main(int argc, char** argv)
 	int		window_border_width	= 2;
 	ei_bool_t	window_closable		= EI_TRUE;
 	ei_axis_set_t	window_resizable 	= ei_axis_both;
-	ei_point_t	window_position	 	= {30, 10};	    
+    ei_point_t	window_position	 	= {30, 10};
 
 	
 	/* Create the application and change the color of the background. */
@@ -75,7 +75,7 @@ int ei_main(int argc, char** argv)
 	window = ei_widget_create("toplevel", ei_app_root_widget());
 	ei_toplevel_configure(window, &window_size, &window_color, &window_border_width,
 				&window_title, &window_closable, &window_resizable, NULL);
-	ei_place(window, NULL, &(window_position.x), &(window_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_place(window, NULL, &(window_position.x), &(window_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
 
 	/* Create, configure and place a button as a descendant of the toplevel window. */
     button = ei_widget_create("button", window);
