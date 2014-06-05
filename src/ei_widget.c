@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 static int current_pick_id = 1;
 
@@ -159,8 +160,8 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     if (relief != NULL)
         button->relief = *relief;
 
-    if (text != NULL)
-        button->text =*text;
+    if (text != NULL && strcmp(*text, "") != 0)
+        button->text = *text;
 
     if (text_font != NULL)
         button->text_font = text_font;
@@ -200,13 +201,13 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
 
     if (requested_size != NULL)
-        toplevel->contains->widget.requested_size = *requested_size;
+        toplevel->frame.widget.requested_size = *requested_size;
 
     if (color != NULL)
-        toplevel->color = *color;
+        toplevel->frame.color = *color;
 
     if (border_width != NULL)
-        toplevel->border_width = *border_width;
+        toplevel->frame.border_width = *border_width;
 
     if (title != NULL)
         toplevel->title = *title;
@@ -219,4 +220,5 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
 
     if (min_size != NULL)
         toplevel->min_size = *min_size;
+
 }

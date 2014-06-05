@@ -34,23 +34,26 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
 
     ei_draw_polygon(surface, &first_point, button->color, clipper);
 
-    ei_anchor_t anchor = button->text_anchor;
-    if (anchor == ei_anc_northwest)
+    if (button->text != NULL)
     {
+        ei_anchor_t anchor = button->text_anchor;
+        if (anchor == ei_anc_northwest)
+        {
 
-    }
-    else
-    {
-        int text_width, text_height;
-        hw_text_compute_size(button->text, button->text_font, &text_width, &text_height);
-        ei_size_t widget_size = widget->screen_location.size;
-        ei_point_t top_left_corner = widget->screen_location.top_left;
-        top_left_corner.x += widget_size.width / 2;
-        top_left_corner.y += widget_size.height / 2;
-        top_left_corner.x -= text_width / 2;
-        top_left_corner.y -= text_height / 2;
+        }
+        else
+        {
+            int text_width, text_height;
+            hw_text_compute_size(button->text, button->text_font, &text_width, &text_height);
+            ei_size_t widget_size = widget->screen_location.size;
+            ei_point_t top_left_corner = widget->screen_location.top_left;
+            top_left_corner.x += widget_size.width / 2;
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.x -= text_width / 2;
+            top_left_corner.y -= text_height / 2;
 
-        ei_draw_text(surface, &top_left_corner, button->text, button->text_font, &button->text_color, clipper);
+            ei_draw_text(surface, &top_left_corner, button->text, button->text_font, &button->text_color, clipper);
+        }
     }
 
     ei_draw_polygon(pick_surface, &first_point,*widget->pick_color, clipper);
