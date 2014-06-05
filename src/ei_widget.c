@@ -50,7 +50,25 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
 
 void ei_widget_destroy(ei_widget_t* widget)
 {
-
+    for (ei_widget_t* child = widget->children_head ; child != NULL ; child = child->next_sibling)
+    {
+        ei_widget_destroy(child);
+    }
+    if (widget->parent->children_head == widget)
+    {
+        widget->parent->children_head = widget->next_sibling;
+    }
+    else
+    {
+        for (ei_widget_t* child = widget->parent->children_head ; child != NULL ; child = child->next_sibling)
+        {
+            if (child->next_sibling == widget)
+            {
+                child->next_sibling = widget->next_sibling;
+            }
+        }
+    }
+    widget->wclass->releasefunc(widget);
 }
 
 bool is_same_color(ei_color_t color1, ei_color_t color2)
@@ -190,7 +208,7 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     if (callback != NULL)
     {
         button->callback = callback;
-        ei_bind(ei_ev_mouse_buttonup, widget, "button", *callback, NULL);
+        ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, NULL);
     }
 
     if (user_param != NULL)

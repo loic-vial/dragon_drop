@@ -5,11 +5,13 @@
 void ei_bind(ei_eventtype_t  eventtype, ei_widget_t*  widget,
                  ei_tag_t  tag, ei_callback_t  callback, void* user_param)
 {
+    if (widget == NULL && tag == NULL) return;
+    if (widget != NULL && tag != NULL) return;
     ei_eventlist_t* event = (ei_eventlist_t*) malloc(sizeof(ei_eventlist_t));
     event->eventtype = eventtype;
     event->widget = widget;
     event->tag = tag;
-    event->callback=callback;
+    event->callback = callback;
     event->next = NULL;
     event->previous = NULL;
     event->user_param = user_param;
