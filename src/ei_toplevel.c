@@ -1,9 +1,11 @@
 #include "ei_toplevel.h"
-#include <stdlib.h>
 #include "ei_types.h"
 #include "ei_widget.h"
 #include "ei_widgetclass.h"
 #include "ei_geometrymanager.h"
+#include "ei_event.h"
+#include <stdlib.h>
+#include <stdbool.h>
 
 void* allocfunc_toplevel()
 {
@@ -19,6 +21,12 @@ void drawfunc_toplevel(ei_widget_t* widget, ei_surface_t surface,
                        ei_surface_t pick_surface, ei_rect_t* clipper)
 {
     drawfunc_frame(widget, surface, pick_surface, clipper);
+}
+
+ei_bool_t ei_callback_toplevel_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_widget_destroy(widget->parent->parent);
+    return true;
 }
 
 void setdefaultsfunc_toplevel(ei_widget_t* widget)
@@ -64,7 +72,8 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->button->color.blue=0;
     toplevel->button->text="X";
     toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 12);
-    ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_callback_t button_callback = ei_callback_toplevel_button;
+    ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &button_callback, NULL);
 
 
     int x=4;
