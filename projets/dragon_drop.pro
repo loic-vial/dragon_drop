@@ -27,7 +27,8 @@ SOURCES += \
     ../src/ei_button.c \
     ../src/ei_toplevel.c \
     ../src/ei_eventlist.c \
-    ../tests/hello_world_absolute.c
+    ../tests/hello_world_absolute.c \
+    ../tests/puzzle.c
 
 HEADERS += \
     ../include/ei_application.h \

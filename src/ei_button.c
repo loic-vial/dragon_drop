@@ -37,23 +37,126 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
     if (button->text != NULL)
     {
         ei_anchor_t anchor = button->text_anchor;
-        if (anchor == ei_anc_northwest)
-        {
 
-        }
-        else
+        int text_width, text_height;
+        hw_text_compute_size(button->text, button->text_font, &text_width, &text_height);
+        ei_size_t widget_size = widget->screen_location.size;
+        ei_point_t top_left_corner = widget->screen_location.top_left;
+        if (anchor == ei_anc_north)
         {
-            int text_width, text_height;
-            hw_text_compute_size(button->text, button->text_font, &text_width, &text_height);
-            ei_size_t widget_size = widget->screen_location.size;
-            ei_point_t top_left_corner = widget->screen_location.top_left;
+            top_left_corner.x += widget_size.width / 2;
+            top_left_corner.x -= text_width / 2;
+        }
+        else if (anchor == ei_anc_center ||anchor == ei_anc_none)
+        {
             top_left_corner.x += widget_size.width / 2;
             top_left_corner.y += widget_size.height / 2;
             top_left_corner.x -= text_width / 2;
             top_left_corner.y -= text_height / 2;
-
-            ei_draw_text(surface, &top_left_corner, button->text, button->text_font, &button->text_color, clipper);
         }
+        else if (anchor == ei_anc_northeast)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= text_width ;
+
+        }
+        else if (anchor == ei_anc_east)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= text_width ;
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.y -= text_height / 2;
+        }
+        else if (anchor == ei_anc_southeast)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= text_width ;
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= text_height ;
+        }
+        else if (anchor == ei_anc_south)
+        {
+            top_left_corner.x += widget_size.width/2 ;
+            top_left_corner.x -= text_width/2 ;
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= text_height ;
+        }
+        else if (anchor == ei_anc_southwest)
+        {
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= text_height ;
+        }
+        else if (anchor == ei_anc_west)
+        {
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.y -= text_height / 2;
+        }
+
+        ei_draw_text(surface, &top_left_corner, button->text, button->text_font, &button->text_color, clipper);
+    }
+    //tracé de l'image
+
+    if (button->img != NULL)
+    {
+        ei_anchor_t anchor = button->img_anchor;
+
+        ei_size_t size = button->img_rect->size;
+        ei_size_t widget_size = button->widget.screen_location.size;
+        ei_point_t top_left_corner = button->widget.screen_location.top_left;
+        if (anchor == ei_anc_north)
+        {
+            top_left_corner.x += widget_size.width / 2;
+            top_left_corner.x -= size.width / 2;
+        }
+        else if (anchor == ei_anc_center ||anchor == ei_anc_none)
+        {
+            top_left_corner.x += widget_size.width / 2;
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.x -= size.width / 2;
+            top_left_corner.y -= size.height / 2;
+        }
+        else if (anchor == ei_anc_northeast)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= size.width ;
+
+        }
+        else if (anchor == ei_anc_east)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= size.width ;
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.y -= size.height / 2;
+        }
+        else if (anchor == ei_anc_southeast)
+        {
+            top_left_corner.x += widget_size.width ;
+            top_left_corner.x -= size.width ;
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= size.height ;
+        }
+        else if (anchor == ei_anc_south)
+        {
+            top_left_corner.x += widget_size.width/2 ;
+            top_left_corner.x -= size.width/2 ;
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= size.height ;
+        }
+        else if (anchor == ei_anc_southwest)
+        {
+            top_left_corner.y += widget_size.height ;
+            top_left_corner.y -= size.height ;
+        }
+        else if (anchor == ei_anc_west)
+        {
+            top_left_corner.y += widget_size.height / 2;
+            top_left_corner.y -= size.height / 2;
+        }
+
+        ei_rect_t rect_1 = ei_rect(top_left_corner, size);
+        hw_surface_lock(*button->img);
+        ei_copy_surface(surface, &rect_1, *button->img, button->img_rect, EI_TRUE);
+        hw_surface_unlock(*button->img);
     }
 
     ei_draw_polygon(pick_surface, &first_point,*widget->pick_color, clipper);

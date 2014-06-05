@@ -113,6 +113,7 @@ void   ei_place   (ei_widget_t*  widget,
     if(width !=NULL)
     {
         place->width=*width;
+        widget->requested_size.width=*width;
     }
     else
     {
@@ -122,6 +123,7 @@ void   ei_place   (ei_widget_t*  widget,
     if(height !=NULL)
     {
         place->height=*height;
+        widget->requested_size.height=*height;
     }
     else
     {

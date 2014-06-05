@@ -4,6 +4,7 @@
 #include "ei_widget.h"
 #include "ei_widgetclass.h"
 #include "ei_geometrymanager.h"
+#include "hw_interface.h"
 
 void* allocfunc_toplevel()
 {
@@ -37,11 +38,21 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->min_size->height=120;
 
     toplevel->border=(ei_frame_t*)ei_widget_create("frame", &toplevel->frame.widget);
-    toplevel->border->widget.requested_size.height=20;
+    toplevel->border->text=toplevel->title="Toplevel";
+
     toplevel->border->color.alpha=255;
     toplevel->border->color.red=0;
     toplevel->border->color.blue=0;
     toplevel->border->color.green=0;
+
+    toplevel->border->text_color.alpha=255;
+    toplevel->border->text_color.red=255;
+    toplevel->border->text_color.green=255;
+    toplevel->border->text_color.blue=255;
+
+    toplevel->border->widget.requested_size.height=20;
+    ei_font_t font =hw_text_font_create	("misc/font.ttf",ei_style_normal,18);
+    toplevel->border->text_font=font;
 
     ei_frame_configure(&toplevel->border->widget,NULL,NULL,
                        &toplevel->frame.border_width,NULL,&toplevel->title,NULL,NULL,NULL,NULL,NULL,NULL);
