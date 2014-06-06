@@ -28,8 +28,8 @@ SOURCES += \
     ../src/ei_toplevel.c \
     ../src/ei_eventlist.c \
     ../src/ei_utils_2.c \
-    ../tests/hello_world_absolute.c \
-    ../tests/puzzle.c
+    ../tests/puzzle.c \
+    ../tests/hello_world_relative.c
 
 HEADERS += \
     ../include/ei_application.h \

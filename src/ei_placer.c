@@ -24,6 +24,8 @@ void ei_runfunc_placer(ei_widget_t* widget)
                                                       placer_param->anchor);
     top_left_pos.x += placer_param->x;
     top_left_pos.y += placer_param->y;
+    top_left_pos.x += widget->parent->screen_location.size.width * placer_param->rel_x;
+    top_left_pos.y += widget->parent->screen_location.size.height * placer_param->rel_y;
     widget->screen_location.top_left = top_left_pos;
 }
 
