@@ -42,7 +42,7 @@ static char*			k_default_image_filename	= "misc/klimt.jpg";
  *
  *	Main function of the application.
  */
-int ei_main(int argc, char** argv)
+int ______________ei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {400, 400};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
@@ -50,7 +50,7 @@ int ei_main(int argc, char** argv)
     ei_widget_t*	button;
     int		button_x		= 0;
     int		button_y		= 0;
-    int		button_width		= 250;
+    int		button_width		= 100;
     int		button_height		= 100;
     ei_color_t	button_color		= {0x88, 0x88, 0x88, 0xff};
     char*		button_title		= "click";
@@ -86,14 +86,14 @@ int ei_main(int argc, char** argv)
     ei_surface_t image		= hw_image_load(k_default_image_filename, ei_app_root_surface());
     ei_size_t image_size	= hw_surface_get_size(image);
     ei_rect_t img_rect;
-    img_rect.size.height=200;
+    img_rect.size.height=10;
     img_rect.size.width=50;
 
     img_rect.top_left.x=200;
     img_rect.top_left.y=200;
     ei_rect_t*rect1=&img_rect;
-ei_anchor_t anc = ei_anc_southwest;
-ei_anchor_t anc2 = ei_anc_southwest;
+ei_anchor_t anc = ei_anc_east;
+ei_anchor_t anc2 = ei_anc_northeast;
     ei_frame_configure(button,&size,&button_color,NULL,NULL,NULL,NULL,NULL,NULL,&image,&rect1,&anc);
     ei_place(button, &anc2, &button_x, &button_y, &button_width, &button_height, NULL, NULL, NULL, NULL );
 
