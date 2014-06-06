@@ -5,6 +5,7 @@
 #include "ei_widget.h"
 #include "ei_frame.h"
 #include "ei_button.h"
+#include "ei_event.h"
 
 typedef struct ei_toplevel_t
 {
@@ -30,5 +31,11 @@ void drawfunc_toplevel(ei_widget_t* widget, ei_surface_t surface,
 void setdefaultsfunc_toplevel(ei_widget_t* widget);
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect);
+
+ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
+
+ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
+
+ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
 
 #endif

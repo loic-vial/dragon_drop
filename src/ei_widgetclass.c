@@ -71,4 +71,6 @@ void ei_toplevel_register_class()
     toplevelclass->geomnotifyfunc = &geomnotifyfunc_toplevel;
     toplevelclass->next = NULL;
     ei_widgetclass_register(toplevelclass);
+    ei_callback_t drag_start = ei_toplevel_drag_start_callback;
+    ei_bind(ei_ev_mouse_buttondown, NULL, "banner", drag_start, NULL);
 }

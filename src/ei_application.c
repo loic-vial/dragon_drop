@@ -103,34 +103,24 @@ void ei_app_run()
         {
             if (tmp->eventtype == event.type)
             {
-                if (tmp->tag == NULL)
+                if (event.type == ei_ev_mouse_buttondown ||
+                    event.type == ei_ev_mouse_buttonup ||
+                    event.type == ei_ev_mouse_move)
                 {
-                    if (event.type == ei_ev_mouse_buttondown ||
-                            event.type == ei_ev_mouse_buttonup ||
-                            event.type == ei_ev_mouse_move)
+                    ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
+                    if ((tmp->tag == NULL && widget_picked == tmp->widget) ||
+                        (tmp->tag != NULL && strcmp(tmp->tag, "all") == 0) ||
+                        (tmp->tag != NULL && strcmp(tmp->tag, widget_picked->wclass->name) == 0))
                     {
-                        if (ei_widget_pick(&event.param.mouse.where) == tmp->widget)
-                        {
-                            tmp->callback(tmp->widget, &event, tmp->user_param);
-                        }
-                    }
-                    else
-                    {
-                        tmp->callback(tmp->widget, &event, tmp->user_param);
+                        tmp->callback(widget_picked, &event, tmp->user_param);
                     }
                 }
-                else if (strcmp(tmp->tag, "all") == 0)
+                else
                 {
                     tmp->callback(tmp->widget, &event, tmp->user_param);
-                }
-                else if (strcmp(tmp->tag, ei_widget_pick(&event.param.mouse.where)->wclass->name) == 0)
-                {
-                    tmp->callback(tmp->widget, &event, tmp->user_param);
-
                 }
             }
         }
-
     }
 }
 
