@@ -18,6 +18,8 @@ typedef struct ei_toplevel_t
 }
 ei_toplevel_t;
 
+void ei_banner_register_class();
+
 void* allocfunc_toplevel();
 
 void releasefunc_toplevel(ei_widget_t* widget);

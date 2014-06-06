@@ -56,8 +56,6 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
                                                              widget->screen_location.size,
                                                              size,
                                                              button->img_anchor);
-        top_left_corner.x+=button->img_rect->top_left.x;
-        top_left_corner.y+=button->img_rect->top_left.y;
 
         hw_surface_lock(*button->img);
         ei_rect_t rect_1;
@@ -101,8 +99,11 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
             {
                 rect_1.size.height=clipper->size.height + button->widget.parent->screen_location.top_left.y-top_left_corner.y;
             }
-
-            ei_copy_surface(surface, &rect_1, *button->img,&rect_1, EI_TRUE);
+ei_rect_t rect_2;
+rect_2.size=rect_1.size;
+rect_2.top_left.x=button->img_rect->top_left.x;
+rect_2.top_left.y=button->img_rect->top_left.y;
+            ei_copy_surface(surface, &rect_1, *button->img,&rect_2, EI_TRUE);
         }
         hw_surface_unlock(*button->img);
     }
