@@ -35,6 +35,8 @@ static ei_bool_t destroy_widget(ei_widget_t* widget, ei_event_t* event, void* us
 
 static bool is_dragging = false;
 static ei_point_t drag_mouse_position;
+static bool is_resizing = false;
+static ei_point_t resize_mouse_position;
 
 static ei_bool_t drag_start(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
@@ -54,7 +56,7 @@ static ei_bool_t drag(ei_widget_t* widget, ei_event_t* event, void* user_param)
     {
         if (strcmp(toplevel->geom_params->manager->name, "placer") == 0)
         {
-            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->parent->geom_params;
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->geom_params;
             ei_point_t diff_position = ei_point_sub(event->param.mouse.where, drag_mouse_position);
             placer->x += diff_position.x;
             placer->y += diff_position.y;
@@ -70,6 +72,46 @@ static ei_bool_t drag_stop(ei_widget_t* widget, ei_event_t* event, void* user_pa
     if (is_dragging)
     {
         is_dragging = false;
+    }
+    return true;
+}
+
+static ei_bool_t resize_start(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    if (!is_resizing)
+    {
+        resize_mouse_position.x = event->param.mouse.where.x;
+        resize_mouse_position.y = event->param.mouse.where.y;
+        is_resizing = true;
+    }
+    return true;
+}
+
+static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_widget_t* toplevel = (ei_widget_t*) user_param;
+    if (is_resizing)
+    {
+        if (strcmp(toplevel->geom_params->manager->name, "placer") == 0)
+        {
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->geom_params;
+            ei_point_t diff_position = ei_point_sub(event->param.mouse.where, resize_mouse_position);
+            placer->width += diff_position.x;
+            toplevel->requested_size.width += diff_position.x;
+            placer->height += diff_position.y;
+            toplevel->requested_size.height += diff_position.y;
+            resize_mouse_position = event->param.mouse.where;
+        }
+    }
+    return true;
+}
+
+static ei_bool_t resize_stop(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    resize(widget, event, user_param);
+    if (is_resizing)
+    {
+        is_resizing = false;
     }
     return true;
 }
@@ -130,7 +172,6 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_callback_t button_callback = destroy_widget;
     ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &button_callback, NULL);
 
-
     int x=4;
     int y=4;
     ei_place(&toplevel->button->widget, &button_anchor, &x, &y,NULL, NULL, NULL, NULL, NULL, NULL);
@@ -139,8 +180,28 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_callback_t _drag = drag;
     ei_callback_t _drag_stop = drag_stop;
     ei_bind(ei_ev_mouse_buttondown, &toplevel->border->widget, NULL, _drag_start, NULL);
-    ei_bind(ei_ev_mouse_move, NULL, "all", _drag, &toplevel->border->widget);
-    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, &toplevel->border->widget);
+    ei_bind(ei_ev_mouse_move, NULL, "all", _drag, &toplevel->frame.widget);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, &toplevel->frame.widget);
+
+    ei_size_t resize_button_size = ei_size(20, 20);
+    ei_color_t resize_button_color;
+    resize_button_color.alpha = 255;
+    resize_button_color.red = 255;
+    resize_button_color.green = 0;
+    resize_button_color.blue = 255;
+    float rel_x = 0.6;
+    float rel_y = 0.6;
+    ei_callback_t _resize_start = resize_start;
+    ei_callback_t _resize = resize;
+    ei_callback_t _resize_stop = resize_stop;
+
+    ei_button_t* resize_button = (ei_button_t*)ei_widget_create("button", &toplevel->frame.widget);
+    ei_button_configure(&resize_button->widget, &resize_button_size, &resize_button_color, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_place(&resize_button->widget, NULL, NULL, NULL, NULL, NULL, &rel_x, &rel_y, NULL, NULL);
+
+    ei_bind(ei_ev_mouse_buttondown, &resize_button->widget, NULL, _resize_start, NULL);
+    ei_bind(ei_ev_mouse_move, NULL, "all", _resize, &toplevel->frame.widget);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, &toplevel->frame.widget);
 }
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)
