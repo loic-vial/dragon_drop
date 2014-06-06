@@ -103,7 +103,7 @@ void   ei_place   (ei_widget_t*  widget,
 
     if(y !=NULL)
     {
-        if(strcmp(widget->wclass->name,"toplevel")==0)
+        if(strcmp(widget->parent->wclass->name,"toplevel")==0)
         {
             place->y=*y+20;
         }

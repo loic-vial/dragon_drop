@@ -190,7 +190,7 @@ ei_bool_t handle_keydown(ei_widget_t* widget, ei_event_t* event, void* user_para
 
 
 
-int __________ei_main(int argc, char* argv[])
+int __________________ei_main(int argc, char* argv[])
 {
 	ei_size_t	root_window_size		= { 1024, 768 };
 	ei_color_t	root_bgcol			= { 0x52, 0x7f, 0xb4, 0xff };

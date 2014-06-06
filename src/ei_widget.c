@@ -131,8 +131,14 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     if (relief !=NULL)
         frame->relief = *relief ;
 
-    if (text != NULL)
-        frame->text= *text ;
+    if (text != NULL && strcmp(*text, "") != 0)
+    {
+        frame->text = *text;
+        int width, height;
+        hw_text_compute_size(frame->text, frame->text_font, &width, &height);
+        widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
+        widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
+    }
 
     if (text_font != NULL)
         frame->text_font = *text_font;
@@ -235,6 +241,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
 
     if (title != NULL)
         toplevel->title = *title;
+    toplevel->border->text=*title;
 
     if (closable != NULL)
         toplevel->closable = *closable;

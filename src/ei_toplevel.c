@@ -78,8 +78,8 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
 {
     setdefaultsfunc_frame(widget);
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
-    toplevel->frame.widget.requested_size.width=320;
-    toplevel->frame.widget.requested_size.height=240;
+    toplevel->frame.widget.requested_size.width=340; //il faut prendre en compte la taille de la bannière
+    toplevel->frame.widget.requested_size.height=260;
     toplevel->frame.color=ei_default_background_color;
     toplevel->frame.border_width=4;
     toplevel->title="Toplevel";

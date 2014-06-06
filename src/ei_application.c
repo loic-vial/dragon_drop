@@ -54,7 +54,20 @@ void draw_widget(ei_widget_t* widget)
     if (widget->geom_params != NULL) {
         widget->geom_params->manager->runfunc(widget);
     }
-    widget->wclass->drawfunc(widget, root_surface, offscreen_surface, NULL);
+    if(widget->parent== NULL)
+    {
+        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,NULL);
+    }
+    else
+    {
+    ei_rect_t clipper;
+    clipper.size.height= widget->parent->requested_size.height;
+    clipper.size.width= widget->parent->requested_size.width;
+
+    clipper.top_left=widget->parent->screen_location.top_left;
+    widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper); //remettre le clipper
+    }
+
     ei_widget_t* current = widget->children_head;
     while (current != NULL)
     {
@@ -104,8 +117,9 @@ void ei_app_run()
                 {
                     tmp->callback(tmp->widget, &event, tmp->user_param);
                 }
-                else // ? faut verifier les classes
+                else if (strcmp(tmp->tag, ei_widget_pick(&event.param.mouse.where)->wclass->name) == 0)
                 {
+                    tmp->callback(tmp->widget, &event, tmp->user_param);
 
                 }
             }
