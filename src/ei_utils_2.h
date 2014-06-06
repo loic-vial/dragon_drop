@@ -8,4 +8,6 @@ ei_point_t ei_position_from_anchor(ei_point_t parent_top_left_corner, ei_size_t 
 
 ei_color_t ei_color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
 
+ei_rect_t calcul_clipper(ei_rect_t parent, ei_rect_t child);
+
 #endif

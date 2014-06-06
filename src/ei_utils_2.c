@@ -67,3 +67,47 @@ ei_color_t ei_color(unsigned char red, unsigned char green, unsigned char blue, 
     color.alpha = alpha;
     return color;
 }
+
+int min(int x1,int x2)
+{
+    if (x1>=x2)
+    {
+        return x2;
+    }
+    else return x1;
+}
+int max (int x1,int x2)
+{
+    if (x1>= x2)
+    {
+        return x1;
+    }
+    else return x2;
+}
+
+ei_rect_t calcul_clipper(ei_rect_t parent, ei_rect_t child)
+{
+    ei_rect_t rect;
+    int maxgauche=max(parent.top_left.x,child.top_left.x);
+    int  mindroit=min(parent.top_left.x+parent.size.width,child.top_left.x+child.size.width);
+    int  maxbas=max(parent.top_left.y,child.top_left.y);
+    int  minhaut=min(parent.top_left.y+parent.size.height,child.top_left.y+child.size.height);
+
+    if ( maxgauche<mindroit && maxbas<minhaut)
+    {
+        rect.top_left.x=maxgauche;
+        rect.size.width=mindroit-maxgauche;
+        rect.top_left.y=maxbas;
+        rect.size.height=minhaut-maxbas;
+    }
+    else
+    {
+        rect.size.height=0;
+        rect.size.width=0;
+        rect.top_left.x=0;
+        rect.top_left.y=0;
+    }
+
+    return rect;
+
+}
