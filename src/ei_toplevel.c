@@ -90,18 +90,26 @@ static ei_bool_t resize_start(ei_widget_t* widget, ei_event_t* event, void* user
 
 static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-    ei_widget_t* toplevel = (ei_widget_t*) user_param;
+    ei_toplevel_t* toplevel = (ei_toplevel_t*) user_param;
     if (is_resizing)
     {
-        if (strcmp(toplevel->geom_params->manager->name, "placer") == 0)
+        if (strcmp(toplevel->frame.widget.geom_params->manager->name, "placer") == 0)
         {
-            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->geom_params;
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->frame.widget.geom_params;
             ei_point_t diff_position = ei_point_sub(event->param.mouse.where, resize_mouse_position);
-            placer->width += diff_position.x;
-            toplevel->requested_size.width += diff_position.x;
-            placer->height += diff_position.y;
-            toplevel->requested_size.height += diff_position.y;
-            resize_mouse_position = event->param.mouse.where;
+            ei_size_t new_size = toplevel->frame.widget.requested_size;
+            new_size = ei_size_add(new_size, ei_size(diff_position.x, diff_position.y));
+            if (toplevel->min_size->width > new_size.width)
+                new_size.width = toplevel->min_size->width;
+            if (toplevel->min_size->height > new_size.height)
+                new_size.height = toplevel->min_size->height;
+            placer->width = new_size.width;
+            placer->height = new_size.height;
+            toplevel->frame.widget.requested_size = new_size;
+            if (toplevel->min_size->width < new_size.width)
+                 resize_mouse_position.x = event->param.mouse.where.x;
+            if (toplevel->min_size->height < new_size.height)
+                 resize_mouse_position.y = event->param.mouse.where.y;
         }
     }
     return true;
