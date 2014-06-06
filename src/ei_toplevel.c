@@ -47,25 +47,22 @@ static ei_bool_t close_button_click(ei_widget_t* widget, ei_event_t* event, void
     return true;
 }
 
-static ei_bool_t drag_start(ei_widget_t* widget, ei_event_t* event, void* user_param);
-static ei_bool_t drag(ei_widget_t* widget, ei_event_t* event, void* user_param);
-static ei_bool_t drag_stop(ei_widget_t* widget, ei_event_t* event, void* user_param);
 static ei_point_t drag_mouse_position;
 static bool is_resizing = false;
 static ei_point_t resize_mouse_position;
 
-static ei_bool_t drag_start(ei_widget_t* widget, ei_event_t* event, void* user_param)
+ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     drag_mouse_position.x = event->param.mouse.where.x;
     drag_mouse_position.y = event->param.mouse.where.y;
-    ei_callback_t _drag = drag;
-    ei_callback_t _drag_stop = drag_stop;
+    ei_callback_t _drag = ei_toplevel_drag_callback;
+    ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
     ei_bind(ei_ev_mouse_move, NULL, "all", _drag, widget->parent);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, widget->parent);
     return true;
 }
 
-static ei_bool_t drag(ei_widget_t* widget, ei_event_t* event, void* user_param)
+ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_widget_t* toplevel = (ei_widget_t*) user_param;
     if (strcmp(toplevel->geom_params->manager->name, "placer") == 0)
@@ -79,10 +76,10 @@ static ei_bool_t drag(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return true;
 }
 
-static ei_bool_t drag_stop(ei_widget_t* widget, ei_event_t* event, void* user_param)
+ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-    ei_callback_t _drag = drag;
-    ei_callback_t _drag_stop = drag_stop;
+    ei_callback_t _drag = ei_toplevel_drag_callback;
+    ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
     ei_unbind(ei_ev_mouse_move, NULL, "all", _drag, user_param);
     ei_unbind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, user_param);
     return true;
@@ -192,9 +189,6 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
 
     ei_place(&toplevel->button->widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
-
-    ei_callback_t _drag_start = drag_start;
-    ei_bind(ei_ev_mouse_buttondown, &toplevel->border->widget, NULL, _drag_start, NULL);
 
     ei_size_t resize_button_size = ei_size(20, 20);
     ei_color_t resize_button_color = ei_color(0, 0, 0, 255);
