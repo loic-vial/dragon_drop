@@ -102,7 +102,136 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     fourth_point.point.y += widget->screen_location.size.height;
     fourth_point.next = NULL;
 
+
     ei_draw_polygon(surface, &first_point, frame->color, clipper);
+
+    if (frame->text != NULL)
+    {
+        ei_size_t text_size;
+        hw_text_compute_size(frame->text, frame->text_font, &text_size.width, &text_size.height);
+        ei_point_t top_left_corner = ei_position_from_anchor(widget->screen_location.top_left,
+                                                             widget->screen_location.size,
+                                                             text_size,
+                                                             frame->text_anchor);
+
+        ei_draw_text(surface, &top_left_corner, frame->text, frame->text_font, &frame->text_color, clipper);
+    }
+    //tracé de l'image
+
+    if (frame->img != NULL)
+    {
+        ei_size_t size = frame->img_rect->size;
+
+        ei_point_t top_left_corner = ei_position_from_anchor(widget->screen_location.top_left,
+                                                             widget->screen_location.size,
+                                                             size,
+                                                             frame->img_anchor);
+
+        hw_surface_lock(*frame->img);
+        ei_rect_t rect_1;
+
+        if(frame->img_rect->size.height <= clipper->size.height )
+        {
+
+            if(frame->img_rect->size.height <= frame->widget.screen_location.size.height )
+            {
+                rect_1.size.height =frame->img_rect->size.height;
+                rect_1.top_left.y=top_left_corner.y;
+            }
+
+            else
+            {
+                rect_1.top_left.y=top_left_corner.y;
+                rect_1.size.height= frame->widget.screen_location.size.height;
+            }
+
+            if(frame->img_rect->size.width <= frame->widget.screen_location.size.width )
+            {
+                rect_1.size.width =frame->img_rect->size.width;
+                rect_1.top_left.x=top_left_corner.x;
+            }
+
+            else
+            {
+                rect_1.top_left.x=top_left_corner.x;
+                rect_1.size.width= frame->widget.screen_location.size.width;
+            }
+        }
+        else
+        {
+
+            if ( clipper->size.height<frame->widget.screen_location.size.height)
+            {
+                rect_1.size.height = clipper->size.height;
+            }
+            else  rect_1.size.height =frame->widget.screen_location.size.height;
+
+
+            rect_1.top_left.y=widget->screen_location.top_left.y;//
+        }
+
+
+
+        if(frame->img_rect->size.width <= clipper->size.width )
+        {
+
+            if(frame->img_rect->size.width <= frame->widget.screen_location.size.width )
+            {
+                rect_1.size.width =frame->img_rect->size.width;
+                rect_1.top_left.x=top_left_corner.x;
+            }
+
+            else
+            {
+                rect_1.top_left.x=top_left_corner.x;
+                rect_1.size.width= frame->widget.screen_location.size.width;
+            }
+
+            if(frame->img_rect->size.height <= frame->widget.screen_location.size.height )
+            {
+                rect_1.size.height =frame->img_rect->size.height;
+                rect_1.top_left.y=top_left_corner.y;
+            }
+
+            else
+            {
+                rect_1.top_left.x=top_left_corner.x;
+                rect_1.size.width= frame->widget.screen_location.size.width;
+            }
+        }
+        else
+        {
+
+            if ( clipper->size.width<frame->widget.screen_location.size.width)
+            {
+                rect_1.size.width = clipper->size.width;
+            }
+            else  rect_1.size.width =frame->widget.screen_location.size.width;
+
+
+            rect_1.top_left.x=widget->screen_location.top_left.x;
+        }
+
+
+        if (clipper->size.width + frame->widget.parent->screen_location.top_left.x>top_left_corner.x ||
+                clipper->size.height + frame->widget.parent->screen_location.top_left.y>top_left_corner.y)
+        {
+            if (clipper->size.width < top_left_corner.x +frame->img_rect->size.width)
+            {
+                rect_1.size.width=clipper->size.width + frame->widget.parent->screen_location.top_left.x-top_left_corner.x;
+            }
+            if (clipper->size.height < top_left_corner.y+frame->img_rect->size.height)
+            {
+                rect_1.size.height=clipper->size.height + frame->widget.parent->screen_location.top_left.y-top_left_corner.y;
+            }
+            ei_rect_t rect_2;
+            rect_2.size=rect_1.size;
+            rect_2.top_left.x=frame->img_rect->top_left.x;
+            rect_2.top_left.y=frame->img_rect->top_left.y;
+            ei_copy_surface(surface, &rect_1, *frame->img,&rect_2, EI_TRUE);
+        }
+        hw_surface_unlock(*frame->img);
+    }
     ei_draw_polygon(pick_surface, &first_point, *widget->pick_color, clipper);
 
     if (frame->text != NULL)
@@ -116,7 +245,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         ei_draw_text(surface, &text_top_left_position, frame->text, frame->text_font,
                      &frame->text_color, clipper);
     }
-
+/*
     if (frame->img != NULL)
     {
         ei_size_t img_size = frame->img_rect->size;
@@ -129,6 +258,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         ei_copy_surface(surface, &img_rect_on_screen, *frame->img, frame->img_rect, EI_TRUE);
         hw_surface_unlock(*frame->img);
     }
+*/
 }
 
 void setdefaultsfunc_frame(ei_widget_t* widget)

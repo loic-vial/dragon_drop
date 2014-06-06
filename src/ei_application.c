@@ -4,7 +4,7 @@
 #include "ei_geometrymanager.h"
 #include "ei_event.h"
 #include "ei_eventlist.h"
-
+#include "ei_toplevel.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +27,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_frame_register_class();
     ei_button_register_class();
     ei_toplevel_register_class();
+    ei_banner_register_class();
     ei_register_placer_manager();
 
     root.widget.wclass = ei_widgetclass_from_name("frame");
@@ -54,7 +55,25 @@ void draw_widget(ei_widget_t* widget)
     if (widget->geom_params != NULL) {
         widget->geom_params->manager->runfunc(widget);
     }
-    widget->wclass->drawfunc(widget, root_surface, offscreen_surface, NULL);
+    if(widget->parent== NULL)
+    {
+        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,NULL);
+    }
+    else
+    {
+        ei_rect_t clipper;
+        clipper.size.height= widget->parent->requested_size.height;
+        clipper.size.width= widget->parent->requested_size.width;
+
+        clipper.top_left=widget->parent->screen_location.top_left;
+        if( strcmp(widget->wclass->name,"banner") ==0 )
+        {
+            clipper.top_left.y-=widget->requested_size.height;
+            clipper.size.height=widget->requested_size.height;
+        }
+        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
+    }
+
     ei_widget_t* current = widget->children_head;
     while (current != NULL)
     {
@@ -87,8 +106,8 @@ void ei_app_run()
                 if (tmp->tag == NULL)
                 {
                     if (event.type == ei_ev_mouse_buttondown ||
-                        event.type == ei_ev_mouse_buttonup ||
-                        event.type == ei_ev_mouse_move)
+                            event.type == ei_ev_mouse_buttonup ||
+                            event.type == ei_ev_mouse_move)
                     {
                         if (ei_widget_pick(&event.param.mouse.where) == tmp->widget)
                         {
@@ -104,8 +123,9 @@ void ei_app_run()
                 {
                     tmp->callback(tmp->widget, &event, tmp->user_param);
                 }
-                else // ? faut verifier les classes
+                else if (strcmp(tmp->tag, ei_widget_pick(&event.param.mouse.where)->wclass->name) == 0)
                 {
+                    tmp->callback(tmp->widget, &event, tmp->user_param);
 
                 }
             }

@@ -1,5 +1,6 @@
 #include "ei_geometrymanager.h"
 #include "ei_placer.h"
+#include "ei_toplevel.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -105,7 +106,8 @@ void   ei_place   (ei_widget_t*  widget,
     {
         if(strcmp(widget->wclass->name,"toplevel")==0)
         {
-            place->y=*y+20;
+            ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
+            place->y=*y+toplevel->border->widget.requested_size.height;
         }
         else place->y=*y;
     }

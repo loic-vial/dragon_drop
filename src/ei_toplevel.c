@@ -12,6 +12,19 @@
 #include <stdbool.h>
 #include <string.h>
 
+void ei_banner_register_class()
+{
+    ei_widgetclass_t* frameclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
+    strcpy(frameclass->name, "banner");
+    frameclass->allocfunc = &allocfunc_frame;
+    frameclass->releasefunc = &releasefunc_frame;
+    frameclass->drawfunc = &drawfunc_frame;
+    frameclass->setdefaultsfunc = &setdefaultsfunc_frame;
+    frameclass->geomnotifyfunc = &geomnotifyfunc_frame;
+    frameclass->next = NULL;
+    ei_widgetclass_register(frameclass);
+}
+
 void* allocfunc_toplevel()
 {
     return calloc(1, sizeof(ei_toplevel_t));
@@ -139,11 +152,11 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->min_size->width = 160;
     toplevel->min_size->height = 120;
 
-    toplevel->border=(ei_frame_t*) ei_widget_create("frame", &toplevel->frame.widget);
+    toplevel->border=(ei_frame_t*) ei_widget_create("banner", &toplevel->frame.widget);
     toplevel->border->text = "Toplevel";
 
     toplevel->border->widget.requested_size.height = 20;
-    ei_font_t border_font = hw_text_font_create("misc/font.ttf",ei_style_normal, 18);
+    ei_font_t border_font = hw_text_font_create("misc/font.ttf",ei_style_normal, 16);
     ei_color_t border_color = ei_color(0, 0, 0, 255);
     ei_color_t border_text_color = ei_color(255, 255, 255, 255);
 
@@ -153,26 +166,29 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
 
     ei_anchor_t border_anchor = ei_anc_north;
 
-    int moins_vingt = -20;
+    int border_position_y = -toplevel->border->widget.requested_size.height;
     float un=1;
-    ei_place(&toplevel->border->widget, &border_anchor, NULL, &moins_vingt, NULL, NULL, NULL, NULL, &un,NULL);
+    ei_place(&toplevel->border->widget, &border_anchor, NULL, &border_position_y, NULL, NULL, NULL, NULL, &un, NULL);
 
     toplevel->button = (ei_button_t*)ei_widget_create("button", &toplevel->border->widget);
 
     ei_size_t* bord=(ei_size_t*)malloc(sizeof(ei_size_t));
-    bord->height = 12;
-    bord->width=12;
+    bord->height = 16;
+    bord->width=16;
     toplevel->button->color.alpha=255;
     toplevel->button->color.red=255;
     toplevel->button->color.green=0;
     toplevel->button->color.blue=0;
     toplevel->button->text="X";
-    toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 12);
+    toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
     ei_anchor_t close_button_anchor = ei_anc_west;
     int close_button_pos_x = 4;
+
     ei_callback_t button_callback = close_button_click;
+    ei_anchor_t close_button_text_anchor = ei_anc_center;
     ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL,
-                        NULL, NULL, NULL, NULL, NULL, NULL, NULL, &button_callback, NULL);
+                        NULL, NULL, NULL, &close_button_text_anchor, NULL, NULL, NULL,
+                        &button_callback, NULL);
 
     ei_place(&toplevel->button->widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
