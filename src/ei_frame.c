@@ -152,20 +152,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         ei_draw_text(surface, &text_top_left_position, frame->text, frame->text_font,
                      &frame->text_color, clipper);
     }
-    /*
-    if (frame->img != NULL)
-    {
-        ei_size_t img_size = frame->img_rect->size;
-        ei_point_t img_top_left_position = ei_position_from_anchor(widget->screen_location.top_left,
-                                                                   widget->screen_location.size,
-                                                                   img_size,
-                                                                   frame->img_anchor);
-        ei_rect_t img_rect_on_screen = ei_rect(img_top_left_position, img_size);
-        hw_surface_lock(*frame->img);
-        ei_copy_surface(surface, &img_rect_on_screen, *frame->img, frame->img_rect, EI_TRUE);
-        hw_surface_unlock(*frame->img);
-    }
-*/
+
 }
 
 void setdefaultsfunc_frame(ei_widget_t* widget)

@@ -115,9 +115,9 @@ static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param
             placer->height = new_size.height;
             toplevel->frame.widget.requested_size = new_size;
             if (toplevel->min_size->width < new_size.width)
-                 resize_mouse_position.x = event->param.mouse.where.x;
+                resize_mouse_position.x = event->param.mouse.where.x;
             if (toplevel->min_size->height < new_size.height)
-                 resize_mouse_position.y = event->param.mouse.where.y;
+                resize_mouse_position.y = event->param.mouse.where.y;
         }
     }
     return true;
@@ -180,10 +180,10 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
     ei_anchor_t close_button_anchor = ei_anc_west;
     int close_button_pos_x = 4;
-
+    int cornus =0;
     ei_callback_t button_callback = close_button_click;
     ei_anchor_t close_button_text_anchor = ei_anc_center;
-    ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL,
+    ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, &cornus, NULL,
                         NULL, NULL, NULL, &close_button_text_anchor, NULL, NULL, NULL,
                         &button_callback, NULL);
 
@@ -200,9 +200,11 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_button_t* resize_button = (ei_button_t*)ei_widget_create("button", &toplevel->frame.widget);
     ei_button_configure(&resize_button->widget, &resize_button_size, &resize_button_color,
                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(&resize_button->widget, &resize_button_anchor, NULL, NULL, NULL,
-             NULL, NULL, NULL, NULL, NULL);
-
+    if (toplevel->closable)
+    {
+        ei_place(&resize_button->widget, &resize_button_anchor, NULL, NULL, NULL,
+                 NULL, NULL, NULL, NULL, NULL);
+    }
     ei_bind(ei_ev_mouse_buttondown, &resize_button->widget, NULL, _resize_start, NULL);
     ei_bind(ei_ev_mouse_move, NULL, "all", _resize, &toplevel->frame.widget);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, &toplevel->frame.widget);

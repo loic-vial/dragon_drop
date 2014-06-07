@@ -48,6 +48,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root.widget.screen_location.top_left.y = 0;
     root.widget.screen_location.size = *main_window_size;
     root.widget.content_rect = &root.widget.screen_location;
+    ei_place(&root.widget,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 }
 
 
@@ -80,9 +81,9 @@ ei_rect_t ei_clipper(ei_widget_t* widget)
 void draw_widget(ei_widget_t* widget)
 {
     if (widget == NULL) return;
-    if (widget->geom_params != NULL) {
-        widget->geom_params->manager->runfunc(widget);
-    }
+    if (widget->geom_params == NULL) return;
+    widget->geom_params->manager->runfunc(widget);
+
     if(widget->parent== NULL)
     {
         widget->wclass->drawfunc(widget, root_surface, offscreen_surface,NULL);
@@ -97,7 +98,7 @@ void draw_widget(ei_widget_t* widget)
             clipper.top_left.y-=widget->requested_size.height;
             clipper.size.height=widget->requested_size.height;
         }
-    if( strcmp(widget->parent->wclass->name,"banner") ==0 )
+        if( strcmp(widget->parent->wclass->name,"banner") ==0 )
         {
             clipper.top_left=widget->screen_location.top_left;
             clipper.size=widget->requested_size;
