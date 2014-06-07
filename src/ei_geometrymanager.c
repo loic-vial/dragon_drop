@@ -1,6 +1,7 @@
 #include "ei_geometrymanager.h"
 #include "ei_placer.h"
 #include "ei_toplevel.h"
+#include "ei_application.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,17 +49,6 @@ void ei_register_placer_manager()
     ei_geometrymanager_register(placer);
 }
 
-void set_default_values_to_placer(ei_placer_geometry_param_t* place)
-{
-    place->anchor = ei_anc_northwest;
-    place->x = 0;
-    place->y = 0;
-    place->rel_x = 0;
-    place->rel_y = 0;
-    place->rel_width = -1;
-    place->rel_height = -1;
-}
-
 void ei_place(ei_widget_t* widget, ei_anchor_t* anchor,
               int* x, int* y, int* width, int* height,
               float* rel_x, float* rel_y, float* rel_width, float* rel_height)
@@ -66,44 +56,75 @@ void ei_place(ei_widget_t* widget, ei_anchor_t* anchor,
     ei_placer_geometry_param_t* place;
     if (widget->geom_params == NULL)
     {
-        place = ( ei_placer_geometry_param_t*)malloc(sizeof(ei_placer_geometry_param_t));
-        place->geometry_param.manager=ei_geometrymanager_from_name("placer");
-        set_default_values_to_placer(place);
-        widget->geom_params=(ei_geometry_param_t*)place;
+        place = (ei_placer_geometry_param_t*) malloc(sizeof(ei_placer_geometry_param_t));
+        place->geometry_param.manager = ei_geometrymanager_from_name("placer");
+        widget->geom_params = (ei_geometry_param_t*) place;
     }
     else if (strcmp(widget->geom_params->manager->name ,"placer") != 0)
     {
-        ei_geometrymanager_unmap (widget);
-        place = malloc(sizeof(ei_placer_geometry_param_t));
-        place->geometry_param.manager=ei_geometrymanager_from_name("placer");
-        set_default_values_to_placer(place);
-        widget->geom_params=(ei_geometry_param_t*)place;
+        ei_geometrymanager_unmap(widget);
+        place = (ei_placer_geometry_param_t*) malloc(sizeof(ei_placer_geometry_param_t));
+        place->geometry_param.manager = ei_geometrymanager_from_name("placer");
+        widget->geom_params=(ei_geometry_param_t*) place;
     }
     else
     {
-        place = (ei_placer_geometry_param_t*)widget->geom_params;
+        place = (ei_placer_geometry_param_t*) widget->geom_params;
     }
 
     if (anchor != NULL)
-        place->anchor =*anchor;
+    {
+        place->anchor = *anchor;
+    }
+    else
+    {
+        place->anchor = ei_anc_northwest;
+    }
 
     if (x != NULL)
+    {
         place->x = *x;
+    }
+    else
+    {
+        place->x = 0;
+    }
 
     if (y != NULL)
     {
-        if(strcmp(widget->wclass->name,"toplevel") == 0)
+        place->y = *y;
+        if (strcmp(widget->wclass->name,"toplevel") == 0)
         {
             ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
-            place->y = *y + toplevel->border->widget.requested_size.height;
+            place->y += toplevel->border->widget.requested_size.height;
         }
-        else place->y = *y;
+    }
+    else
+    {
+        place->y = 0;
+    }
+
+    if (rel_x != NULL)
+    {
+        place->rel_x = *rel_x;
+    }
+    else
+    {
+        place->rel_x = 0;
+    }
+
+    if (rel_y != NULL)
+    {
+        place->rel_y = *rel_y;
+    }
+    else
+    {
+        place->rel_y = 0;
     }
 
     if (width != NULL)
     {
         place->width = *width;
-        widget->requested_size.width = *width;
     }
     else
     {
@@ -113,22 +134,27 @@ void ei_place(ei_widget_t* widget, ei_anchor_t* anchor,
     if (height != NULL)
     {
         place->height = *height;
-        widget->requested_size.height = *height;
     }
     else
     {
         place->height = widget->requested_size.height;
     }
 
-    if (rel_x != NULL)
-        place->rel_x = *rel_x;
-
-    if (rel_y != NULL)
-        place->rel_y = *rel_y;
-
     if (rel_width != NULL)
+    {
         place->rel_width = *rel_width;
+    }
+    else
+    {
+        place->rel_width = -1;
+    }
 
     if (rel_height != NULL)
+    {
         place->rel_height = *rel_height;
+    }
+    else
+    {
+        place->rel_height = -1;
+    }
 }
