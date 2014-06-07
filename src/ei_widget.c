@@ -11,7 +11,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include "ei_geometrymanager.h"
+#include "ei_placer.h"
 static int current_pick_id = 1;
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
@@ -213,8 +214,17 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     toplevel->border->text=*title;
 
     if (closable != NULL)
+    {
         toplevel->closable = *closable;
-
+        if(toplevel->closable)
+        {
+              ei_anchor_t resize_button_anchor = ei_anc_west;
+              int x=8;
+            ei_place(toplevel->border->widget.children_head, &resize_button_anchor, &x, NULL, NULL,
+                     NULL, NULL, NULL, NULL, NULL);
+        }
+        else ei_releasefunc_placer(toplevel->border->widget.children_head);
+    }
     if (resizable != NULL)
         toplevel->resizable = *resizable;
 
