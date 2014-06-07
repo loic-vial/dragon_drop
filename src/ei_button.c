@@ -57,54 +57,21 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
                                                              size,
                                                              button->img_anchor);
 
-        hw_surface_lock(*button->img);
-        ei_rect_t rect_1;
+        ei_rect_t rect =calcul_clipper(*clipper,widget->screen_location);
+        ei_rect_t bon_top;
+        bon_top.top_left=top_left_corner;
+        bon_top.size=size;
+        rect =calcul_clipper(bon_top,rect);
 
-        if(button->img_rect->size.height < clipper->size.height && button->img_rect->size.width < clipper->size.width)
-        {
 
-            if(button->img_rect->size.height < button->widget.screen_location.size.height && button->img_rect->size.width < button->widget.screen_location.size.width)
-            {
-                rect_1 = ei_rect(top_left_corner, button->img_rect->size);
-            }
+        ei_rect_t rect_2;
+        rect_2.size=rect.size;
+        rect_2.top_left=button->img_rect->top_left;
+         hw_surface_lock(*button->img);
+        ei_copy_surface		(surface,&rect,*button->img,&rect_2,EI_TRUE);
 
-            else
-            {
-                rect_1 = ei_rect(button->widget.screen_location.top_left, button->widget.screen_location.size);
-            }
-        }
-        else
-        {
 
-            if ( clipper->size.height<button->widget.screen_location.size.height)
-            {
-                rect_1.size.height = clipper->size.height;
-            }
-            else  rect_1.size.height =button->widget.screen_location.size.height;
 
-            if ( clipper->size.width<button->widget.screen_location.size.width)
-            {
-                rect_1.size.width = clipper->size.width;
-            }
-            else  rect_1.size.width =button->widget.screen_location.size.width;
-            rect_1.top_left=widget->screen_location.top_left;
-        }
-        if (clipper->size.width + button->widget.parent->screen_location.top_left.x>top_left_corner.x ||clipper->size.height + button->widget.parent->screen_location.top_left.y>top_left_corner.y)
-        {
-            if (clipper->size.width + button->widget.parent->screen_location.top_left.x < top_left_corner.x +button->img_rect->size.width)
-            {
-                rect_1.size.width=clipper->size.width + button->widget.parent->screen_location.top_left.x-top_left_corner.x;
-            }
-            if (clipper->size.height + button->widget.parent->screen_location.top_left.y< top_left_corner.y+button->img_rect->size.height)
-            {
-                rect_1.size.height=clipper->size.height + button->widget.parent->screen_location.top_left.y-top_left_corner.y;
-            }
-ei_rect_t rect_2;
-rect_2.size=rect_1.size;
-rect_2.top_left.x=button->img_rect->top_left.x;
-rect_2.top_left.y=button->img_rect->top_left.y;
-            ei_copy_surface(surface, &rect_1, *button->img,&rect_2, EI_TRUE);
-        }
         hw_surface_unlock(*button->img);
     }
 
