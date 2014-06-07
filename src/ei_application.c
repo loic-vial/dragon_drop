@@ -29,6 +29,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_button_register_class();
     ei_toplevel_register_class();
     ei_banner_register_class();
+    ei_resize_register_class();
     ei_register_placer_manager();
 
     root.widget.wclass = ei_widgetclass_from_name("frame");

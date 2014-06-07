@@ -25,6 +25,19 @@ void ei_banner_register_class()
     ei_widgetclass_register(frameclass);
 }
 
+void ei_resize_register_class()
+{
+    ei_widgetclass_t* buttonclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
+    strcpy(buttonclass->name, "resize");
+   buttonclass->allocfunc = &allocfunc_button;
+    buttonclass->releasefunc = &releasefunc_button;
+    buttonclass->drawfunc = &drawfunc_button;
+    buttonclass->setdefaultsfunc = &setdefaultsfunc_button;
+    buttonclass->geomnotifyfunc = &geomnotifyfunc_button;
+    buttonclass->next = NULL;
+    ei_widgetclass_register(buttonclass);
+}
+
 void* allocfunc_toplevel()
 {
     return calloc(1, sizeof(ei_toplevel_t));
@@ -198,7 +211,7 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_callback_t _resize = resize;
     ei_callback_t _resize_stop = resize_stop;
 
-    ei_button_t* resize_button = (ei_button_t*)ei_widget_create("button", &toplevel->frame.widget);
+    ei_button_t* resize_button = (ei_button_t*)ei_widget_create("resize", &toplevel->frame.widget);
     ei_button_configure(&resize_button->frame.widget, &resize_button_size, &resize_button_color,
                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     if (toplevel->closable)

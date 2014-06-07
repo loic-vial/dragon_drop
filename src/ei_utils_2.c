@@ -1,7 +1,9 @@
 #include "ei_utils_2.h"
 
+#include <stdlib.h>
+
 ei_point_t ei_position_from_anchor(ei_point_t top_left_corner, ei_size_t parent_size,
-                              ei_size_t child_size, ei_anchor_t anchor)
+                                   ei_size_t child_size, ei_anchor_t anchor)
 {
     if (anchor == ei_anc_northwest || anchor == ei_anc_none)
     {
@@ -110,4 +112,26 @@ ei_rect_t calcul_clipper(ei_rect_t parent, ei_rect_t child)
 
     return rect;
 
+}
+
+void ei_tail(ei_widget_t* widget)
+{
+    if(widget->parent->children_tail !=widget)
+    {
+        if(widget->parent->children_head == widget)
+        {
+                widget->parent->children_head=widget->next_sibling;
+        }
+        else
+        {
+            ei_widget_t* prec=widget->parent->children_head;
+            while(prec->next_sibling !=widget)
+            {
+                prec=prec->next_sibling;
+            }
+            prec->next_sibling=widget->next_sibling;
+        }
+        widget->parent->children_tail->next_sibling = widget;
+        widget->next_sibling=NULL;
+    }
 }

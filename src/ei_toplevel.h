@@ -20,6 +20,7 @@ typedef struct ei_toplevel_t
 ei_toplevel_t;
 
 void ei_banner_register_class();
+void ei_resize_register_class();
 
 void* allocfunc_toplevel();
 

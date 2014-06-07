@@ -13,6 +13,7 @@
 #include <string.h>
 #include "ei_geometrymanager.h"
 #include "ei_placer.h"
+#include "ei_utils_2.h"
 static int current_pick_id = 1;
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
@@ -31,7 +32,7 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->children_head = NULL;
     widget->children_tail = NULL;
     widget->next_sibling = NULL;
-    if (parent->children_tail == NULL)
+    if (parent->children_head == NULL)
     {
         parent->children_head = widget;
         parent->children_tail = widget;
@@ -46,7 +47,19 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->screen_location = ei_rect_zero();
     widget->content_rect = &widget->screen_location;
     widgetclass->setdefaultsfunc(widget);
-    return widget;
+
+    if (strcmp(parent->wclass->name,"toplevel")==0 && strcmp(widget->wclass->name,"banner") != 0   && strcmp(widget->wclass->name,"resize") != 0 )
+    {
+        ei_widget_t* resize;
+        resize=parent->children_head;
+        while(strcmp(resize->wclass->name,"resize")!=0)
+        {
+            resize=resize->next_sibling;
+        }
+        ei_tail(resize);
+    }
+
+return widget;
 }
 
 void ei_widget_destroy(ei_widget_t* widget)
@@ -218,8 +231,8 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         toplevel->closable = *closable;
         if(toplevel->closable)
         {
-              ei_anchor_t resize_button_anchor = ei_anc_west;
-              int x=8;
+            ei_anchor_t resize_button_anchor = ei_anc_west;
+            int x=8;
             ei_place(toplevel->border->widget.children_head, &resize_button_anchor, &x, NULL, NULL,
                      NULL, NULL, NULL, NULL, NULL);
         }

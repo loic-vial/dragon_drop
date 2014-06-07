@@ -46,4 +46,5 @@ HEADERS += \
     ../src/ei_placer.h \
     ../src/ei_button.h \
     ../src/ei_toplevel.h \
-    ../src/ei_eventlist.h
+    ../src/ei_eventlist.h \
+    ../src/ei_utils_2.h
