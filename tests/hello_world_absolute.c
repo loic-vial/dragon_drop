@@ -42,34 +42,34 @@ static char*			k_default_image_filename	= "misc/klimt.jpg";
  *
  *	Main function of the application.
  */
-int ___ei_main(int argc, char** argv)
+int ei_main(int argc, char** argv)
 {
-    ei_size_t	screen_size		= {400, 400};
+    ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
 
     ei_widget_t*	button;
     int		button_x		= 0;
     int		button_y		= 0;
-    int		button_width		= 100;
-    int		button_height		= 100;
-    ei_color_t	button_color		= {0x88, 0x88, 0x88, 0xff};
+    int		button_width		= 400;
+    int		button_height		= 400;
+    ei_color_t	button_color		= {0x90, 0x40, 0x88, 0xff};
     char*		button_title		= "click";
     ei_color_t	button_text_color	= {0x00, 0x00, 0x00, 0xff};
     ei_relief_t	button_relief		= ei_relief_raised;
     int		button_border_width	= 2;
     ei_callback_t 	button_callback 	= button_press;
 
-     ei_size_t	size		= {10,10};
+     ei_size_t	size		= {100,100};
 
     ei_widget_t*	window;
-    ei_size_t	window_size		= {200,200};
+    ei_size_t	window_size		= {500,500};
     char*		window_title		= "Hello World";
-    ei_color_t	window_color		= {0xA0,0xA0,0xA0, 0xff};
+    ei_color_t	window_color		= {0x20,0xA0,0xA0, 0xff};
     int		window_border_width	= 2;
     ei_bool_t	window_closable		= EI_TRUE;
     ei_axis_set_t	window_resizable 	= ei_axis_both;
-    ei_point_t	window_position	 	= {30, 10};
-
+    ei_point_t	window_position	 	= {100, 100};
+ei_anchor_t anc = ei_anc_center;
 
     /* Create the application and change the color of the background. */
     ei_app_create(&screen_size, EI_FALSE);
@@ -83,19 +83,39 @@ int ___ei_main(int argc, char** argv)
 
     /* Create, configure and place a button as a descendant of the toplevel window. */
     button = ei_widget_create("frame", window);
+
+    ei_frame_configure(button,&size,&button_color,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+    ei_place(button, &anc, &button_x, &button_y, &button_width, &button_height, NULL, NULL, NULL, NULL );
+
+
+
+    /* Create, configure and place a button as a descendant of the toplevel window. */
+
+    ei_widget_t*	button1;
+    int		button_x1		= 0;
+    int		button_y1		= 0;
+    int		button_width1		= 200;
+    int		button_height1		= 200;
+    ei_color_t	button_color1		= {0x10, 0x88, 0x90, 0xff};
+    char*		button_title1		= "click";
+    ei_color_t	button_text_color1	= {0x00, 0x00, 0x00, 0xff};
+    ei_relief_t	button_relief1		= ei_relief_raised;
+    int		button_border_width1	= 2;
+    ei_callback_t 	button_callback1 	= button_press;
+    button1 = ei_widget_create("button", button);
+
     ei_surface_t image		= hw_image_load(k_default_image_filename, ei_app_root_surface());
     ei_size_t image_size	= hw_surface_get_size(image);
     ei_rect_t img_rect;
     img_rect.size.height=100;
-    img_rect.size.width=50;
+    img_rect.size.width=100;
 
     img_rect.top_left.x=200;
     img_rect.top_left.y=200;
     ei_rect_t*rect1=&img_rect;
-ei_anchor_t anc = ei_anc_west;
-ei_anchor_t anc2 = ei_anc_northeast;
-    ei_frame_configure(button,&size,&button_color,NULL,NULL,NULL,NULL,NULL,NULL,&image,&rect1,&anc);
-    ei_place(button, &anc2, &button_x, &button_y, &button_width, &button_height, NULL, NULL, NULL, NULL );
+ei_anchor_t anc2 = ei_anc_center;
+    ei_button_configure(button1,&size,&button_color1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&image,&rect1,&anc,NULL,NULL);
+    ei_place(button1, &anc2, &button_x1, &button_y1, &button_width1, &button_height1, NULL, NULL, NULL, NULL );
 
     /* Hook the keypress callback to the event. */
     ei_bind(ei_ev_keydown,		NULL, "all", process_key, NULL);
