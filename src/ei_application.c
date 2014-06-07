@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-static ei_frame_t root;
+static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
 static bool want_quit;
@@ -33,24 +33,11 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_banner_register_class();
     ei_register_placer_manager();
 
-    root.widget.wclass = ei_widgetclass_from_name("frame");
-    root.widget.pick_id = 0;
-    root.widget.pick_color = malloc(sizeof(ei_color_t));
-    root.widget.pick_color->red = 0;
-    root.widget.pick_color->green = 0;
-    root.widget.pick_color->blue = 0;
-    root.widget.pick_color->alpha = 255;
-    root.widget.parent = NULL;
-    root.widget.children_head = NULL;
-    root.widget.children_tail = NULL;
-    root.widget.next_sibling = NULL;
-    root.widget.geom_params = NULL;
-    root.widget.requested_size = *main_window_size;
-    root.widget.screen_location.top_left.x = 0;
-    root.widget.screen_location.top_left.y = 0;
-    root.widget.screen_location.size = *main_window_size;
-    root.widget.content_rect = &root.widget.screen_location;
-    ei_place(&root.widget,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+    root = (ei_frame_t*) ei_widget_create("frame", NULL);
+    ei_color_t color = ei_color(0, 0, 0, 255);
+    ei_frame_configure(&root->widget, main_window_size, &color, NULL, NULL, NULL, NULL,
+                       NULL, NULL, NULL, NULL, NULL);
+    ei_place(&root->widget, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
 
@@ -131,7 +118,7 @@ void ei_app_run()
         {
             hw_surface_lock(root_surface);
             hw_surface_lock(offscreen_surface);
-            draw_widget(&root.widget);
+            draw_widget(&root->widget);
             hw_surface_unlock(root_surface);
             hw_surface_unlock(offscreen_surface);
             hw_surface_update_rects(root_surface, NULL);
@@ -192,7 +179,7 @@ void ei_app_quit_request()
 
 ei_widget_t* ei_app_root_widget()
 {
-    return &root.widget;
+    return &root->widget;
 }
 
 ei_surface_t ei_app_root_surface()
