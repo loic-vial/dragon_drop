@@ -12,16 +12,18 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-static ei_frame_t root;
+static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
 static bool want_quit;
+static ei_linked_rect_t* updated_rects;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 {
     hw_init();
 
     want_quit = false;
+    updated_rects = NULL;
     root_surface = hw_create_window(main_window_size, fullscreen);
     offscreen_surface = hw_surface_create(root_surface, main_window_size, true);
 
@@ -31,24 +33,11 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_banner_register_class();
     ei_register_placer_manager();
 
-    root.widget.wclass = ei_widgetclass_from_name("frame");
-    root.widget.pick_id = 0;
-    root.widget.pick_color = malloc(sizeof(ei_color_t));
-    root.widget.pick_color->red = 0;
-    root.widget.pick_color->green = 0;
-    root.widget.pick_color->blue = 0;
-    root.widget.pick_color->alpha = 255;
-    root.widget.parent = NULL;
-    root.widget.children_head = NULL;
-    root.widget.children_tail = NULL;
-    root.widget.next_sibling = NULL;
-    root.widget.geom_params = NULL;
-    root.widget.requested_size = *main_window_size;
-    root.widget.screen_location.top_left.x = 0;
-    root.widget.screen_location.top_left.y = 0;
-    root.widget.screen_location.size = *main_window_size;
-    root.widget.content_rect = &root.widget.screen_location;
-    ei_place(&root.widget,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+    root = (ei_frame_t*) ei_widget_create("frame", NULL);
+    ei_color_t color = ei_color(0, 0, 0, 255);
+    ei_frame_configure(&root->widget, main_window_size, &color, NULL, NULL, NULL, NULL,
+                       NULL, NULL, NULL, NULL, NULL);
+    ei_place(&root->widget, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
 
@@ -95,13 +84,13 @@ void draw_widget(ei_widget_t* widget)
 
         if( strcmp(widget->wclass->name,"banner") ==0 )
         {
-            clipper.top_left.y-=widget->requested_size.height;
-            clipper.size.height=widget->requested_size.height;
+            clipper.top_left.y-=widget->screen_location.size.height;
+            clipper.size.height=widget->screen_location.size.height;
         }
         if( strcmp(widget->parent->wclass->name,"banner") ==0 )
         {
             clipper.top_left=widget->screen_location.top_left;
-            clipper.size=widget->requested_size;
+            clipper.size=widget->screen_location.size;
         }
         widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
     }
@@ -114,19 +103,28 @@ void draw_widget(ei_widget_t* widget)
     }
 }
 
+void clear_rects(ei_linked_rect_t** rects)
+{
+    *rects = NULL; // MUST RELEASE MEMORY
+}
+
 void ei_app_run()
 {
     ei_event_t event;
     event.type = ei_ev_none;
     while (!want_quit)
     {
-        hw_surface_lock(root_surface);
-        hw_surface_lock(offscreen_surface);
-        draw_widget(&root.widget);
-        hw_surface_unlock(root_surface);
-        hw_surface_unlock(offscreen_surface);
-        hw_surface_update_rects(root_surface, NULL);
-        hw_surface_update_rects(offscreen_surface, NULL);
+        //if (updated_rects != NULL)
+        {
+            hw_surface_lock(root_surface);
+            hw_surface_lock(offscreen_surface);
+            draw_widget(&root->widget);
+            hw_surface_unlock(root_surface);
+            hw_surface_unlock(offscreen_surface);
+            hw_surface_update_rects(root_surface, NULL);
+            hw_surface_update_rects(offscreen_surface, NULL);
+            clear_rects(&updated_rects);
+        }
 
         hw_event_wait_next(&event);
 
@@ -158,7 +156,20 @@ void ei_app_run()
 
 void ei_app_invalidate_rect(ei_rect_t* rect)
 {
-
+    if (updated_rects == NULL)
+    {
+        updated_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
+        updated_rects->rect = *rect;
+        updated_rects->next = NULL;
+    }
+    else
+    {
+        ei_linked_rect_t* tmp = updated_rects;
+        while (tmp->next != NULL) tmp = tmp->next;
+        tmp->next = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
+        tmp->next->rect = *rect;
+        tmp->next->next = NULL;
+    }
 }
 
 void ei_app_quit_request()
@@ -168,7 +179,7 @@ void ei_app_quit_request()
 
 ei_widget_t* ei_app_root_widget()
 {
-    return &root.widget;
+    return &root->widget;
 }
 
 ei_surface_t ei_app_root_surface()

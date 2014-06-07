@@ -13,7 +13,7 @@
 #include <string.h>
 #include "ei_geometrymanager.h"
 #include "ei_placer.h"
-static int current_pick_id = 1;
+static int current_pick_id = 0;
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
 {
@@ -31,12 +31,12 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->children_head = NULL;
     widget->children_tail = NULL;
     widget->next_sibling = NULL;
-    if (parent->children_tail == NULL)
+    if (parent != NULL && parent->children_tail == NULL)
     {
         parent->children_head = widget;
         parent->children_tail = widget;
     }
-    else
+    else if (parent != NULL)
     {
         parent->children_tail->next_sibling = widget;
         parent->children_tail = widget;

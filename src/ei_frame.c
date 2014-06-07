@@ -242,7 +242,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
 
         ei_draw_text(surface, &top_left_corner, frame->text, frame->text_font, &frame->text_color, clipper);
     }
-    //tracé de l'image
 
     if (frame->img != NULL)
     {
@@ -275,18 +274,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         hw_surface_unlock(frame->img);
     }
     ei_draw_polygon(pick_surface, &points, *widget->pick_color, clipper);
-
-    if (frame->text != NULL)
-    {
-        ei_size_t text_size;
-        hw_text_compute_size(frame->text, frame->text_font, &text_size.width, &text_size.height);
-        ei_point_t text_top_left_position = ei_position_from_anchor(widget->screen_location.top_left,
-                                                                    widget->screen_location.size,
-                                                                    text_size,
-                                                                    frame->text_anchor);
-        ei_draw_text(surface, &text_top_left_position, frame->text, frame->text_font,
-                     &frame->text_color, clipper);
-    }
 
 }
 
