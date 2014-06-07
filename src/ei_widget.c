@@ -16,6 +16,7 @@
 #include "ei_utils_2.h"
 static int current_pick_id = 1;
 
+
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
 {
     ei_widgetclass_t* widgetclass = ei_widgetclass_from_name(class_name);
@@ -32,12 +33,13 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->children_head = NULL;
     widget->children_tail = NULL;
     widget->next_sibling = NULL;
-    if (parent->children_head == NULL)
+
+    if (parent != NULL && parent->children_tail == NULL)
     {
         parent->children_head = widget;
         parent->children_tail = widget;
     }
-    else
+    else if (parent != NULL)
     {
         parent->children_tail->next_sibling = widget;
         parent->children_tail = widget;
@@ -48,7 +50,7 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->content_rect = &widget->screen_location;
     widgetclass->setdefaultsfunc(widget);
 
-    if (strcmp(parent->wclass->name,"toplevel")==0 && strcmp(widget->wclass->name,"banner") != 0   && strcmp(widget->wclass->name,"resize") != 0 )
+  /*  if (strcmp(parent->wclass->name,"toplevel")==0 && strcmp(widget->wclass->name,"banner") != 0   && strcmp(widget->wclass->name,"resize") != 0 )
     {
         ei_widget_t* resize;
         resize=parent->children_head;
@@ -57,7 +59,7 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
             resize=resize->next_sibling;
         }
         ei_tail(resize);
-    }
+    }*/
 
 return widget;
 }

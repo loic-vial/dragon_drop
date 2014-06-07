@@ -76,7 +76,6 @@ ei_linked_point_t rounded_frame(ei_rect_t rectangle, float rayon,
         current_point->next->point = sommet;
         current_point = current_point->next;
     }
-
     //bas droite
     sommet.x += +rectangle.size.width;
     if (bot){
@@ -113,6 +112,84 @@ ei_linked_point_t rounded_frame(ei_rect_t rectangle, float rayon,
     return(liste_points);
 }
 
+// tu lui donnes un rectangle
+// elle te recrachela linked_points de haut ou du bas
+// à fusionner avec rounded frame ?? j'ai repris le même code
+ei_linked_point_t sixty_nine(ei_rect_t rectangle, float rayon,
+                             ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
+    // partie du haut
+    if (sup){
+        ei_point_t sommet = rectangle.top_left;
+        ei_point_t centre;
+        ei_linked_point_t liste_points;
+        liste_points.point = rectangle.top_left;
+        liste_points.next = NULL;
+        ei_linked_point_t* current_point = &liste_points;
+        //haut gauche
+        sommet = rectangle.top_left;
+        if (top){
+            centre.x = sommet.x + rayon;
+            centre.y = sommet.y + rayon;
+            liste_points = arc(centre, rayon, 90, 180);
+            current_point = &liste_points;
+            while (current_point->next != NULL) {
+                current_point = current_point->next;
+            }
+        }
+        else {
+            liste_points.point = sommet;
+            current_point = &liste_points;
+        }
+        //bas gauche
+        sommet.y += rectangle.size.height;
+        if (bot){
+            centre.x = sommet.x + rayon;
+            centre.y = sommet.y - rayon;
+            current_point->next = malloc(sizeof(ei_linked_point_t));
+            *current_point->next = arc(centre, rayon, -180, -135);
+            while (current_point->next != NULL) {
+                current_point = current_point->next;
+            }
+        }
+        else {
+            current_point->next = malloc(sizeof(ei_linked_point_t));
+            current_point->next->point = sommet;
+            current_point = current_point->next;
+        }
+        // premier point intermédiaire
+        ei_point_t point_inter;
+        float h = rectangle.size.height/2;
+        point_inter.x = sommet.x + h;
+        point_inter.y = sommet.y - h;
+        current_point->next = malloc(sizeof(ei_linked_point_t));
+        current_point->next->point = point_inter;
+        current_point = current_point->next;
+        // deuxième point intermédiaire
+        sommet.y += -rectangle.size.height;
+        point_inter.x = sommet.x - h;
+        point_inter.y = sommet.y + h;
+        current_point->next = malloc(sizeof(ei_linked_point_t));
+        current_point->next->point = point_inter;
+        current_point = current_point->next;
+        // haut droite
+        if (top){
+            centre.x = sommet.x - rayon;
+            centre.y = sommet.y + rayon;
+            current_point->next = malloc(sizeof(ei_linked_point_t));
+            *current_point->next = arc(centre, rayon, 45, 90);
+            while (current_point->next != NULL) {
+                current_point = current_point->next;
+            }
+        }
+        else {
+            current_point->next = malloc(sizeof(ei_linked_point_t));
+            current_point->next->point = sommet;
+            current_point = current_point->next;
+        }
+        current_point->next = NULL;
+        return(liste_points);
+    }
+}
 
 
 void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
@@ -121,9 +198,38 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     ei_frame_t* frame = (ei_frame_t*)widget;
 
     ei_rect_t rect = widget->screen_location;
-    ei_linked_point_t points = rounded_frame(rect, 15, EI_TRUE, EI_FALSE);
+    float rayon;
+    rayon = 5;
+    ei_linked_point_t points = rounded_frame(rect, rayon, EI_TRUE, EI_FALSE);
 
-    ei_draw_polygon(surface, &points, frame->color, clipper);
+    //relief
+//    if(frame->relief == ei_relief_none){
+        //contour
+        if (frame->border_width!=0){
+            ei_rect_t rect_2;
+            rect_2.top_left.x = rect.top_left.x + frame->border_width;
+            rect_2.top_left.y = rect.top_left.y + frame->border_width;
+            rect_2.size.width = rect.size.width - 2*frame->border_width;
+            rect_2.size.height = rect.size.height - 2*frame->border_width;
+            float rayon_2 = rayon - frame->border_width;
+            if (rayon_2 < 0){
+                rayon_2 = 0;
+            }
+            ei_draw_polygon(surface, &points, ei_color(0x00,0x33,0x66, 0xff), clipper);
+            ei_linked_point_t points = rounded_frame(rect_2, rayon_2, EI_TRUE, EI_FALSE);
+            ei_draw_polygon(surface, &points, frame->color, clipper);
+        }
+        else{
+            ei_draw_polygon(surface, &points, frame->color, clipper);
+        }
+ //   }
+ /*   else if (frame->relief == ei_relief_raised){
+        ei_linked_point_t points_sup = sixty_nine(rect, 5, EI_TRUE, EI_TRUE, EI_TRUE);
+        ei_color_t light = ei_color(0xdf, 0xf2, 0xff, 0xff);
+        ei_color_t dark = ei_color(0x00, 0x33, 0x66, 0xff);
+        ei_draw_polygon(surface, &points_sup, light, clipper);
+    }
+*/
 
     if (frame->text != NULL)
     {
@@ -136,7 +242,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
 
         ei_draw_text(surface, &top_left_corner, frame->text, frame->text_font, &frame->text_color, clipper);
     }
-    //tracé de l'image
 
     if (frame->img != NULL)
     {
@@ -169,18 +274,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         hw_surface_unlock(frame->img);
     }
     ei_draw_polygon(pick_surface, &points, *widget->pick_color, clipper);
-
-    if (frame->text != NULL)
-    {
-        ei_size_t text_size;
-        hw_text_compute_size(frame->text, frame->text_font, &text_size.width, &text_size.height);
-        ei_point_t text_top_left_position = ei_position_from_anchor(widget->screen_location.top_left,
-                                                                    widget->screen_location.size,
-                                                                    text_size,
-                                                                    frame->text_anchor);
-        ei_draw_text(surface, &text_top_left_position, frame->text, frame->text_font,
-                     &frame->text_color, clipper);
-    }
 
 }
 
