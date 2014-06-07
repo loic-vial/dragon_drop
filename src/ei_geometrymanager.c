@@ -59,16 +59,9 @@ void set_default_values_to_placer(ei_placer_geometry_param_t* place)
     place->rel_height = -1;
 }
 
-void   ei_place   (ei_widget_t*  widget,
-                   ei_anchor_t*  anchor,
-                   int*   x,
-                   int*   y,
-                   int*   width,
-                   int*   height,
-                   float*   rel_x,
-                   float*   rel_y,
-                   float*   rel_width,
-                   float*   rel_height)
+void ei_place(ei_widget_t* widget, ei_anchor_t* anchor,
+              int* x, int* y, int* width, int* height,
+              float* rel_x, float* rel_y, float* rel_width, float* rel_height)
 {
     ei_placer_geometry_param_t* place;
     if (widget->geom_params == NULL)
@@ -91,67 +84,51 @@ void   ei_place   (ei_widget_t*  widget,
         place = (ei_placer_geometry_param_t*)widget->geom_params;
     }
 
-    if(anchor !=NULL)
-    {
-        place->anchor=*anchor;
-    }
+    if (anchor != NULL)
+        place->anchor =*anchor;
 
-    if(x !=NULL)
-    {
+    if (x != NULL)
+        place->x = *x;
 
-        place->x=*x;
-    }
-
-    if(y !=NULL)
+    if (y != NULL)
     {
-        if(strcmp(widget->wclass->name,"toplevel")==0)
+        if(strcmp(widget->wclass->name,"toplevel") == 0)
         {
             ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
-            place->y=*y+toplevel->border->widget.requested_size.height;
+            place->y = *y + toplevel->border->widget.requested_size.height;
         }
-        else place->y=*y;
+        else place->y = *y;
     }
 
-    if(width !=NULL)
+    if (width != NULL)
     {
-        place->width=*width;
-        widget->requested_size.width=*width;
+        place->width = *width;
+        widget->requested_size.width = *width;
     }
     else
     {
-        place->width=widget->requested_size.width;
+        place->width = widget->requested_size.width;
     }
 
-    if(height !=NULL)
+    if (height != NULL)
     {
-        place->height=*height;
-        widget->requested_size.height=*height;
+        place->height = *height;
+        widget->requested_size.height = *height;
     }
     else
     {
-        place->height=widget->requested_size.height;
+        place->height = widget->requested_size.height;
     }
 
-    if(rel_x !=NULL)
-    {
-        place->rel_x=*rel_x;
-    }
+    if (rel_x != NULL)
+        place->rel_x = *rel_x;
 
-    if(rel_y!=NULL)
-    {
-        place->rel_y=*rel_y;
-    }
+    if (rel_y != NULL)
+        place->rel_y = *rel_y;
 
-    if(rel_width !=NULL)
-    {
-        place->rel_width=*rel_width;
-    }
+    if (rel_width != NULL)
+        place->rel_width = *rel_width;
 
-    if(rel_height !=NULL)
-    {
-        place->rel_height=*rel_height;
-    }
+    if (rel_height != NULL)
+        place->rel_height = *rel_height;
 }
-
-
-

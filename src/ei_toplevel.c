@@ -172,22 +172,22 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_size_t* bord=(ei_size_t*)malloc(sizeof(ei_size_t));
     bord->height = 16;
     bord->width=16;
-    toplevel->button->color.alpha=255;
-    toplevel->button->color.red=255;
-    toplevel->button->color.green=0;
-    toplevel->button->color.blue=0;
-    toplevel->button->text="X";
-    toplevel->button->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
+    toplevel->button->frame.color.alpha=255;
+    toplevel->button->frame.color.red=255;
+    toplevel->button->frame.color.green=0;
+    toplevel->button->frame.color.blue=0;
+    toplevel->frame.text="X";
+    toplevel->frame.text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
     ei_anchor_t close_button_anchor = ei_anc_west;
     int close_button_pos_x = 4;
 
     ei_callback_t button_callback = close_button_click;
     ei_anchor_t close_button_text_anchor = ei_anc_center;
-    ei_button_configure(&toplevel->button->widget, bord, NULL, NULL, NULL, NULL,
+    ei_button_configure(&toplevel->button->frame.widget, bord, NULL, NULL, NULL, NULL,
                         NULL, NULL, NULL, &close_button_text_anchor, NULL, NULL, NULL,
                         &button_callback, NULL);
 
-    ei_place(&toplevel->button->widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
+    ei_place(&toplevel->button->frame.widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
 
     ei_size_t resize_button_size = ei_size(20, 20);
@@ -198,12 +198,12 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_callback_t _resize_stop = resize_stop;
 
     ei_button_t* resize_button = (ei_button_t*)ei_widget_create("button", &toplevel->frame.widget);
-    ei_button_configure(&resize_button->widget, &resize_button_size, &resize_button_color,
+    ei_button_configure(&resize_button->frame.widget, &resize_button_size, &resize_button_color,
                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(&resize_button->widget, &resize_button_anchor, NULL, NULL, NULL,
+    ei_place(&resize_button->frame.widget, &resize_button_anchor, NULL, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
 
-    ei_bind(ei_ev_mouse_buttondown, &resize_button->widget, NULL, _resize_start, NULL);
+    ei_bind(ei_ev_mouse_buttondown, &resize_button->frame.widget, NULL, _resize_start, NULL);
     ei_bind(ei_ev_mouse_move, NULL, "all", _resize, &toplevel->frame.widget);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, &toplevel->frame.widget);
 }

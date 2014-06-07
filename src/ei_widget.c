@@ -151,8 +151,7 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
 
     if (img != NULL)
     {
-        frame->img = (ei_surface_t*) malloc(sizeof(ei_surface_t));
-        *frame->img = *img;
+        frame->img = *img;
         frame->text=NULL;
     }
 
@@ -173,57 +172,13 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
                          ei_anchor_t* img_anchor, ei_callback_t* callback, void** user_param)
 {
     if (widget == NULL) return;
-    if (strcmp(widget->wclass->name, "button") != 0) return;
+    ei_frame_configure(widget, requested_size, color, border_width, relief, text, text_font,
+                       text_color, text_anchor, img, img_rect, img_anchor);
 
     ei_button_t* button = (ei_button_t*)widget;
 
-    if (requested_size != NULL)
-        widget->requested_size = *requested_size;
-
-    if (color != NULL)
-        button->color = *color;
-
-    if (border_width != NULL)
-        button->border_width = *border_width;
-
     if (corner_radius != NULL)
         button->corner_radius= *corner_radius;
-
-    if (relief != NULL)
-        button->relief = *relief;
-
-    if (text_font != NULL)
-        button->text_font = text_font;
-
-    if (text != NULL && strcmp(*text, "") != 0)
-    {
-        button->text = *text;
-        int width, height;
-        hw_text_compute_size(button->text, button->text_font, &width, &height);
-        widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
-        widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
-    }
-
-    if (text_color != NULL)
-        button->text_color = *text_color;
-
-    if (text_anchor != NULL)
-        button->text_anchor = *text_anchor;
-
-    if (img != NULL)
-    {
-        button->img = *img;
-        button->text = NULL;
-    }
-
-    if (img_rect != NULL)
-    {
-        button->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
-        *button->img_rect = **img_rect;
-    }
-
-    if (img_anchor != NULL)
-        button->img_anchor = *img_anchor;
 
     if (user_param != NULL)
         button->user_param = *user_param;

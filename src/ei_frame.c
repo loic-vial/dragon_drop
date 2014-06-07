@@ -132,12 +132,9 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         else rect_2.top_left.x= frame->img_rect->top_left.x -bon_top.top_left.x ;
 
 
-        hw_surface_lock(*frame->img);
-        ei_copy_surface		(surface,&rect,*frame->img,&rect_2,EI_TRUE);
-
-
-
-        hw_surface_unlock(*frame->img);
+        hw_surface_lock(frame->img);
+        ei_copy_surface(surface,&rect,frame->img,&rect_2,EI_TRUE);
+        hw_surface_unlock(frame->img);
     }
     ei_draw_polygon(pick_surface, &points, *widget->pick_color, clipper);
 
