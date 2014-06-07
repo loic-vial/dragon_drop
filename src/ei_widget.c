@@ -173,6 +173,7 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
                          ei_anchor_t* img_anchor, ei_callback_t* callback, void** user_param)
 {
     if (widget == NULL) return;
+    if (strcmp(widget->wclass->name, "button") != 0) return;
 
     ei_button_t* button = (ei_button_t*)widget;
 
@@ -211,9 +212,8 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
 
     if (img != NULL)
     {
-        button->img = (ei_surface_t*) malloc(sizeof(ei_surface_t));
-        *button->img = *img;
-        button->text=NULL;
+        button->img = *img;
+        button->text = NULL;
     }
 
     if (img_rect != NULL)
@@ -225,18 +225,14 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     if (img_anchor != NULL)
         button->img_anchor = *img_anchor;
 
+    if (user_param != NULL)
+        button->user_param = *user_param;
+
     if (callback != NULL)
     {
-        button->callback = callback;
-
-        if (user_param != NULL)
-            ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, (void*)*user_param);
-        else
-            ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, NULL);
+        button->callback = *callback;
+        ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, button->user_param);
     }
-
-    if (user_param != NULL)
-        button->user_param = user_param;
 
 }
 

@@ -67,12 +67,12 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
         ei_rect_t rect_2;
         rect_2.size=rect.size;
         rect_2.top_left=button->img_rect->top_left;
-         hw_surface_lock(*button->img);
-        ei_copy_surface		(surface,&rect,*button->img,&rect_2,EI_TRUE);
+        hw_surface_lock(button->img);
+        ei_copy_surface		(surface,&rect,button->img,&rect_2,EI_TRUE);
 
 
 
-        hw_surface_unlock(*button->img);
+        hw_surface_unlock(button->img);
     }
 
     ei_draw_polygon(pick_surface, &first_point,*widget->pick_color, clipper);
