@@ -76,6 +76,7 @@ ei_linked_point_t rounded_frame(ei_rect_t rectangle, float rayon,
         current_point->next->point = sommet;
         current_point = current_point->next;
     }
+
     //bas droite
     sommet.x += +rectangle.size.width;
     if (bot){
@@ -111,6 +112,8 @@ ei_linked_point_t rounded_frame(ei_rect_t rectangle, float rayon,
     current_point->next = NULL;
     return(liste_points);
 }
+
+
 
 void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
                     ei_surface_t pick_surface, ei_rect_t*  clipper)
@@ -154,7 +157,14 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         ei_rect_t rect_2;
         rect_2.size=rect.size;
         rect_2.top_left=frame->img_rect->top_left;
-         hw_surface_lock(*frame->img);
+        if(bon_top.top_left.x>clipper->top_left.x)
+        {
+            rect_2.top_left.x=frame->img_rect->top_left.x;
+        }
+        else rect_2.top_left.x= frame->img_rect->top_left.x -bon_top.top_left.x ;
+
+
+        hw_surface_lock(*frame->img);
         ei_copy_surface		(surface,&rect,*frame->img,&rect_2,EI_TRUE);
 
 

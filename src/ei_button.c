@@ -66,11 +66,17 @@ void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
 
         ei_rect_t rect_2;
         rect_2.size=rect.size;
+
         rect_2.top_left=button->img_rect->top_left;
+        if(bon_top.top_left.x>clipper->top_left.x)
+        {
+            rect_2.top_left.x=button->img_rect->top_left.x;
+        }
+        else rect_2.top_left.x= button->img_rect->top_left.x -bon_top.top_left.x ;
+
+
         hw_surface_lock(button->img);
-        ei_copy_surface		(surface,&rect,button->img,&rect_2,EI_TRUE);
-
-
+        ei_copy_surface	(surface,&rect,button->img,&rect_2,EI_TRUE);
 
         hw_surface_unlock(button->img);
     }

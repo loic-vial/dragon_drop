@@ -5,6 +5,7 @@
 #include "ei_event.h"
 #include "ei_eventlist.h"
 #include "ei_toplevel.h"
+#include "ei_utils_2.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,6 +50,33 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root.widget.content_rect = &root.widget.screen_location;
 }
 
+
+ei_rect_t ei_clipper(ei_widget_t* widget)
+{
+    ei_rect_t clipper;
+    clipper.size=widget->parent->requested_size;
+    clipper.top_left=widget->parent->screen_location.top_left;
+
+    if (widget->parent->parent ==NULL)
+    {
+        return clipper;
+    }
+    else
+    {
+        ei_widget_t* current = widget->parent->parent;
+        ei_rect_t rect;
+        while (current !=NULL)
+        {
+            rect.size=current->requested_size;
+            rect.top_left=current->screen_location.top_left;
+            clipper= calcul_clipper(rect, clipper);
+            current=current->parent;
+        }
+
+        return clipper;
+    }
+}
+
 void draw_widget(ei_widget_t* widget)
 {
     if (widget == NULL) return;
@@ -62,14 +90,17 @@ void draw_widget(ei_widget_t* widget)
     else
     {
         ei_rect_t clipper;
-        clipper.size.height= widget->parent->requested_size.height;
-        clipper.size.width= widget->parent->requested_size.width;
+        clipper = ei_clipper(widget);
 
-        clipper.top_left=widget->parent->screen_location.top_left;
         if( strcmp(widget->wclass->name,"banner") ==0 )
         {
             clipper.top_left.y-=widget->requested_size.height;
             clipper.size.height=widget->requested_size.height;
+        }
+    if( strcmp(widget->parent->wclass->name,"banner") ==0 )
+        {
+            clipper.top_left=widget->screen_location.top_left;
+            clipper.size=widget->requested_size;
         }
         widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
     }
@@ -104,13 +135,13 @@ void ei_app_run()
             if (tmp->eventtype == event.type)
             {
                 if (event.type == ei_ev_mouse_buttondown ||
-                    event.type == ei_ev_mouse_buttonup ||
-                    event.type == ei_ev_mouse_move)
+                        event.type == ei_ev_mouse_buttonup ||
+                        event.type == ei_ev_mouse_move)
                 {
                     ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
                     if ((tmp->tag == NULL && widget_picked == tmp->widget) ||
-                        (tmp->tag != NULL && strcmp(tmp->tag, "all") == 0) ||
-                        (tmp->tag != NULL && strcmp(tmp->tag, widget_picked->wclass->name) == 0))
+                            (tmp->tag != NULL && strcmp(tmp->tag, "all") == 0) ||
+                            (tmp->tag != NULL && strcmp(tmp->tag, widget_picked->wclass->name) == 0))
                     {
                         tmp->callback(widget_picked, &event, tmp->user_param);
                     }
