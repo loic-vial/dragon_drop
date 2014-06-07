@@ -150,10 +150,17 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
         frame->text_anchor = *text_anchor;
 
     if (img != NULL)
-        frame->img = img;
+    {
+        frame->img = (ei_surface_t*) malloc(sizeof(ei_surface_t));
+        *frame->img = *img;
+        frame->text=NULL;
+    }
 
     if (img_rect != NULL)
-        frame->img_rect = *img_rect;
+    {
+        frame->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
+        *frame->img_rect = **img_rect;
+    }
 
     if (img_anchor != NULL)
         frame->img_anchor = *img_anchor;
@@ -204,12 +211,16 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
 
     if (img != NULL)
     {
-        button->img = img;
+        button->img = (ei_surface_t*) malloc(sizeof(ei_surface_t));
+        *button->img = *img;
         button->text=NULL;
     }
 
     if (img_rect != NULL)
-        button->img_rect = *img_rect;
+    {
+        button->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
+        *button->img_rect = **img_rect;
+    }
 
     if (img_anchor != NULL)
         button->img_anchor = *img_anchor;
