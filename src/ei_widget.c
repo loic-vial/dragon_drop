@@ -14,7 +14,7 @@
 #include "ei_geometrymanager.h"
 #include "ei_placer.h"
 #include "ei_utils_2.h"
-static int current_pick_id = 1;
+static int current_pick_id = 0;
 
 
 ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* parent)
@@ -50,18 +50,24 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     widget->content_rect = &widget->screen_location;
     widgetclass->setdefaultsfunc(widget);
 
-  /*  if (strcmp(parent->wclass->name,"toplevel")==0 && strcmp(widget->wclass->name,"banner") != 0   && strcmp(widget->wclass->name,"resize") != 0 )
+    if( parent !=NULL )
     {
-        ei_widget_t* resize;
-        resize=parent->children_head;
-        while(strcmp(resize->wclass->name,"resize")!=0)
+        if (strcmp(parent->wclass->name,"toplevel")==0 && strcmp(widget->wclass->name,"banner") != 0   && strcmp(widget->wclass->name,"resize") != 0 )
         {
-            resize=resize->next_sibling;
+            ei_widget_t* resize;
+            resize=parent->children_head;
+            while(resize != NULL && strcmp(resize->wclass->name,"resize")!=0)
+            {
+                resize=resize->next_sibling;
+            }
+            if (resize != NULL)
+            {
+                ei_tail(resize);
+                ;
+            }
         }
-        ei_tail(resize);
-    }*/
-
-return widget;
+    }
+    return widget;
 }
 
 void ei_widget_destroy(ei_widget_t* widget)
@@ -225,8 +231,10 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         toplevel->frame.border_width = *border_width;
 
     if (title != NULL)
+    {
         toplevel->title = *title;
-    toplevel->border->text=*title;
+        toplevel->border->text=*title;
+    }
 
     if (closable != NULL)
     {

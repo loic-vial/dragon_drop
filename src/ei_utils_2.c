@@ -116,22 +116,24 @@ ei_rect_t calcul_clipper(ei_rect_t parent, ei_rect_t child)
 
 void ei_tail(ei_widget_t* widget)
 {
-    if(widget->parent->children_tail !=widget)
+    if (widget->parent->children_tail == widget) return;
+
+    if(widget->parent->children_head == widget)
     {
-        if(widget->parent->children_head == widget)
-        {
-                widget->parent->children_head=widget->next_sibling;
-        }
-        else
-        {
-            ei_widget_t* prec=widget->parent->children_head;
-            while(prec->next_sibling !=widget)
-            {
-                prec=prec->next_sibling;
-            }
-            prec->next_sibling=widget->next_sibling;
-        }
+        widget->parent->children_head=widget->next_sibling;
         widget->parent->children_tail->next_sibling = widget;
+        widget->next_sibling=NULL;
+    }
+    else
+    {
+        ei_widget_t* prec=widget->parent->children_head;
+        while(prec->next_sibling !=widget)
+        {
+            prec=prec->next_sibling;
+        }
+        prec->next_sibling=widget->next_sibling;
+        widget->parent->children_tail->next_sibling = widget;
+        widget->parent->children_tail = widget;
         widget->next_sibling=NULL;
     }
 }

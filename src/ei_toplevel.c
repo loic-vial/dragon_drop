@@ -201,8 +201,11 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
                         NULL, NULL, NULL, &close_button_text_anchor, NULL, NULL, NULL,
                         &button_callback, NULL);
 
-    ei_place(&toplevel->button->frame.widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
-             NULL, NULL, NULL, NULL, NULL);
+    if (toplevel->closable)
+    {
+        ei_place(&toplevel->button->frame.widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
+                 NULL, NULL, NULL, NULL, NULL);
+    }
 
     ei_size_t resize_button_size = ei_size(20, 20);
     ei_color_t resize_button_color = ei_color(0, 0, 0, 255);
@@ -214,7 +217,7 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_button_t* resize_button = (ei_button_t*)ei_widget_create("resize", &toplevel->frame.widget);
     ei_button_configure(&resize_button->frame.widget, &resize_button_size, &resize_button_color,
                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    if (toplevel->closable)
+    //if (toplevel->resizable)
     {
         ei_place(&resize_button->frame.widget, &resize_button_anchor, NULL, NULL, NULL,
                  NULL, NULL, NULL, NULL, NULL);
