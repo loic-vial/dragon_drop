@@ -115,6 +115,7 @@ void ei_app_run()
     event.type = ei_ev_none;
     while (!want_quit)
     {
+        printf("%d\n", root->widget.children_tail->pick_id);
         //if (updated_rects != NULL)
         {
             hw_surface_lock(root_surface);

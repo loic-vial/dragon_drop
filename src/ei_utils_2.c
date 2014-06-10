@@ -122,6 +122,7 @@ void ei_tail(ei_widget_t* widget)
     {
         widget->parent->children_head=widget->next_sibling;
         widget->parent->children_tail->next_sibling = widget;
+        widget->parent->children_tail = widget;
         widget->next_sibling=NULL;
     }
     else

@@ -70,6 +70,26 @@ int ei_main(int argc, char** argv)
         ei_place(toplevel, NULL, &(window_position.x), &(window_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
         ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
 
+        ei_widget_t*    coucou;
+        ei_size_t       coucou_size     = {300,300};
+        char*           coucou_title    = "Heorld";
+        ei_color_t      coucou_color    = {0xA0,0xA0,0xA0, 0xff};
+        int             coucou_border_width    = 20;
+           closable        = EI_FALSE;
+        ei_axis_set_t   coucou_resizable = ei_axis_both;
+        ei_point_t	coucou_position	 = {90, 100};
+ei_anchor_t anc= ei_anc_center;
+        coucou = ei_widget_create("toplevel", ei_app_root_widget());
+        button = ei_widget_create("button", coucou);
+
+        ei_toplevel_configure(coucou, &coucou_size, &coucou_color, &coucou_border_width, &coucou_title, &closable, &coucou_resizable, NULL);
+        ei_button_configure(button, NULL, &button_color,
+                            &button_border_width, NULL, &relief, &button_title, NULL, &text_color, NULL,
+                            NULL, NULL, NULL, &button_callback, NULL);
+
+        ei_place(coucou, NULL, &(coucou_position.x), &(coucou_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
+        ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
+
 	ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);
 
         ei_app_run();

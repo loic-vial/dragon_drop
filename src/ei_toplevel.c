@@ -66,12 +66,14 @@ static ei_point_t resize_mouse_position;
 
 ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
+    ei_tail(widget->parent);
     drag_mouse_position.x = event->param.mouse.where.x;
     drag_mouse_position.y = event->param.mouse.where.y;
     ei_callback_t _drag = ei_toplevel_drag_callback;
     ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
     ei_bind(ei_ev_mouse_move, NULL, "all", _drag, widget->parent);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, widget->parent);
+
     return true;
 }
 
@@ -85,6 +87,7 @@ ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void
         placer->x += diff_position.x;
         placer->y += diff_position.y;
         drag_mouse_position = event->param.mouse.where;
+
     }
     return true;
 }
