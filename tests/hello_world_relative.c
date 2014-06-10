@@ -42,7 +42,7 @@ int ei_main(int argc, char** argv)
         ei_color_t      text_color      = {0x00, 0x00, 0x00, 0xff};
         ei_relief_t     relief          = ei_relief_raised;
         int             button_border_width    = 2;
-        char*           button_title    = "click";
+        char*           button_title    = "";
         
         ei_size_t       window_size     = {400,400};
         char*           window_title    = "Hello World";
@@ -50,7 +50,7 @@ int ei_main(int argc, char** argv)
         int             window_border_width    = 2;
         ei_bool_t       closable        = EI_TRUE;
         ei_axis_set_t   window_resizable = ei_axis_both;
-        ei_point_t	window_position	 = {30, 10};        
+        ei_point_t	window_position	 = {30, 10};
 
         
         ei_widget_t*    button;
@@ -75,11 +75,11 @@ int ei_main(int argc, char** argv)
         char*           coucou_title    = "Heorld";
         ei_color_t      coucou_color    = {0xA0,0xA0,0xA0, 0xff};
         int             coucou_border_width    = 20;
-           closable        = EI_FALSE;
+           closable        = EI_TRUE;
         ei_axis_set_t   coucou_resizable = ei_axis_both;
         ei_point_t	coucou_position	 = {90, 100};
 ei_anchor_t anc= ei_anc_center;
-        coucou = ei_widget_create("toplevel", ei_app_root_widget());
+        coucou = ei_widget_create("toplevel", toplevel);
         button = ei_widget_create("button", coucou);
 
         ei_toplevel_configure(coucou, &coucou_size, &coucou_color, &coucou_border_width, &coucou_title, &closable, &coucou_resizable, NULL);
@@ -88,6 +88,31 @@ ei_anchor_t anc= ei_anc_center;
                             NULL, NULL, NULL, &button_callback, NULL);
 
         ei_place(coucou, NULL, &(coucou_position.x), &(coucou_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
+        ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
+
+
+
+
+
+
+        ei_widget_t*    lol;
+        ei_size_t       lol_size     = {300,300};
+        char*           lol_title    = "bof";
+        ei_color_t      lol_color    = {0xA0,0xA0,0xA0, 0xff};
+        int             lol_border_width    = 20;
+           closable        = EI_TRUE;
+        ei_axis_set_t   lol_resizable = ei_axis_both;
+        ei_point_t	lol_position	 = {90, 100};
+
+        lol = ei_widget_create("toplevel", coucou);
+        button = ei_widget_create("button", lol);
+
+        ei_toplevel_configure(lol, &lol_size, &lol_color, &lol_border_width, &lol_title, &closable, &lol_resizable, NULL);
+        ei_button_configure(button, NULL, &button_color,
+                            &button_border_width, NULL, &relief, &button_title, NULL, &text_color, NULL,
+                            NULL, NULL, NULL, &button_callback, NULL);
+
+        ei_place(lol, NULL, &(lol_position.x), &(lol_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
         ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
 
 	ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);

@@ -175,6 +175,15 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     {
         frame->img = *img;
         frame->text=NULL;
+
+
+        if( frame->img_rect ==NULL)
+        {
+            ei_size_t size =hw_surface_get_size(frame->img);
+            ei_point_t point=ei_point_zero();
+            frame->img_rect=(ei_rect_t*)malloc(sizeof(ei_rect_t));
+            *frame->img_rect=ei_rect(point,  size);
+        }
     }
 
     if (img_rect != NULL)
@@ -182,6 +191,7 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
         frame->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
         *frame->img_rect = **img_rect;
     }
+
 
     if (img_anchor != NULL)
         frame->img_anchor = *img_anchor;
