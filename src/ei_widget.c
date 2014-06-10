@@ -153,17 +153,17 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     if (relief !=NULL)
         frame->relief = *relief ;
 
+    if (text_font != NULL)
+        frame->text_font = *text_font;
+
     if (text != NULL && strcmp(*text, "") != 0)
     {
         frame->text = *text;
-        int width, height;
+      int width, height;
         hw_text_compute_size(frame->text, frame->text_font, &width, &height);
         widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
         widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
     }
-
-    if (text_font != NULL)
-        frame->text_font = *text_font;
 
     if (text_color !=NULL)
         frame->text_color = *text_color;
@@ -200,7 +200,7 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
     ei_button_t* button = (ei_button_t*)widget;
 
     if (corner_radius != NULL)
-        button->corner_radius= *corner_radius;
+        button->frame.corner_radius= *corner_radius;
 
     if (user_param != NULL)
         button->user_param = *user_param;
@@ -242,15 +242,26 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         if(toplevel->closable)
         {
             ei_anchor_t resize_button_anchor = ei_anc_west;
-            int x=8;
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)toplevel->button->frame.widget.geom_params;
+            int x=placer->x;
             ei_place(toplevel->border->widget.children_head, &resize_button_anchor, &x, NULL, NULL,
                      NULL, NULL, NULL, NULL, NULL);
         }
         else ei_releasefunc_placer(toplevel->border->widget.children_head);
     }
     if (resizable != NULL)
+    {
         toplevel->resizable = *resizable;
 
+ if(toplevel->resizable !=ei_axis_none)
+        {
+            ei_anchor_t resize_anchor = ei_anc_southeast;
+            int x=8;
+            ei_place(&toplevel->resize_button->frame.widget, &resize_anchor, &x, NULL, NULL,
+                     NULL, NULL, NULL, NULL, NULL);
+        }
+        else ei_releasefunc_placer(&toplevel->resize_button->frame.widget);
+    }
     if (min_size != NULL)
         toplevel->min_size = *min_size;
 

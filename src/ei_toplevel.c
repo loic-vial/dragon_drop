@@ -29,7 +29,7 @@ void ei_resize_register_class()
 {
     ei_widgetclass_t* buttonclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
     strcpy(buttonclass->name, "resize");
-   buttonclass->allocfunc = &allocfunc_button;
+    buttonclass->allocfunc = &allocfunc_button;
     buttonclass->releasefunc = &releasefunc_button;
     buttonclass->drawfunc = &drawfunc_button;
     buttonclass->setdefaultsfunc = &setdefaultsfunc_button;
@@ -119,11 +119,23 @@ static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param
             ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) toplevel->frame.widget.geom_params;
             ei_point_t diff_position = ei_point_sub(event->param.mouse.where, resize_mouse_position);
             ei_size_t new_size = toplevel->frame.widget.requested_size;
+
+            if (toplevel->resizable ==ei_axis_none )
+            {return EI_TRUE;}
+            else if (toplevel->resizable == ei_axis_x)
+            {diff_position.y =0;}
+            else if (toplevel->resizable ==ei_axis_y)
+            { diff_position.x =0;}
+
             new_size = ei_size_add(new_size, ei_size(diff_position.x, diff_position.y));
+
+
             if (toplevel->min_size->width > new_size.width)
                 new_size.width = toplevel->min_size->width;
+
             if (toplevel->min_size->height > new_size.height)
                 new_size.height = toplevel->min_size->height;
+
             placer->width = new_size.width;
             placer->height = new_size.height;
             toplevel->frame.widget.requested_size = new_size;
@@ -151,6 +163,9 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     setdefaultsfunc_frame(widget);
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
 
+    toplevel->frame.rounded_up = EI_FALSE;
+    toplevel->frame.rounded_down = EI_TRUE;
+    toplevel->frame.corner_radius = 5;
     toplevel->frame.widget.requested_size.width = 320;
     toplevel->frame.widget.requested_size.height = 240;
     toplevel->frame.color = ei_default_background_color;
@@ -164,14 +179,17 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
 
     toplevel->border=(ei_frame_t*) ei_widget_create("banner", &toplevel->frame.widget);
     toplevel->border->text = "Toplevel";
-
+    toplevel->border->border_width =0;
     toplevel->border->widget.requested_size.height = 20;
+    toplevel->border->rounded_up=EI_TRUE;
+    toplevel->border->rounded_down=EI_FALSE;
+    toplevel->border->corner_radius=5;
     ei_font_t border_font = hw_text_font_create("misc/font.ttf",ei_style_normal, 16);
     ei_color_t border_color = ei_color(0, 0, 0, 255);
     ei_color_t border_text_color = ei_color(255, 255, 255, 255);
-
+    int border =0;
     ei_frame_configure(&toplevel->border->widget, NULL, &border_color,
-                       &toplevel->frame.border_width, NULL, &toplevel->title, &border_font,
+                       &border, NULL, &toplevel->title, &border_font,
                        &border_text_color, NULL, NULL, NULL, NULL);
 
     ei_anchor_t border_anchor = ei_anc_north;
@@ -183,29 +201,26 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel->button = (ei_button_t*)ei_widget_create("button", &toplevel->border->widget);
 
     ei_size_t* bord=(ei_size_t*)malloc(sizeof(ei_size_t));
-    bord->height = 16;
-    bord->width=16;
-    toplevel->button->frame.color.alpha=255;
-    toplevel->button->frame.color.red=255;
-    toplevel->button->frame.color.green=0;
-    toplevel->button->frame.color.blue=0;
-    toplevel->frame.text="X";
-    toplevel->frame.text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
+    bord->height = 12;
+    bord->width = 12;
+    toplevel->button->frame.border_width =0;
+    toplevel->button->frame.color = ei_color(255, 0, 0, 255);
+    int close_button_corner_radius = 6;
+    char* text="x";
+    ei_font_t textfont = hw_text_font_create("misc/font.ttf", ei_style_bold, 10);
     ei_anchor_t close_button_anchor = ei_anc_west;
     int close_button_pos_x = 4;
-    int cornus =0;
     ei_callback_t button_callback = close_button_click;
     ei_anchor_t close_button_text_anchor = ei_anc_center;
-
-    ei_button_configure(&toplevel->button->frame.widget, bord, NULL, NULL, &cornus, NULL,
-                        NULL, NULL, NULL, &close_button_text_anchor, NULL, NULL, NULL,
+    toplevel->button->frame.rounded_down=EI_TRUE;
+    toplevel->button->frame.rounded_up=EI_TRUE;
+    ei_button_configure(&toplevel->button->frame.widget, bord, NULL,&toplevel->button->frame.border_width, &close_button_corner_radius, NULL,
+                        &text, &textfont, NULL, &close_button_text_anchor, NULL, NULL, NULL,
                         &button_callback, NULL);
 
-    if (toplevel->closable)
-    {
-        ei_place(&toplevel->button->frame.widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
-                 NULL, NULL, NULL, NULL, NULL);
-    }
+    ei_place(&toplevel->button->frame.widget, &close_button_anchor, &close_button_pos_x, NULL, NULL,
+             NULL, NULL, NULL, NULL, NULL);
+
 
     ei_size_t resize_button_size = ei_size(20, 20);
     ei_color_t resize_button_color = ei_color(0, 0, 0, 255);
@@ -217,14 +232,14 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     ei_button_t* resize_button = (ei_button_t*)ei_widget_create("resize", &toplevel->frame.widget);
     ei_button_configure(&resize_button->frame.widget, &resize_button_size, &resize_button_color,
                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    //if (toplevel->resizable)
-    {
-        ei_place(&resize_button->frame.widget, &resize_button_anchor, NULL, NULL, NULL,
-                 NULL, NULL, NULL, NULL, NULL);
-    }
+
+    ei_place(&resize_button->frame.widget, &resize_button_anchor, NULL, NULL, NULL,
+             NULL, NULL, NULL, NULL, NULL);
+
     ei_bind(ei_ev_mouse_buttondown, &resize_button->frame.widget, NULL, _resize_start, NULL);
     ei_bind(ei_ev_mouse_move, NULL, "all", _resize, &toplevel->frame.widget);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, &toplevel->frame.widget);
+    toplevel->resize_button = resize_button;
 }
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)

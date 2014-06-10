@@ -23,7 +23,7 @@ void setdefaultsfunc_button(ei_widget_t* widget)
 {
     setdefaultsfunc_frame(widget);
     ei_button_t* button = (ei_button_t*) widget;
-    button->corner_radius = 0;
+    button->frame.corner_radius = 0;
     button->callback = NULL;
     button->user_param = NULL;
 }

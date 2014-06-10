@@ -16,6 +16,9 @@ typedef struct ei_frame_t
     ei_surface_t img;
     ei_rect_t* img_rect;
     ei_anchor_t img_anchor;
+    int corner_radius;
+    ei_bool_t rounded_up;
+    ei_bool_t rounded_down;
 }
 ei_frame_t;
 

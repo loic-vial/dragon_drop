@@ -16,6 +16,7 @@ typedef struct ei_toplevel_t
     ei_size_t*		min_size;
     ei_frame_t* border;
     ei_button_t* button;
+    ei_button_t* resize_button;
 }
 ei_toplevel_t;
 
