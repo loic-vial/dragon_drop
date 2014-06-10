@@ -159,7 +159,7 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     if (text != NULL && strcmp(*text, "") != 0)
     {
         frame->text = *text;
-      int width, height;
+        int width, height;
         hw_text_compute_size(frame->text, frame->text_font, &width, &height);
         widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
         widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
@@ -242,7 +242,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         if(toplevel->closable)
         {
             ei_anchor_t resize_button_anchor = ei_anc_west;
-            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)toplevel->button->frame.widget.geom_params;
+            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)toplevel->close_button->frame.widget.geom_params;
             int x=placer->x;
             ei_place(toplevel->border->widget.children_head, &resize_button_anchor, &x, NULL, NULL,
                      NULL, NULL, NULL, NULL, NULL);
@@ -253,7 +253,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     {
         toplevel->resizable = *resizable;
 
- if(toplevel->resizable !=ei_axis_none)
+        if(toplevel->resizable !=ei_axis_none)
         {
             ei_anchor_t resize_anchor = ei_anc_southeast;
             int x=8;
@@ -262,7 +262,12 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         }
         else ei_releasefunc_placer(&toplevel->resize_button->frame.widget);
     }
-    if (min_size != NULL)
-        toplevel->min_size = *min_size;
 
+    if (min_size != NULL)
+    {
+        if (*min_size == NULL)
+            toplevel->min_size = NULL;
+        else
+            *toplevel->min_size = **min_size;
+    }
 }

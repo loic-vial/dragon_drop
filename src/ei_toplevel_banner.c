@@ -20,6 +20,9 @@ void ei_banner_register_class()
     bannerclass->geomnotifyfunc = &geomnotifyfunc_frame;
     bannerclass->next = NULL;
     ei_widgetclass_register(bannerclass);
+
+    ei_callback_t drag_start = ei_toplevel_drag_start_callback;
+    ei_bind(ei_ev_mouse_buttondown, NULL, "banner", drag_start, NULL);
 }
 
 ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)

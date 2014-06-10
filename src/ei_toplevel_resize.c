@@ -21,6 +21,9 @@ void ei_resize_register_class()
     resizeclass->geomnotifyfunc = &geomnotifyfunc_button;
     resizeclass->next = NULL;
     ei_widgetclass_register(resizeclass);
+
+    ei_callback_t _resize_start = ei_toplevel_resize_start_callback;
+    ei_bind(ei_ev_mouse_buttondown, NULL, "resize", _resize_start, NULL);
 }
 
 ei_bool_t ei_toplevel_resize_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)

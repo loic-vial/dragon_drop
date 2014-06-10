@@ -2,6 +2,8 @@
 #include "ei_frame.h"
 #include "ei_button.h"
 #include "ei_toplevel.h"
+#include "ei_toplevel_banner.h"
+#include "ei_toplevel_resize.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,6 +73,6 @@ void ei_toplevel_register_class()
     toplevelclass->geomnotifyfunc = &geomnotifyfunc_toplevel;
     toplevelclass->next = NULL;
     ei_widgetclass_register(toplevelclass);
-    ei_callback_t drag_start = ei_toplevel_drag_start_callback;
-    ei_bind(ei_ev_mouse_buttondown, NULL, "banner", drag_start, NULL);
+    ei_banner_register_class();
+    ei_resize_register_class();
 }
