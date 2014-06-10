@@ -29,7 +29,9 @@ SOURCES += \
     ../src/ei_eventlist.c \
     ../src/ei_utils_2.c \
     ../tests/puzzle.c \
-    ../tests/hello_world_relative.c
+    ../tests/hello_world_relative.c \
+    ../src/ei_toplevel_resize.c \
+    ../src/ei_toplevel_banner.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -47,4 +49,6 @@ HEADERS += \
     ../src/ei_button.h \
     ../src/ei_toplevel.h \
     ../src/ei_eventlist.h \
-    ../src/ei_utils_2.h
+    ../src/ei_utils_2.h \
+    ../src/ei_toplevel_resize.h \
+    ../src/ei_toplevel_banner.h
