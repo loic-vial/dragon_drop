@@ -74,7 +74,7 @@ ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event
     ei_bind(ei_ev_mouse_move, NULL, "all", _drag, widget->parent);
     ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, widget->parent);
 
-    return true;
+    return false;
 }
 
 ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -89,7 +89,7 @@ ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void
         drag_mouse_position = event->param.mouse.where;
 
     }
-    return true;
+    return false;
 }
 
 ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -98,7 +98,7 @@ ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t* widget, ei_event_t* event,
     ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
     ei_unbind(ei_ev_mouse_move, NULL, "all", _drag, user_param);
     ei_unbind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, user_param);
-    return true;
+    return false;
 }
 
 static ei_bool_t resize_start(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -109,7 +109,7 @@ static ei_bool_t resize_start(ei_widget_t* widget, ei_event_t* event, void* user
         resize_mouse_position.y = event->param.mouse.where.y;
         is_resizing = true;
     }
-    return true;
+    return false;
 }
 
 static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -148,7 +148,7 @@ static ei_bool_t resize(ei_widget_t* widget, ei_event_t* event, void* user_param
                 resize_mouse_position.y = event->param.mouse.where.y;
         }
     }
-    return true;
+    return false;
 }
 
 static ei_bool_t resize_stop(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -158,7 +158,7 @@ static ei_bool_t resize_stop(ei_widget_t* widget, ei_event_t* event, void* user_
     {
         is_resizing = false;
     }
-    return true;
+    return false;
 }
 
 void setdefaultsfunc_toplevel(ei_widget_t* widget)

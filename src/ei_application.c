@@ -64,6 +64,12 @@ ei_rect_t ei_clipper(ei_widget_t* widget)
             current=current->parent;
         }
 
+        if( strcmp(widget->wclass->name,"banner") ==0 )
+        {
+            clipper.top_left.y-=widget->screen_location.size.height;
+            clipper.size.height=widget->screen_location.size.height;
+        }
+
         return clipper;
     }
 }
@@ -83,11 +89,11 @@ void draw_widget(ei_widget_t* widget)
         ei_rect_t clipper;
         clipper = ei_clipper(widget);
 
-        if( strcmp(widget->wclass->name,"banner") ==0 )
+      /*  if( strcmp(widget->wclass->name,"banner") ==0 )
         {
             clipper.top_left.y-=widget->screen_location.size.height;
             clipper.size.height=widget->screen_location.size.height;
-        }
+        }*/
         if( strcmp(widget->parent->wclass->name,"banner") ==0 )
         {
             clipper.top_left=widget->screen_location.top_left;

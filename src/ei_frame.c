@@ -290,6 +290,7 @@ void setdefaultsfunc_frame(ei_widget_t* widget)
     frame->corner_radius = 0;
     frame->rounded_up = EI_FALSE;
     frame->rounded_down = EI_FALSE;
+    frame->widget.requested_size=ei_size_zero();
 }
 
 void geomnotifyfunc_frame(ei_widget_t* widget, ei_rect_t rect)

@@ -159,7 +159,7 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     if (text != NULL && strcmp(*text, "") != 0)
     {
         frame->text = *text;
-      int width, height;
+        int width, height;
         hw_text_compute_size(frame->text, frame->text_font, &width, &height);
         widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
         widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
@@ -175,6 +175,15 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
     {
         frame->img = *img;
         frame->text=NULL;
+
+
+        if( frame->img_rect ==NULL)
+        {
+            ei_size_t size =hw_surface_get_size(frame->img);
+            ei_point_t point=ei_point_zero();
+            frame->img_rect=(ei_rect_t*)malloc(sizeof(ei_rect_t));
+            *frame->img_rect=ei_rect(point,  size);
+        }
     }
 
     if (img_rect != NULL)
@@ -182,6 +191,7 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
         frame->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
         *frame->img_rect = **img_rect;
     }
+
 
     if (img_anchor != NULL)
         frame->img_anchor = *img_anchor;
@@ -253,7 +263,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     {
         toplevel->resizable = *resizable;
 
- if(toplevel->resizable !=ei_axis_none)
+        if(toplevel->resizable !=ei_axis_none)
         {
             ei_anchor_t resize_anchor = ei_anc_southeast;
             int x=8;

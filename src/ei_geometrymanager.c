@@ -2,6 +2,7 @@
 #include "ei_placer.h"
 #include "ei_toplevel.h"
 #include "ei_application.h"
+#include "ei_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,9 +35,15 @@ ei_geometrymanager_t* ei_geometrymanager_from_name (ei_geometrymanager_name_t na
     return NULL;
 }
 
+
+
 void ei_geometrymanager_unmap(ei_widget_t* widget)
 {
     widget->geom_params->manager->releasefunc(widget);
+    widget->geom_params=NULL;                            // TODO il faudra désallouer
+    ei_app_invalidate_rect(&widget->screen_location);
+    widget->screen_location = ei_rect_zero();
+
 }
 
 void ei_register_placer_manager()

@@ -42,7 +42,7 @@ int ei_main(int argc, char** argv)
         ei_color_t      text_color      = {0x00, 0x00, 0x00, 0xff};
         ei_relief_t     relief          = ei_relief_raised;
         int             button_border_width    = 2;
-        char*           button_title    = "click";
+        char*           button_title    = "";
         
         ei_size_t       window_size     = {400,400};
         char*           window_title    = "Hello World";
@@ -75,11 +75,11 @@ int ei_main(int argc, char** argv)
         char*           coucou_title    = "Heorld";
         ei_color_t      coucou_color    = {0xA0,0xA0,0xA0, 0xff};
         int             coucou_border_width    = 20;
-           closable        = EI_FALSE;
+           closable        = EI_TRUE;
         ei_axis_set_t   coucou_resizable = ei_axis_both;
         ei_point_t	coucou_position	 = {90, 100};
 ei_anchor_t anc= ei_anc_center;
-        coucou = ei_widget_create("toplevel", ei_app_root_widget());
+        coucou = ei_widget_create("toplevel", toplevel);
         button = ei_widget_create("button", coucou);
 
         ei_toplevel_configure(coucou, &coucou_size, &coucou_color, &coucou_border_width, &coucou_title, &closable, &coucou_resizable, NULL);
