@@ -44,7 +44,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 ei_rect_t ei_clipper(ei_widget_t* widget)
 {
     ei_rect_t clipper;
-    clipper.size=widget->parent->requested_size;
+    clipper.size=widget->parent->content_rect->size;
     clipper.top_left=widget->parent->screen_location.top_left;
 
     if( strcmp(widget->wclass->name,"banner") ==0 )

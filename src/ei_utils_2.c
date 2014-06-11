@@ -70,6 +70,14 @@ ei_color_t ei_color(unsigned char red, unsigned char green, unsigned char blue, 
     return color;
 }
 
+ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2)
+{
+    return (color1.red == color2.red &&
+            color1.green == color2.green &&
+            color1.blue == color2.blue &&
+            color1.alpha == color2.alpha);
+}
+
 int min(int x1,int x2)
 {
     if (x1>=x2)

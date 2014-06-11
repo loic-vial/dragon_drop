@@ -91,8 +91,8 @@ void toplevel_close_button_init(ei_toplevel_t* toplevel)
 void toplevel_resize_button_init(ei_toplevel_t* toplevel)
 {
     toplevel->resize_button = (ei_button_t*) ei_widget_create("resize", &toplevel->frame.widget);
-    toplevel->frame.widget.requested_size =  ei_size(20, 20);
-    toplevel->frame.color = ei_color(0, 0, 0, 255);
+    toplevel->resize_button->frame.widget.requested_size = ei_size(20, 20);
+    toplevel->resize_button->frame.color = ei_color(0, 0, 0, 255);
     ei_anchor_t anchor = ei_anc_southeast;
     ei_place(&toplevel->resize_button->frame.widget, &anchor, NULL, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
