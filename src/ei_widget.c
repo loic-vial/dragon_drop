@@ -74,9 +74,12 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
 
 void ei_widget_destroy(ei_widget_t* widget)
 {
-    for (ei_widget_t* child = widget->children_head ; child != NULL ; child = child->next_sibling)
+    ei_widget_t* child = widget->children_head;
+    while (child != NULL)
     {
+        ei_widget_t* next_child = child->next_sibling;
         ei_widget_destroy(child);
+        child = next_child;
     }
     if (widget->parent->children_head == widget)
     {
@@ -92,7 +95,10 @@ void ei_widget_destroy(ei_widget_t* widget)
             }
         }
     }
+    ei_geometrymanager_unmap(widget);
     widget->wclass->releasefunc(widget);
+    free(widget->pick_color);
+    free(widget);
 }
 
 ei_widget_t* get_widget_with_pick_color(ei_widget_t* widget, ei_color_t color)
@@ -205,6 +211,10 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
 
     if (img_rect != NULL)
     {
+        if (frame->img_rect != NULL)
+        {
+            free(frame->img_rect);
+        }
         if (*img_rect != NULL)
         {
             frame->img_rect = (ei_rect_t*) malloc(sizeof(ei_rect_t));
@@ -231,23 +241,33 @@ void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const e
                          ei_anchor_t* img_anchor, ei_callback_t* callback, void** user_param)
 {
     if (widget == NULL) return;
+
     ei_frame_configure(widget, requested_size, color, border_width, relief, text, text_font,
                        text_color, text_anchor, img, img_rect, img_anchor);
 
     ei_button_t* button = (ei_button_t*) widget;
 
     if (corner_radius != NULL)
-        button->frame.corner_radius = *corner_radius;
-
-    if (user_param != NULL)
-        button->user_param = *user_param;
-
-    if (callback != NULL)
     {
-        button->callback = *callback;
-        ei_bind(ei_ev_mouse_buttonup, widget, NULL, *callback, button->user_param);
+        button->frame.corner_radius = *corner_radius;
     }
 
+    if (user_param != NULL || callback != NULL)
+    {
+        ei_unbind(ei_ev_mouse_buttonup, widget, NULL, button->callback, button->user_param);
+
+        if (user_param != NULL)
+        {
+            button->user_param = *user_param;
+        }
+
+        if (callback != NULL)
+        {
+            button->callback = *callback;
+        }
+
+        ei_bind(ei_ev_mouse_buttonup, widget, NULL, button->callback, button->user_param);
+    }
 }
 
 void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_color_t* color,
@@ -302,9 +322,18 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
 */
     if (min_size != NULL)
     {
-        if (*min_size == NULL)
-            toplevel->min_size = NULL;
-        else
+        if (toplevel->min_size != NULL)
+        {
+            free(toplevel->min_size);
+        }
+        if (*min_size != NULL)
+        {
+            toplevel->min_size = (ei_size_t*) malloc(sizeof(ei_size_t));
             *toplevel->min_size = **min_size;
+        }
+        else
+        {
+            toplevel->min_size = NULL;
+        }
     }
 }

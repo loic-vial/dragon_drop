@@ -1,6 +1,7 @@
 #include "ei_button.h"
 #include "ei_utils.h"
 #include "ei_utils_2.h"
+#include "ei_event.h"
 #include <stdlib.h>
 
 void* allocfunc_button()
@@ -10,7 +11,8 @@ void* allocfunc_button()
 
 void releasefunc_button(ei_widget_t* widget)
 {
-    free(widget);
+    ei_button_t* button = (ei_button_t*) widget;
+    ei_unbind(ei_ev_mouse_buttonup, widget, NULL, button->callback, button->user_param);
 }
 
 void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
@@ -23,7 +25,6 @@ void setdefaultsfunc_button(ei_widget_t* widget)
 {
     setdefaultsfunc_frame(widget);
     ei_button_t* button = (ei_button_t*) widget;
-    button->frame.corner_radius = 0;
     button->callback = NULL;
     button->user_param = NULL;
 }
@@ -32,3 +33,4 @@ void geomnotifyfunc_button(ei_widget_t* widget, ei_rect_t rect)
 {
 
 }
+

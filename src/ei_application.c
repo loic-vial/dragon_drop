@@ -6,6 +6,7 @@
 #include "ei_eventlist.h"
 #include "ei_toplevel.h"
 #include "ei_utils_2.h"
+#include "ei_radiobutton.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -32,20 +32,24 @@ void ei_bind(ei_eventtype_t  eventtype, ei_widget_t*  widget,
 void ei_unbind (ei_eventtype_t eventtype, ei_widget_t* widget, ei_tag_t tag,
                 ei_callback_t callback, void* user_param)
 {
-    for (ei_eventlist_t* tmp = first_eventlist ; tmp != NULL ; tmp = tmp->next)
+    ei_eventlist_t* event = first_eventlist;
+    while (event != NULL)
     {
-        if (tmp->eventtype == eventtype &&
-            tmp->widget == widget &&
-            ((tag != NULL && tmp->tag != NULL && strcmp(tmp->tag, tag) == 0) ||
-             (tag == NULL && tmp->tag == NULL)) &&
-            tmp->callback == callback &&
-            tmp->user_param == user_param)
+        ei_eventlist_t* next_event = event->next;
+        if (event->eventtype == eventtype &&
+            event->widget == widget &&
+            ((tag != NULL && event->tag != NULL && strcmp(event->tag, tag) == 0) ||
+             (tag == NULL && event->tag == NULL)) &&
+            event->callback == callback &&
+            event->user_param == user_param)
         {
-            if (tmp->previous != NULL)
-                tmp->previous->next = tmp->next;
-            if (tmp->next != NULL)
-                tmp->next->previous = tmp->previous;
+            if (event->previous != NULL)
+                event->previous->next = event->next;
+            if (event->next != NULL)
+                event->next->previous = event->previous;
+            free(event);
         }
+        event = next_event;
     }
 }
 
