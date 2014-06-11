@@ -1,14 +1,15 @@
 # Variable definitions.
 
 PLATFORM	= $(shell uname)
-CC		= gcc
+CC			= gcc
 OBJDIR		= ./objs
 TESTS		= ./tests
+SRCDIR		= ./src
 INCLUDES	= ./include
 INCFLAGS	:= -I${INCLUDES}
 #OPTFLAGS	:= -Os -DNDEBUG
 OPTFLAGS	:= -g
-CCFLAGS		:= -c ${OPTFLAGS} -Wall -std=c99
+CCFLAGS		:= -c ${OPTFLAGS} -Wall -Wextra -std=c99
 
 # The list of objects to include in the library
 
@@ -122,17 +123,15 @@ ${OBJDIR}/puzzle.o : ${TESTS}/puzzle.c
 ${LIBEI} : ${LIBEIOBJS}
 	ar rcs ${LIBEI} ${LIBEIOBJS}
 
-
+$(OBJDIR)/%.o : src/%.c
+	${CC} ${CCFLAGS} ${INCFLAGS} -c -o $@ $^
+        
 
 # Building of the doxygen documentation.
 
 doc :
 	doxygen docs/doxygen.cfg
 
-
-$(OBJDIR)/%.o : src/%.c
-	${CC} ${CCFLAGS} ${INCFLAGS} -c -o $@ $^
-        
 
 # Removing all built files.
 

@@ -35,15 +35,12 @@ ei_geometrymanager_t* ei_geometrymanager_from_name (ei_geometrymanager_name_t na
     return NULL;
 }
 
-
-
 void ei_geometrymanager_unmap(ei_widget_t* widget)
 {
     widget->geom_params->manager->releasefunc(widget);
-    widget->geom_params=NULL;                            // TODO il faudra désallouer
+    widget->geom_params = NULL;
     ei_app_invalidate_rect(&widget->screen_location);
     widget->screen_location = ei_rect_zero();
-
 }
 
 void ei_register_placer_manager()

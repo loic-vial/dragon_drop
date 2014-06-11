@@ -42,5 +42,7 @@ void ei_runfunc_placer(ei_widget_t* widget)
 
 void ei_releasefunc_placer(ei_widget_t* widget)
 {
-widget->geom_params=NULL;
+    ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) widget->geom_params;
+    free(placer);
+    widget->geom_params = NULL;
 }

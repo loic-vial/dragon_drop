@@ -61,6 +61,7 @@ int ei_main(int argc, char** argv)
 ei_destroy_field((ei_radiobutton_t*)frame,1);
 ei_destroy_field((ei_radiobutton_t*)frame,1);
 
+
   ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);
 
     ei_app_run();
