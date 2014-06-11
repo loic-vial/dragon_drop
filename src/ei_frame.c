@@ -17,21 +17,21 @@ void releasefunc_frame(ei_widget_t* widget)
     free(widget);
 }
 
-ei_linked_point_t arc(ei_point_t centre, float rayon, float angle_debut, float angle_fin)
+ei_linked_point_t arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
 {
     ei_linked_point_t liste_points;
     ei_linked_point_t* current_point = &liste_points;
     ei_point_t point;
 
     for(float angle=angle_debut; angle<angle_fin; angle+=1){
-        point.x = centre.x + rayon*cos(angle*PI/180.0);
-        point.y = centre.y - rayon*sin(angle*PI/180.0);
+        point.x = centre.x + radius*cos(angle*PI/180.0);
+        point.y = centre.y - radius*sin(angle*PI/180.0);
         current_point->point = point;
         current_point->next = malloc(sizeof(ei_linked_point_t));
         current_point = current_point->next;
     }
-    point.x = centre.x + rayon*cos(angle_fin*PI/180.0);
-    point.y = centre.y - rayon*sin(angle_fin*PI/180.0);
+    point.x = centre.x + radius*cos(angle_fin*PI/180.0);
+    point.y = centre.y - radius*sin(angle_fin*PI/180.0);
     current_point->point = point;
     current_point->next = NULL;
     return(liste_points);
