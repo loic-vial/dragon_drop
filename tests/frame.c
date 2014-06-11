@@ -39,7 +39,7 @@ int ei_main(int argc, char** argv)
 
     fframe->rounded_up = EI_TRUE;
     fframe->rounded_down = EI_TRUE;
-    fframe->corner_radius = 5;
+    fframe->corner_radius = 10;
 
     ei_frame_configure(frame, &frame_size, &frame_color,
                 &frame_border_width, &frame_relief, NULL, NULL, NULL, NULL,
