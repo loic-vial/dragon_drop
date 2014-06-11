@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "ei_application.h"
 #include "ei_event.h"
 #include "hw_interface.h"
 #include "ei_widget.h"
 #include "ei_geometrymanager.h"
-
+#include "../src/ei_radiobutton.h"
 
 ei_bool_t button_press(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);
@@ -31,89 +30,27 @@ ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param)
 
 int _______ei_main(int argc, char** argv)
 {
-    ei_size_t	screen_size	= {800, 800};
+    ei_size_t	screen_size	= {400, 400};
     ei_color_t      root_bgcol      = {0x52, 0x7f, 0xb4, 0xff};
-
-    float           button_rel_x    = 0.2;
-    float           button_rel_y    = 0.3;
-    float           button_rel_size_x = 0.5;
-    float           button_rel_size_y = 0.5;
-    ei_color_t	button_color	= {0x88, 0x88, 0x88, 0xff};
-    ei_color_t      text_color      = {0x00, 0x00, 0x00, 0xff};
-    ei_relief_t     relief          = ei_relief_raised;
-    int             button_border_width    = 2;
-    char*           button_title    = "";
-
-    ei_size_t       window_size     = {400,400};
-    char*           window_title    = "Hello World";
-    ei_color_t      window_color    = {0xA0,0xA0,0xA0, 0xff};
-    int             window_border_width    = 2;
-    ei_bool_t       closable        = EI_TRUE;
-    ei_axis_set_t   window_resizable = ei_axis_both;
-    ei_point_t	window_position	 = {30, 10};
-
-
-    ei_widget_t*    button;
-    ei_widget_t*    toplevel;
 
     ei_app_create(&screen_size, EI_FALSE);
     ei_frame_configure(ei_app_root_widget(), NULL, &root_bgcol, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-    toplevel = ei_widget_create("toplevel", ei_app_root_widget());
-    button = ei_widget_create("button", toplevel);
-
-    ei_toplevel_configure(toplevel, &window_size, &window_color, &window_border_width, &window_title, &closable, &window_resizable, NULL);
-    ei_button_configure(button, NULL, &button_color,
-                        &button_border_width, NULL, &relief, &button_title, NULL, &text_color, NULL,
-                        NULL, NULL, NULL, &button_callback, NULL);
-
-    ei_place(toplevel, NULL, &(window_position.x), &(window_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
-
-    ei_widget_t*    coucou;
-    ei_size_t       coucou_size     = {300,300};
-    char*           coucou_title    = "Heorld";
-    ei_color_t      coucou_color    = {0xA0,0xA0,0xA0, 0xff};
-    int             coucou_border_width    = 20;
-    closable        = EI_TRUE;
-    ei_axis_set_t   coucou_resizable = ei_axis_both;
-    ei_point_t	coucou_position	 = {90, 100};
-    ei_anchor_t anc= ei_anc_center;
-    coucou = ei_widget_create("toplevel", toplevel);
-    button = ei_widget_create("button", coucou);
-
-    ei_toplevel_configure(coucou, &coucou_size, &coucou_color, &coucou_border_width, &coucou_title, &closable, &coucou_resizable, NULL);
-    ei_button_configure(button, NULL, &button_color,
-                        &button_border_width, NULL, &relief, &button_title, NULL, &text_color, NULL,
-                        NULL, NULL, NULL, &button_callback, NULL);
-
-    ei_place(coucou, NULL, &(coucou_position.x), &(coucou_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
+    ei_widget_t*	frame;
+    ei_size_t	frame_size		= {200,200};
+    int		frame_x			= 30;
+    int		frame_y			= 30;
+    ei_color_t	frame_color		= {0x00, 0x88, 0x88, 0xff};
+    ei_relief_t	frame_relief		= ei_relief_raised;
+    int		frame_border_width	= 6;
 
 
+    frame = ei_widget_create("radiobutton", ei_app_root_widget());
+  ei_radiobutton_configure(frame, &frame_size, &frame_color,
+                &frame_border_width, &frame_relief, NULL, NULL, NULL, NULL,
+                NULL, NULL, NULL);
+    ei_place(frame, NULL, &frame_x, &frame_y, NULL, NULL, NULL, NULL, NULL, NULL );
 
-
-
-
-    ei_widget_t*    lol;
-    ei_size_t       lol_size     = {300,300};
-    char*           lol_title    = "bof";
-    ei_color_t      lol_color    = {0xA0,0xA0,0xA0, 0xff};
-    int             lol_border_width    = 20;
-    closable        = EI_TRUE;
-    ei_axis_set_t   lol_resizable = ei_axis_both;
-    ei_point_t	lol_position	 = {90, 100};
-
-    lol = ei_widget_create("toplevel", coucou);
-    button = ei_widget_create("button", lol);
-
-    ei_toplevel_configure(lol, &lol_size, &lol_color, &lol_border_width, &lol_title, &closable, &lol_resizable, NULL);
-    ei_button_configure(button, NULL, &button_color,
-                        &button_border_width, NULL, &relief, &button_title, NULL, &text_color, NULL,
-                        NULL, NULL, NULL, &button_callback, NULL);
-
-    ei_place(lol, NULL, &(lol_position.x), &(lol_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(button, NULL, NULL, NULL, NULL,NULL, &button_rel_x, &button_rel_y, &button_rel_size_x, &button_rel_size_y );
 
     ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);
 

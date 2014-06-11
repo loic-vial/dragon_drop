@@ -27,6 +27,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     root_surface = hw_create_window(main_window_size, fullscreen);
     offscreen_surface = hw_surface_create(root_surface, main_window_size, true);
 
+    ei_radiobutton_register_class();
     ei_frame_register_class();
     ei_button_register_class();
     ei_toplevel_register_class();
