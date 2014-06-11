@@ -257,6 +257,14 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     ei_linked_point_t* points = rounded_frame(rect, frame->corner_radius, frame->rounded_up, frame->rounded_down);
     if (frame->border_width != 0)
     {
+        ei_rect_t rect_2;
+        rect_2.top_left.x = rect.top_left.x + frame->border_width;
+        rect_2.top_left.y = rect.top_left.y + frame->border_width;
+        rect_2.size.width = rect.size.width - 2 * frame->border_width;
+        rect_2.size.height = rect.size.height - 2 * frame->border_width;
+        int radius_2 = frame->corner_radius - frame->border_width;
+        radius_2 = radius_2 < 0 ? 0 : radius_2;
+        ei_linked_point_t* points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
         if (frame->relief == ei_relief_raised){
             ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
                                                       frame->rounded_up, frame->rounded_down, EI_TRUE);
@@ -268,13 +276,6 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
             ei_draw_polygon(surface, points_bot, dark, clipper);
         }
         else if (frame->relief == ei_relief_none){
-            ei_rect_t rect_2;
-            rect_2.top_left.x = rect.top_left.x + frame->border_width;
-            rect_2.top_left.y = rect.top_left.y + frame->border_width;
-            rect_2.size.width = rect.size.width - 2 * frame->border_width;
-            rect_2.size.height = rect.size.height - 2 * frame->border_width;
-            int radius_2 = frame->corner_radius - frame->border_width;
-            radius_2 = radius_2 < 0 ? 0 : radius_2;
             ei_color_t border_color = frame->color;
             border_color.red /= 2;
             border_color.green /= 2;
