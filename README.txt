@@ -1,1 +1,4 @@
-! NE PAS OUBLIER DE RENDRE LE PROJET COMPILÉ EN OPTIMISATION
+! compiler le projet en optimisé
+! enlever le fichier .git
+- classes banner et resize
+

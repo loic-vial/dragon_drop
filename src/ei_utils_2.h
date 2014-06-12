@@ -11,7 +11,9 @@ ei_color_t ei_color(unsigned char red, unsigned char green, unsigned char blue, 
 
 ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2);
 
-ei_rect_t calcul_clipper(ei_rect_t parent, ei_rect_t child);
+ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
+
+ei_rect_t rectangle_intersection(ei_rect_t parent, ei_rect_t child);
 
 void ei_tail(ei_widget_t* widget);
 

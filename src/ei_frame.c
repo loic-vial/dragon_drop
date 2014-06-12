@@ -313,11 +313,11 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                                                              size,
                                                              frame->img_anchor);
 
-        ei_rect_t rect =calcul_clipper(*clipper,widget->screen_location);
+        ei_rect_t rect =rectangle_intersection(*clipper,widget->screen_location);
         ei_rect_t bon_top;
         bon_top.top_left=top_left_corner;
         bon_top.size=size;
-        rect =calcul_clipper(bon_top,rect);
+        rect =rectangle_intersection(bon_top,rect);
 
 
         ei_rect_t rect_2;

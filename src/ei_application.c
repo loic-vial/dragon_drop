@@ -5,6 +5,7 @@
 #include "ei_event.h"
 #include "ei_eventlist.h"
 #include "ei_toplevel.h"
+#include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_radiobutton.h"
 #include <string.h>
@@ -42,43 +43,21 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 }
 
 
-ei_rect_t ei_clipper(ei_widget_t* widget)
+ei_rect_t compute_clipper(ei_widget_t* widget)
 {
-    ei_rect_t clipper;
-    clipper.size=widget->parent->screen_location.size;
-    clipper.top_left=widget->parent->screen_location.top_left;
-
-    if( strcmp(widget->wclass->name,"banner") ==0 )
+    ei_rect_t clipper = ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
+    while (widget->parent != NULL)
     {
-        clipper.top_left.y-=widget->screen_location.size.height;
-        clipper.size.height=widget->screen_location.size.height;
-    }
-
-    if (widget->parent->parent ==NULL)
-    {
-        return clipper;
-    }
-    else
-    {
-        ei_widget_t* current = widget->parent->parent;
-        ei_widget_t* prec = widget->parent;
-        ei_rect_t rect;
-        while (current !=NULL)
+        ei_rect_t rect = *widget->parent->content_rect;
+        if (strcmp(widget->wclass->name,"banner") == 0)
         {
-            rect.size=current->requested_size;
-            rect.top_left=current->screen_location.top_left;
-
-            if(strcmp(prec->wclass->name,"banner")==0 )
-            {
-                rect.top_left.y-=prec->screen_location.size.height;
-                rect.size.height=prec->screen_location.size.height;
-            }
-            clipper= calcul_clipper(rect, clipper);
-            current=current->parent;
-            prec=prec->parent;
+            rect.top_left.y -= widget->content_rect->size.height;
+            rect.size.height = widget->content_rect->size.height;
         }
-        return clipper;
+        clipper = rectangle_intersection(rect, clipper);
+        widget = widget->parent;
     }
+    return clipper;
 }
 
 void draw_widget(ei_widget_t* widget)
@@ -86,23 +65,11 @@ void draw_widget(ei_widget_t* widget)
     if (widget == NULL) return;
     if (widget->geom_params == NULL) return;
     widget->geom_params->manager->runfunc(widget);
-
-    if(widget->parent== NULL)
-    {
-        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,NULL);
-    }
-    else
-    {
-        ei_rect_t clipper;
-        clipper = ei_clipper(widget);
-        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
-    }
-
-    ei_widget_t* current = widget->children_head;
-    while (current != NULL)
+    ei_rect_t clipper = compute_clipper(widget);
+    widget->wclass->drawfunc(widget, root_surface, offscreen_surface, &clipper);
+    for (ei_widget_t* current = widget->children_head ; current != NULL ; current = current->next_sibling)
     {
         draw_widget(current);
-        current = current->next_sibling;
     }
 }
 
@@ -116,7 +83,7 @@ void clear_rects(ei_linked_rect_t** rects)
         free(rect);
         rect = next_rect;
     }
-    *rects = NULL; // MUST RELEASE MEMORY
+    *rects = NULL;
 }
 
 void ei_app_run()
@@ -132,8 +99,11 @@ void ei_app_run()
             draw_widget(&root->widget);
             hw_surface_unlock(root_surface);
             hw_surface_unlock(offscreen_surface);
-            hw_surface_update_rects(root_surface, NULL);
-            hw_surface_update_rects(offscreen_surface, NULL);
+            if (updated_rects != NULL)
+            {
+                hw_surface_update_rects(root_surface, NULL);
+                hw_surface_update_rects(offscreen_surface, NULL);
+            }
             clear_rects(&updated_rects);
         }
 
