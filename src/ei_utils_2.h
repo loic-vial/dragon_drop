@@ -17,4 +17,7 @@ ei_rect_t rectangle_intersection(ei_rect_t parent, ei_rect_t child);
 
 void ei_tail(ei_widget_t* widget);
 
+int min(int x1, int x2);
+int max (int x1,int x2);
+
 #endif

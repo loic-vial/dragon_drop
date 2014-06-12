@@ -24,7 +24,7 @@ int _______hgei_main(int argc, char** argv)
 	ei_size_t	frame_size		= {300,200};
 	int		frame_x			= 150;
 	int		frame_y			= 200;
-	ei_color_t	frame_color		= {0x88, 0x88, 0x88, 0xff};
+    ei_color_t	frame_color		= {0x40, 0xA4, 0x97, 0xff};
     ei_relief_t	frame_relief		= ei_relief_raised;
     int		frame_border_width	= 8;
 
