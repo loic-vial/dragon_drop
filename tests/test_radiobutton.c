@@ -36,7 +36,11 @@ ei_bool_t field(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return EI_TRUE;
 
 }
+<<<<<<< HEAD
 int _____________________________ei_main(int argc, char** argv)
+=======
+int ___ei_main(int argc, char** argv)
+>>>>>>> 6ddd36b123164c6dff81fef4e8e5f73000298205
 {
     ei_size_t	screen_size	= {400, 400};
     ei_color_t      root_bgcol      = {0x52, 0x7f, 0xb4, 0xff};

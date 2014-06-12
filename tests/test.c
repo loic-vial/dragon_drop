@@ -7,7 +7,7 @@
 #include "ei_event.h"
 #include "ei_geometrymanager.h"
 
-int ei_main(int argc, char* argv[])
+int ___sreei_main(int argc, char* argv[])
 {
     ei_size_t	root_window_size		= { 800, 800 };
 	ei_color_t	root_bgcol			= { 0x52, 0x7f, 0xb4, 0xff };

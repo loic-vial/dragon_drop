@@ -18,4 +18,8 @@ void ei_button_releasefunc(ei_widget_t* widget);
 
 void ei_button_setdefaultsfunc (ei_widget_t* widget);
 
+ei_bool_t ei_button_click_down(ei_widget_t* widget, ei_event_t* event, void* user_param);
+
+ei_bool_t ei_button_click_up(ei_widget_t* widget, ei_event_t* event, void* user_param);
+
 #endif

@@ -60,6 +60,8 @@ void ei_button_register_class()
     buttonclass->geomnotifyfunc = NULL;
     buttonclass->next = NULL;
     ei_widgetclass_register(buttonclass);
+    ei_bind(ei_ev_mouse_buttondown, NULL, "button", ei_button_click_down, NULL);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "button", ei_button_click_up, NULL);
 }
 
 void ei_toplevel_register_class()
