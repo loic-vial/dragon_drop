@@ -45,7 +45,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 ei_rect_t ei_clipper(ei_widget_t* widget)
 {
     ei_rect_t clipper;
-    clipper.size=widget->parent->content_rect->size;
+    clipper.size=widget->parent->screen_location.size;
     clipper.top_left=widget->parent->screen_location.top_left;
 
     if( strcmp(widget->wclass->name,"banner") ==0 )
@@ -139,30 +139,30 @@ void ei_app_run()
 
         hw_event_wait_next(&event);
 
-        ei_eventlist_t* event = first_eventlist;
-        while (event != NULL)
+        ei_eventlist_t* event_tmp = first_eventlist;
+        while (event_tmp != NULL)
         {
-            ei_eventlist_t* next_event = event->next;
-            if (event->eventtype == event.type)
+            ei_eventlist_t* next_event = event_tmp->next;
+            if (event_tmp->eventtype == event.type)
             {
                 if (event.type == ei_ev_mouse_buttondown ||
-                        event.type == ei_ev_mouse_buttonup ||
-                        event.type == ei_ev_mouse_move)
+                    event.type == ei_ev_mouse_buttonup ||
+                    event.type == ei_ev_mouse_move)
                 {
                     ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                    if ((event->tag == NULL && widget_picked == event->widget) ||
-                            (event->tag != NULL && strcmp(event->tag, "all") == 0) ||
-                            (event->tag != NULL && strcmp(event->tag, widget_picked->wclass->name) == 0))
+                    if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget) ||
+                        (event_tmp->tag != NULL && strcmp(event_tmp->tag, "all") == 0) ||
+                        (event_tmp->tag != NULL && strcmp(event_tmp->tag, widget_picked->wclass->name) == 0))
                     {
-                        event->callback(widget_picked, &event, event->user_param);
+                        event_tmp->callback(widget_picked, &event, event_tmp->user_param);
                     }
                 }
                 else
                 {
-                    event->callback(event->widget, &event, event->user_param);
+                    event_tmp->callback(event_tmp->widget, &event, event_tmp->user_param);
                 }
             }
-            event = next_event;
+            event_tmp = next_event;
         }
     }
 }
