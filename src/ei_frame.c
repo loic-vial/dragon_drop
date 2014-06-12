@@ -107,12 +107,9 @@ ei_linked_point_t* rounded_frame(ei_rect_t rectangle, float rayon, ei_bool_t top
     return liste_points;
 }
 
-// tu lui donnes un rectangle
-// elle te recrachela linked_points de haut ou du bas
-// à fusionner avec rounded frame ?? j'ai repris le même code
+
 ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
                               ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
-    // partie du haut
     ei_point_t vertex = rectangle.top_left;
     ei_point_t centre;
     ei_linked_point_t* point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
@@ -120,7 +117,14 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
     point_list->next = NULL;
     ei_linked_point_t* current_point = point_list;
     ei_point_t point_inter;
-    float h = rectangle.size.height/2;
+    float h;
+    if (rectangle.size.height < rectangle.size.width){
+        h = rectangle.size.height/2;
+    }
+    else {
+        h = rectangle.size.width/2;
+    }
+    // partie du haut
     if (sup){
         //haut gauche
         vertex = rectangle.top_left;
@@ -250,6 +254,22 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
     return(point_list);
 }
 
+/*void draw_round_button (ei_point_t centre, float radius, ei_color_t color){
+    ei_point_t current_point;
+    current_point.x = centre.x;
+    current_point.y = centre.y - radius;
+    while (current_point.x <= current_point.y){
+        ei_linked_point_t couple;
+        couple.point = centre;
+        couple.next = malloc(sizeof(ei_linked_point_t));
+        couple.next->point = current_point;
+        couple.next->next = NULL;
+        ei_draw_polyline(ei_app_root_surface, &couple, color, NULL);
+        //
+
+    }
+}*/
+
 ei_color_t light_color(ei_color_t color){
     int percent = 70;
     color.red = max(min(round(color.red + color.red * percent/100), 255), 0);
@@ -265,6 +285,8 @@ ei_color_t dark_color(ei_color_t color){
     color.blue = max(min(round(color.blue*percent/100),255),0);
     return color;
 }
+
+
 
 void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                        ei_surface_t pick_surface, ei_rect_t*  clipper)
@@ -381,5 +403,5 @@ void ei_frame_setdefaultsfunc(ei_widget_t* widget)
     frame->rounded_down = EI_FALSE;
     frame->widget.requested_size=ei_size_zero();
     ei_linked_tag_t* tag = ei_initial_tag_t( widget);
-frame->tag=tag;
+    frame->tag=tag;
 }

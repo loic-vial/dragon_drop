@@ -35,4 +35,6 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
 
 void ei_frame_setdefaultsfunc(ei_widget_t* widget);
 
+ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin);
+
 #endif
