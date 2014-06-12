@@ -2,6 +2,8 @@
 #define EI_FRAME_H
 
 #include "ei_widget.h"
+#include "ei_event.h"
+
 
 typedef struct ei_frame_t
 {
@@ -19,6 +21,8 @@ typedef struct ei_frame_t
     int corner_radius;
     ei_bool_t rounded_up;
     ei_bool_t rounded_down;
+    ei_linked_tag_t* tag;
+
 }
 ei_frame_t;
 

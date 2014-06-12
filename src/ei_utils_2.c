@@ -91,7 +91,7 @@ int min(int x1, int x2)
     return (x1 < x2) ? x1 : x2;
 }
 
-int max (int x1,int x2)
+int max (int x1, int x2)
 {
     return (x1 > x2) ? x1 : x2;
 }

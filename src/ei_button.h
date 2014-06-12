@@ -2,6 +2,7 @@
 #define EI_BUTTON_H
 
 #include "ei_frame.h"
+#include "ei_tag.h"
 
 typedef struct ei_button_t
 {

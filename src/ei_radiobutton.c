@@ -11,6 +11,7 @@
 #include "ei_event.h"
 #include "hw_interface.h"
 
+
 ei_bool_t click_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_button_t* field_button = (ei_button_t*)widget;
@@ -101,6 +102,8 @@ void setdefaultsfunc_radiobutton(ei_widget_t* widget)
     widget->requested_size.width = 150;
     widget->requested_size.height = 20;
     ei_add_children_radiobutton("premier champ",radio);
+    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
+    radio->frame.tag=tag;
 }
 
 void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,

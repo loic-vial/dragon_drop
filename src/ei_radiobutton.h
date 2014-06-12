@@ -5,6 +5,7 @@
 #include "ei_frame.h"
 #include "ei_button.h"
 #include "ei_widget.h"
+#include "ei_event.h"
 
 typedef struct ei_radiobutton_t
 {

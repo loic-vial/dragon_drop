@@ -7,6 +7,8 @@
 
 void ei_banner_register_class();
 
+void ei_banner_setdefaultsfunc(ei_widget_t* widget);
+
 ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
 
 ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);

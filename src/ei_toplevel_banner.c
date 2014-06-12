@@ -9,6 +9,14 @@
 
 static ei_point_t drag_mouse_position;
 
+void ei_banner_setdefaultsfunc(ei_widget_t* widget)
+{
+    ei_frame_t*  banner =(ei_frame_t*)widget;
+    ei_frame_setdefaultsfunc(widget);
+    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
+banner->tag=tag;
+}
+
 void ei_banner_register_class()
 {
     ei_widgetclass_t* bannerclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
@@ -16,7 +24,7 @@ void ei_banner_register_class()
     bannerclass->allocfunc = &ei_frame_allocfunc;
     bannerclass->releasefunc = &ei_frame_releasefunc;
     bannerclass->drawfunc = &ei_frame_drawfunc;
-    bannerclass->setdefaultsfunc = &ei_frame_setdefaultsfunc;
+    bannerclass->setdefaultsfunc = &ei_banner_setdefaultsfunc;
     bannerclass->geomnotifyfunc = NULL;
     bannerclass->next = NULL;
     ei_widgetclass_register(bannerclass);

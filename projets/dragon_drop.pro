@@ -5,7 +5,7 @@ CONFIG -= qt
 
 QMAKE_CFLAGS += -std=c99 -Wno-unused
 
-INCLUDEPATH += ../include /usr/include/SDL
+INCLUDEPATH += ../include ../src /usr/include/SDL
 
 LIBS += -L$$_PRO_FILE_PWD_/../lib/
 LIBS += -leibase -lSDL_gfx -lSDL -lSDL_ttf -lSDL_image
@@ -34,6 +34,8 @@ SOURCES += \
     ../src/ei_radiobutton.c \
     ../tests/test_radiobutton.c \
     ../src/ei_tag.c
+
+    ../tests/test.c
 
 HEADERS += \
     ../include/ei_application.h \
