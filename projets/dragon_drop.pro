@@ -5,7 +5,7 @@ CONFIG -= qt
 
 QMAKE_CFLAGS += -std=c99 -Wno-unused
 
-INCLUDEPATH += ../include /usr/include/SDL
+INCLUDEPATH += ../include ../src /usr/include/SDL
 
 LIBS += -L$$_PRO_FILE_PWD_/../lib/
 LIBS += -leibase -lSDL_gfx -lSDL -lSDL_ttf -lSDL_image
@@ -32,7 +32,8 @@ SOURCES += \
     ../tests/hello_world_relative.c \
     ../src/ei_toplevel_resize.c \
     ../src/ei_toplevel_banner.c \
-    ../src/ei_radiobutton.c
+    ../src/ei_radiobutton.c \
+    ../tests/test.c
 
 HEADERS += \
     ../include/ei_application.h \

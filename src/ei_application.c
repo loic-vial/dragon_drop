@@ -126,7 +126,7 @@ void ei_app_run()
         draw_widget(&root->widget);
         hw_surface_unlock(root_surface);
         hw_surface_unlock(offscreen_surface);
-        if (invalid_rects != NULL)
+        // if (invalid_rects != NULL)
         {
             hw_surface_update_rects(root_surface, NULL);
             hw_surface_update_rects(offscreen_surface, NULL);
@@ -139,6 +139,8 @@ void ei_app_run()
 
 void ei_app_invalidate_rect(ei_rect_t* rect)
 {
+    ei_rect_t root_rect = ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
+    *rect = rectangle_intersection(*rect, root_rect);
     if (invalid_rects == NULL)
     {
         invalid_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
