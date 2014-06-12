@@ -18,7 +18,7 @@ static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
 static bool want_quit;
-static ei_linked_rect_t* invalid_rects;
+ei_linked_rect_t* invalid_rects;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 {
@@ -126,7 +126,7 @@ void ei_app_run()
         draw_widget(&root->widget);
         hw_surface_unlock(root_surface);
         hw_surface_unlock(offscreen_surface);
-        // if (invalid_rects != NULL)
+        if (invalid_rects != NULL)
         {
             hw_surface_update_rects(root_surface, NULL);
             hw_surface_update_rects(offscreen_surface, NULL);
