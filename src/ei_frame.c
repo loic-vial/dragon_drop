@@ -14,13 +14,22 @@ void* allocfunc_frame()
 
 void releasefunc_frame(ei_widget_t* widget)
 {
-    free(widget);
+    ei_frame_t* frame = (ei_frame_t*) widget;
+    if (frame->img != NULL)
+    {
+        hw_surface_free(frame->img);
+    }
+    if (frame->img_rect != NULL)
+    {
+        free(frame->img_rect);
+    }
 }
 
-ei_linked_point_t arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
+
+ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
 {
-    ei_linked_point_t liste_points;
-    ei_linked_point_t* current_point = &liste_points;
+    ei_linked_point_t* liste_points = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+    ei_linked_point_t* current_point = liste_points;
     ei_point_t point;
 
     for(float angle=angle_debut; angle<angle_fin; angle+=1){
@@ -37,93 +46,78 @@ ei_linked_point_t arc(ei_point_t centre, float radius, float angle_debut, float 
     return(liste_points);
 }
 
-ei_linked_point_t rounded_frame(ei_rect_t rectangle, float rayon,
-                                ei_bool_t top, ei_bool_t bot){
-    ei_point_t sommet = rectangle.top_left;
-    ei_point_t centre;
-    ei_linked_point_t liste_points;
-    liste_points.point = rectangle.top_left;
-    liste_points.next = NULL;
-    ei_linked_point_t* current_point = &liste_points;
-    //haut gauche
-    sommet = rectangle.top_left;
-    if (top){
-        centre.x = sommet.x + rayon;
-        centre.y = sommet.y + rayon;
-        liste_points = arc(centre, rayon, 90, 180);
-        current_point = &liste_points;
-        while (current_point->next != NULL) {
-            current_point = current_point->next;
-        }
+ei_linked_point_t* rounded_frame_up(ei_rect_t rectangle, float rayon)
+{
+    ei_point_t centre = ei_point_add(rectangle.top_left, ei_point(rectangle.size.width, 0));
+    centre = ei_point_add(centre, ei_point(-rayon, rayon));
+    ei_linked_point_t* liste_points = arc(centre, rayon, 0, 90);
+    ei_linked_point_t* current_point;
+    for (current_point = liste_points ; current_point->next != NULL ; current_point = current_point->next);
+    centre = ei_point_add(rectangle.top_left, ei_point(rayon, rayon));
+    current_point->next = arc(centre, rayon, 90, 180);
+    return liste_points;
+}
+
+ei_linked_point_t* rounded_frame_down(ei_rect_t rectangle, float rayon)
+{
+    ei_point_t centre = ei_point_add(rectangle.top_left, ei_point(0, rectangle.size.height));
+    centre = ei_point_add(centre, ei_point(rayon, -rayon));
+    ei_linked_point_t* liste_points = arc(centre, rayon, -180, -90);
+    ei_linked_point_t* current_point;
+    for (current_point = liste_points ; current_point->next != NULL ; current_point = current_point->next);
+    centre = ei_point_add(rectangle.top_left, ei_point(rectangle.size.width, rectangle.size.height));
+    centre = ei_point_add(centre, ei_point(-rayon, -rayon));
+    current_point->next = arc(centre, rayon, -90, 0);
+    return liste_points;
+}
+
+ei_linked_point_t* rounded_frame(ei_rect_t rectangle, float rayon, ei_bool_t top, ei_bool_t bot)
+{
+    ei_linked_point_t* liste_points;
+    ei_linked_point_t* current_point;
+    if (top)
+    {
+        liste_points = rounded_frame_up(rectangle, rayon);
+        for (current_point = liste_points ; current_point->next != NULL ; current_point = current_point->next);
     }
-    else {
-        liste_points.point = sommet;
-        current_point = &liste_points;
+    else
+    {
+        liste_points = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+        liste_points->point = ei_point_add(rectangle.top_left, ei_point(rectangle.size.width, 0));
+        liste_points->next = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+        liste_points->next->point = rectangle.top_left;
+        liste_points->next->next = NULL;
+        current_point = liste_points->next;
     }
-    //bas gauche
-    sommet.y += rectangle.size.height;
-    if (bot){
-        centre.x = sommet.x + rayon;
-        centre.y = sommet.y - rayon;
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        *current_point->next = arc(centre, rayon, -180, -90);
-        while (current_point->next != NULL) {
-            current_point = current_point->next;
-        }
+    if (bot)
+    {
+        current_point->next = rounded_frame_down(rectangle, rayon);
+        for (current_point = liste_points ; current_point->next != NULL ; current_point = current_point->next);
     }
-    else {
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        current_point->next->point = sommet;
-        current_point = current_point->next;
+    else
+    {
+        current_point->next = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+        current_point->next->point = ei_point_add(rectangle.top_left, ei_point(0, rectangle.size.height));
+        current_point->next->next = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+        current_point->next->next->point = ei_point_add(rectangle.top_left,
+                                                        ei_point(rectangle.size.width, rectangle.size.height));
+        current_point->next->next->next = NULL;
     }
-    //bas droite
-    sommet.x += +rectangle.size.width;
-    if (bot){
-        centre.x = sommet.x - rayon;
-        centre.y = sommet.y - rayon;
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        *current_point->next = arc(centre, rayon, -90, 0);
-        while (current_point->next != NULL) {
-            current_point = current_point->next;
-        }
-    }
-    else {
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        current_point->next->point = sommet;
-        current_point = current_point->next;
-    }
-    //haut droite
-    sommet.y += -rectangle.size.height;
-    if (top){
-        centre.x = sommet.x - rayon;
-        centre.y = sommet.y + rayon;
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        *current_point->next = arc(centre, rayon, 0, 90);
-        while (current_point->next != NULL) {
-            current_point = current_point->next;
-        }
-    }
-    else {
-        current_point->next = malloc(sizeof(ei_linked_point_t));
-        current_point->next->point = sommet;
-        current_point = current_point->next;
-    }
-    current_point->next = NULL;
-    return(liste_points);
+    return liste_points;
 }
 
 // tu lui donnes un rectangle
 // elle te recrachela linked_points de haut ou du bas
 // à fusionner avec rounded frame ?? j'ai repris le même code
-ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
-                             ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
+ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
+                              ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
     // partie du haut
     ei_point_t vertex = rectangle.top_left;
     ei_point_t centre;
-    ei_linked_point_t point_list;
-    point_list.point = rectangle.top_left;
-    point_list.next = NULL;
-    ei_linked_point_t* current_point = &point_list;
+    ei_linked_point_t* point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+    point_list->point = rectangle.top_left;
+    point_list->next = NULL;
+    ei_linked_point_t* current_point = point_list;
     ei_point_t point_inter;
     float h = rectangle.size.height/2;
     if (sup){
@@ -133,14 +127,14 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x + radius;
             centre.y = vertex.y + radius;
             point_list = arc(centre, radius, 90, 180);
-            current_point = &point_list;
+            current_point = point_list;
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
         }
         else {
-            point_list.point = vertex;
-            current_point = &point_list;
+            point_list->point = vertex;
+            current_point = point_list;
         }
         //bas gauche
         vertex.y += rectangle.size.height;
@@ -148,7 +142,7 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x + radius;
             centre.y = vertex.y - radius;
             current_point->next = malloc(sizeof(ei_linked_point_t));
-            *current_point->next = arc(centre, radius, -180, -135);
+            current_point->next = arc(centre, radius, -180, -135);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
@@ -177,7 +171,7 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x - radius;
             centre.y = vertex.y + radius;
             current_point->next = malloc(sizeof(ei_linked_point_t));
-            *current_point->next = arc(centre, radius, 45, 90);
+            current_point->next = arc(centre, radius, 45, 90);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
@@ -195,14 +189,14 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x + radius;
             centre.y = vertex.y - radius;
             point_list = arc(centre, radius, -135, -90);
-            current_point = &point_list;
+            current_point = point_list;
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
         }
         else {
-            point_list.point = vertex;
-            current_point = &point_list;
+            point_list->point = vertex;
+            current_point = point_list;
         }
         // bas droite
         vertex.x += rectangle.size.width;
@@ -210,7 +204,7 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x - radius;
             centre.y = vertex.y - radius;
             current_point->next = malloc(sizeof(ei_linked_point_t));
-            *current_point->next = arc(centre, radius, -90, 0);
+            current_point->next = arc(centre, radius, -90, 0);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
@@ -226,7 +220,7 @@ ei_linked_point_t sixty_nine(ei_rect_t rectangle, float radius,
             centre.x = vertex.x - radius;
             centre.y = vertex.y + radius;
             current_point->next = malloc(sizeof(ei_linked_point_t));
-            *current_point->next = arc(centre, radius, 0, 45);
+            current_point->next = arc(centre, radius, 0, 45);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
             }
@@ -261,7 +255,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
 {
     ei_frame_t* frame = (ei_frame_t*)widget;
     ei_rect_t rect = widget->screen_location;
-    ei_linked_point_t points = rounded_frame(rect, frame->corner_radius, frame->rounded_up, frame->rounded_down);
+    ei_linked_point_t* points = rounded_frame(rect, frame->corner_radius, frame->rounded_up, frame->rounded_down);
     if (frame->border_width != 0)
     {
         ei_rect_t rect_2;
@@ -271,30 +265,30 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         rect_2.size.height = rect.size.height - 2 * frame->border_width;
         int radius_2 = frame->corner_radius - frame->border_width;
         radius_2 = radius_2 < 0 ? 0 : radius_2;
-        ei_linked_point_t points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
+        ei_linked_point_t* points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
         if (frame->relief == ei_relief_raised){
-            ei_linked_point_t points_up = sixty_nine(rect, frame->corner_radius,
-                                                     frame->rounded_up, frame->rounded_down, EI_TRUE);
-            ei_linked_point_t points_bot = sixty_nine(rect, frame->corner_radius,
-                                                      frame->rounded_up, frame->rounded_down, EI_FALSE);
+            ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
+                                                      frame->rounded_up, frame->rounded_down, EI_TRUE);
+            ei_linked_point_t* points_bot = sixty_nine(rect, frame->corner_radius,
+                                                       frame->rounded_up, frame->rounded_down, EI_FALSE);
             ei_color_t light = ei_color(0xdf, 0xf2, 0xff, 0xff);
             ei_color_t dark = ei_color(0x00, 0x33, 0x66, 0xff);
-            ei_draw_polygon(surface, &points_up, light, clipper);
-            ei_draw_polygon(surface, &points_bot, dark, clipper);
-            ei_draw_polygon(surface, &points_2, frame->color, clipper);
+            ei_draw_polygon(surface, points_up, light, clipper);
+            ei_draw_polygon(surface, points_bot, dark, clipper);
         }
         else if (frame->relief == ei_relief_none){
             ei_color_t border_color = frame->color;
             border_color.red /= 2;
             border_color.green /= 2;
             border_color.blue /= 2;
-            ei_draw_polygon(surface, &points, border_color, clipper);
-            ei_draw_polygon(surface, &points_2, frame->color, clipper);
+            ei_draw_polygon(surface, points, border_color, clipper);
+            ei_linked_point_t* points = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
+            ei_draw_polygon(surface, points, frame->color, clipper);
         }
     }
     else
     {
-        ei_draw_polygon(surface, &points, frame->color, clipper);
+        ei_draw_polygon(surface, points, frame->color, clipper);
     }
 
 
@@ -341,8 +335,15 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
         ei_copy_surface(surface,&rect,frame->img,&rect_2,EI_TRUE);
         hw_surface_unlock(frame->img);
     }
-    ei_draw_polygon(pick_surface, &points, *widget->pick_color, clipper);
+    ei_draw_polygon(pick_surface, points, *widget->pick_color, clipper);
 
+    ei_linked_point_t* point = points;
+    while (point != NULL)
+    {
+        ei_linked_point_t* next_point = point->next;
+        free(point);
+        point = next_point;
+    }
 }
 
 void setdefaultsfunc_frame(ei_widget_t* widget)

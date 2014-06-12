@@ -20,7 +20,12 @@ void* allocfunc_toplevel()
 
 void releasefunc_toplevel(ei_widget_t* widget)
 {
-    free(widget);
+    ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
+    if (toplevel->min_size != NULL)
+    {
+        free(toplevel->min_size);
+        toplevel->min_size = NULL;
+    }
 }
 
 void drawfunc_toplevel(ei_widget_t* widget, ei_surface_t surface, ei_surface_t pick_surface, ei_rect_t* clipper)

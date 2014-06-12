@@ -6,6 +6,7 @@
 #include "ei_eventlist.h"
 #include "ei_toplevel.h"
 #include "ei_utils_2.h"
+#include "ei_radiobutton.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -94,13 +95,6 @@ void draw_widget(ei_widget_t* widget)
     {
         ei_rect_t clipper;
         clipper = ei_clipper(widget);
-
-
-        /* if( strcmp(widget->parent->wclass->name,"banner") ==0 )
-        {
-            clipper.top_left=widget->screen_location.top_left;
-            clipper.size=widget->screen_location.size;
-        }*/
         widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
     }
 
