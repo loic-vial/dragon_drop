@@ -33,7 +33,8 @@ SOURCES += \
     ../src/ei_toplevel_banner.c \
     ../src/ei_radiobutton.c \
     ../tests/test_radiobutton.c \
-    ../src/ei_tag.c
+    ../src/ei_tag.c \
+    ../tests/test_tag.c
 
     ../tests/test.c
 
