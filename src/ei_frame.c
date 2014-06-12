@@ -401,7 +401,7 @@ void ei_frame_setdefaultsfunc(ei_widget_t* widget)
     frame->corner_radius = 0;
     frame->rounded_up = EI_FALSE;
     frame->rounded_down = EI_FALSE;
-    frame->widget.requested_size=ei_size_zero();
-    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
+    frame->widget.requested_size = ei_size_zero();
+    ei_linked_tag_t* tag = ei_initial_tag_t(widget);
     frame->tag=tag;
 }
