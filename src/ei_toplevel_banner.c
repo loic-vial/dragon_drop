@@ -25,7 +25,7 @@ void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color
         ei_toplevel_t* toplevel=(ei_toplevel_t*)widget;
         if(color_banner !=NULL)
         {
-toplevel ->border->color=*color_banner;
+            toplevel ->border->color=*color_banner;
         }
         if(color_text !=NULL)
         {
