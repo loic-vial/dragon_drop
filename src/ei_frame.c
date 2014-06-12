@@ -249,36 +249,17 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
     return(point_list);
 }
 
-/*
-ei_color_t change_color(ei_color_t base_color, ei_bool_t light){
-    ei_color_t new_color = base_color;
-    int percent = 100;
-    if (light) {
-        int percent = 90;
-        new_color.red = max(min(round(new_color.red*percent/100) + round(255 - percent/100*255),255),0);
-        new_color.green = max(min(round(new_color.green*percent/100) + round(255 - percent/100*255),255),0);
-        new_color.blue = max(min(round(new_color.blue*percent/100) + round(255 - percent/100*255),255),0);
-    }
-    else {
-        int percent = 70;
-        new_color.red = max(min(round(new_color.red*percent/100),255),0);
-        new_color.green = max(min(round(new_color.green*percent/100),255),0);
-        new_color.blue = max(min(round(new_color.blue*percent/100),255),0);
-    }
-    return(new_color);
-}
-*/
+
 
 ei_color_t change_color(ei_color_t base_color, ei_bool_t light){
     ei_color_t new_color = base_color;
         int percent = 70;
     if (light) {
-        new_color.red = max(min(new_color.red *(1 + percent/100), 255), 0);
-        new_color.green = max(min(new_color.green *(1 + percent/100), 255), 0);
-        new_color.blue = max(min(new_color.blue *(1 + percent/100), 255), 0);
+        new_color.red = max(min(round(new_color.red + new_color.red * percent/100), 255), 0);
+        new_color.green = max(min(round(new_color.green + new_color.green * percent/100), 255), 0);
+        new_color.blue = max(min(round(new_color.blue + new_color.blue * percent/100), 255), 0);
     }
     else {
-
         new_color.red = max(min(round(new_color.red*percent/100),255),0);
         new_color.green = max(min(round(new_color.green*percent/100),255),0);
         new_color.blue = max(min(round(new_color.blue*percent/100),255),0);
@@ -313,13 +294,13 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
             ei_draw_polygon(surface, points_bot, dark, clipper);
             ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
-        else if (frame->relief == ei_relief_none){
-            ei_draw_polygon(surface, points, dark, clipper);
-            ei_draw_polygon(surface, points_2, frame->color, clipper);
-        }
         else if (frame->relief == ei_relief_sunken){
             ei_draw_polygon(surface, points_up, dark, clipper);
             ei_draw_polygon(surface, points_bot, light, clipper);
+            ei_draw_polygon(surface, points_2, frame->color, clipper);
+        }
+        else if (frame->relief == ei_relief_none){
+            ei_draw_polygon(surface, points, dark, clipper);
             ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
     }
