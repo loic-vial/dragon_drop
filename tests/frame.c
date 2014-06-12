@@ -15,18 +15,19 @@
  *	Main function of the application.
  */
 
-int ythjei_main(int argc, char** argv)
+int ei_main(int argc, char** argv)
 {
 	ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
 
 	ei_widget_t*	frame;
-	ei_size_t	frame_size		= {300,200};
+    ei_size_t	frame_size		= {20,20};
 	int		frame_x			= 150;
 	int		frame_y			= 200;
     ei_color_t	frame_color		= {0x40, 0xA4, 0x97, 0xff};
     ei_relief_t	frame_relief		= ei_relief_raised;
-    int		frame_border_width	= 8;
+    int		frame_border_width	= 1;
+
 
 	/* Create the application and change the color of the background. */
     ei_app_create(&screen_size, EI_FALSE);
@@ -40,7 +41,7 @@ int ythjei_main(int argc, char** argv)
 
     fframe->rounded_up = EI_TRUE;
     fframe->rounded_down = EI_TRUE;
-    fframe->corner_radius = 15;
+    fframe->corner_radius = 10;
 
     ei_frame_configure(frame, &frame_size, &frame_color,
                 &frame_border_width, &frame_relief, NULL, NULL, NULL, NULL,
