@@ -7,12 +7,12 @@
 
 #define PI 3.14159265
 
-void* allocfunc_frame()
+void* ei_frame_allocfunc()
 {
     return calloc(1, sizeof(ei_frame_t));
 }
 
-void releasefunc_frame(ei_widget_t* widget)
+void ei_frame_releasefunc(ei_widget_t* widget)
 {
     ei_frame_t* frame = (ei_frame_t*) widget;
     if (frame->img != NULL)
@@ -249,7 +249,7 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
 }
 
 
-void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
+void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                     ei_surface_t pick_surface, ei_rect_t*  clipper)
 {
     ei_frame_t* frame = (ei_frame_t*)widget;
@@ -345,7 +345,7 @@ void drawfunc_frame(ei_widget_t* widget, ei_surface_t surface,
     }
 }
 
-void setdefaultsfunc_frame(ei_widget_t* widget)
+void ei_frame_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_frame_t* frame = (ei_frame_t*) widget;
     frame->color = ei_default_background_color;
@@ -362,9 +362,4 @@ void setdefaultsfunc_frame(ei_widget_t* widget)
     frame->rounded_up = EI_FALSE;
     frame->rounded_down = EI_FALSE;
     frame->widget.requested_size=ei_size_zero();
-}
-
-void geomnotifyfunc_frame(ei_widget_t* widget, ei_rect_t rect)
-{
-
 }

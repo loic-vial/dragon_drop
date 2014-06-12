@@ -14,11 +14,11 @@ void ei_resize_register_class()
 {
     ei_widgetclass_t* resizeclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
     strcpy(resizeclass->name, "resize");
-    resizeclass->allocfunc = &allocfunc_button;
-    resizeclass->releasefunc = &releasefunc_button;
-    resizeclass->drawfunc = &drawfunc_button;
-    resizeclass->setdefaultsfunc = &setdefaultsfunc_button;
-    resizeclass->geomnotifyfunc = &geomnotifyfunc_button;
+    resizeclass->allocfunc = &ei_button_allocfunc;
+    resizeclass->releasefunc = &ei_button_releasefunc;
+    resizeclass->drawfunc = &ei_frame_drawfunc;
+    resizeclass->setdefaultsfunc = &ei_button_setdefaultsfunc;
+    resizeclass->geomnotifyfunc = NULL;
     resizeclass->next = NULL;
     ei_widgetclass_register(resizeclass);
 
