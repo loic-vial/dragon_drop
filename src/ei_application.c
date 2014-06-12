@@ -18,14 +18,14 @@ static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
 static bool want_quit;
-static ei_linked_rect_t* updated_rects;
+static ei_linked_rect_t* invalid_rects;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 {
     hw_init();
 
     want_quit = false;
-    updated_rects = NULL;
+    invalid_rects = NULL;
     root_surface = hw_create_window(main_window_size, fullscreen);
     offscreen_surface = hw_surface_create(root_surface, main_window_size, true);
 
@@ -73,7 +73,7 @@ void draw_widget(ei_widget_t* widget)
     }
 }
 
-void clear_rects(ei_linked_rect_t** rects)
+void clear_rect_list(ei_linked_rect_t** rects)
 {
     if (rects == NULL) return;
     ei_linked_rect_t* rect = *rects;
@@ -86,68 +86,68 @@ void clear_rects(ei_linked_rect_t** rects)
     *rects = NULL;
 }
 
+void manage_event(ei_event_t event)
+{
+    ei_eventlist_t* event_tmp = first_eventlist;
+    while (event_tmp != NULL)
+    {
+        ei_eventlist_t* next_event = event_tmp->next;
+        if (event_tmp->eventtype == event.type)
+        {
+            if (event.type == ei_ev_mouse_buttondown ||
+                event.type == ei_ev_mouse_buttonup ||
+                event.type == ei_ev_mouse_move)
+            {
+                ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
+                if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget) ||
+                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, "all") == 0) ||
+                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, widget_picked->wclass->name) == 0))
+                {
+                    event_tmp->callback(widget_picked, &event, event_tmp->user_param);
+                }
+            }
+            else
+            {
+                event_tmp->callback(event_tmp->widget, &event, event_tmp->user_param);
+            }
+        }
+        event_tmp = next_event;
+    }
+}
+
 void ei_app_run()
 {
     ei_event_t event;
     event.type = ei_ev_none;
     while (!want_quit)
     {
-        //if (updated_rects != NULL)
+        hw_surface_lock(root_surface);
+        hw_surface_lock(offscreen_surface);
+        draw_widget(&root->widget);
+        hw_surface_unlock(root_surface);
+        hw_surface_unlock(offscreen_surface);
+        if (invalid_rects != NULL)
         {
-            hw_surface_lock(root_surface);
-            hw_surface_lock(offscreen_surface);
-            draw_widget(&root->widget);
-            hw_surface_unlock(root_surface);
-            hw_surface_unlock(offscreen_surface);
-            if (updated_rects != NULL)
-            {
-                hw_surface_update_rects(root_surface, NULL);
-                hw_surface_update_rects(offscreen_surface, NULL);
-            }
-            clear_rects(&updated_rects);
+            hw_surface_update_rects(root_surface, NULL);
+            hw_surface_update_rects(offscreen_surface, NULL);
         }
-
+        clear_rect_list(&invalid_rects);
         hw_event_wait_next(&event);
-
-        ei_eventlist_t* event_tmp = first_eventlist;
-        while (event_tmp != NULL)
-        {
-            ei_eventlist_t* next_event = event_tmp->next;
-            if (event_tmp->eventtype == event.type)
-            {
-                if (event.type == ei_ev_mouse_buttondown ||
-                    event.type == ei_ev_mouse_buttonup ||
-                    event.type == ei_ev_mouse_move)
-                {
-                    ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                    if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget) ||
-                        (event_tmp->tag != NULL && strcmp(event_tmp->tag, "all") == 0) ||
-                        (event_tmp->tag != NULL && strcmp(event_tmp->tag, widget_picked->wclass->name) == 0))
-                    {
-                        event_tmp->callback(widget_picked, &event, event_tmp->user_param);
-                    }
-                }
-                else
-                {
-                    event_tmp->callback(event_tmp->widget, &event, event_tmp->user_param);
-                }
-            }
-            event_tmp = next_event;
-        }
+        manage_event(event);
     }
 }
 
 void ei_app_invalidate_rect(ei_rect_t* rect)
 {
-    if (updated_rects == NULL)
+    if (invalid_rects == NULL)
     {
-        updated_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
-        updated_rects->rect = *rect;
-        updated_rects->next = NULL;
+        invalid_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
+        invalid_rects->rect = *rect;
+        invalid_rects->next = NULL;
     }
     else
     {
-        ei_linked_rect_t* tmp = updated_rects;
+        ei_linked_rect_t* tmp = invalid_rects;
         while (tmp->next != NULL) tmp = tmp->next;
         tmp->next = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
         tmp->next->rect = *rect;
