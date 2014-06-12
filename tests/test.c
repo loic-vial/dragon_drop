@@ -19,13 +19,15 @@ int ei_main(int argc, char* argv[])
 
 
     ei_widget_t* toplevel = ei_widget_create("toplevel", ei_app_root_widget());
-    ei_size_t toplevel_size = ei_size(100, 130);
+    ei_size_t toplevel_size = ei_size(200, 230);
     ei_color_t toplevel_color = ei_color(210, 123, 200, 210);
     int toplevel_border = 0;
     int toplevel_x = 0;
     int toplevel_y = 0;
-    ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_color, &toplevel_border, NULL, NULL,
-                       NULL, NULL);
+    ei_bool_t toplevel_closable = EI_TRUE;
+    ei_axis_set_t toplevel_resizable = ei_axis_y;
+    ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_color, &toplevel_border, NULL, &toplevel_closable,
+                       &toplevel_resizable, NULL);
     ei_place(toplevel, NULL, &toplevel_x, &toplevel_y, NULL, NULL, NULL, NULL, NULL, NULL);
 
 
