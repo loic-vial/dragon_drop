@@ -249,22 +249,20 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
     return(point_list);
 }
 
+ei_color_t light_color(ei_color_t color){
+    int percent = 70;
+    color.red = max(min(round(color.red + color.red * percent/100), 255), 0);
+    color.green = max(min(round(color.green + color.green * percent/100), 255), 0);
+    color.blue = max(min(round(color.blue + color.blue * percent/100), 255), 0);
+    return color;
+}
 
-
-ei_color_t change_color(ei_color_t base_color, ei_bool_t light){
-    ei_color_t new_color = base_color;
-        int percent = 70;
-    if (light) {
-        new_color.red = max(min(round(new_color.red + new_color.red * percent/100), 255), 0);
-        new_color.green = max(min(round(new_color.green + new_color.green * percent/100), 255), 0);
-        new_color.blue = max(min(round(new_color.blue + new_color.blue * percent/100), 255), 0);
-    }
-    else {
-        new_color.red = max(min(round(new_color.red*percent/100),255),0);
-        new_color.green = max(min(round(new_color.green*percent/100),255),0);
-        new_color.blue = max(min(round(new_color.blue*percent/100),255),0);
-    }
-    return(new_color);
+ei_color_t dark_color(ei_color_t color){
+    int percent = 70;
+    color.red = max(min(round(color.red*percent/100),255),0);
+    color.green = max(min(round(color.green*percent/100),255),0);
+    color.blue = max(min(round(color.blue*percent/100),255),0);
+    return color;
 }
 
 void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
@@ -283,8 +281,8 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
         int radius_2 = frame->corner_radius - frame->border_width;
         radius_2 = radius_2 < 0 ? 0 : radius_2;
         ei_linked_point_t* points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
-        ei_color_t light = change_color(frame->color, EI_TRUE);
-        ei_color_t dark = change_color(frame->color, EI_FALSE);
+        ei_color_t light = light_color(frame->color);
+        ei_color_t dark = dark_color(frame->color);
         ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
                                                   frame->rounded_up, frame->rounded_down, EI_TRUE);
         ei_linked_point_t* points_bot = sixty_nine(rect, frame->corner_radius,

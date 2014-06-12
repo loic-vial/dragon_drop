@@ -38,12 +38,13 @@ void ei_runfunc_placer(ei_widget_t* widget)
     }
     widget->screen_location.top_left = top_left_pos;
 
-    if (widget->wclass->geomnotifyfunc != NULL)
-    {
-        widget->wclass->geomnotifyfunc(widget, widget->screen_location);
-    }
     if (!is_same_rect(screen_location_before, widget->screen_location))
     {
+        if (widget->wclass->geomnotifyfunc != NULL)
+        {
+            widget->wclass->geomnotifyfunc(widget, widget->screen_location);
+        }
+
         ei_app_invalidate_rect(&screen_location_before);
         ei_app_invalidate_rect(&widget->screen_location);
     }

@@ -140,11 +140,11 @@ void ei_app_run()
 void ei_app_invalidate_rect(ei_rect_t* rect)
 {
     ei_rect_t root_rect = ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
-    *rect = rectangle_intersection(*rect, root_rect);
+    ei_rect_t new_rect = rectangle_intersection(*rect, root_rect);
     if (invalid_rects == NULL)
     {
         invalid_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
-        invalid_rects->rect = *rect;
+        invalid_rects->rect = new_rect;
         invalid_rects->next = NULL;
     }
     else
@@ -152,7 +152,7 @@ void ei_app_invalidate_rect(ei_rect_t* rect)
         ei_linked_rect_t* tmp = invalid_rects;
         while (tmp->next != NULL) tmp = tmp->next;
         tmp->next = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
-        tmp->next->rect = *rect;
+        tmp->next->rect = new_rect;
         tmp->next->next = NULL;
     }
 }
