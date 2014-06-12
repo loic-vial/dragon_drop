@@ -25,21 +25,22 @@ void ei_frame_releasefunc(ei_widget_t* widget)
     }
 }
 
-ei_linked_point_t* arc(ei_point_t centre, float rayon, float angle_debut, float angle_fin)
+
+ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
 {
     ei_linked_point_t* liste_points = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
     ei_linked_point_t* current_point = liste_points;
     ei_point_t point;
 
     for(float angle=angle_debut; angle<angle_fin; angle+=1){
-        point.x = centre.x + rayon*cos(angle*PI/180.0);
-        point.y = centre.y - rayon*sin(angle*PI/180.0);
+        point.x = centre.x + radius*cos(angle*PI/180.0);
+        point.y = centre.y - radius*sin(angle*PI/180.0);
         current_point->point = point;
         current_point->next = malloc(sizeof(ei_linked_point_t));
         current_point = current_point->next;
     }
-    point.x = centre.x + rayon*cos(angle_fin*PI/180.0);
-    point.y = centre.y - rayon*sin(angle_fin*PI/180.0);
+    point.x = centre.x + radius*cos(angle_fin*PI/180.0);
+    point.y = centre.y - radius*sin(angle_fin*PI/180.0);
     current_point->point = point;
     current_point->next = NULL;
     return(liste_points);
@@ -249,8 +250,25 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
 }
 
 
+
+ei_color_t change_color(ei_color_t base_color, ei_bool_t light){
+    ei_color_t new_color = base_color;
+        int percent = 70;
+    if (light) {
+        new_color.red = max(min(round(new_color.red + new_color.red * percent/100), 255), 0);
+        new_color.green = max(min(round(new_color.green + new_color.green * percent/100), 255), 0);
+        new_color.blue = max(min(round(new_color.blue + new_color.blue * percent/100), 255), 0);
+    }
+    else {
+        new_color.red = max(min(round(new_color.red*percent/100),255),0);
+        new_color.green = max(min(round(new_color.green*percent/100),255),0);
+        new_color.blue = max(min(round(new_color.blue*percent/100),255),0);
+    }
+    return(new_color);
+}
+
 void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
-                    ei_surface_t pick_surface, ei_rect_t*  clipper)
+                       ei_surface_t pick_surface, ei_rect_t*  clipper)
 {
     ei_frame_t* frame = (ei_frame_t*)widget;
     ei_rect_t rect = widget->screen_location;
@@ -265,24 +283,25 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
         int radius_2 = frame->corner_radius - frame->border_width;
         radius_2 = radius_2 < 0 ? 0 : radius_2;
         ei_linked_point_t* points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
+        ei_color_t light = change_color(frame->color, EI_TRUE);
+        ei_color_t dark = change_color(frame->color, EI_FALSE);
+        ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
+                                                  frame->rounded_up, frame->rounded_down, EI_TRUE);
+        ei_linked_point_t* points_bot = sixty_nine(rect, frame->corner_radius,
+                                                   frame->rounded_up, frame->rounded_down, EI_FALSE);
         if (frame->relief == ei_relief_raised){
-            ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
-                                                      frame->rounded_up, frame->rounded_down, EI_TRUE);
-            ei_linked_point_t* points_bot = sixty_nine(rect, frame->corner_radius,
-                                                       frame->rounded_up, frame->rounded_down, EI_FALSE);
-            ei_color_t light = ei_color(0xdf, 0xf2, 0xff, 0xff);
-            ei_color_t dark = ei_color(0x00, 0x33, 0x66, 0xff);
             ei_draw_polygon(surface, points_up, light, clipper);
             ei_draw_polygon(surface, points_bot, dark, clipper);
+            ei_draw_polygon(surface, points_2, frame->color, clipper);
+        }
+        else if (frame->relief == ei_relief_sunken){
+            ei_draw_polygon(surface, points_up, dark, clipper);
+            ei_draw_polygon(surface, points_bot, light, clipper);
+            ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
         else if (frame->relief == ei_relief_none){
-            ei_color_t border_color = frame->color;
-            border_color.red /= 2;
-            border_color.green /= 2;
-            border_color.blue /= 2;
-            ei_draw_polygon(surface, points, border_color, clipper);
-            ei_linked_point_t* points = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
-            ei_draw_polygon(surface, points, frame->color, clipper);
+            ei_draw_polygon(surface, points, dark, clipper);
+            ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
     }
     else
