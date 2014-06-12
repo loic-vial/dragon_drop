@@ -29,10 +29,10 @@ SOURCES += \
     ../src/ei_eventlist.c \
     ../src/ei_utils_2.c \
     ../tests/puzzle.c \
-    ../tests/hello_world_relative.c \
     ../src/ei_toplevel_resize.c \
     ../src/ei_toplevel_banner.c \
-    ../src/ei_radiobutton.c
+    ../src/ei_radiobutton.c \
+    ../tests/test_radiobutton.c
 
 HEADERS += \
     ../include/ei_application.h \
