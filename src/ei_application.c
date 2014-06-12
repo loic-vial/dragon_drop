@@ -108,6 +108,14 @@ void draw_widget(ei_widget_t* widget)
 
 void clear_rects(ei_linked_rect_t** rects)
 {
+    if (rects == NULL) return;
+    ei_linked_rect_t* rect = *rects;
+    while (rect != NULL)
+    {
+        ei_linked_rect_t* next_rect = rect->next;
+        free(rect);
+        rect = next_rect;
+    }
     *rects = NULL; // MUST RELEASE MEMORY
 }
 
@@ -131,28 +139,30 @@ void ei_app_run()
 
         hw_event_wait_next(&event);
 
-        ei_eventlist_t* tmp = first_eventlist;
-        for (tmp = first_eventlist ; tmp != NULL ; tmp = tmp->next)
+        ei_eventlist_t* event = first_eventlist;
+        while (event != NULL)
         {
-            if (tmp->eventtype == event.type)
+            ei_eventlist_t* next_event = event->next;
+            if (event->eventtype == event.type)
             {
                 if (event.type == ei_ev_mouse_buttondown ||
                         event.type == ei_ev_mouse_buttonup ||
                         event.type == ei_ev_mouse_move)
                 {
                     ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                    if ((tmp->tag == NULL && widget_picked == tmp->widget) ||
-                            (tmp->tag != NULL && strcmp(tmp->tag, "all") == 0) ||
-                            (tmp->tag != NULL && strcmp(tmp->tag, widget_picked->wclass->name) == 0))
+                    if ((event->tag == NULL && widget_picked == event->widget) ||
+                            (event->tag != NULL && strcmp(event->tag, "all") == 0) ||
+                            (event->tag != NULL && strcmp(event->tag, widget_picked->wclass->name) == 0))
                     {
-                        tmp->callback(widget_picked, &event, tmp->user_param);
+                        event->callback(widget_picked, &event, event->user_param);
                     }
                 }
                 else
                 {
-                    tmp->callback(tmp->widget, &event, tmp->user_param);
+                    event->callback(event->widget, &event, event->user_param);
                 }
             }
+            event = next_event;
         }
     }
 }
