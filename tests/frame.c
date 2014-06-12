@@ -25,7 +25,7 @@ int ei_main(int argc, char** argv)
 	int		frame_x			= 150;
 	int		frame_y			= 200;
 	ei_color_t	frame_color		= {0x88, 0x88, 0x88, 0xff};
-    ei_relief_t	frame_relief		= ei_relief_none;
+    ei_relief_t	frame_relief		= ei_relief_raised;
     int		frame_border_width	= 8;
 
 	/* Create the application and change the color of the background. */
@@ -38,7 +38,7 @@ int ei_main(int argc, char** argv)
 
     ei_frame_t* fframe = (ei_frame_t*) frame;
 
-    fframe->rounded_up = EI_FALSE;
+    fframe->rounded_up = EI_TRUE;
     fframe->rounded_down = EI_TRUE;
     fframe->corner_radius = 15;
 
