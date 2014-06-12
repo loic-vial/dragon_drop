@@ -29,10 +29,13 @@ SOURCES += \
     ../src/ei_eventlist.c \
     ../src/ei_utils_2.c \
     ../tests/puzzle.c \
-    ../tests/hello_world_relative.c \
     ../src/ei_toplevel_resize.c \
     ../src/ei_toplevel_banner.c \
     ../src/ei_radiobutton.c \
+    ../tests/test_radiobutton.c \
+    ../src/ei_tag.c \
+    ../tests/test_tag.c
+
     ../tests/test.c
 
 HEADERS += \
@@ -54,4 +57,5 @@ HEADERS += \
     ../src/ei_utils_2.h \
     ../src/ei_toplevel_resize.h \
     ../src/ei_toplevel_banner.h \
-    ../src/ei_radiobutton.h
+    ../src/ei_radiobutton.h \
+    ../src/ei_tag.h

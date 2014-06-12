@@ -10,6 +10,14 @@
 
 static ei_point_t resize_mouse_position;
 
+void ei_resize_setdefaultsfunc(ei_widget_t* widget)
+{
+    ei_button_setdefaultsfunc(widget);
+    ei_button_t* button = (ei_button_t*)widget;
+    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
+    button->frame.tag=tag;
+}
+
 void ei_resize_register_class()
 {
     ei_widgetclass_t* resizeclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
@@ -17,7 +25,7 @@ void ei_resize_register_class()
     resizeclass->allocfunc = &ei_button_allocfunc;
     resizeclass->releasefunc = &ei_button_releasefunc;
     resizeclass->drawfunc = &ei_frame_drawfunc;
-    resizeclass->setdefaultsfunc = &ei_button_setdefaultsfunc;
+    resizeclass->setdefaultsfunc = &ei_resize_setdefaultsfunc;
     resizeclass->geomnotifyfunc = NULL;
     resizeclass->next = NULL;
     ei_widgetclass_register(resizeclass);

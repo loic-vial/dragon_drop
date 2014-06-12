@@ -7,6 +7,9 @@
 
 void ei_resize_register_class();
 
+void ei_resize_setdefaultsfunc(ei_widget_t* widget);
+
+
 ei_bool_t ei_toplevel_resize_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
 
 ei_bool_t ei_toplevel_resize_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);

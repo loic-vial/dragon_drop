@@ -126,7 +126,7 @@ void ei_app_run()
         draw_widget(&root->widget);
         hw_surface_unlock(root_surface);
         hw_surface_unlock(offscreen_surface);
-        if (invalid_rects != NULL)
+        //if (invalid_rects != NULL)
         {
             hw_surface_update_rects(root_surface, NULL);
             hw_surface_update_rects(offscreen_surface, NULL);
