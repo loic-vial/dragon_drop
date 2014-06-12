@@ -7,7 +7,10 @@
 #include "ei_event.h"
 #include "ei_geometrymanager.h"
 
-int ___sreei_main(int argc, char* argv[])
+ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);
+
+
+int ei_main(int argc, char* argv[])
 {
     ei_size_t	root_window_size		= { 800, 800 };
 	ei_color_t	root_bgcol			= { 0x52, 0x7f, 0xb4, 0xff };
@@ -37,6 +40,8 @@ int ___sreei_main(int argc, char* argv[])
     ei_frame_configure(frame, &frame_size, &frame_color, NULL, NULL, NULL,
                        NULL, NULL, NULL, NULL, NULL, NULL);
     ei_place(frame, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+    ei_bind(ei_ev_keydown, NULL, "all", process_key, NULL);
 
 	ei_app_run();
 	

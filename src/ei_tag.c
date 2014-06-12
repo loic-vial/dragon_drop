@@ -28,7 +28,6 @@ void ei_add_tag(ei_tag_t* tag)
 }
 
 void ei_destroy_tag(ei_tag_t *tag)
-
 {
     if(first_linked_tag !=NULL)
     {
@@ -37,7 +36,8 @@ void ei_destroy_tag(ei_tag_t *tag)
        {
            last_tag=last_tag->next;
        }
-       ei_linked_tag_t* to_destroy = last_tag->next; //TODO désalouer to_destroy
+       ei_linked_tag_t* to_destroy = last_tag->next;
+       free(to_destroy);
        last_tag->next=last_tag->next->next;
     }
 }

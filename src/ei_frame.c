@@ -26,7 +26,6 @@ void ei_frame_releasefunc(ei_widget_t* widget)
     }
 }
 
-
 ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
 {
     ei_linked_point_t* liste_points = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
@@ -108,8 +107,8 @@ ei_linked_point_t* rounded_frame(ei_rect_t rectangle, float rayon, ei_bool_t top
 }
 
 
-ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
-                              ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
+ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
+                                ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
     ei_point_t vertex = rectangle.top_left;
     ei_point_t centre;
     ei_linked_point_t* point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
@@ -254,22 +253,6 @@ ei_linked_point_t* sixty_nine(ei_rect_t rectangle, float radius,
     return(point_list);
 }
 
-/*void draw_round_button (ei_point_t centre, float radius, ei_color_t color){
-    ei_point_t current_point;
-    current_point.x = centre.x;
-    current_point.y = centre.y - radius;
-    while (current_point.x <= current_point.y){
-        ei_linked_point_t couple;
-        couple.point = centre;
-        couple.next = malloc(sizeof(ei_linked_point_t));
-        couple.next->point = current_point;
-        couple.next->next = NULL;
-        ei_draw_polyline(ei_app_root_surface, &couple, color, NULL);
-        //
-
-    }
-}*/
-
 ei_color_t light_color(ei_color_t color){
     int percent = 70;
     color.red = max(min(round(color.red + color.red * percent/100), 255), 0);
@@ -286,7 +269,16 @@ ei_color_t dark_color(ei_color_t color){
     return color;
 }
 
-
+void free_points(ei_linked_point_t* points)
+{
+    ei_linked_point_t* point = points;
+    while (point != NULL)
+    {
+        ei_linked_point_t* next_point = point->next;
+        free(point);
+        point = next_point;
+    }
+}
 
 void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                        ei_surface_t pick_surface, ei_rect_t*  clipper)
@@ -306,31 +298,36 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
         ei_linked_point_t* points_2 = rounded_frame(rect_2, radius_2, frame->rounded_up, frame->rounded_down);
         ei_color_t light = light_color(frame->color);
         ei_color_t dark = dark_color(frame->color);
-        ei_linked_point_t* points_up = sixty_nine(rect, frame->corner_radius,
-                                                  frame->rounded_up, frame->rounded_down, EI_TRUE);
-        ei_linked_point_t* points_bot = sixty_nine(rect, frame->corner_radius,
-                                                   frame->rounded_up, frame->rounded_down, EI_FALSE);
-        if (frame->relief == ei_relief_raised){
+        ei_linked_point_t* points_up = relief_frame(rect, frame->corner_radius,
+                                                    frame->rounded_up, frame->rounded_down, EI_TRUE);
+        ei_linked_point_t* points_down = relief_frame(rect, frame->corner_radius,
+                                                     frame->rounded_up, frame->rounded_down, EI_FALSE);
+        if (frame->relief == ei_relief_raised)
+        {
             ei_draw_polygon(surface, points_up, light, clipper);
-            ei_draw_polygon(surface, points_bot, dark, clipper);
+            ei_draw_polygon(surface, points_down, dark, clipper);
             ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
-        else if (frame->relief == ei_relief_sunken){
+        else if (frame->relief == ei_relief_sunken)
+        {
             ei_draw_polygon(surface, points_up, dark, clipper);
-            ei_draw_polygon(surface, points_bot, light, clipper);
+            ei_draw_polygon(surface, points_down, light, clipper);
             ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
-        else if (frame->relief == ei_relief_none){
+        else if (frame->relief == ei_relief_none)
+        {
             ei_draw_polygon(surface, points, dark, clipper);
             ei_draw_polygon(surface, points_2, frame->color, clipper);
         }
+
+        free_points(points_up);
+        free_points(points_down);
+        free_points(points_2);
     }
     else
     {
         ei_draw_polygon(surface, points, frame->color, clipper);
     }
-
-
 
     if (frame->text != NULL)
     {
@@ -353,36 +350,31 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                                                              size,
                                                              frame->img_anchor);
 
-        ei_rect_t rect =rectangle_intersection(*clipper,widget->screen_location);
+        ei_rect_t rect = rectangle_intersection(*clipper, widget->screen_location);
         ei_rect_t bon_top;
-        bon_top.top_left=top_left_corner;
-        bon_top.size=size;
-        rect =rectangle_intersection(bon_top,rect);
-
-
+        bon_top.top_left = top_left_corner;
+        bon_top.size = size;
+        rect = rectangle_intersection(bon_top,rect);
         ei_rect_t rect_2;
-        rect_2.size=rect.size;
-        rect_2.top_left=frame->img_rect->top_left;
-        if(bon_top.top_left.x>clipper->top_left.x)
+        rect_2.size = rect.size;
+        rect_2.top_left = frame->img_rect->top_left;
+        if(bon_top.top_left.x > clipper->top_left.x)
         {
-            rect_2.top_left.x=frame->img_rect->top_left.x;
+            rect_2.top_left.x = frame->img_rect->top_left.x;
         }
-        else rect_2.top_left.x= frame->img_rect->top_left.x -bon_top.top_left.x ;
-
+        else
+        {
+            rect_2.top_left.x = frame->img_rect->top_left.x -bon_top.top_left.x;
+        }
 
         hw_surface_lock(frame->img);
-        ei_copy_surface(surface,&rect,frame->img,&rect_2,EI_TRUE);
+        ei_copy_surface(surface, &rect, frame->img, &rect_2, EI_TRUE);
         hw_surface_unlock(frame->img);
     }
+
     ei_draw_polygon(pick_surface, points, *widget->pick_color, clipper);
 
-    ei_linked_point_t* point = points;
-    while (point != NULL)
-    {
-        ei_linked_point_t* next_point = point->next;
-        free(point);
-        point = next_point;
-    }
+    free_points(points);
 }
 
 void ei_frame_setdefaultsfunc(ei_widget_t* widget)
