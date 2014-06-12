@@ -303,34 +303,41 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         toplevel->title = *title;
         toplevel->border->text=*title;
     }
-    /*
+
     if (closable != NULL)
     {
         toplevel->closable = *closable;
-        if(toplevel->closable)
+
+        if (toplevel->closable)
         {
             ei_anchor_t resize_button_anchor = ei_anc_west;
-            ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)toplevel->close_button->frame.widget.geom_params;
-            int x=placer->x;
-            ei_place(toplevel->border->widget.children_head, &resize_button_anchor, &x, NULL, NULL,
-                     NULL, NULL, NULL, NULL, NULL);
+            int resize_button_x = 4;
+            ei_place(&toplevel->close_button->frame.widget, &resize_button_anchor,
+                     &resize_button_x, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
-        else ei_releasefunc_placer(toplevel->border->widget.children_head);
+        else
+        {
+            ei_releasefunc_placer(&toplevel->close_button->frame.widget);
+        }
     }
+
     if (resizable != NULL)
     {
         toplevel->resizable = *resizable;
 
-        if(toplevel->resizable !=ei_axis_none)
+        if(toplevel->resizable != ei_axis_none)
         {
-            ei_anchor_t resize_anchor = ei_anc_southeast;
-            int x=8;
-            ei_place(&toplevel->resize_button->frame.widget, &resize_anchor, &x, NULL, NULL,
-                     NULL, NULL, NULL, NULL, NULL);
+            ei_anchor_t resize_button_anchor = ei_anc_southeast;
+            int resize_button_x = 8;
+            ei_place(&toplevel->resize_button->frame.widget, &resize_button_anchor,
+                     &resize_button_x, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
-        else ei_releasefunc_placer(&toplevel->resize_button->frame.widget);
+        else
+        {
+            ei_releasefunc_placer(&toplevel->resize_button->frame.widget);
+        }
     }
-*/
+
     if (min_size != NULL)
     {
         if (toplevel->min_size != NULL)
