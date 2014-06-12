@@ -32,7 +32,8 @@ SOURCES += \
     ../src/ei_toplevel_resize.c \
     ../src/ei_toplevel_banner.c \
     ../src/ei_radiobutton.c \
-    ../tests/test_radiobutton.c
+    ../tests/test_radiobutton.c \
+    ../src/ei_tag.c
 
 HEADERS += \
     ../include/ei_application.h \
@@ -53,4 +54,5 @@ HEADERS += \
     ../src/ei_utils_2.h \
     ../src/ei_toplevel_resize.h \
     ../src/ei_toplevel_banner.h \
-    ../src/ei_radiobutton.h
+    ../src/ei_radiobutton.h \
+    ../src/ei_tag.h

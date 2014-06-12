@@ -241,6 +241,8 @@ void ei_frame_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei
 
     if (need_recompute_requested_size)
         recompute_frame_requested_size(frame);
+
+    ei_app_invalidate_rect(&widget->screen_location);
 }
 
 void ei_button_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,

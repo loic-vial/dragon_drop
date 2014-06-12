@@ -13,18 +13,19 @@
 
 ei_bool_t click_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-    ei_button_t* button = (ei_button_t*)widget;
-    ei_frame_t* liste= (ei_frame_t*)widget->parent->parent->children_head;
-    while(liste !=NULL)
+    ei_button_t* field_button = (ei_button_t*)widget;
+    ei_frame_t* field= (ei_frame_t*)widget->parent->parent->children_head;
+    while(field !=NULL)
     {
-        ei_frame_t* parent= (ei_frame_t*)button->frame.widget.parent;
-        ei_button_t* button_tmp=(ei_button_t*) liste->widget.children_head;
+        //ei_frame_t* parent= (ei_frame_t*)field_button->frame.widget.parent;
+        ei_button_t* button_tmp=(ei_button_t*) field->widget.children_head;
         button_tmp->frame.color=ei_color(255,255,255,150);
-        liste=(ei_frame_t*)liste->widget.next_sibling;
+        field=(ei_frame_t*)field->widget.next_sibling;
     }
-    ei_color_t color={0x00,0x00,0x00,0xff};
-    button->frame.color=color;
+    ei_color_t color=ei_color(0,0,0,255);
+    field_button->frame.color=color;
     return EI_FALSE;
+
 }
 
 
