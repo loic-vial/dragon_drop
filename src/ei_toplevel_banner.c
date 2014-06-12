@@ -13,11 +13,11 @@ void ei_banner_register_class()
 {
     ei_widgetclass_t* bannerclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
     strcpy(bannerclass->name, "banner");
-    bannerclass->allocfunc = &allocfunc_frame;
-    bannerclass->releasefunc = &releasefunc_frame;
-    bannerclass->drawfunc = &drawfunc_frame;
-    bannerclass->setdefaultsfunc = &setdefaultsfunc_frame;
-    bannerclass->geomnotifyfunc = &geomnotifyfunc_frame;
+    bannerclass->allocfunc = &ei_frame_allocfunc;
+    bannerclass->releasefunc = &ei_frame_releasefunc;
+    bannerclass->drawfunc = &ei_frame_drawfunc;
+    bannerclass->setdefaultsfunc = &ei_frame_setdefaultsfunc;
+    bannerclass->geomnotifyfunc = NULL;
     bannerclass->next = NULL;
     ei_widgetclass_register(bannerclass);
 

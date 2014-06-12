@@ -78,7 +78,7 @@ void add_children_radiobutton(char * text, ei_radiobutton_t* radio)
 
 void setdefaultsfunc_radiobutton(ei_widget_t* widget)
 {
-    setdefaultsfunc_frame(widget);
+    ei_frame_setdefaultsfunc(widget);
     ei_radiobutton_t* radio=(ei_radiobutton_t*)widget;
     ei_color_t color=ei_default_background_color;
     radio->number=0;
@@ -103,11 +103,11 @@ void ei_radiobutton_register_class()
 {
     ei_widgetclass_t* radiobuttonclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
     strcpy(radiobuttonclass->name, "radiobutton");
-    radiobuttonclass->allocfunc = &allocfunc_frame;
-    radiobuttonclass->releasefunc = &releasefunc_frame;
-    radiobuttonclass->drawfunc = &drawfunc_frame;
+    radiobuttonclass->allocfunc = &ei_frame_allocfunc;
+    radiobuttonclass->releasefunc = &ei_frame_releasefunc;
+    radiobuttonclass->drawfunc = &ei_frame_drawfunc;
     radiobuttonclass->setdefaultsfunc = &setdefaultsfunc_radiobutton;
-    radiobuttonclass->geomnotifyfunc = &geomnotifyfunc_frame;
+    radiobuttonclass->geomnotifyfunc = NULL;
     radiobuttonclass->next = NULL;
     ei_widgetclass_register(radiobuttonclass);
 }

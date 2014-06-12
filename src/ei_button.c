@@ -4,33 +4,22 @@
 #include "ei_event.h"
 #include <stdlib.h>
 
-void* allocfunc_button()
+void* ei_button_allocfunc()
 {
     return calloc(1, sizeof(ei_button_t));
 }
 
-void releasefunc_button(ei_widget_t* widget)
+void ei_button_releasefunc(ei_widget_t* widget)
 {
     ei_button_t* button = (ei_button_t*) widget;
     ei_unbind(ei_ev_mouse_buttonup, widget, NULL, button->callback, button->user_param);
 }
 
-void drawfunc_button(ei_widget_t* widget, ei_surface_t surface,
-                     ei_surface_t pick_surface, ei_rect_t* clipper)
+void ei_button_setdefaultsfunc(ei_widget_t* widget)
 {
-    drawfunc_frame(widget, surface, pick_surface, clipper);
-}
-
-void setdefaultsfunc_button(ei_widget_t* widget)
-{
-    setdefaultsfunc_frame(widget);
+    ei_frame_setdefaultsfunc(widget);
     ei_button_t* button = (ei_button_t*) widget;
     button->callback = NULL;
     button->user_param = NULL;
-}
-
-void geomnotifyfunc_button(ei_widget_t* widget, ei_rect_t rect)
-{
-
 }
 

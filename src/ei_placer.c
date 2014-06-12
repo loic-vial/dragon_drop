@@ -7,6 +7,7 @@
 void ei_runfunc_placer(ei_widget_t* widget)
 {
     ei_placer_geometry_param_t* placer_param = (ei_placer_geometry_param_t*) widget->geom_params;
+    ei_rect_t screen_location_before = widget->screen_location;
 
     if (placer_param->rel_width != -1 && widget->parent != NULL)
         widget->screen_location.size.width = widget->parent->screen_location.size.width * placer_param->rel_width;
@@ -37,7 +38,15 @@ void ei_runfunc_placer(ei_widget_t* widget)
     }
     widget->screen_location.top_left = top_left_pos;
 
-    ei_app_invalidate_rect(&widget->screen_location);
+    if (widget->wclass->geomnotifyfunc != NULL)
+    {
+        widget->wclass->geomnotifyfunc(widget, widget->screen_location);
+    }
+    if (!is_same_rect(screen_location_before, widget->screen_location))
+    {
+        ei_app_invalidate_rect(&screen_location_before);
+        ei_app_invalidate_rect(&widget->screen_location);
+    }
 }
 
 void ei_releasefunc_placer(ei_widget_t* widget)

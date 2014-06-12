@@ -28,11 +28,6 @@ void releasefunc_toplevel(ei_widget_t* widget)
     }
 }
 
-void drawfunc_toplevel(ei_widget_t* widget, ei_surface_t surface, ei_surface_t pick_surface, ei_rect_t* clipper)
-{
-    drawfunc_frame(widget, surface, pick_surface, clipper);
-}
-
 ei_bool_t close_button_click(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_widget_destroy(widget->parent->parent);
@@ -105,7 +100,7 @@ void toplevel_resize_button_init(ei_toplevel_t* toplevel)
 
 void setdefaultsfunc_toplevel(ei_widget_t* widget)
 {
-    setdefaultsfunc_frame(widget);
+    ei_frame_setdefaultsfunc(widget);
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
     toplevel_frame_init(toplevel);
     toplevel_banner_init(toplevel);

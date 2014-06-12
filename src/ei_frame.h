@@ -22,18 +22,13 @@ typedef struct ei_frame_t
 }
 ei_frame_t;
 
+void* ei_frame_allocfunc();
 
-void* allocfunc_frame();
+void ei_frame_releasefunc(ei_widget_t* widget);
 
-void releasefunc_frame (struct ei_widget_t* widget);
+void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
+                      ei_surface_t pick_surface, ei_rect_t* clipper);
 
-void drawfunc_frame  (struct ei_widget_t* widget,
-                         ei_surface_t  surface,
-                         ei_surface_t  pick_surface,
-                         ei_rect_t*  clipper);
-void setdefaultsfunc_frame (struct ei_widget_t* widget);
-
-void geomnotifyfunc_frame (struct ei_widget_t* widget,
-                             ei_rect_t  rect);
+void ei_frame_setdefaultsfunc(ei_widget_t* widget);
 
 #endif

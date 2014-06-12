@@ -5,6 +5,7 @@
 #include "ei_event.h"
 #include "ei_eventlist.h"
 #include "ei_toplevel.h"
+#include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_radiobutton.h"
 #include <string.h>
@@ -17,14 +18,14 @@ static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
 static bool want_quit;
-static ei_linked_rect_t* updated_rects;
+static ei_linked_rect_t* invalid_rects;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 {
     hw_init();
 
     want_quit = false;
-    updated_rects = NULL;
+    invalid_rects = NULL;
     root_surface = hw_create_window(main_window_size, fullscreen);
     offscreen_surface = hw_surface_create(root_surface, main_window_size, true);
 
@@ -42,43 +43,21 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 }
 
 
-ei_rect_t ei_clipper(ei_widget_t* widget)
+ei_rect_t compute_clipper(ei_widget_t* widget)
 {
-    ei_rect_t clipper;
-    clipper.size=widget->parent->content_rect->size;
-    clipper.top_left=widget->parent->screen_location.top_left;
-
-    if( strcmp(widget->wclass->name,"banner") ==0 )
+    ei_rect_t clipper = ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
+    while (widget->parent != NULL)
     {
-        clipper.top_left.y-=widget->screen_location.size.height;
-        clipper.size.height=widget->screen_location.size.height;
-    }
-
-    if (widget->parent->parent ==NULL)
-    {
-        return clipper;
-    }
-    else
-    {
-        ei_widget_t* current = widget->parent->parent;
-        ei_widget_t* prec = widget->parent;
-        ei_rect_t rect;
-        while (current !=NULL)
+        ei_rect_t rect = *widget->parent->content_rect;
+        if (strcmp(widget->wclass->name,"banner") == 0)
         {
-            rect.size=current->requested_size;
-            rect.top_left=current->screen_location.top_left;
-
-            if(strcmp(prec->wclass->name,"banner")==0 )
-            {
-                rect.top_left.y-=prec->screen_location.size.height;
-                rect.size.height=prec->screen_location.size.height;
-            }
-            clipper= calcul_clipper(rect, clipper);
-            current=current->parent;
-            prec=prec->parent;
+            rect.top_left.y -= widget->content_rect->size.height;
+            rect.size.height = widget->content_rect->size.height;
         }
-        return clipper;
+        clipper = rectangle_intersection(rect, clipper);
+        widget = widget->parent;
     }
+    return clipper;
 }
 
 void draw_widget(ei_widget_t* widget)
@@ -86,29 +65,54 @@ void draw_widget(ei_widget_t* widget)
     if (widget == NULL) return;
     if (widget->geom_params == NULL) return;
     widget->geom_params->manager->runfunc(widget);
-
-    if(widget->parent== NULL)
-    {
-        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,NULL);
-    }
-    else
-    {
-        ei_rect_t clipper;
-        clipper = ei_clipper(widget);
-        widget->wclass->drawfunc(widget, root_surface, offscreen_surface,&clipper);
-    }
-
-    ei_widget_t* current = widget->children_head;
-    while (current != NULL)
+    ei_rect_t clipper = compute_clipper(widget);
+    widget->wclass->drawfunc(widget, root_surface, offscreen_surface, &clipper);
+    for (ei_widget_t* current = widget->children_head ; current != NULL ; current = current->next_sibling)
     {
         draw_widget(current);
-        current = current->next_sibling;
     }
 }
 
-void clear_rects(ei_linked_rect_t** rects)
+void clear_rect_list(ei_linked_rect_t** rects)
 {
-    *rects = NULL; // MUST RELEASE MEMORY
+    if (rects == NULL) return;
+    ei_linked_rect_t* rect = *rects;
+    while (rect != NULL)
+    {
+        ei_linked_rect_t* next_rect = rect->next;
+        free(rect);
+        rect = next_rect;
+    }
+    *rects = NULL;
+}
+
+void manage_event(ei_event_t event)
+{
+    ei_eventlist_t* event_tmp = first_eventlist;
+    while (event_tmp != NULL)
+    {
+        ei_eventlist_t* next_event = event_tmp->next;
+        if (event_tmp->eventtype == event.type)
+        {
+            if (event.type == ei_ev_mouse_buttondown ||
+                event.type == ei_ev_mouse_buttonup ||
+                event.type == ei_ev_mouse_move)
+            {
+                ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
+                if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget) ||
+                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, "all") == 0) ||
+                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, widget_picked->wclass->name) == 0))
+                {
+                    event_tmp->callback(widget_picked, &event, event_tmp->user_param);
+                }
+            }
+            else
+            {
+                event_tmp->callback(event_tmp->widget, &event, event_tmp->user_param);
+            }
+        }
+        event_tmp = next_event;
+    }
 }
 
 void ei_app_run()
@@ -117,57 +121,33 @@ void ei_app_run()
     event.type = ei_ev_none;
     while (!want_quit)
     {
-        //if (updated_rects != NULL)
+        hw_surface_lock(root_surface);
+        hw_surface_lock(offscreen_surface);
+        draw_widget(&root->widget);
+        hw_surface_unlock(root_surface);
+        hw_surface_unlock(offscreen_surface);
+        if (invalid_rects != NULL)
         {
-            hw_surface_lock(root_surface);
-            hw_surface_lock(offscreen_surface);
-            draw_widget(&root->widget);
-            hw_surface_unlock(root_surface);
-            hw_surface_unlock(offscreen_surface);
             hw_surface_update_rects(root_surface, NULL);
             hw_surface_update_rects(offscreen_surface, NULL);
-            clear_rects(&updated_rects);
         }
-
+        clear_rect_list(&invalid_rects);
         hw_event_wait_next(&event);
-
-        ei_eventlist_t* tmp = first_eventlist;
-        for (tmp = first_eventlist ; tmp != NULL ; tmp = tmp->next)
-        {
-            if (tmp->eventtype == event.type)
-            {
-                if (event.type == ei_ev_mouse_buttondown ||
-                        event.type == ei_ev_mouse_buttonup ||
-                        event.type == ei_ev_mouse_move)
-                {
-                    ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                    if ((tmp->tag == NULL && widget_picked == tmp->widget) ||
-                            (tmp->tag != NULL && strcmp(tmp->tag, "all") == 0) ||
-                            (tmp->tag != NULL && strcmp(tmp->tag, widget_picked->wclass->name) == 0))
-                    {
-                        tmp->callback(widget_picked, &event, tmp->user_param);
-                    }
-                }
-                else
-                {
-                    tmp->callback(tmp->widget, &event, tmp->user_param);
-                }
-            }
-        }
+        manage_event(event);
     }
 }
 
 void ei_app_invalidate_rect(ei_rect_t* rect)
 {
-    if (updated_rects == NULL)
+    if (invalid_rects == NULL)
     {
-        updated_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
-        updated_rects->rect = *rect;
-        updated_rects->next = NULL;
+        invalid_rects = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
+        invalid_rects->rect = *rect;
+        invalid_rects->next = NULL;
     }
     else
     {
-        ei_linked_rect_t* tmp = updated_rects;
+        ei_linked_rect_t* tmp = invalid_rects;
         while (tmp->next != NULL) tmp = tmp->next;
         tmp->next = (ei_linked_rect_t*) malloc(sizeof(ei_linked_rect_t));
         tmp->next->rect = *rect;
