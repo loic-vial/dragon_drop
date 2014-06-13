@@ -35,7 +35,8 @@ SOURCES += \
     ../tests/test_radiobutton.c \
     ../src/ei_tag.c \
     ../tests/test_tag.c \
-    ../tests/test_toplevel.c
+    ../tests/test_toplevel.c \
+    ../src/ei_drag_and_drop.c
 
     ../tests/test.c
 
@@ -59,4 +60,5 @@ HEADERS += \
     ../src/ei_toplevel_resize.h \
     ../src/ei_toplevel_banner.h \
     ../src/ei_radiobutton.h \
-    ../src/ei_tag.h
+    ../src/ei_tag.h \
+    ../src/ei_drag_and_drop.h

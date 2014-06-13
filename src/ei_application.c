@@ -6,6 +6,7 @@
 #include "ei_utils_2.h"
 #include "ei_eventlist.h"
 #include "ei_tag.h"
+#include "ei_drag_and_drop.h"
 #include <stdlib.h>
 
 extern ei_geometrymanager_t* first_manager;
@@ -36,6 +37,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_frame_configure(&root->widget, main_window_size, &color, NULL, NULL, NULL, NULL,
                        NULL, NULL, NULL, NULL, NULL);
     ei_place(&root->widget, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_movable();
 }
 
 ei_rect_t compute_clipper(ei_widget_t* widget)
