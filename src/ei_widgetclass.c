@@ -1,11 +1,7 @@
-#include "ei_widgetclass.h"
-#include "ei_frame.h"
-#include "ei_button.h"
 #include "ei_toplevel.h"
 #include "ei_toplevel_banner.h"
 #include "ei_toplevel_resize.h"
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 ei_widgetclass_t* first_class = NULL;
