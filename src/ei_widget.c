@@ -1,18 +1,9 @@
-#include "ei_widget.h"
-#include "ei_button.h"
-#include "ei_frame.h"
 #include "ei_toplevel.h"
-#include "ei_types.h"
-#include "ei_event.h"
-#include "hw_interface.h"
 #include "ei_utils.h"
 #include "ei_application.h"
-#include "ei_geometrymanager.h"
 #include "ei_placer.h"
 #include "ei_utils_2.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 static int current_pick_id = 0;
