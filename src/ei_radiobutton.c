@@ -1,15 +1,11 @@
 ﻿#include "ei_radiobutton.h"
-#include "ei_button.h"
 #include <stdlib.h>
 #include <string.h>
-#include "ei_types.h"
-#include "ei_frame.h"
 #include "ei_placer.h"
 #include "ei_types.h"
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_event.h"
-#include "hw_interface.h"
 
 
 ei_bool_t click_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
