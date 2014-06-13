@@ -10,7 +10,7 @@
 #include "../src/ei_tag.h"
 
 
-ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param)
+ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     if (event->param.key.key_sym == SDLK_ESCAPE) {
         ei_app_quit_request();
@@ -92,11 +92,11 @@ int _g__ei_main(int argc, char** argv)
 ei_destroy_tag(tag);
 display_list_tag();
 
-    ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);
+    ei_bind(ei_ev_keydown, 		NULL, "all", quit, NULL);
 
     ei_app_run();
 
-    ei_unbind(ei_ev_keydown,	NULL, "all", process_key, NULL);
+    ei_unbind(ei_ev_keydown,	NULL, "all", quit, NULL);
 
     ei_app_free();
     return (EXIT_SUCCESS);

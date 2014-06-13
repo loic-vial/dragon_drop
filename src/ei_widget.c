@@ -325,9 +325,8 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         if(toplevel->resizable != ei_axis_none)
         {
             ei_anchor_t resize_button_anchor = ei_anc_southeast;
-            int resize_button_x = 8;
             ei_place(&toplevel->resize_button->frame.widget, &resize_button_anchor,
-                     &resize_button_x, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+                     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         }
         else
         {

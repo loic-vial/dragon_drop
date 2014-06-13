@@ -94,7 +94,7 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio)
              NULL, NULL, NULL, NULL, NULL);
 }
 
-void setdefaultsfunc_radiobutton(ei_widget_t* widget)
+void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_frame_setdefaultsfunc(widget);
     ei_radiobutton_t* radio=(ei_radiobutton_t*)widget;
@@ -170,7 +170,7 @@ void ei_radiobutton_register_class()
     radiobuttonclass->allocfunc = &ei_frame_allocfunc;
     radiobuttonclass->releasefunc = &ei_frame_releasefunc;
     radiobuttonclass->drawfunc = &ei_frame_drawfunc;
-    radiobuttonclass->setdefaultsfunc = &setdefaultsfunc_radiobutton;
+    radiobuttonclass->setdefaultsfunc = &ei_radiobutton_setdefaultsfunc;
     radiobuttonclass->geomnotifyfunc = NULL;
     radiobuttonclass->next = NULL;
     ei_widgetclass_register(radiobuttonclass);

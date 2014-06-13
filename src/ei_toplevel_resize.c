@@ -14,7 +14,7 @@ void ei_resize_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_button_setdefaultsfunc(widget);
     ei_button_t* button = (ei_button_t*)widget;
-   ei_initial_tag_t( widget);
+    ei_initial_tag_t( widget);
 
 }
 

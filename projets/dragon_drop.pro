@@ -35,7 +35,7 @@ SOURCES += \
     ../tests/test_radiobutton.c \
     ../src/ei_tag.c \
     ../tests/test_tag.c \
-    ../tests/test.c
+    ../tests/test_toplevel.c
 
     ../tests/test.c
 
