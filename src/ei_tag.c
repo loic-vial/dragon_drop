@@ -42,10 +42,15 @@ void ei_remove_tag_from_list(ei_linked_tag_t** tag_list, ei_tag_t tag)
     else
     {
         ei_linked_tag_t* current_tag = *tag_list;
-        while (strcmp(current_tag->next->tag, tag) !=0)
+        while (current_tag->next != NULL)
         {
+            if (strcmp(current_tag->next->tag, tag) == 0)
+            {
+                break;
+            }
             current_tag = current_tag->next;
         }
+        if (current_tag->next == NULL) return;
         ei_linked_tag_t* next_tag = current_tag->next->next;
         free(current_tag->next);
         current_tag->next = next_tag;
