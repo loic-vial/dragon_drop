@@ -17,14 +17,20 @@ ei_bool_t ei_quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return EI_FALSE;
 }
 
-int lei_main(int argc, char* argv[])
+void create_toplevel_1_frame(ei_widget_t* toplevel)
 {
-    ei_size_t root_size = ei_size(800, 600);
-    ei_color_t root_color = ei_color(60, 10, 80, 255);
-    ei_app_create(&root_size, EI_FALSE);
-    ei_frame_configure(ei_app_root_widget(), NULL, &root_color, NULL, NULL, NULL,
+    ei_widget_t* frame = ei_widget_create("frame", toplevel);
+    ei_size_t frame_size = ei_size(50, 30);
+    ei_color_t frame_color = ei_color(210, 123, 200, 210);
+    ei_anchor_t frame_anchor = ei_anc_center;
+    char* frame_text = "Salut ! Hej ! Hola !";
+    ei_frame_configure(frame, &frame_size, &frame_color, NULL, NULL, &frame_text,
                        NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_place(frame, &frame_anchor, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+}
 
+void create_toplevel_1()
+{
     ei_widget_t* toplevel = ei_widget_create("toplevel", ei_app_root_widget());
     ei_size_t toplevel_size = ei_size(200, 230);
     ei_color_t toplevel_color = ei_color(23, 187, 200, 210);
@@ -34,24 +40,32 @@ int lei_main(int argc, char* argv[])
     ei_bool_t toplevel_closable = EI_TRUE;
     ei_axis_set_t toplevel_resizable = ei_axis_both;
     ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_color, &toplevel_border, NULL, &toplevel_closable,
-                       &toplevel_resizable, NULL);
+                          &toplevel_resizable, NULL);
     ei_place(toplevel, NULL, &toplevel_x, &toplevel_y, NULL, NULL, NULL, NULL, NULL, NULL);
 
+    create_toplevel_1_frame(toplevel);
+}
 
-    ei_widget_t* frame = ei_widget_create("frame", toplevel);
-    ei_size_t frame_size = ei_size(50, 30);
-    ei_color_t frame_color = ei_color(210, 123, 200, 210);
-    ei_anchor_t frame_anchor = ei_anc_center;
-    char* frame_text = "Salut le monde !";
-    ei_frame_configure(frame, &frame_size, &frame_color, NULL, NULL, &frame_text,
+void create_root()
+{
+    ei_size_t root_size = ei_size(800, 600);
+    ei_color_t root_color = ei_color(60, 10, 80, 255);
+    ei_app_create(&root_size, EI_FALSE);
+    ei_frame_configure(ei_app_root_widget(), NULL, &root_color, NULL, NULL, NULL,
                        NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_place(frame, &frame_anchor, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+}
+
+int lmpei_main(int argc, char* argv[])
+{
+    create_root();
+
+    create_toplevel_1();
 
     ei_bind(ei_ev_keydown, NULL, "all", ei_quit, NULL);
 
-	ei_app_run();
-	
-	ei_app_free();
+    ei_app_run();
 
-	return (EXIT_SUCCESS);
+    ei_app_free();
+
+    return (EXIT_SUCCESS);
 }

@@ -53,6 +53,7 @@ ei_rect_t compute_clipper(ei_widget_t* widget)
     {
         ei_rect_t rect = *widget->parent->content_rect;
         if (strcmp(widget->wclass->name,"banner") == 0)
+
         {
             rect.top_left.y -= widget->content_rect->size.height;
             rect.size.height = widget->content_rect->size.height;
