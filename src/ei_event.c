@@ -16,14 +16,14 @@ void ei_bind(ei_eventtype_t  eventtype, ei_widget_t*  widget,
     event->next = NULL;
     event->previous = NULL;
     event->user_param = user_param;
-    if (first_eventlist == NULL)
+    if (first_event == NULL)
     {
-        first_eventlist = event;
+        first_event = event;
     }
     else
     {
         ei_eventlist_t* tmp;
-        for (tmp = first_eventlist; tmp->next != NULL ; tmp = tmp->next);
+        for (tmp = first_event; tmp->next != NULL ; tmp = tmp->next);
         event->previous = tmp;
         tmp->next = event;
     }
@@ -32,7 +32,7 @@ void ei_bind(ei_eventtype_t  eventtype, ei_widget_t*  widget,
 void ei_unbind (ei_eventtype_t eventtype, ei_widget_t* widget, ei_tag_t tag,
                 ei_callback_t callback, void* user_param)
 {
-    ei_eventlist_t* event = first_eventlist;
+    ei_eventlist_t* event = first_event;
     while (event != NULL)
     {
         ei_eventlist_t* next_event = event->next;

@@ -68,10 +68,10 @@ void ei_toplevel_register_class()
 {
     ei_widgetclass_t* toplevelclass = (ei_widgetclass_t*) malloc(sizeof(ei_widgetclass_t));
     strcpy(toplevelclass->name, "toplevel");
-    toplevelclass->allocfunc = &allocfunc_toplevel;
-    toplevelclass->releasefunc = &releasefunc_toplevel;
+    toplevelclass->allocfunc = &ei_toplevel_allocfunc;
+    toplevelclass->releasefunc = &ei_toplevel_releasefunc;
     toplevelclass->drawfunc = &ei_frame_drawfunc;
-    toplevelclass->setdefaultsfunc = &setdefaultsfunc_toplevel;
+    toplevelclass->setdefaultsfunc = &ei_toplevel_setdefaultsfunc;
     toplevelclass->geomnotifyfunc = NULL;
     toplevelclass->next = NULL;
     ei_widgetclass_register(toplevelclass);

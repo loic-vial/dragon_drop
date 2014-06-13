@@ -13,6 +13,6 @@ void add_tag(ei_tag_t tag);
 
 void ei_destroy_tag(ei_tag_t tag);
 
-extern ei_linked_tag_t* first_linked_tag;
+extern ei_linked_tag_t* first_tag;
 
 #endif

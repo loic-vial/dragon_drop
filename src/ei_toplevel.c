@@ -13,12 +13,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-void* allocfunc_toplevel()
+void* ei_toplevel_allocfunc()
 {
     return calloc(1, sizeof(ei_toplevel_t));
 }
 
-void releasefunc_toplevel(ei_widget_t* widget)
+void ei_toplevel_releasefunc(ei_widget_t* widget)
 {
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
     if (toplevel->min_size != NULL)
@@ -26,6 +26,8 @@ void releasefunc_toplevel(ei_widget_t* widget)
         free(toplevel->min_size);
         toplevel->min_size = NULL;
     }
+    hw_text_font_free(toplevel->close_button_font);
+    hw_text_font_free(toplevel->border_font);
 }
 
 ei_bool_t close_button_click(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -58,6 +60,7 @@ void toplevel_banner_init(ei_toplevel_t* toplevel)
     toplevel->border->rounded_down = EI_FALSE;
     toplevel->border->corner_radius = 5;
     toplevel->border->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
+    toplevel->border_font = toplevel->border->text_font;
     toplevel->border->color = ei_color(0, 0, 0, 255);
     toplevel->border->text_color = ei_color(255, 255, 255, 255);
     toplevel->border->border_width = 0;
@@ -77,6 +80,7 @@ void toplevel_close_button_init(ei_toplevel_t* toplevel)
     toplevel->close_button->frame.corner_radius = 6;
     toplevel->close_button->frame.text = "x";
     toplevel->close_button->frame.text_font = hw_text_font_create("misc/font.ttf", ei_style_bold, 10);
+    toplevel->close_button_font = toplevel->close_button->frame.text_font;
     toplevel->close_button->frame.text_anchor = ei_anc_center;
     toplevel->close_button->frame.rounded_down=EI_TRUE;
     toplevel->close_button->frame.rounded_up=EI_TRUE;
@@ -98,7 +102,7 @@ void toplevel_resize_button_init(ei_toplevel_t* toplevel)
              NULL, NULL, NULL, NULL, NULL);
 }
 
-void setdefaultsfunc_toplevel(ei_widget_t* widget)
+void ei_toplevel_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_frame_setdefaultsfunc(widget);
     ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
@@ -106,11 +110,5 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel_banner_init(toplevel);
     toplevel_close_button_init(toplevel);
     toplevel_resize_button_init(toplevel);
-     ei_initial_tag_t( widget);
-
-}
-
-void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)
-{
-
+    ei_initial_tag_t( widget);
 }

@@ -31,10 +31,6 @@ void ei_frame_releasefunc(ei_widget_t* widget)
         free(tag);
         tag = next_tag;
     }
-    if (frame->text_font != ei_default_font)
-    {
-        hw_text_font_free(frame->text_font);
-    }
 }
 
 ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
@@ -122,10 +118,8 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
                                 ei_bool_t top, ei_bool_t bot, ei_bool_t sup){
     ei_point_t vertex = rectangle.top_left;
     ei_point_t centre;
-    ei_linked_point_t* point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
-    point_list->point = rectangle.top_left;
-    point_list->next = NULL;
-    ei_linked_point_t* current_point = point_list;
+    ei_linked_point_t* point_list = NULL;
+    ei_linked_point_t* current_point = NULL;
     ei_point_t point_inter;
     float h;
     if (rectangle.size.height < rectangle.size.width){
@@ -148,6 +142,8 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
             }
         }
         else {
+            point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+            point_list->next = NULL;;
             point_list->point = vertex;
             current_point = point_list;
         }
@@ -156,7 +152,6 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
         if (bot){
             centre.x = vertex.x + radius;
             centre.y = vertex.y - radius;
-            current_point->next = malloc(sizeof(ei_linked_point_t));
             current_point->next = arc(centre, radius, -180, -135);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
@@ -185,7 +180,6 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
         if (top){
             centre.x = vertex.x - radius;
             centre.y = vertex.y + radius;
-            current_point->next = malloc(sizeof(ei_linked_point_t));
             current_point->next = arc(centre, radius, 45, 90);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
@@ -210,6 +204,8 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
             }
         }
         else {
+            point_list = (ei_linked_point_t*) malloc(sizeof(ei_linked_point_t));
+            point_list->next = NULL;
             point_list->point = vertex;
             current_point = point_list;
         }
@@ -218,7 +214,6 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
         if (bot){
             centre.x = vertex.x - radius;
             centre.y = vertex.y - radius;
-            current_point->next = malloc(sizeof(ei_linked_point_t));
             current_point->next = arc(centre, radius, -90, 0);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
@@ -234,7 +229,6 @@ ei_linked_point_t* relief_frame(ei_rect_t rectangle, float radius,
         if (top) {
             centre.x = vertex.x - radius;
             centre.y = vertex.y + radius;
-            current_point->next = malloc(sizeof(ei_linked_point_t));
             current_point->next = arc(centre, radius, 0, 45);
             while (current_point->next != NULL) {
                 current_point = current_point->next;
@@ -312,7 +306,7 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
         ei_linked_point_t* points_up = relief_frame(rect, frame->corner_radius,
                                                     frame->rounded_up, frame->rounded_down, EI_TRUE);
         ei_linked_point_t* points_down = relief_frame(rect, frame->corner_radius,
-                                                     frame->rounded_up, frame->rounded_down, EI_FALSE);
+                                                      frame->rounded_up, frame->rounded_down, EI_FALSE);
         if (frame->relief == ei_relief_raised)
         {
             ei_draw_polygon(surface, points_up, light, clipper);
@@ -405,6 +399,5 @@ void ei_frame_setdefaultsfunc(ei_widget_t* widget)
     frame->rounded_up = EI_FALSE;
     frame->rounded_down = EI_FALSE;
     frame->widget.requested_size = ei_size_zero();
-ei_initial_tag_t(widget);
-
+    ei_initial_tag_t(widget);
 }

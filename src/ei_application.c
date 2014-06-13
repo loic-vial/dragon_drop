@@ -89,7 +89,7 @@ void clear_rect_list(ei_linked_rect_t** rects)
 
 void manage_event(ei_event_t event)
 {
-    ei_eventlist_t* event_tmp = first_eventlist;
+    ei_eventlist_t* event_tmp = first_event;
     while (event_tmp != NULL)
     {
         ei_eventlist_t* next_event = event_tmp->next;
@@ -175,23 +175,25 @@ ei_surface_t ei_app_root_surface()
 
 void ei_app_free()
 {
-    ei_linked_tag_t* tag = first_linked_tag;
+    ei_widget_destroy(&root->widget);
+    hw_surface_free(root_surface);
+    hw_surface_free(offscreen_surface);
+
+    ei_linked_tag_t* tag = first_tag;
     while (tag != NULL)
     {
         ei_linked_tag_t* next_tag = tag->next;
         free(tag);
         tag = next_tag;
     }
-    ei_eventlist_t* event = first_eventlist;
+
+    ei_eventlist_t* event = first_event;
     while (event != NULL)
     {
         ei_eventlist_t* next_event = event->next;
-        ei_unbind(event->eventtype, event->widget, event->tag, event->callback, event->user_param);
+        free(event);
         event = next_event;
     }
-    ei_widget_destroy(&root->widget);
-    hw_surface_free(root_surface);
-    hw_surface_free(offscreen_surface);
 
     ei_widgetclass_t* wclass = first_class;
     while (wclass != NULL)

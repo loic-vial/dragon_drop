@@ -13,4 +13,4 @@ typedef struct ei_eventlist_t
 }
 ei_eventlist_t;
 
-extern ei_eventlist_t* first_eventlist;
+extern ei_eventlist_t* first_event;

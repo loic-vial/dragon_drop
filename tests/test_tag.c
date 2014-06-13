@@ -22,7 +22,7 @@ ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param)
 
 void display_list_tag()
 {
-    ei_linked_tag_t* last_tag = first_linked_tag;
+    ei_linked_tag_t* last_tag = first_tag;
     while(last_tag !=NULL)
     {
         printf("%s \n", (char*)last_tag->tag);
@@ -41,7 +41,7 @@ void display_tag(ei_widget_t* widget)
     }
 }
 
-int __dsf_ei_main(int argc, char** argv)
+int ei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
