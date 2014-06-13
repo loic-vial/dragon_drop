@@ -5,6 +5,7 @@
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_eventlist.h"
+#include "ei_tag.h"
 
 extern ei_geometrymanager_t* first_manager;
 extern ei_widgetclass_t* first_class;

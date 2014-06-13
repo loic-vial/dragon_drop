@@ -1,17 +1,8 @@
 #include "ei_toplevel.h"
-#include "ei_types.h"
-#include "ei_widget.h"
-#include "ei_widgetclass.h"
-#include "ei_geometrymanager.h"
-#include "hw_interface.h"
-#include "ei_event.h"
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_placer.h"
-#include "ei_toplevel_resize.h"
-#include "ei_toplevel_banner.h"
 #include <stdlib.h>
-#include <string.h>
 
 void* ei_toplevel_allocfunc()
 {
