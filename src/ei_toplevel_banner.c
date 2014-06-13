@@ -14,7 +14,7 @@ void ei_banner_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_frame_t*  banner =(ei_frame_t*)widget;
     ei_frame_setdefaultsfunc(widget);
- ei_initial_tag_t( widget);
+    ei_initial_tag_t( widget);
 }
 
 void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text)

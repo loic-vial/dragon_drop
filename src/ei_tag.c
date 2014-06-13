@@ -113,3 +113,39 @@ void ei_destroy_tag_widget(ei_widget_t* widget,ei_tag_t tag)
         tag_liste->next=next_tag;
     }
 }
+
+ei_bool_t widget_has_tags(ei_widget_t *widget)
+{
+    if (strcmp(widget->wclass->name,"frame") == 0 ||
+            strcmp(widget->wclass->name,"button") == 0 ||
+            strcmp(widget->wclass->name,"toplevel") == 0 ||
+            strcmp(widget->wclass->name,"radiobutton") == 0 ||
+            strcmp(widget->wclass->name,"banner") == 0 ||
+            strcmp(widget->wclass->name,"resize") == 0)
+    {
+        return EI_TRUE;
+    }
+    else
+    {
+        return EI_FALSE;
+    }
+}
+
+ei_bool_t widget_has_this_tag(ei_widget_t* widget, ei_tag_t tag)
+{
+    if (widget == NULL || tag == NULL) return EI_FALSE;
+    if (widget_has_tags(widget))
+    {
+        ei_frame_t* frame = (ei_frame_t*) widget;
+        ei_linked_tag_t* tag_liste = frame->tag;
+        while (tag_liste != NULL)
+        {
+            if (strcmp(tag_liste->tag, tag) == 0)
+            {
+                return EI_TRUE;
+            }
+            tag_liste = tag_liste->next;
+        }
+    }
+    return EI_FALSE;
+}

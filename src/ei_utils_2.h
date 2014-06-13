@@ -13,11 +13,12 @@ ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2);
 
 ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
 
+int min(int x1, int x2);
+
+int max (int x1,int x2);
+
 ei_rect_t rectangle_intersection(ei_rect_t parent, ei_rect_t child);
 
 void ei_tail(ei_widget_t* widget);
-
-int min(int x1, int x2);
-int max (int x1,int x2);
 
 #endif

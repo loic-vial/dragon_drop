@@ -17,7 +17,7 @@ ei_bool_t ei_quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return EI_FALSE;
 }
 
-int ei_main(int argc, char* argv[])
+int lei_main(int argc, char* argv[])
 {
     ei_size_t root_size = ei_size(800, 600);
     ei_color_t root_color = ei_color(60, 10, 80, 255);

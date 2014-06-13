@@ -41,7 +41,7 @@ void display_tag(ei_widget_t* widget)
     }
 }
 
-int _g__ei_main(int argc, char** argv)
+int ooei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
@@ -87,10 +87,10 @@ int _g__ei_main(int argc, char** argv)
     ei_destroy_tag_widget(frame,tag);
     display_tag(frame);
     printf("on va detruire le tag frame dans tout les widget \n");
-    tag=(ei_tag_t)"coucou";
-
+    tag=(ei_tag_t)"frame";
 ei_destroy_tag(tag);
 display_list_tag();
+
 
     ei_bind(ei_ev_keydown, 		NULL, "all", quit, NULL);
 

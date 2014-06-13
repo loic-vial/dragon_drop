@@ -8,6 +8,7 @@
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_radiobutton.h"
+#include "ei_tag.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -101,9 +102,11 @@ void manage_event(ei_event_t event)
                 event.type == ei_ev_mouse_move)
             {
                 ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget) ||
-                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, "all") == 0) ||
-                    (event_tmp->tag != NULL && strcmp(event_tmp->tag, widget_picked->wclass->name) == 0))
+                if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget))
+                {
+                    event_tmp->callback(widget_picked, &event, event_tmp->user_param);
+                }
+                else if (widget_has_this_tag(widget_picked, event_tmp->tag))
                 {
                     event_tmp->callback(widget_picked, &event, event_tmp->user_param);
                 }
