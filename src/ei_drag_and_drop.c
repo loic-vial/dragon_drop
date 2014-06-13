@@ -2,18 +2,16 @@
 #include "ei_utils_2.h"
 #include "ei_placer.h"
 #include "ei_utils.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 static ei_point_t drag_mouse_position;
 
-void ei_movable()
+void ei_enable_movable_tag()
 {
-     ei_bind(ei_ev_mouse_buttondown, NULL, "movable", ei_movable_drag_start_callback, NULL);
-
+    ei_bind(ei_ev_mouse_buttondown, NULL, "movable", ei_movable_drag_start_callback, NULL);
 }
-
 
 ei_bool_t ei_movable_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {

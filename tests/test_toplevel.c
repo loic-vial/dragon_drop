@@ -97,7 +97,7 @@ int ei_main(int argc, char* argv[])
     ei_color_t color_button={0xc7,0x99,0x74,0xff};
     ei_color_t color_button_text={0x00,0x00,0xff,0xff};
     ei_color_t color_text = {0,0,0,255};
-    ei_configure_banner (toplevel, &color_banner, &color_text,NULL,&color_button_text);
+    ei_banner_configure (toplevel, &color_banner, &color_text,NULL,&color_button_text);
 
     create_toplevel_2();
 

@@ -37,7 +37,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_frame_configure(&root->widget, main_window_size, &color, NULL, NULL, NULL, NULL,
                        NULL, NULL, NULL, NULL, NULL);
     ei_place(&root->widget, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    ei_movable();
+    ei_enable_movable_tag();
 }
 
 ei_rect_t compute_clipper(ei_widget_t* widget)

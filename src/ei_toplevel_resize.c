@@ -26,8 +26,7 @@ void ei_resize_register_class()
     resizeclass->next = NULL;
     ei_widgetclass_register(resizeclass);
 
-    ei_callback_t _resize_start = ei_toplevel_resize_start_callback;
-    ei_bind(ei_ev_mouse_buttondown, NULL, "resize", _resize_start, NULL);
+    ei_bind(ei_ev_mouse_buttondown, NULL, "resize", ei_toplevel_resize_start_callback, NULL);
 }
 
 ei_bool_t ei_toplevel_resize_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -35,10 +34,8 @@ ei_bool_t ei_toplevel_resize_start_callback(ei_widget_t* widget, ei_event_t* eve
     ei_tail(widget->parent);
     resize_mouse_position.x = event->param.mouse.where.x;
     resize_mouse_position.y = event->param.mouse.where.y;
-    ei_callback_t _resize = ei_toplevel_resize_callback;
-    ei_callback_t _resize_stop = ei_toplevel_resize_stop_callback;
-    ei_bind(ei_ev_mouse_move, NULL, "all", _resize, widget->parent);
-    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, widget->parent);
+    ei_bind(ei_ev_mouse_move, NULL, "all", ei_toplevel_resize_callback, widget->parent);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", ei_toplevel_resize_stop_callback, widget->parent);
     return EI_TRUE;
 }
 
@@ -78,10 +75,8 @@ ei_bool_t ei_toplevel_resize_callback(ei_widget_t* widget, ei_event_t* event, vo
 
 ei_bool_t ei_toplevel_resize_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-    ei_callback_t _resize = ei_toplevel_resize_callback;
-    ei_callback_t _resize_stop = ei_toplevel_resize_stop_callback;
-    ei_unbind(ei_ev_mouse_move, NULL, "all", _resize, user_param);
-    ei_unbind(ei_ev_mouse_buttonup, NULL, "all", _resize_stop, user_param);
+    ei_unbind(ei_ev_mouse_move, NULL, "all", ei_toplevel_resize_callback, user_param);
+    ei_unbind(ei_ev_mouse_buttonup, NULL, "all", ei_toplevel_resize_stop_callback, user_param);
     return EI_TRUE;
 }
 

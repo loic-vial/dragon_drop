@@ -16,7 +16,7 @@ void ei_banner_setdefaultsfunc(ei_widget_t* widget)
     ei_set_initial_tags(widget);
 }
 
-void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text, ei_color_t* color_button, ei_color_t* color_button_text)
+void ei_banner_configure (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text, ei_color_t* color_button, ei_color_t* color_button_text)
 {
     if(strcmp(widget->wclass->name,"toplevel") ==0)
     {
@@ -52,8 +52,7 @@ void ei_banner_register_class()
     bannerclass->next = NULL;
     ei_widgetclass_register(bannerclass);
 
-    ei_callback_t drag_start = ei_toplevel_drag_start_callback;
-    ei_bind(ei_ev_mouse_buttondown, NULL, "banner", drag_start, NULL);
+    ei_bind(ei_ev_mouse_buttondown, NULL, "banner", ei_toplevel_drag_start_callback, NULL);
 }
 
 ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -61,10 +60,8 @@ ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t* widget, ei_event_t* event
     ei_tail(widget->parent);
     drag_mouse_position.x = event->param.mouse.where.x;
     drag_mouse_position.y = event->param.mouse.where.y;
-    ei_callback_t _drag = ei_toplevel_drag_callback;
-    ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
-    ei_bind(ei_ev_mouse_move, NULL, "all", _drag, widget->parent);
-    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, widget->parent);
+    ei_bind(ei_ev_mouse_move, NULL, "all", ei_toplevel_drag_callback, widget->parent);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", ei_toplevel_drag_stop_callback, widget->parent);
     return EI_TRUE;
 }
 
@@ -84,9 +81,7 @@ ei_bool_t ei_toplevel_drag_callback(ei_widget_t* widget, ei_event_t* event, void
 
 ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-    ei_callback_t _drag = ei_toplevel_drag_callback;
-    ei_callback_t _drag_stop = ei_toplevel_drag_stop_callback;
-    ei_unbind(ei_ev_mouse_move, NULL, "all", _drag, user_param);
-    ei_unbind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, user_param);
+    ei_unbind(ei_ev_mouse_move, NULL, "all", ei_toplevel_drag_callback, user_param);
+    ei_unbind(ei_ev_mouse_buttonup, NULL, "all", ei_toplevel_drag_stop_callback, user_param);
     return EI_TRUE;
 }
