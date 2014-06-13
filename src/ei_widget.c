@@ -150,6 +150,8 @@ void recompute_frame_requested_size(ei_frame_t* frame)
     {
         int width, height;
         hw_text_compute_size(frame->text, frame->text_font, &width, &height);
+        width+=frame->border_width*2;
+        height+=frame->border_width*2;
         widget->requested_size.width = width > widget->requested_size.width ? width : widget->requested_size.width;
         widget->requested_size.height = height > widget->requested_size.height ? height : widget->requested_size.height;
     }
