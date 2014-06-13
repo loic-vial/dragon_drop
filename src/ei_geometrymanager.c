@@ -1,11 +1,10 @@
 #include "ei_geometrymanager.h"
-#include "ei_placer.h"
-#include "ei_toplevel.h"
 #include "ei_application.h"
 #include "ei_utils.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "ei_placer.h"
+#include "ei_toplevel.h"
 #include <string.h>
+#include <stdlib.h>
 
 ei_geometrymanager_t* first_manager = NULL;
 

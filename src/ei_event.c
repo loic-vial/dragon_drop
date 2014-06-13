@@ -1,7 +1,7 @@
 #include "ei_event.h"
 #include "ei_eventlist.h"
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
 void ei_bind(ei_eventtype_t  eventtype, ei_widget_t*  widget,
                  ei_tag_t  tag, ei_callback_t  callback, void* user_param)

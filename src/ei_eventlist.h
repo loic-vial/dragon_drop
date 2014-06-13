@@ -1,4 +1,6 @@
-#include <stdlib.h>
+#ifndef EI_EVENTLIST_H
+#define EI_EVENTLIST_H
+
 #include "ei_event.h"
 
 typedef struct ei_eventlist_t
@@ -14,3 +16,5 @@ typedef struct ei_eventlist_t
 ei_eventlist_t;
 
 extern ei_eventlist_t* first_event;
+
+#endif
