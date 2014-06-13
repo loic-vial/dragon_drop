@@ -11,9 +11,7 @@ static ei_point_t resize_mouse_position;
 void ei_resize_setdefaultsfunc(ei_widget_t* widget)
 {
     ei_button_setdefaultsfunc(widget);
-    ei_button_t* button = (ei_button_t*)widget;
-    ei_set_initial_tags( widget);
-
+    ei_set_initial_tags(widget);
 }
 
 void ei_resize_register_class()

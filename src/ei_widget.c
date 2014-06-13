@@ -44,19 +44,11 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     if (parent != NULL)
     {
         if (strcmp(parent->wclass->name,"toplevel") == 0 &&
-                strcmp(widget->wclass->name,"banner") != 0 &&
-                strcmp(widget->wclass->name,"resize") != 0)
+            strcmp(widget->wclass->name,"banner") != 0 &&
+            strcmp(widget->wclass->name,"resize") != 0)
         {
-            ei_widget_t* resize;
-            resize=parent->children_head;
-            while(resize != NULL && strcmp(resize->wclass->name,"resize")!=0)
-            {
-                resize=resize->next_sibling;
-            }
-            if (resize != NULL)
-            {
-                ei_tail(resize);
-            }
+            ei_toplevel_t* toplevel = (ei_toplevel_t*) parent;
+            ei_tail(&toplevel->resize_button->frame.widget);
         }
     }
     return widget;
@@ -121,7 +113,7 @@ ei_widget_t* ei_widget_pick(ei_point_t* where)
     buffer = &buffer[(where->x + where->y * size.width) * sizeof(ei_color_t)];
     int ir, ig, ib, ia;
     hw_surface_get_channel_indices(offscreen_surface, &ir, &ig, &ib, &ia);
-    ei_color_t color=ei_color(buffer[ir],buffer[ig],buffer[ib],255);
+    ei_color_t color = ei_color(buffer[ir],buffer[ig],buffer[ib],255);
     return get_widget_with_pick_color(ei_app_root_widget(), color);
 }
 
@@ -134,16 +126,16 @@ void recompute_frame_requested_size(ei_frame_t* frame)
         {
             ei_size_t size = hw_surface_get_size(frame->img);
             widget->requested_size.width = size.width > widget->requested_size.width ?
-                        size.width : widget->requested_size.width;
+                                               size.width : widget->requested_size.width;
             widget->requested_size.height = size.height > widget->requested_size.height ?
-                        size.height : widget->requested_size.height;
+                                                size.height : widget->requested_size.height;
         }
         else
         {
             widget->requested_size.width = frame->img_rect->size.width > widget->requested_size.width ?
-                        frame->img_rect->size.width : widget->requested_size.width;
+                                               frame->img_rect->size.width : widget->requested_size.width;
             widget->requested_size.height = frame->img_rect->size.height > widget->requested_size.height ?
-                        frame->img_rect->size.height : widget->requested_size.height;
+                                                frame->img_rect->size.height : widget->requested_size.height;
         }
     }
     else if (frame->text != NULL)
@@ -303,7 +295,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         }
         else
         {
-            ei_releasefunc_placer(&toplevel->close_button->frame.widget);
+            ei_geometrymanager_unmap(&toplevel->close_button->frame.widget);
         }
     }
 
@@ -319,7 +311,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
         }
         else
         {
-            ei_releasefunc_placer(&toplevel->resize_button->frame.widget);
+            ei_geometrymanager_unmap(&toplevel->resize_button->frame.widget);
         }
     }
 

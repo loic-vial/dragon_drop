@@ -1,20 +1,19 @@
 #include "ei_toplevel_banner.h"
-
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_placer.h"
 #include "ei_frame.h"
-#include <stdlib.h>
-#include <string.h>
 #include "ei_tag.h"
 #include "ei_toplevel.h"
+#include <stdlib.h>
+#include <string.h>
+
 static ei_point_t drag_mouse_position;
 
 void ei_banner_setdefaultsfunc(ei_widget_t* widget)
 {
-    ei_frame_t*  banner =(ei_frame_t*)widget;
     ei_frame_setdefaultsfunc(widget);
-    ei_set_initial_tags( widget);
+    ei_set_initial_tags(widget);
 }
 
 void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text, ei_color_t* color_button, ei_color_t* color_button_text)
