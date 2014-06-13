@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ei_radiobutton.h"
 #include "ei_geometrymanager.h"
+#include "ei_application.h"
 
 ei_bool_t button_press(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);

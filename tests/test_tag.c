@@ -2,13 +2,8 @@
 #include <stdlib.h>
 
 #include "ei_application.h"
-#include "ei_event.h"
-#include "hw_interface.h"
-#include "ei_widget.h"
 #include "ei_geometrymanager.h"
-#include "../src/ei_frame.h"
-#include "ei_tag.h"
-#include "ei_utils_2.h"
+#include "ei_frame.h"
 
 ei_widget_t* frame_tooltip;
 
