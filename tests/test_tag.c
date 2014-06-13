@@ -83,7 +83,7 @@ void display_tag(ei_widget_t* widget)
     }
 }
 
-int ei_main(int argc, char** argv)
+int _tag_ei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
