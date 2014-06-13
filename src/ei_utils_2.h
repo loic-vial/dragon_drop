@@ -13,6 +13,8 @@ ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2);
 
 ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
 
+void clear_rect_list(ei_linked_rect_t** rects);
+
 int min(int x1, int x2);
 
 int max (int x1,int x2);
