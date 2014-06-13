@@ -1,10 +1,8 @@
 #include "ei_toplevel_resize.h"
-
-#include "ei_utils.h"
+#include "ei_toplevel.h"
 #include "ei_utils_2.h"
 #include "ei_placer.h"
-#include "ei_button.h"
-#include "ei_toplevel.h"
+#include "ei_utils.h"
 #include <stdlib.h>
 #include <string.h>
 
