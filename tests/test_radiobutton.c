@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ei_application.h"
-#include "ei_event.h"
-#include "hw_interface.h"
-#include "ei_widget.h"
+#include "ei_radiobutton.h"
 #include "ei_geometrymanager.h"
-#include "../src/ei_radiobutton.h"
-/*
+#include "ei_application.h"
+
 ei_bool_t button_press(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_callback_t button_callback = button_press;
@@ -74,4 +71,4 @@ int _____________________________ei_main(int argc, char** argv)
 
     return (EXIT_SUCCESS);
 }
-*/
+
