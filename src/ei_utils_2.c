@@ -86,6 +86,19 @@ ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2)
             rect1.top_left.y == rect2.top_left.y);
 }
 
+void clear_rect_list(ei_linked_rect_t** rects)
+{
+    if (rects == NULL) return;
+    ei_linked_rect_t* rect = *rects;
+    while (rect != NULL)
+    {
+        ei_linked_rect_t* next_rect = rect->next;
+        free(rect);
+        rect = next_rect;
+    }
+    *rects = NULL;
+}
+
 int min(int x1, int x2)
 {
     return (x1 < x2) ? x1 : x2;

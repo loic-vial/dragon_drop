@@ -1,33 +1,24 @@
 #include "ei_application.h"
+#include "ei_placer.h"
 #include "ei_frame.h"
-#include "ei_widgetclass.h"
-#include "ei_geometrymanager.h"
-#include "ei_event.h"
-#include "ei_eventlist.h"
-#include "ei_toplevel.h"
+#include "ei_radiobutton.h"
 #include "ei_utils.h"
 #include "ei_utils_2.h"
-#include "ei_radiobutton.h"
-#include "ei_tag.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdint.h>
+#include "ei_eventlist.h"
 
 extern ei_geometrymanager_t* first_manager;
 extern ei_widgetclass_t* first_class;
 static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
-static bool want_quit;
+static ei_bool_t want_quit;
 ei_linked_rect_t* invalid_rects;
 
 void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
 {
     hw_init();
 
-    want_quit = false;
+    want_quit = EI_FALSE;
     invalid_rects = NULL;
     root_surface = hw_create_window(main_window_size, fullscreen);
     offscreen_surface = hw_surface_create(root_surface, main_window_size, EI_FALSE);
@@ -45,15 +36,13 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     ei_place(&root->widget, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-
 ei_rect_t compute_clipper(ei_widget_t* widget)
 {
     ei_rect_t clipper = ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
     while (widget->parent != NULL)
     {
         ei_rect_t rect = *widget->parent->content_rect;
-        if (strcmp(widget->wclass->name,"banner") == 0)
-
+        if (widget_has_this_tag(widget, "banner"))
         {
             rect.top_left.y -= widget->content_rect->size.height;
             rect.size.height = widget->content_rect->size.height;
@@ -75,19 +64,6 @@ void draw_widget(ei_widget_t* widget)
     {
         draw_widget(current);
     }
-}
-
-void clear_rect_list(ei_linked_rect_t** rects)
-{
-    if (rects == NULL) return;
-    ei_linked_rect_t* rect = *rects;
-    while (rect != NULL)
-    {
-        ei_linked_rect_t* next_rect = rect->next;
-        free(rect);
-        rect = next_rect;
-    }
-    *rects = NULL;
 }
 
 void manage_event(ei_event_t event)
@@ -132,11 +108,8 @@ void ei_app_run()
         draw_widget(&root->widget);
         hw_surface_unlock(root_surface);
         hw_surface_unlock(offscreen_surface);
-        //if (invalid_rects != NULL)
-        {
-            hw_surface_update_rects(root_surface, NULL);
-            hw_surface_update_rects(offscreen_surface, NULL);
-        }
+        hw_surface_update_rects(root_surface, NULL);
+        hw_surface_update_rects(offscreen_surface, NULL);
         clear_rect_list(&invalid_rects);
         hw_event_wait_next(&event);
         manage_event(event);
@@ -165,7 +138,7 @@ void ei_app_invalidate_rect(ei_rect_t* rect)
 
 void ei_app_quit_request()
 {
-    want_quit = true;
+    want_quit = EI_TRUE;
 }
 
 ei_widget_t* ei_app_root_widget()
