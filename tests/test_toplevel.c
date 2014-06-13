@@ -2,7 +2,7 @@
 #include "ei_utils.h"
 #include "ei_utils_2.h"
 #include "ei_geometrymanager.h"
-#include"ei_toplevel_banner.h"
+#include "ei_toplevel_banner.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -87,7 +87,7 @@ void create_root()
                        NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-int _toplevel_ei_main(int argc, char* argv[])
+int ei_main(int argc, char* argv[])
 {
     create_root();
 

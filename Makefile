@@ -7,14 +7,14 @@ TESTS		= ./tests
 SRCDIR		= ./src
 INCLUDES	= ./include
 INCFLAGS	:= -I${INCLUDES}
-#OPTFLAGS	:= -Os -DNDEBUG
-OPTFLAGS	:= -g
-CCFLAGS		:= -c ${OPTFLAGS} -Wall -Wextra -std=c99
+OPTFLAGS	:= -Os -DNDEBUG
+#OPTFLAGS	:= -g
+CCFLAGS		:= -c ${OPTFLAGS} -Wall -Wextra -Wno-unused -std=c99
 
 # The list of objects to include in the library
 
-LIBEIOBJS	:= 	$(OBJDIR)/ei_application.o $(OBJDIR)/ei_frame.o $(OBJDIR)/ei_event.o $(OBJDIR)/ei_widget.o $(OBJDIR)/ei_utils_2.o $(OBJDIR)/ei_widgetclass.o $(OBJDIR)/ei_toplevel.o $(OBJDIR)/ei_toplevel_resize.o $(OBJDIR)/ei_toplevel_banner.o $(OBJDIR)/ei_placer.o $(OBJDIR)/ei_geometrymanager.o $(OBJDIR)/ei_button.o $(OBJDIR)/ei_eventlist.o
-
+LIBEIOBJS	:= 	$(OBJDIR)/ei_application.o $(OBJDIR)/ei_frame.o $(OBJDIR)/ei_event.o $(OBJDIR)/ei_widget.o $(OBJDIR)/ei_utils_2.o $(OBJDIR)/ei_widgetclass.o $(OBJDIR)/ei_toplevel.o $(OBJDIR)/ei_toplevel_resize.o $(OBJDIR)/ei_toplevel_banner.o $(OBJDIR)/ei_placer.o $(OBJDIR)/ei_geometrymanager.o $(OBJDIR)/ei_button.o $(OBJDIR)/ei_eventlist.o $(OBJDIR)/ei_radiobutton.o $(OBJDIR)/ei_tag.o $(OBJDIR)/ei_drag_and_drop.o
+ 
 # Platform specific definitions (OS X, Linux, Windows)
 
 ifeq (${PLATFORM},Darwin)
@@ -61,10 +61,9 @@ endif
 # Main target of the makefile. To build specific targets, call "make <target_name>"
 
 TARGETS		=	${LIBEI} \
-			minimal frame button hello_world_absolute hello_world_relative puzzle
+			minimal frame button hello_world_absolute hello_world_relative puzzle test_radiobutton test_tag test_toplevel
+			
 all : ${TARGETS}
-
-
 
 ########## Test-programs
 
@@ -115,6 +114,30 @@ puzzle : ${OBJDIR}/puzzle.o ${LIBEIBASE} ${LIBEI}
 
 ${OBJDIR}/puzzle.o : ${TESTS}/puzzle.c
 	${CC} ${CCFLAGS} ${INCFLAGS} ${TESTS}/puzzle.c -o ${OBJDIR}/puzzle.o
+
+# test_radiobutton
+
+test_radiobutton : ${OBJDIR}/test_radiobutton.o ${LIBEIBASE} ${LIBEI}
+	${LINK} -o test_radiobutton ${OBJDIR}/test_radiobutton.o ${LIBEI} ${LIBS}
+
+${OBJDIR}/test_radiobutton.o : ${TESTS}/test_radiobutton.c
+	${CC} ${CCFLAGS} ${INCFLAGS} ${TESTS}/test_radiobutton.c -o ${OBJDIR}/test_radiobutton.o
+
+# test_tag
+
+test_tag : ${OBJDIR}/test_tag.o ${LIBEIBASE} ${LIBEI}
+	${LINK} -o test_tag ${OBJDIR}/test_tag.o ${LIBEI} ${LIBS}
+
+${OBJDIR}/test_tag.o : ${TESTS}/test_tag.c
+	${CC} ${CCFLAGS} ${INCFLAGS} ${TESTS}/test_tag.c -o ${OBJDIR}/test_tag.o
+
+# test_toplevel
+
+test_toplevel : ${OBJDIR}/test_toplevel.o ${LIBEIBASE} ${LIBEI}
+	${LINK} -o test_toplevel ${OBJDIR}/test_toplevel.o ${LIBEI} ${LIBS}
+
+${OBJDIR}/test_toplevel.o : ${TESTS}/test_toplevel.c
+	${CC} ${CCFLAGS} ${INCFLAGS} ${TESTS}/test_toplevel.c -o ${OBJDIR}/test_toplevel.o
 
 
 

@@ -129,8 +129,7 @@ void create_puzzle_window(char* image_filename)
 	toplevel	= ei_widget_create("toplevel", ei_app_root_widget());
 	toplevel_size	= ei_size(n.width*k_tile_size, n.height*k_tile_size);
 	border_width	= 0;
-    ei_bool_t closable =EI_TRUE;
-    ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_bg, &border_width, &title, &closable, &resizable, NULL);
+	ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_bg, &border_width, &title, NULL, &resizable, NULL);
 	ei_place(toplevel, NULL, &(g_toplevel_position.x), &(g_toplevel_position.y), NULL, NULL, NULL, NULL, NULL, NULL);
 	g_toplevel_position = ei_point_add(g_toplevel_position, ei_point(12, 12));
 
@@ -191,12 +190,11 @@ ei_bool_t handle_keydown(ei_widget_t* widget, ei_event_t* event, void* user_para
 
 
 
-int kkei_main(int argc, char* argv[])
-
+int ei_main(int argc, char* argv[])
 {
-    ei_size_t	root_window_size		= { 800, 800 };
+	ei_size_t	root_window_size		= { 1024, 768 };
 	ei_color_t	root_bgcol			= { 0x52, 0x7f, 0xb4, 0xff };
-    ei_bool_t	fullscreen			= EI_FALSE;
+	ei_bool_t	fullscreen			= EI_FALSE;
 
 	ei_app_create(&root_window_size, fullscreen);
 	ei_frame_configure(ei_app_root_widget(), NULL, &root_bgcol, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
