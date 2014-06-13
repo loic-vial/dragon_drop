@@ -4,6 +4,7 @@
 #include "ei_utils_2.h"
 #include "ei_event.h"
 #include "ei_geometrymanager.h"
+#include"ei_toplevel_banner.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,7 +30,7 @@ void create_toplevel_1_frame(ei_widget_t* toplevel)
     ei_place(frame, &frame_anchor, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-void create_toplevel_1()
+ei_widget_t* create_toplevel_1()
 {
     ei_widget_t* toplevel = ei_widget_create("toplevel", ei_app_root_widget());
     ei_size_t toplevel_size = ei_size(200, 230);
@@ -44,6 +45,8 @@ void create_toplevel_1()
     ei_place(toplevel, NULL, &toplevel_x, &toplevel_y, NULL, NULL, NULL, NULL, NULL, NULL);
 
     create_toplevel_1_frame(toplevel);
+    return toplevel;
+
 }
 
 void create_root()
@@ -55,11 +58,17 @@ void create_root()
                        NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-int lmpei_main(int argc, char* argv[])
+int ei_main(int argc, char* argv[])
 {
     create_root();
 
-    create_toplevel_1();
+    ei_widget_t* toplevel =create_toplevel_1();
+
+    ei_color_t color_banner={0xcd,0x00,0x74,0xff};
+    ei_color_t color_button={0xc7,0x99,0x74,0xff};
+        ei_color_t color_button_text={0x00,0x00,0xff,0xff};
+    ei_color_t color_text = {0,0,0,255};
+    ei_configure_banner (toplevel, &color_banner, &color_text,NULL,&color_button_text);
 
     ei_bind(ei_ev_keydown, NULL, "all", ei_quit, NULL);
 

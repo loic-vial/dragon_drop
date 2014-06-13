@@ -1,5 +1,4 @@
 #include "ei_tag.h"
-#include "ei_widgetclass.h"
 #include "ei_frame.h"
 #include <stdlib.h>
 #include <string.h>

@@ -17,7 +17,7 @@ void ei_banner_setdefaultsfunc(ei_widget_t* widget)
     ei_initial_tag_t( widget);
 }
 
-void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text)
+void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color_t* color_text, ei_color_t* color_button, ei_color_t* color_button_text)
 {
     if(strcmp(widget->wclass->name,"toplevel") ==0)
     {
@@ -29,6 +29,14 @@ void ei_configure_banner (ei_widget_t* widget,ei_color_t* color_banner, ei_color
         if(color_text !=NULL)
         {
             toplevel->border->text_color=*color_text;
+        }
+        if(color_button !=NULL)
+        {
+            toplevel->close_button->frame.color=*color_button;
+        }
+        if(color_button_text !=NULL)
+        {
+            toplevel->close_button->frame.text_color=*color_button_text;
         }
     }
 }

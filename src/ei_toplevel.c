@@ -74,12 +74,17 @@ void toplevel_banner_init(ei_toplevel_t* toplevel)
 void toplevel_close_button_init(ei_toplevel_t* toplevel)
 {
     toplevel->close_button = (ei_button_t*) ei_widget_create("button", &toplevel->border->widget);
-    toplevel->close_button->frame.widget.requested_size = ei_size(12, 12);
+
     toplevel->close_button->frame.border_width = 0;
     toplevel->close_button->frame.color = ei_color(255, 0, 0, 255);
-    toplevel->close_button->frame.corner_radius = 6;
+
     toplevel->close_button->frame.text = "x";
-    toplevel->close_button->frame.text_font = hw_text_font_create("misc/font.ttf", ei_style_bold, 10);
+    toplevel->close_button->frame.text_font = hw_text_font_create("misc/font.ttf", ei_style_bold, 12);
+    int height,width;
+    hw_text_compute_size((toplevel->close_button->frame.text),toplevel->close_button->frame.text_font,&width,&height);
+    int taille=max(height,width);
+    toplevel->close_button->frame.widget.requested_size = ei_size(taille,taille);
+     toplevel->close_button->frame.corner_radius = taille/2;
     toplevel->close_button_font = toplevel->close_button->frame.text_font;
     toplevel->close_button->frame.text_anchor = ei_anc_center;
     toplevel->close_button->frame.rounded_down=EI_TRUE;
