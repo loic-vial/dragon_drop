@@ -7,7 +7,7 @@
 #include "ei_utils_2.h"
 
 ei_widget_t* frame_tooltip;
-
+ei_widget_t* frame;
 ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     if (event->param.key.key_sym == SDLK_ESCAPE) {
@@ -21,13 +21,18 @@ ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
 
 ei_bool_t display(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-      ei_widget_t* widget_tooltip=(ei_widget_t*)frame_tooltip;
+    ei_widget_t* widget_tooltip=(ei_widget_t*)frame_tooltip;
     if(widget_has_this_tag(widget,"tooltip"))
     {
-    ei_tail(widget_tooltip);
-    ei_point_t location = widget->screen_location.top_left;
-    location.y+=200;
-    ei_place(frame_tooltip, NULL ,&location.x, &location.y, NULL, NULL, NULL, NULL, NULL, NULL );
+        if(widget_has_this_tag(widget,"tooltip_positif"))
+        {
+            ei_frame_t* frame=(ei_frame_t*)frame_tooltip;
+            frame->text="=)";
+        }
+        ei_tail(widget_tooltip);
+        ei_point_t location = widget->screen_location.top_left;
+        location.y+=200;
+        ei_place(frame_tooltip, NULL ,&location.x, &location.y, NULL, NULL, NULL, NULL, NULL, NULL );
     }
     else
     {
@@ -37,8 +42,25 @@ ei_bool_t display(ei_widget_t* widget, ei_event_t* event, void* user_param)
 }
 
 
+ei_bool_t activation(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+     ei_add_tag_widget(frame,"tooltip");
+     return EI_FALSE;
+}
+
+ei_bool_t positif(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_destroy_tag_widget(frame,"tooltip_negatif");
+     ei_add_tag_widget(frame,"tooltip_positif");
+     return EI_FALSE;
+}
 
 
+ei_bool_t desactivation(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+     ei_destroy_tag_widget(frame,"tooltip");
+     return EI_FALSE;
+}
 
 void display_list_tag()
 {
@@ -66,7 +88,7 @@ int ei_main(int argc, char** argv)
     ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
 
-    ei_widget_t*	frame;
+
     ei_size_t	frame_size		= {200,200};
 
     ei_color_t	frame_color		= {0x40, 0xA4, 0x97, 0xff};
@@ -79,40 +101,72 @@ int ei_main(int argc, char** argv)
 
     /* Create, configure and place the frame on screen. */
     frame = ei_widget_create("frame", ei_app_root_widget());
-
-
-
     char* text = "Une tooltip existe ici";
     ei_frame_configure(frame, &frame_size, &frame_color,
                        &frame_border_width, &frame_relief, &text, NULL, NULL, NULL,
                        NULL, NULL, NULL);
-    ei_anchor_t anc=ei_anc_west;
+    ei_anchor_t anc=ei_anc_center;
     ei_place(frame,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
     ei_tag_t tag = (ei_tag_t)"tooltip";
     ei_add_tag_widget(frame,tag);
 
-    /*Create a second frame*/
-    ei_widget_t* frame2 = ei_widget_create("frame", ei_app_root_widget());
-    text="Il n'en existe pas ici";
-    ei_frame_configure(frame2, &frame_size, &frame_color,
-                       &frame_border_width, &frame_relief, &text, NULL, NULL, NULL,
-                       NULL, NULL, NULL);
-    anc=ei_anc_center;
-    ei_place(frame2,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
+    /*Create a button*/
+    ei_widget_t* button1 = ei_widget_create("button", ei_app_root_widget());
+    text="Ce bouton désactive la tooltip";
+    ei_font_t font = hw_text_font_create("misc/font.ttf", ei_style_normal, 13);
+    ei_size_t	button_size		= {10,60};
+    ei_color_t	button_color		= {0x40, 0xA4, 0x97, 0xff};
+    ei_relief_t	button_relief		= ei_relief_raised;
+    int		button_border_width	= 4;
+    ei_callback_t desactivation_callback = desactivation;
+    ei_button_configure(button1, &button_size, &button_color,
+                        &button_border_width, NULL,&button_relief, &text,&font, NULL, NULL,
+                        NULL, NULL, NULL,&desactivation_callback,NULL); //il faut mettre la callback
+    anc=ei_anc_northwest;
+    int x=10;
+    int y=50;
+    ei_place(button1,&anc,&x, &y, NULL, NULL,NULL,NULL, NULL, NULL );
 
 
+    /*Create a button*/
+    ei_widget_t* button2 = ei_widget_create("button", ei_app_root_widget());
+    text="Ce bouton active la tooltip";
 
+    ei_callback_t activation_callback = activation;
+
+    ei_button_configure(button2, &button_size, &button_color,
+                        &button_border_width, NULL,&button_relief, &text,&font, NULL, NULL,
+                        NULL, NULL, NULL,&activation_callback,NULL); //il faut mettre la callback
+    anc=ei_anc_southwest;
+    int x2=10;
+    int y2=-50;
+    ei_place(button2,&anc,&x2, &y2, NULL, NULL,NULL,NULL, NULL, NULL );
+
+
+    /*Create a button*/
+    ei_widget_t* button3 = ei_widget_create("button", ei_app_root_widget());
+    text="Ce bouton affiche un message positif";
+
+    ei_callback_t positif_callback = positif;
+
+    ei_button_configure(button3, &button_size, &button_color,
+                        &button_border_width, NULL,&button_relief, &text,&font, NULL, NULL,
+                        NULL, NULL, NULL,&positif_callback,NULL); //il faut mettre la callback
+    anc=ei_anc_northeast;
+    int x3=-10;
+    int y3=50;
+    ei_place(button3,&anc,&x3, &y3, NULL, NULL,NULL,NULL, NULL, NULL );
     /*Create a third frame*/
-    ei_widget_t* frame3 = ei_widget_create("frame", ei_app_root_widget());
+    /*ei_widget_t* frame3 = ei_widget_create("frame", ei_app_root_widget());
     text="Il en existe une ici";
     ei_frame_configure(frame3, &frame_size, &frame_color,
                        &frame_border_width, &frame_relief, &text, NULL, NULL, NULL,
                        NULL, NULL, NULL);
     anc=ei_anc_east;
-    ei_place(frame3,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
+ //   ei_place(frame3,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
     ei_add_tag_widget(frame3,tag);
 
-
+*/
     /*Create a frame for display*/
     frame_tooltip = ei_widget_create("frame", ei_app_root_widget());
     text="Je suis une tooltip";

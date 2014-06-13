@@ -33,7 +33,7 @@ ei_bool_t field(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return EI_TRUE;
 
 }
-int _____________________________ei_main(int argc, char** argv)
+int lkhei_main(int argc, char** argv)
 
 {
     ei_size_t	screen_size	= {400, 400};
