@@ -2,8 +2,7 @@
 #define EI_FRAME_H
 
 #include "ei_widget.h"
-#include "ei_event.h"
-
+#include "ei_tag.h"
 
 typedef struct ei_frame_t
 {
@@ -22,7 +21,6 @@ typedef struct ei_frame_t
     ei_bool_t rounded_up;
     ei_bool_t rounded_down;
     ei_linked_tag_t* tag;
-
 }
 ei_frame_t;
 
