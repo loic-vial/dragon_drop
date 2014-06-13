@@ -19,7 +19,7 @@ void ei_button_setdefaultsfunc(ei_widget_t* widget)
     button->callback = NULL;
     button->user_param = NULL;
     button->frame.relief = ei_relief_raised;
-    ei_initial_tag_t(widget);
+    ei_set_initial_tags(widget);
 }
 
 ei_bool_t ei_button_click_down(ei_widget_t* widget, ei_event_t* event, void* user_param)

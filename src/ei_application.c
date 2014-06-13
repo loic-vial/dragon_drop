@@ -112,7 +112,7 @@ void ei_app_run()
         hw_surface_unlock(offscreen_surface);
         hw_surface_update_rects(root_surface, NULL);
         hw_surface_update_rects(offscreen_surface, NULL);
-        clear_rect_list(&invalid_rects);
+        ei_clear_rect_list(&invalid_rects);
         hw_event_wait_next(&event);
         manage_event(event);
     }
@@ -159,13 +159,7 @@ void ei_app_free()
     hw_surface_free(root_surface);
     hw_surface_free(offscreen_surface);
 
-    ei_linked_tag_t* tag = first_tag;
-    while (tag != NULL)
-    {
-        ei_linked_tag_t* next_tag = tag->next;
-        free(tag);
-        tag = next_tag;
-    }
+    ei_clear_tag_list(&first_tag);
 
     ei_eventlist_t* event = first_event;
     while (event != NULL)

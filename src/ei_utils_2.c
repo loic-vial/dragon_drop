@@ -86,7 +86,7 @@ ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2)
             rect1.top_left.y == rect2.top_left.y);
 }
 
-void clear_rect_list(ei_linked_rect_t** rects)
+void ei_clear_rect_list(ei_linked_rect_t** rects)
 {
     if (rects == NULL) return;
     ei_linked_rect_t* rect = *rects;

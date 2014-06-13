@@ -106,5 +106,5 @@ void ei_toplevel_setdefaultsfunc(ei_widget_t* widget)
     toplevel_banner_init(toplevel);
     toplevel_close_button_init(toplevel);
     toplevel_resize_button_init(toplevel);
-    ei_initial_tag_t( widget);
+    ei_set_initial_tags( widget);
 }

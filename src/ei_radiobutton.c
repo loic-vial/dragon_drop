@@ -98,7 +98,7 @@ void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget)
     widget->requested_size.width = 150;
     widget->requested_size.height = 20;
     ei_add_children_radiobutton("premier champ",radio);
-    ei_initial_tag_t(widget);
+    ei_set_initial_tags(widget);
 }
 
 void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,
