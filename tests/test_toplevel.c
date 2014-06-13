@@ -56,7 +56,7 @@ void create_root()
                        NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-int ei_main(int argc, char* argv[])
+int mlkmlei_main(int argc, char* argv[])
 {
     create_root();
 

@@ -82,6 +82,7 @@ void ei_add_tag_widget(ei_widget_t* widget,ei_tag_t tag)
         ei_linked_tag_t* current_tag = frame->tag;
         while (current_tag->next !=NULL)
         {
+            if(current_tag->tag == tag) return;
             current_tag = current_tag->next;
         }
         current_tag->next = (ei_linked_tag_t*)malloc(sizeof(ei_linked_tag_t));

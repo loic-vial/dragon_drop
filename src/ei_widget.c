@@ -44,8 +44,8 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     if (parent != NULL)
     {
         if (strcmp(parent->wclass->name,"toplevel") == 0 &&
-            strcmp(widget->wclass->name,"banner") != 0 &&
-            strcmp(widget->wclass->name,"resize") != 0)
+                strcmp(widget->wclass->name,"banner") != 0 &&
+                strcmp(widget->wclass->name,"resize") != 0)
         {
             ei_widget_t* resize;
             resize=parent->children_head;
@@ -119,13 +119,9 @@ ei_widget_t* ei_widget_pick(ei_point_t* where)
     uint8_t* buffer = hw_surface_get_buffer(offscreen_surface);
     ei_size_t size = hw_surface_get_size(offscreen_surface);
     buffer = &buffer[(where->x + where->y * size.width) * sizeof(ei_color_t)];
-    ei_color_t color;
     int ir, ig, ib, ia;
     hw_surface_get_channel_indices(offscreen_surface, &ir, &ig, &ib, &ia);
-    color.red = buffer[ir];
-    color.green = buffer[ig];
-    color.blue = buffer[ib];
-    color.alpha = 255;
+    ei_color_t color=ei_color(buffer[ir],buffer[ig],buffer[ib],255);
     return get_widget_with_pick_color(ei_app_root_widget(), color);
 }
 
@@ -138,16 +134,16 @@ void recompute_frame_requested_size(ei_frame_t* frame)
         {
             ei_size_t size = hw_surface_get_size(frame->img);
             widget->requested_size.width = size.width > widget->requested_size.width ?
-                                               size.width : widget->requested_size.width;
+                        size.width : widget->requested_size.width;
             widget->requested_size.height = size.height > widget->requested_size.height ?
-                                                size.height : widget->requested_size.height;
+                        size.height : widget->requested_size.height;
         }
         else
         {
             widget->requested_size.width = frame->img_rect->size.width > widget->requested_size.width ?
-                                               frame->img_rect->size.width : widget->requested_size.width;
+                        frame->img_rect->size.width : widget->requested_size.width;
             widget->requested_size.height = frame->img_rect->size.height > widget->requested_size.height ?
-                                                frame->img_rect->size.height : widget->requested_size.height;
+                        frame->img_rect->size.height : widget->requested_size.height;
         }
     }
     else if (frame->text != NULL)
