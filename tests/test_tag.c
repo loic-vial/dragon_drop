@@ -4,10 +4,16 @@
 #include "ei_application.h"
 #include "ei_geometrymanager.h"
 #include "ei_frame.h"
+#include "ei_utils.h"
 #include "ei_utils_2.h"
+#include "ei_placer.h"
+#include <string.h>
+
+static ei_point_t drag_mouse_position;
 
 ei_widget_t* frame_tooltip;
 ei_widget_t* frame;
+
 ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     if (event->param.key.key_sym == SDLK_ESCAPE) {
@@ -16,6 +22,43 @@ ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
     }
 
     return EI_FALSE;
+}
+
+ei_bool_t ei_movable_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
+ei_bool_t ei_movable_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param);
+ei_bool_t ei_movable_drag_start_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_tail(widget);
+    drag_mouse_position.x = event->param.mouse.where.x;
+    drag_mouse_position.y = event->param.mouse.where.y;
+    ei_callback_t _drag = ei_movable_drag_callback;
+    ei_callback_t _drag_stop = ei_movable_drag_stop_callback;
+    ei_bind(ei_ev_mouse_move, NULL, "all", _drag, widget);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, widget);
+    return EI_TRUE;
+}
+
+ei_bool_t ei_movable_drag_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    widget = (ei_widget_t*) user_param;
+    if (strcmp(widget->geom_params->manager->name, "placer") == 0)
+    {
+        ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*) widget->geom_params;
+        ei_point_t diff_position = ei_point_sub(event->param.mouse.where, drag_mouse_position);
+        placer->x += diff_position.x;
+        placer->y += diff_position.y;
+        drag_mouse_position = event->param.mouse.where;
+    }
+    return EI_TRUE;
+}
+
+ei_bool_t ei_movable_drag_stop_callback(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_callback_t _drag = ei_movable_drag_callback;
+    ei_callback_t _drag_stop = ei_movable_drag_stop_callback;
+    ei_unbind(ei_ev_mouse_move, NULL, "all", _drag, user_param);
+    ei_unbind(ei_ev_mouse_buttonup, NULL, "all", _drag_stop, user_param);
+    return EI_TRUE;
 }
 
 
@@ -54,29 +97,29 @@ ei_bool_t activation(ei_widget_t* widget, ei_event_t* event, void* user_param)
     ei_destroy_tag_widget(frame,"tooltip_positif");
     ei_frame_t* frame1=(ei_frame_t*)frame_tooltip;
     frame1->text="Je suis une Tooltip";
-     ei_add_tag_widget(frame,"tooltip");
-     return EI_FALSE;
+    ei_add_tag_widget(frame,"tooltip");
+    return EI_FALSE;
 }
 
 ei_bool_t positif(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_destroy_tag_widget(frame,"tooltip_negatif");
-     ei_add_tag_widget(frame,"tooltip_positif");
-     return EI_FALSE;
+    ei_add_tag_widget(frame,"tooltip_positif");
+    return EI_FALSE;
 }
 
 ei_bool_t negatif(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_destroy_tag_widget(frame,"tooltip_positif");
-     ei_add_tag_widget(frame,"tooltip_negatif");
-     return EI_FALSE;
+    ei_add_tag_widget(frame,"tooltip_negatif");
+    return EI_FALSE;
 }
 
 
 ei_bool_t desactivation(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
-     ei_destroy_tag_widget(frame,"tooltip");
-     return EI_FALSE;
+    ei_destroy_tag_widget(frame,"tooltip");
+    return EI_FALSE;
 }
 
 void display_list_tag()
@@ -100,7 +143,7 @@ void display_tag(ei_widget_t* widget)
     }
 }
 
-int _tag_ei_main(int argc, char** argv)
+int ei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {600, 600};
     ei_color_t	root_bgcol		= {0x52, 0x7f, 0xb4, 0xff};
@@ -126,6 +169,10 @@ int _tag_ei_main(int argc, char** argv)
     ei_place(frame,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
     ei_tag_t tag = (ei_tag_t)"tooltip";
     ei_add_tag_widget(frame,tag);
+
+
+    ei_add_tag_widget(frame, "movable");
+    ei_bind(ei_ev_mouse_buttondown, NULL, "movable", ei_movable_drag_start_callback, NULL);
 
     /*Create a button*/
     ei_widget_t* button1 = ei_widget_create("button", ei_app_root_widget());
