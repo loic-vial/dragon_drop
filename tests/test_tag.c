@@ -4,6 +4,7 @@
 #include "ei_application.h"
 #include "ei_geometrymanager.h"
 #include "ei_frame.h"
+#include "ei_utils_2.h"
 
 ei_widget_t* frame_tooltip;
 
@@ -16,8 +17,6 @@ ei_bool_t quit(ei_widget_t* widget, ei_event_t* event, void* user_param)
 
     return EI_FALSE;
 }
-
-
 
 
 ei_bool_t display(ei_widget_t* widget, ei_event_t* event, void* user_param)

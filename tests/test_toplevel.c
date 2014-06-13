@@ -1,8 +1,6 @@
 #include "ei_application.h"
-#include "ei_widget.h"
 #include "ei_utils.h"
 #include "ei_utils_2.h"
-#include "ei_event.h"
 #include "ei_geometrymanager.h"
 #include"ei_toplevel_banner.h"
 #include <stdio.h>
