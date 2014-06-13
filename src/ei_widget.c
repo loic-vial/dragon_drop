@@ -53,8 +53,8 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
     if (parent != NULL)
     {
         if (strcmp(parent->wclass->name,"toplevel") == 0 &&
-                strcmp(widget->wclass->name,"banner") != 0 &&
-                strcmp(widget->wclass->name,"resize") != 0)
+            strcmp(widget->wclass->name,"banner") != 0 &&
+            strcmp(widget->wclass->name,"resize") != 0)
         {
             ei_widget_t* resize;
             resize=parent->children_head;
@@ -73,6 +73,7 @@ ei_widget_t* ei_widget_create(ei_widgetclass_name_t class_name, ei_widget_t* par
 
 void ei_widget_destroy(ei_widget_t* widget)
 {
+    if (widget == NULL) return;
     ei_widget_t* child = widget->children_head;
     while (child != NULL)
     {
@@ -80,27 +81,25 @@ void ei_widget_destroy(ei_widget_t* widget)
         ei_widget_destroy(child);
         child = next_child;
     }
-    if (widget->parent->children_head == widget)
+    if (widget->parent != NULL)
     {
-        widget->parent->children_head = widget->next_sibling;
-    }
-    else
-    {
-        for (ei_widget_t* child = widget->parent->children_head ; child != NULL ; child = child->next_sibling)
+        if (widget->parent->children_head == widget)
         {
-            for (ei_widget_t* child = widget->parent->children_head ; child != NULL ; child = child->next_sibling)
+            widget->parent->children_head = widget->next_sibling;
+        }
+        else
+        {
+            ei_widget_t* child = widget->parent->children_head;
+            while (child->next_sibling != widget)
             {
-                if (child->next_sibling == widget)
-                {
-                    child->next_sibling = widget->next_sibling;
-                }
-                if (widget == widget->parent->children_tail)
-                {
-                    widget->parent->children_tail=child;
-                }
+                child = child->next_sibling;
+            }
+            child->next_sibling = widget->next_sibling;
+            if (widget == widget->parent->children_tail)
+            {
+                widget->parent->children_tail=child;
             }
         }
-        widget->wclass->releasefunc(widget);
     }
     ei_geometrymanager_unmap(widget);
     widget->wclass->releasefunc(widget);
@@ -148,16 +147,16 @@ void recompute_frame_requested_size(ei_frame_t* frame)
         {
             ei_size_t size = hw_surface_get_size(frame->img);
             widget->requested_size.width = size.width > widget->requested_size.width ?
-                        size.width : widget->requested_size.width;
+                                               size.width : widget->requested_size.width;
             widget->requested_size.height = size.height > widget->requested_size.height ?
-                        size.height : widget->requested_size.height;
+                                                size.height : widget->requested_size.height;
         }
         else
         {
             widget->requested_size.width = frame->img_rect->size.width > widget->requested_size.width ?
-                        frame->img_rect->size.width : widget->requested_size.width;
+                                               frame->img_rect->size.width : widget->requested_size.width;
             widget->requested_size.height = frame->img_rect->size.height > widget->requested_size.height ?
-                        frame->img_rect->size.height : widget->requested_size.height;
+                                                frame->img_rect->size.height : widget->requested_size.height;
         }
     }
     else if (frame->text != NULL)

@@ -21,8 +21,8 @@ void ei_button_setdefaultsfunc(ei_widget_t* widget)
     ei_button_t* button = (ei_button_t*) widget;
     button->callback = NULL;
     button->user_param = NULL;
-    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
-    button->frame.tag = tag;
+ ei_initial_tag_t( widget);
+
     button->frame.relief = ei_relief_raised;
 }
 

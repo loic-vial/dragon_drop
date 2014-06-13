@@ -24,6 +24,17 @@ void ei_frame_releasefunc(ei_widget_t* widget)
     {
         free(frame->img_rect);
     }
+    ei_linked_tag_t* tag = frame->tag;
+    while (tag != NULL)
+    {
+        ei_linked_tag_t* next_tag = tag->next;
+        free(tag);
+        tag = next_tag;
+    }
+    if (frame->text_font != ei_default_font)
+    {
+        hw_text_font_free(frame->text_font);
+    }
 }
 
 ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin)
@@ -394,6 +405,6 @@ void ei_frame_setdefaultsfunc(ei_widget_t* widget)
     frame->rounded_up = EI_FALSE;
     frame->rounded_down = EI_FALSE;
     frame->widget.requested_size = ei_size_zero();
-    ei_linked_tag_t* tag = ei_initial_tag_t(widget);
-    frame->tag=tag;
+ei_initial_tag_t(widget);
+
 }

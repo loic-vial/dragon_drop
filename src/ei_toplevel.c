@@ -106,8 +106,8 @@ void setdefaultsfunc_toplevel(ei_widget_t* widget)
     toplevel_banner_init(toplevel);
     toplevel_close_button_init(toplevel);
     toplevel_resize_button_init(toplevel);
-    ei_linked_tag_t* tag = ei_initial_tag_t( widget);
-    toplevel->frame.tag =tag;
+     ei_initial_tag_t( widget);
+
 }
 
 void geomnotifyfunc_toplevel(ei_widget_t* widget, ei_rect_t rect)

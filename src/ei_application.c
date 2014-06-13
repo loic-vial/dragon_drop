@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+extern ei_widgetclass_t* first_class;
 static ei_frame_t* root;
 static ei_surface_t root_surface;
 ei_surface_t offscreen_surface;
@@ -174,5 +175,31 @@ ei_surface_t ei_app_root_surface()
 
 void ei_app_free()
 {
+    ei_linked_tag_t* tag = first_linked_tag;
+    while (tag != NULL)
+    {
+        ei_linked_tag_t* next_tag = tag->next;
+        free(tag);
+        tag = next_tag;
+    }
+    ei_eventlist_t* event = first_eventlist;
+    while (event != NULL)
+    {
+        ei_eventlist_t* next_event = event->next;
+        ei_unbind(event->eventtype, event->widget, event->tag, event->callback, event->user_param);
+        event = next_event;
+    }
+    ei_widget_destroy(&root->widget);
+    hw_surface_free(root_surface);
+    hw_surface_free(offscreen_surface);
+
+    ei_widgetclass_t* wclass = first_class;
+    while (wclass != NULL)
+    {
+        ei_widgetclass_t* next_wclass = wclass->next;
+        free(wclass);
+        wclass = next_wclass;
+    }
+
     hw_quit();
 }

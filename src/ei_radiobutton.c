@@ -47,7 +47,7 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio)
 
     float rel_width = 1;
     int height;
-    if (radio->number ==0)
+    if (radio->number == 0)
     { height=20;
     }
     else

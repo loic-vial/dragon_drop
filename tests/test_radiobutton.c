@@ -6,7 +6,7 @@
 #include "ei_widget.h"
 #include "ei_geometrymanager.h"
 #include "../src/ei_radiobutton.h"
-
+/*
 ei_bool_t button_press(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);
 ei_callback_t button_callback = button_press;
@@ -36,7 +36,8 @@ ei_bool_t field(ei_widget_t* widget, ei_event_t* event, void* user_param)
     return EI_TRUE;
 
 }
-int ___ei_main(int argc, char** argv)
+int _____________________________ei_main(int argc, char** argv)
+
 {
     ei_size_t	screen_size	= {400, 400};
     ei_color_t      root_bgcol      = {0x52, 0x7f, 0xb4, 0xff};
@@ -73,3 +74,4 @@ int ___ei_main(int argc, char** argv)
 
     return (EXIT_SUCCESS);
 }
+*/
