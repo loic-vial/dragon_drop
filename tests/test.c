@@ -10,9 +10,9 @@
 ei_bool_t process_key(ei_widget_t* widget, ei_event_t* event, void* user_param);
 
 
-int ___j_ei_main(int argc, char* argv[])
+int sf_ei_main(int argc, char* argv[])
 {
-    ei_size_t	root_window_size		= { 800, 800 };
+    ei_size_t	root_window_size		= { 800, 600 };
 	ei_color_t	root_bgcol			= { 0x52, 0x7f, 0xb4, 0xff };
     ei_bool_t	fullscreen			= EI_FALSE;
 
@@ -25,8 +25,8 @@ int ___j_ei_main(int argc, char* argv[])
     ei_size_t toplevel_size = ei_size(200, 230);
     ei_color_t toplevel_color = ei_color(210, 123, 200, 210);
     int toplevel_border = 0;
-    int toplevel_x = 0;
-    int toplevel_y = 0;
+    int toplevel_x = 40;
+    int toplevel_y = 20;
     ei_bool_t toplevel_closable = EI_TRUE;
     ei_axis_set_t toplevel_resizable = ei_axis_y;
     ei_toplevel_configure(toplevel, &toplevel_size, &toplevel_color, &toplevel_border, NULL, &toplevel_closable,

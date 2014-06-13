@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+extern ei_geometrymanager_t* first_manager;
 extern ei_widgetclass_t* first_class;
 static ei_frame_t* root;
 static ei_surface_t root_surface;
@@ -28,7 +29,7 @@ void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen)
     want_quit = false;
     invalid_rects = NULL;
     root_surface = hw_create_window(main_window_size, fullscreen);
-    offscreen_surface = hw_surface_create(root_surface, main_window_size, true);
+    offscreen_surface = hw_surface_create(root_surface, main_window_size, EI_FALSE);
 
     ei_radiobutton_register_class();
     ei_frame_register_class();
@@ -201,6 +202,14 @@ void ei_app_free()
         ei_widgetclass_t* next_wclass = wclass->next;
         free(wclass);
         wclass = next_wclass;
+    }
+
+    ei_geometrymanager_t* manager = first_manager;
+    while (manager != NULL)
+    {
+        ei_geometrymanager_t* next_manager = manager->next;
+        free(manager);
+        manager = next_manager;
     }
 
     hw_quit();
