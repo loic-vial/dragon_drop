@@ -25,4 +25,8 @@ ei_bool_t widget_has_tags(ei_widget_t* widget);
 
 ei_bool_t widget_has_this_tag(ei_widget_t* widget, ei_tag_t tag);
 
+ei_bool_t has_this_tag(ei_tag_t tag);
+
+ei_bool_t ei_list_has_this_tag(ei_linked_tag_t* tag_list, ei_tag_t tag);
+
 #endif

@@ -85,7 +85,7 @@ void manage_event(ei_event_t event)
                 {
                     event_tmp->callback(widget_picked, &event, event_tmp->user_param);
                 }
-                else if (widget_has_this_tag(widget_picked, event_tmp->tag))
+                else if (widget_has_this_tag(widget_picked, event_tmp->tag) && has_this_tag(event_tmp->tag))
                 {
                     event_tmp->callback(widget_picked, &event, event_tmp->user_param);
                 }

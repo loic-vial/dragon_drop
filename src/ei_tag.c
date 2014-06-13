@@ -93,6 +93,7 @@ void ei_add_tag_widget(ei_widget_t* widget, ei_tag_t tag)
     if (!widget_has_tags(widget)) return;
     ei_frame_t* frame = (ei_frame_t*) widget;
     ei_add_tag_to_list(&frame->tag, tag);
+    ei_add_tag_to_list(&first_tag,tag);
 }
 
 void ei_destroy_tag_widget(ei_widget_t* widget, ei_tag_t tag)
@@ -121,17 +122,29 @@ ei_bool_t widget_has_tags(ei_widget_t *widget)
 
 ei_bool_t widget_has_this_tag(ei_widget_t* widget, ei_tag_t tag)
 {
-    if (widget == NULL || tag == NULL) return EI_FALSE;
     if (!widget_has_tags(widget)) return EI_FALSE;
     ei_frame_t* frame = (ei_frame_t*) widget;
-    ei_linked_tag_t* tag_liste = frame->tag;
-    while (tag_liste != NULL)
+   return ei_list_has_this_tag(frame->tag,tag);
+}
+
+ei_bool_t has_this_tag(ei_tag_t tag)
+{
+    return ei_list_has_this_tag(first_tag,tag);
+}
+
+ei_bool_t ei_list_has_this_tag(ei_linked_tag_t* tag_list, ei_tag_t tag)
+{
+    if (tag_list == NULL || tag == NULL) return EI_FALSE;
+
+    ei_linked_tag_t* list = tag_list;
+
+    while (list != NULL)
     {
-        if (strcmp(tag_liste->tag, tag) == 0)
+        if (strcmp(list->tag, tag) == 0)
         {
             return EI_TRUE;
         }
-        tag_liste = tag_liste->next;
+        list = list->next;
     }
     return EI_FALSE;
 }

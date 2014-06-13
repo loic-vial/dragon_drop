@@ -29,6 +29,12 @@ ei_bool_t display(ei_widget_t* widget, ei_event_t* event, void* user_param)
             ei_frame_t* frame=(ei_frame_t*)frame_tooltip;
             frame->text="=)";
         }
+
+        if(widget_has_this_tag(widget,"tooltip_negatif"))
+        {
+            ei_frame_t* frame=(ei_frame_t*)frame_tooltip;
+            frame->text="=(";
+        }
         ei_tail(widget_tooltip);
         ei_point_t location = widget->screen_location.top_left;
         location.y+=200;
@@ -44,6 +50,10 @@ ei_bool_t display(ei_widget_t* widget, ei_event_t* event, void* user_param)
 
 ei_bool_t activation(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
+    ei_destroy_tag_widget(frame,"tooltip_negatif");
+    ei_destroy_tag_widget(frame,"tooltip_positif");
+    ei_frame_t* frame1=(ei_frame_t*)frame_tooltip;
+    frame1->text="Je suis une Tooltip";
      ei_add_tag_widget(frame,"tooltip");
      return EI_FALSE;
 }
@@ -52,6 +62,13 @@ ei_bool_t positif(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_destroy_tag_widget(frame,"tooltip_negatif");
      ei_add_tag_widget(frame,"tooltip_positif");
+     return EI_FALSE;
+}
+
+ei_bool_t negatif(ei_widget_t* widget, ei_event_t* event, void* user_param)
+{
+    ei_destroy_tag_widget(frame,"tooltip_positif");
+     ei_add_tag_widget(frame,"tooltip_negatif");
      return EI_FALSE;
 }
 
@@ -156,20 +173,25 @@ int ei_main(int argc, char** argv)
     int x3=-10;
     int y3=50;
     ei_place(button3,&anc,&x3, &y3, NULL, NULL,NULL,NULL, NULL, NULL );
-    /*Create a third frame*/
-    /*ei_widget_t* frame3 = ei_widget_create("frame", ei_app_root_widget());
-    text="Il en existe une ici";
-    ei_frame_configure(frame3, &frame_size, &frame_color,
-                       &frame_border_width, &frame_relief, &text, NULL, NULL, NULL,
-                       NULL, NULL, NULL);
-    anc=ei_anc_east;
- //   ei_place(frame3,  &anc,NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL );
-    ei_add_tag_widget(frame3,tag);
 
-*/
+    /*Create a button*/
+    ei_widget_t* button4 = ei_widget_create("button", ei_app_root_widget());
+    text="Ce bouton affiche un message negatif";
+
+    ei_callback_t negatif_callback = negatif;
+
+    ei_button_configure(button4, &button_size, &button_color,
+                        &button_border_width, NULL,&button_relief, &text,&font, NULL, NULL,
+                        NULL, NULL, NULL,&negatif_callback,NULL); //il faut mettre la callback
+    anc=ei_anc_southeast;
+    int x4=-10;
+    int y4=-50;
+    ei_place(button4,&anc,&x4, &y4, NULL, NULL,NULL,NULL, NULL, NULL );
+
+
     /*Create a frame for display*/
     frame_tooltip = ei_widget_create("frame", ei_app_root_widget());
-    text="Je suis une tooltip";
+    text="Je suis une Tooltip";
     ei_size_t	frame_tooltip_size		= {100,50};
     ei_color_t color ={0xff,0xff,0xff,50};
     ei_frame_configure(frame_tooltip, &frame_tooltip_size, &color,
