@@ -2,7 +2,6 @@
 #define EI_PLACER_H
 
 #include "ei_geometrymanager.h"
-#include "ei_widget.h"
 
 typedef struct ei_placer_geometry_param_t
 {
