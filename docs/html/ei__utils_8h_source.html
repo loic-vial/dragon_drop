@@ -97,78 +97,78 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a3efbe5d4e8424e1543374b1965f996ae">   18</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__size__t.html">ei_size_t</a> <a class="code" href="ei__utils_8h.html#a3efbe5d4e8424e1543374b1965f996ae">ei_size_zero</a>()</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="structei__size__t.html">ei_size_t</a>       s       = {0, 0};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="structei__size__t.html">ei_size_t</a> s = { 0, 0 };</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">return</span> s;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a4b1d120e983284a82145e464ad74725c">   27</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__size__t.html">ei_size_t</a> <a class="code" href="ei__utils_8h.html#a4b1d120e983284a82145e464ad74725c">ei_size</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="structei__size__t.html">ei_size_t</a>       s;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        s.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>         = width;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        s.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>        = height;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="structei__size__t.html">ei_size_t</a> s;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        s.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a> = width;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        s.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a> = height;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> s;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a0340ad040bce7744b00c5b2f73e41fcb">   38</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__point__t.html">ei_point_t</a> <a class="code" href="ei__utils_8h.html#a0340ad040bce7744b00c5b2f73e41fcb">ei_point_zero</a>()</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structei__point__t.html">ei_point_t</a>      p       = {0, 0};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structei__point__t.html">ei_point_t</a> p = { 0, 0 };</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> p;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a689110a7501607722040920b1ed48427">   47</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__point__t.html">ei_point_t</a> <a class="code" href="ei__utils_8h.html#a689110a7501607722040920b1ed48427">ei_point</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="structei__point__t.html">ei_point_t</a>      pt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        pt.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>    = x;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        pt.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>    = y;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="structei__point__t.html">ei_point_t</a> pt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        pt.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a> = x;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        pt.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a> = y;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> pt;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a1f53854088399bdcb1a61c68d0dacb43">   59</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__point__t.html">ei_point_t</a> <a class="code" href="ei__utils_8h.html#a1f53854088399bdcb1a61c68d0dacb43">ei_point_neg</a>(<a class="code" href="structei__point__t.html">ei_point_t</a> point)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        point.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>         = - point.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        point.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>         = - point.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        point.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a> = -point.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        point.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a> = -point.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> point;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#ad02f1050ce11a0d6d064ffc5cb55a58c">   70</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__point__t.html">ei_point_t</a> <a class="code" href="ei__utils_8h.html#ad02f1050ce11a0d6d064ffc5cb55a58c">ei_point_add</a>(<a class="code" href="structei__point__t.html">ei_point_t</a> p1, <a class="code" href="structei__point__t.html">ei_point_t</a> p2)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        p1.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>            += p2.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        p1.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>            += p2.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        p1.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a> += p2.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        p1.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a> += p2.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> p1;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a46a8f591217526bb50e4b0e24692aad4">   81</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__point__t.html">ei_point_t</a> <a class="code" href="ei__utils_8h.html#a46a8f591217526bb50e4b0e24692aad4">ei_point_sub</a>(<a class="code" href="structei__point__t.html">ei_point_t</a> p1, <a class="code" href="structei__point__t.html">ei_point_t</a> p2)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        p1.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>            -= p2.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        p1.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>            -= p2.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        p1.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a> -= p2.<a class="code" href="structei__point__t.html#a6ec4a8846bae4b9694506dae039047b3">x</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        p1.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a> -= p2.<a class="code" href="structei__point__t.html#a0c0f1bfa95c372595c52522877f556a0">y</a>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> p1;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#af4b3479ad0dd792735e4c4645afc57bd">   92</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__size__t.html">ei_size_t</a> <a class="code" href="ei__utils_8h.html#af4b3479ad0dd792735e4c4645afc57bd">ei_size_add</a>(<a class="code" href="structei__size__t.html">ei_size_t</a> s1, <a class="code" href="structei__size__t.html">ei_size_t</a> s2)</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        s1.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>        += s2.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        s1.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>       += s2.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        s1.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a> += s2.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        s1.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a> += s2.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> s1;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a2300c0c2c2f9493c1f331a44692d2f03">  103</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__size__t.html">ei_size_t</a> <a class="code" href="ei__utils_8h.html#a2300c0c2c2f9493c1f331a44692d2f03">ei_size_sub</a>(<a class="code" href="structei__size__t.html">ei_size_t</a> s1, <a class="code" href="structei__size__t.html">ei_size_t</a> s2)</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        s1.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>        -= s2.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        s1.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>       -= s2.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        s1.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a> -= s2.<a class="code" href="structei__size__t.html#a981037618942814a4318a4c27cdaecc1">width</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        s1.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a> -= s2.<a class="code" href="structei__size__t.html#a2f152e26c90d01cac2b337ebc118a5f1">height</a>;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> s1;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#a8bef8234db026386d82fb016cf7d67dc">  113</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__rect__t.html">ei_rect_t</a> <a class="code" href="ei__utils_8h.html#a8bef8234db026386d82fb016cf7d67dc">ei_rect_zero</a>()</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="structei__rect__t.html">ei_rect_t</a>       r       = {{0, 0}, {0, 0}};</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="structei__rect__t.html">ei_rect_t</a> r = { {0, 0}, {0, 0} };</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">return</span> r;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="ei__utils_8h.html#ad0ce7d71c3cc717f1b3cd5f8c767870e">  122</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structei__rect__t.html">ei_rect_t</a> <a class="code" href="ei__utils_8h.html#ad0ce7d71c3cc717f1b3cd5f8c767870e">ei_rect</a>(<a class="code" href="structei__point__t.html">ei_point_t</a> top_left, <a class="code" href="structei__size__t.html">ei_size_t</a> size)</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="structei__rect__t.html">ei_rect_t</a>       r;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        r.<a class="code" href="structei__rect__t.html#aabe78780aa971b9cb9742ed59a2e9438">top_left</a>      = top_left;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        r.<a class="code" href="structei__rect__t.html#a200c48a352d448a24d4f85673f6bad14">size</a>          = size;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="structei__rect__t.html">ei_rect_t</a> r;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        r.<a class="code" href="structei__rect__t.html#aabe78780aa971b9cb9742ed59a2e9438">top_left</a> = top_left;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        r.<a class="code" href="structei__rect__t.html#a200c48a352d448a24d4f85673f6bad14">size</a> = size;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">return</span> r;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
@@ -200,7 +200,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 14 2014 16:53:41 for Projet C - Interaction Graphique by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 14 2014 17:10:34 for Projet C - Interaction Graphique by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
