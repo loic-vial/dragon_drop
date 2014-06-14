@@ -96,7 +96,7 @@ int ei_main(int argc, char** argv)
     ei_app_run();
 
     ei_unbind(ei_ev_keydown,	NULL, "all", process_key, NULL);
-
+ ei_unbind(ei_ev_mouse_buttonup,	NULL, "select_button" ,field, NULL);
     ei_app_free();
 
     return (EXIT_SUCCESS);
