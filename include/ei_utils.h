@@ -17,7 +17,7 @@
  */
 static inline ei_size_t ei_size_zero()
 {
-	ei_size_t s = { 0, 0 };
+	ei_size_t	s	= {0, 0};
 	return s;
 }
 
@@ -26,9 +26,9 @@ static inline ei_size_t ei_size_zero()
  */
 static inline ei_size_t ei_size(int width, int height)
 {
-	ei_size_t s;
-	s.width = width;
-	s.height = height;
+	ei_size_t	s;
+	s.width		= width;
+	s.height	= height;
 	return s;
 }
 
@@ -37,7 +37,7 @@ static inline ei_size_t ei_size(int width, int height)
  */
 static inline ei_point_t ei_point_zero()
 {
-	ei_point_t p = { 0, 0 };
+	ei_point_t	p	= {0, 0};
 	return p;
 }
 
@@ -46,9 +46,9 @@ static inline ei_point_t ei_point_zero()
  */
 static inline ei_point_t ei_point(int x, int y)
 {
-	ei_point_t pt;
-	pt.x = x;
-	pt.y = y;
+	ei_point_t	pt;
+	pt.x	= x;
+	pt.y	= y;
 	return pt;
 }
 
@@ -58,8 +58,8 @@ static inline ei_point_t ei_point(int x, int y)
  */
 static inline ei_point_t ei_point_neg(ei_point_t point)
 {
-	point.x = -point.x;
-	point.y = -point.y;
+	point.x 	= - point.x;
+	point.y 	= - point.y;
 	return point;
 }
 
@@ -69,8 +69,8 @@ static inline ei_point_t ei_point_neg(ei_point_t point)
  */
 static inline ei_point_t ei_point_add(ei_point_t p1, ei_point_t p2)
 {
-	p1.x += p2.x;
-	p1.y += p2.y;
+	p1.x		+= p2.x;
+	p1.y		+= p2.y;
 	return p1;
 }
 
@@ -80,8 +80,8 @@ static inline ei_point_t ei_point_add(ei_point_t p1, ei_point_t p2)
  */
 static inline ei_point_t ei_point_sub(ei_point_t p1, ei_point_t p2)
 {
-	p1.x -= p2.x;
-	p1.y -= p2.y;
+	p1.x		-= p2.x;
+	p1.y		-= p2.y;
 	return p1;
 }
 
@@ -91,8 +91,8 @@ static inline ei_point_t ei_point_sub(ei_point_t p1, ei_point_t p2)
  */
 static inline ei_size_t ei_size_add(ei_size_t s1, ei_size_t s2)
 {
-	s1.width += s2.width;
-	s1.height += s2.height;
+	s1.width	+= s2.width;
+	s1.height	+= s2.height;
 	return s1;
 }
 
@@ -102,8 +102,8 @@ static inline ei_size_t ei_size_add(ei_size_t s1, ei_size_t s2)
  */
 static inline ei_size_t ei_size_sub(ei_size_t s1, ei_size_t s2)
 {
-	s1.width -= s2.width;
-	s1.height -= s2.height;
+	s1.width	-= s2.width;
+	s1.height	-= s2.height;
 	return s1;
 }
 
@@ -112,7 +112,7 @@ static inline ei_size_t ei_size_sub(ei_size_t s1, ei_size_t s2)
  */
 static inline ei_rect_t ei_rect_zero()
 {
-	ei_rect_t r = { {0, 0}, {0, 0} };
+	ei_rect_t	r	= {{0, 0}, {0, 0}};
 	return r;
 }
 
@@ -121,9 +121,9 @@ static inline ei_rect_t ei_rect_zero()
  */
 static inline ei_rect_t ei_rect(ei_point_t top_left, ei_size_t size)
 {
-	ei_rect_t r;
-	r.top_left = top_left;
-	r.size = size;
+	ei_rect_t	r;
+	r.top_left	= top_left;
+	r.size		= size;
 	return r;
 }
 

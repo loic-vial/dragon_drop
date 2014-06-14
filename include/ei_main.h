@@ -22,6 +22,6 @@
  *
  * @return			An error code: 0 means ok, 1 means error.
  */
-int ei_main(int argc, char *argv[]);
+int ei_main (int argc, char* argv[]);
 
 #endif
