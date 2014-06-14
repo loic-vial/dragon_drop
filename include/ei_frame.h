@@ -5,7 +5,7 @@
 #include "ei_tag.h"
 
 /**
-* \brief ei_frame_t     A struct for a frame
+* \brief ei_frame_t     A type of widget wich represent a frame
 *
 */
 typedef struct ei_frame_t

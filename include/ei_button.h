@@ -5,11 +5,11 @@
 
 
 /**
- * \brief	ei_button_t     Button is a widget who has lot of common fields with frame and two for itself.
+ * \brief	ei_button_t     A type of widget which represent a button
  */
 typedef struct ei_button_t
 {
-    ei_frame_t frame; ///<It's a pointer to a widget and a frame. Many fields of frame are shared by others widgets.
+    ei_frame_t frame; ///< Frame to memorized all common field between button and frame.
     ei_callback_t callback; ///< This function will be called then the button is clicked
     void* user_param; ///<Parameter send by the user
 }

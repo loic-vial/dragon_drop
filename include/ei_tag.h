@@ -3,6 +3,9 @@
 
 #include "ei_event.h"
 
+/**
+ * @brief first_tag     A pointer to a list of all tags present in the application
+ */
 extern ei_linked_tag_t* first_tag;
 
 void ei_add_tag_to_list(ei_linked_tag_t** tag_list, ei_tag_t tag);
