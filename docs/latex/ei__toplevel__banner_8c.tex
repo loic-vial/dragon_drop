@@ -1,0 +1,145 @@
+\hypertarget{ei__toplevel__banner_8c}{\section{ei\+\_\+toplevel\+\_\+banner.\+c File Reference}
+\label{ei__toplevel__banner_8c}\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+toplevel\+\_\+banner.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+placer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+frame.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+tag.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+toplevel.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__toplevel__banner_8c_a2cfacf594b7caed7d6697700a91429d5}{ei\+\_\+banner\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Sets the defaults attributes of widgets of the class \char`\"{}banner\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{ei__toplevel__banner_8c_a3fd6bdced7473946666dd2d6b94785a8}{ei\+\_\+banner\+\_\+configure} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} $\ast$color\+\_\+banner, \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} $\ast$color\+\_\+text, \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} $\ast$color\+\_\+button, \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} $\ast$color\+\_\+button\+\_\+text)
+\begin{DoxyCompactList}\small\item\em Configures the attributes of widgets of the class \char`\"{}banner\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{ei__toplevel__banner_8c_afdb572acbfad86da6e8dd627d30b931c}{ei\+\_\+banner\+\_\+register\+\_\+class} ()
+\begin{DoxyCompactList}\small\item\em Registers the \char`\"{}banner\char`\"{} widget class. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__banner_8c_a6a5fece1018ed8d8cfa2b56cfeb311f2}{ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button down callback for \char`\"{}banner\char`\"{} widgets This initializes the drag and drop for toplevel widgets. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__banner_8c_a79e07af81e19c74e284b218f5d7f0d47}{ei\+\_\+toplevel\+\_\+drag\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button move callback for \char`\"{}banner\char`\"{} widgets. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__banner_8c_aa44443f80465232ce61f155c106bd053}{ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button up callback for \char`\"{}banner\char`\"{} widgets This ends the drag and drop for toplevel widgets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{structei__point__t}{ei\+\_\+point\+\_\+t} \hyperlink{ei__toplevel__banner_8c_a470337293f9b7952ba7bd4a4a6a9aa87}{drag\+\_\+mouse\+\_\+position}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__toplevel__banner_8c_a3fd6bdced7473946666dd2d6b94785a8}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+banner\+\_\+configure@{ei\+\_\+banner\+\_\+configure}}
+\index{ei\+\_\+banner\+\_\+configure@{ei\+\_\+banner\+\_\+configure}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+banner\+\_\+configure}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+banner\+\_\+configure (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+color\+\_\+t} $\ast$}]{color\+\_\+banner, }
+\item[{{\bf ei\+\_\+color\+\_\+t} $\ast$}]{color\+\_\+text, }
+\item[{{\bf ei\+\_\+color\+\_\+t} $\ast$}]{color\+\_\+button, }
+\item[{{\bf ei\+\_\+color\+\_\+t} $\ast$}]{color\+\_\+button\+\_\+text}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_a3fd6bdced7473946666dd2d6b94785a8}
+
+
+Configures the attributes of widgets of the class \char`\"{}banner\char`\"{}. 
+
+
+
+Definition at line 19 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+\hypertarget{ei__toplevel__banner_8c_afdb572acbfad86da6e8dd627d30b931c}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+banner\+\_\+register\+\_\+class@{ei\+\_\+banner\+\_\+register\+\_\+class}}
+\index{ei\+\_\+banner\+\_\+register\+\_\+class@{ei\+\_\+banner\+\_\+register\+\_\+class}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+banner\+\_\+register\+\_\+class}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+banner\+\_\+register\+\_\+class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_afdb572acbfad86da6e8dd627d30b931c}
+
+
+Registers the \char`\"{}banner\char`\"{} widget class. 
+
+
+
+Definition at line 43 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+\hypertarget{ei__toplevel__banner_8c_a2cfacf594b7caed7d6697700a91429d5}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+banner\+\_\+setdefaultsfunc@{ei\+\_\+banner\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+banner\+\_\+setdefaultsfunc@{ei\+\_\+banner\+\_\+setdefaultsfunc}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+banner\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+banner\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_a2cfacf594b7caed7d6697700a91429d5}
+
+
+Sets the defaults attributes of widgets of the class \char`\"{}banner\char`\"{}. 
+
+
+
+Definition at line 13 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+\hypertarget{ei__toplevel__banner_8c_a79e07af81e19c74e284b218f5d7f0d47}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+toplevel\+\_\+drag\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+drag\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+callback}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+drag\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+drag\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_a79e07af81e19c74e284b218f5d7f0d47}
+
+
+Mouse button move callback for \char`\"{}banner\char`\"{} widgets. 
+
+
+
+Definition at line 68 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+\hypertarget{ei__toplevel__banner_8c_a6a5fece1018ed8d8cfa2b56cfeb311f2}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+drag\+\_\+start\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_a6a5fece1018ed8d8cfa2b56cfeb311f2}
+
+
+Mouse button down callback for \char`\"{}banner\char`\"{} widgets This initializes the drag and drop for toplevel widgets. 
+
+
+
+Definition at line 58 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+\hypertarget{ei__toplevel__banner_8c_aa44443f80465232ce61f155c106bd053}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback@{ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+drag\+\_\+stop\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__banner_8c_aa44443f80465232ce61f155c106bd053}
+
+
+Mouse button up callback for \char`\"{}banner\char`\"{} widgets This ends the drag and drop for toplevel widgets. 
+
+
+
+Definition at line 82 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{ei__toplevel__banner_8c_a470337293f9b7952ba7bd4a4a6a9aa87}{\index{ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}!drag\+\_\+mouse\+\_\+position@{drag\+\_\+mouse\+\_\+position}}
+\index{drag\+\_\+mouse\+\_\+position@{drag\+\_\+mouse\+\_\+position}!ei\+\_\+toplevel\+\_\+banner.\+c@{ei\+\_\+toplevel\+\_\+banner.\+c}}
+\subsubsection[{drag\+\_\+mouse\+\_\+position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+point\+\_\+t} drag\+\_\+mouse\+\_\+position\hspace{0.3cm}{\ttfamily [static]}}}\label{ei__toplevel__banner_8c_a470337293f9b7952ba7bd4a4a6a9aa87}
+
+
+Definition at line 11 of file ei\+\_\+toplevel\+\_\+banner.\+c.
+

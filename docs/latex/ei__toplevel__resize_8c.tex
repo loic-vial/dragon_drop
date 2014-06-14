@@ -1,0 +1,122 @@
+\hypertarget{ei__toplevel__resize_8c}{\section{ei\+\_\+toplevel\+\_\+resize.\+c File Reference}
+\label{ei__toplevel__resize_8c}\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+toplevel\+\_\+resize.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+toplevel.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+placer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__toplevel__resize_8c_ab81ee5fd6bd17d5a479636bcad941573}{ei\+\_\+resize\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Sets the defaults attributes of widgets of the class \char`\"{}resize\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{ei__toplevel__resize_8c_af07cb924fdbc1afa10419dce18ab0fbf}{ei\+\_\+resize\+\_\+register\+\_\+class} ()
+\begin{DoxyCompactList}\small\item\em Registers the \char`\"{}resize\char`\"{} widget class. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__resize_8c_acf58c9d033b2bcde60fd0dccb8deab94}{ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button down callback for \char`\"{}resize\char`\"{} widgets This initializes the resize of toplevel widgets. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__resize_8c_ae128797041f1bfb0fcb1e082e566cb47}{ei\+\_\+toplevel\+\_\+resize\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button move callback for \char`\"{}resize\char`\"{} widgets. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel__resize_8c_a14841e0bb17ad42925d1115ba5f3019c}{ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button up callback for \char`\"{}resize\char`\"{} widgets This ends the resize of toplevel widgets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{structei__point__t}{ei\+\_\+point\+\_\+t} \hyperlink{ei__toplevel__resize_8c_aa6712b076fa9369a662a1041379b3e2b}{resize\+\_\+mouse\+\_\+position}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__toplevel__resize_8c_af07cb924fdbc1afa10419dce18ab0fbf}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!ei\+\_\+resize\+\_\+register\+\_\+class@{ei\+\_\+resize\+\_\+register\+\_\+class}}
+\index{ei\+\_\+resize\+\_\+register\+\_\+class@{ei\+\_\+resize\+\_\+register\+\_\+class}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{ei\+\_\+resize\+\_\+register\+\_\+class}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+resize\+\_\+register\+\_\+class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__resize_8c_af07cb924fdbc1afa10419dce18ab0fbf}
+
+
+Registers the \char`\"{}resize\char`\"{} widget class. 
+
+
+
+Definition at line 17 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+
+\hypertarget{ei__toplevel__resize_8c_ab81ee5fd6bd17d5a479636bcad941573}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!ei\+\_\+resize\+\_\+setdefaultsfunc@{ei\+\_\+resize\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+resize\+\_\+setdefaultsfunc@{ei\+\_\+resize\+\_\+setdefaultsfunc}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{ei\+\_\+resize\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+resize\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__resize_8c_ab81ee5fd6bd17d5a479636bcad941573}
+
+
+Sets the defaults attributes of widgets of the class \char`\"{}resize\char`\"{}. 
+
+
+
+Definition at line 11 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+
+\hypertarget{ei__toplevel__resize_8c_ae128797041f1bfb0fcb1e082e566cb47}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!ei\+\_\+toplevel\+\_\+resize\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+resize\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+callback}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+resize\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+resize\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__resize_8c_ae128797041f1bfb0fcb1e082e566cb47}
+
+
+Mouse button move callback for \char`\"{}resize\char`\"{} widgets. 
+
+
+
+Definition at line 42 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+
+\hypertarget{ei__toplevel__resize_8c_acf58c9d033b2bcde60fd0dccb8deab94}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+resize\+\_\+start\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__resize_8c_acf58c9d033b2bcde60fd0dccb8deab94}
+
+
+Mouse button down callback for \char`\"{}resize\char`\"{} widgets This initializes the resize of toplevel widgets. 
+
+
+
+Definition at line 32 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+
+\hypertarget{ei__toplevel__resize_8c_a14841e0bb17ad42925d1115ba5f3019c}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback}}
+\index{ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback@{ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+resize\+\_\+stop\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel__resize_8c_a14841e0bb17ad42925d1115ba5f3019c}
+
+
+Mouse button up callback for \char`\"{}resize\char`\"{} widgets This ends the resize of toplevel widgets. 
+
+
+
+Definition at line 76 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{ei__toplevel__resize_8c_aa6712b076fa9369a662a1041379b3e2b}{\index{ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}!resize\+\_\+mouse\+\_\+position@{resize\+\_\+mouse\+\_\+position}}
+\index{resize\+\_\+mouse\+\_\+position@{resize\+\_\+mouse\+\_\+position}!ei\+\_\+toplevel\+\_\+resize.\+c@{ei\+\_\+toplevel\+\_\+resize.\+c}}
+\subsubsection[{resize\+\_\+mouse\+\_\+position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+point\+\_\+t} resize\+\_\+mouse\+\_\+position\hspace{0.3cm}{\ttfamily [static]}}}\label{ei__toplevel__resize_8c_aa6712b076fa9369a662a1041379b3e2b}
+
+
+Definition at line 9 of file ei\+\_\+toplevel\+\_\+resize.\+c.
+

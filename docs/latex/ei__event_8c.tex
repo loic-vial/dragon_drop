@@ -1,0 +1,73 @@
+\hypertarget{ei__event_8c}{\section{ei\+\_\+event.\+c File Reference}
+\label{ei__event_8c}\index{ei\+\_\+event.\+c@{ei\+\_\+event.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+event.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+eventlist.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__event_8c_a184545ec337224781aa9bfc94117a910}{ei\+\_\+bind} (\hyperlink{ei__event_8h_a132dde064150d861ad24e9d839cbe007}{ei\+\_\+eventtype\+\_\+t} eventtype, \hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag, \hyperlink{ei__widget_8h_a3692fee0affca071917f22f2ec2018a4}{ei\+\_\+callback\+\_\+t} callback, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Binds a callback to an event type and a widget or a tag. \end{DoxyCompactList}\item 
+void \hyperlink{ei__event_8c_ad80fcdf761d8a59418b5cb38a1bbcbf9}{ei\+\_\+unbind} (\hyperlink{ei__event_8h_a132dde064150d861ad24e9d839cbe007}{ei\+\_\+eventtype\+\_\+t} eventtype, \hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag, \hyperlink{ei__widget_8h_a3692fee0affca071917f22f2ec2018a4}{ei\+\_\+callback\+\_\+t} callback, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Unbinds a callback from an event type and widget or tag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__event_8c_a184545ec337224781aa9bfc94117a910}{\index{ei\+\_\+event.\+c@{ei\+\_\+event.\+c}!ei\+\_\+bind@{ei\+\_\+bind}}
+\index{ei\+\_\+bind@{ei\+\_\+bind}!ei\+\_\+event.\+c@{ei\+\_\+event.\+c}}
+\subsubsection[{ei\+\_\+bind}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+bind (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+eventtype\+\_\+t}}]{eventtype, }
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag, }
+\item[{{\bf ei\+\_\+callback\+\_\+t}}]{callback, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__event_8c_a184545ec337224781aa9bfc94117a910}
+
+
+Binds a callback to an event type and a widget or a tag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em eventtype} & The type of the event. \\
+\hline
+{\em widget} & The callback is only called if the event is related to this widget. This parameter must be N\+U\+L\+L if the \char`\"{}tag\char`\"{} parameter is not N\+U\+L\+L. \\
+\hline
+{\em tag} & The callback is only called if the event is related to a widget that has this tag. A tag can be a widget class name, or the tag \char`\"{}all\char`\"{}. This parameter must be N\+U\+L\+L is the \char`\"{}widget\char`\"{} parameter is not N\+U\+L\+L. \\
+\hline
+{\em callback} & The callback (i.\+e. the function to call). \\
+\hline
+{\em user\+\_\+param} & A user parameter that will be passed to the callback when it is called. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 6 of file ei\+\_\+event.\+c.
+
+\hypertarget{ei__event_8c_ad80fcdf761d8a59418b5cb38a1bbcbf9}{\index{ei\+\_\+event.\+c@{ei\+\_\+event.\+c}!ei\+\_\+unbind@{ei\+\_\+unbind}}
+\index{ei\+\_\+unbind@{ei\+\_\+unbind}!ei\+\_\+event.\+c@{ei\+\_\+event.\+c}}
+\subsubsection[{ei\+\_\+unbind}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+unbind (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+eventtype\+\_\+t}}]{eventtype, }
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag, }
+\item[{{\bf ei\+\_\+callback\+\_\+t}}]{callback, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__event_8c_ad80fcdf761d8a59418b5cb38a1bbcbf9}
+
+
+Unbinds a callback from an event type and widget or tag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em eventtype,widget,tag,callback,user\+\_\+param} & All parameters must have the same value as when \hyperlink{ei__event_8c_a184545ec337224781aa9bfc94117a910}{ei\+\_\+bind} was called to create the binding. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file ei\+\_\+event.\+c.
+

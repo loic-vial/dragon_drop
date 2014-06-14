@@ -1,0 +1,154 @@
+\hypertarget{ei__button_8h}{\section{ei\+\_\+button.\+h File Reference}
+\label{ei__button_8h}\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+frame.\+h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} A type of widget which represent a button \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} \hyperlink{ei__button_8h_ad95915547ebab2ac76e7413ab7fc07ca}{ei\+\_\+button\+\_\+t}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} A type of widget which represent a button \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{ei__button_8h_a0b38f3751cf3c39a2564302956a12ec1}{ei\+\_\+button\+\_\+allocfunc} ()
+\begin{DoxyCompactList}\small\item\em ei\+\_\+button\+\_\+allocfunc A function that is called to allocate a block of the size of a \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} in the memory. It initializes it to zero. \end{DoxyCompactList}\item 
+void \hyperlink{ei__button_8h_acbe822405bfd772bde4d0b7015419e64}{ei\+\_\+button\+\_\+releasefunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+button\+\_\+releasefunc Releases the memory used by the widget button. \end{DoxyCompactList}\item 
+void \hyperlink{ei__button_8h_a9ebc79176951d1a7f8ef9fd7ae4527b2}{ei\+\_\+button\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+button\+\_\+setdefaultsfunc Sets attributes to defaults values. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__button_8h_a5f7da06eb01710002ab013f9ddeb212f}{ei\+\_\+button\+\_\+click\+\_\+down} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+button\+\_\+click\+\_\+down Callback called when a button is down. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__button_8h_a1c9ebdeb59ec609bc58e0b22fb14fd04}{ei\+\_\+button\+\_\+click\+\_\+up} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+button\+\_\+click\+\_\+up Callback called then a clicked button become up \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{ei__button_8h_ad95915547ebab2ac76e7413ab7fc07ca}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+t@{ei\+\_\+button\+\_\+t}}
+\index{ei\+\_\+button\+\_\+t@{ei\+\_\+button\+\_\+t}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ei\+\_\+button\+\_\+t}
+ {\bf ei\+\_\+button\+\_\+t}}}\label{ei__button_8h_ad95915547ebab2ac76e7413ab7fc07ca}
+
+
+\hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} A type of widget which represent a button 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__button_8h_a0b38f3751cf3c39a2564302956a12ec1}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+allocfunc@{ei\+\_\+button\+\_\+allocfunc}}
+\index{ei\+\_\+button\+\_\+allocfunc@{ei\+\_\+button\+\_\+allocfunc}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+allocfunc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ ei\+\_\+button\+\_\+allocfunc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__button_8h_a0b38f3751cf3c39a2564302956a12ec1}
+
+
+ei\+\_\+button\+\_\+allocfunc A function that is called to allocate a block of the size of a \hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} in the memory. It initializes it to zero. 
+
+
+
+Definition at line 4 of file ei\+\_\+button.\+c.
+
+\hypertarget{ei__button_8h_a5f7da06eb01710002ab013f9ddeb212f}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+click\+\_\+down@{ei\+\_\+button\+\_\+click\+\_\+down}}
+\index{ei\+\_\+button\+\_\+click\+\_\+down@{ei\+\_\+button\+\_\+click\+\_\+down}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+click\+\_\+down}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+button\+\_\+click\+\_\+down (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__button_8h_a5f7da06eb01710002ab013f9ddeb212f}
+
+
+ei\+\_\+button\+\_\+click\+\_\+down Callback called when a button is down. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget button which is clicked \\
+\hline
+{\em event} & The event \hyperlink{ei__event_8h_a132dde064150d861ad24e9d839cbe007ae75b2b6a8423d54c46a418d222e0af66}{ei\+\_\+ev\+\_\+mouse\+\_\+buttondown} \\
+\hline
+{\em user\+\_\+param} & Parameters send by the user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 26 of file ei\+\_\+button.\+c.
+
+\hypertarget{ei__button_8h_a1c9ebdeb59ec609bc58e0b22fb14fd04}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+click\+\_\+up@{ei\+\_\+button\+\_\+click\+\_\+up}}
+\index{ei\+\_\+button\+\_\+click\+\_\+up@{ei\+\_\+button\+\_\+click\+\_\+up}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+click\+\_\+up}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+button\+\_\+click\+\_\+up (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__button_8h_a1c9ebdeb59ec609bc58e0b22fb14fd04}
+
+
+ei\+\_\+button\+\_\+click\+\_\+up Callback called then a clicked button become up 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget button which is released \\
+\hline
+{\em event} & The event \hyperlink{ei__event_8h_a132dde064150d861ad24e9d839cbe007aabd9931e36fb3628cc044a2aafc2c7e4}{ei\+\_\+ev\+\_\+mouse\+\_\+buttonup} \\
+\hline
+{\em user\+\_\+param} & Parameters send by the user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 33 of file ei\+\_\+button.\+c.
+
+\hypertarget{ei__button_8h_acbe822405bfd772bde4d0b7015419e64}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+releasefunc@{ei\+\_\+button\+\_\+releasefunc}}
+\index{ei\+\_\+button\+\_\+releasefunc@{ei\+\_\+button\+\_\+releasefunc}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+releasefunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+button\+\_\+releasefunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__button_8h_acbe822405bfd772bde4d0b7015419e64}
+
+
+ei\+\_\+button\+\_\+releasefunc Releases the memory used by the widget button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & This widget is a button that must be released. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file ei\+\_\+button.\+c.
+
+\hypertarget{ei__button_8h_a9ebc79176951d1a7f8ef9fd7ae4527b2}{\index{ei\+\_\+button.\+h@{ei\+\_\+button.\+h}!ei\+\_\+button\+\_\+setdefaultsfunc@{ei\+\_\+button\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+button\+\_\+setdefaultsfunc@{ei\+\_\+button\+\_\+setdefaultsfunc}!ei\+\_\+button.\+h@{ei\+\_\+button.\+h}}
+\subsubsection[{ei\+\_\+button\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+button\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__button_8h_a9ebc79176951d1a7f8ef9fd7ae4527b2}
+
+
+ei\+\_\+button\+\_\+setdefaultsfunc Sets attributes to defaults values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The button widget to set to default. Frame is set to defaults values with \hyperlink{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}{ei\+\_\+frame\+\_\+setdefaultsfunc} Callback and user\+\_\+param are set to N\+U\+L\+L. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 15 of file ei\+\_\+button.\+c.
+

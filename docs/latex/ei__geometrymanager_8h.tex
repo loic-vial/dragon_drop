@@ -1,0 +1,251 @@
+\hypertarget{ei__geometrymanager_8h}{\section{ei\+\_\+geometrymanager.\+h File Reference}
+\label{ei__geometrymanager_8h}\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+}
+
+
+Manages the positionning and sizing of widgets on the screen.  
+
+
+{\ttfamily \#include \char`\"{}ei\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+widget.\+h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structei__geometrymanager__t}{ei\+\_\+geometrymanager\+\_\+t}
+\begin{DoxyCompactList}\small\item\em The structure that stores information about a geometry manager. \end{DoxyCompactList}\item 
+struct \hyperlink{structei__geometry__param__t}{ei\+\_\+geometry\+\_\+param\+\_\+t}
+\begin{DoxyCompactList}\small\item\em A structure that stores information about the geometry manager managing a widget, and the widget's geometry management parameters. This a the generic type. Each geometry manager adds field after \char`\"{}manager\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \hyperlink{ei__geometrymanager_8h_af4774cf9094dc50890c3b767481d6336}{ei\+\_\+geometrymanager\+\_\+name\+\_\+t} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em A name of a geometry manager. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ei__geometrymanager_8h_a29270ac9786c3b30b385c473671311af}{ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t} )(struct \hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em A function that runs the geometry computation for this widget. This may trigger geometry computation for this widget's master and the other slaves of the master. \end{DoxyCompactList}\item 
+typedef void($\ast$ \hyperlink{ei__geometrymanager_8h_a66a8ffc0df10cdc7accb921fbed8a930}{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t} )(struct \hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em A function called when a widget cease to be managed by its geometry manager. Most of the work is done in \hyperlink{ei__geometrymanager_8c_a4d7abf47408b59fc6d7aabb362ef817d}{ei\+\_\+geometrymanager\+\_\+unmap}. This function hook is only provided to trigger recomputation when the disappearance of a widget has an effect on the geometry of other widgets. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structei__geometrymanager__t}{ei\+\_\+geometrymanager\+\_\+t} \hyperlink{ei__geometrymanager_8h_a9a7bb406f58418dcd8fa9aa852c9253c}{ei\+\_\+geometrymanager\+\_\+t}
+\begin{DoxyCompactList}\small\item\em The structure that stores information about a geometry manager. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structei__geometry__param__t}{ei\+\_\+geometry\+\_\+param\+\_\+t} \hyperlink{ei__geometrymanager_8h_a6d6d1d1c4a949ac02568dfd2d5af7f2e}{ei\+\_\+geometry\+\_\+param\+\_\+t}
+\begin{DoxyCompactList}\small\item\em A structure that stores information about the geometry manager managing a widget, and the widget's geometry management parameters. This a the generic type. Each geometry manager adds field after \char`\"{}manager\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__geometrymanager_8h_a2928bbcaa255d39507ef43f7c27ce33b}{ei\+\_\+geometrymanager\+\_\+register} (\hyperlink{structei__geometrymanager__t}{ei\+\_\+geometrymanager\+\_\+t} $\ast$geometrymanager)
+\begin{DoxyCompactList}\small\item\em Registers a geometry manager to the program so that it can be called to manager widgets. This must be done only once in the application. \end{DoxyCompactList}\item 
+\hyperlink{structei__geometrymanager__t}{ei\+\_\+geometrymanager\+\_\+t} $\ast$ \hyperlink{ei__geometrymanager_8h_a6c505d9519b6dfb509346ca0a32d0623}{ei\+\_\+geometrymanager\+\_\+from\+\_\+name} (\hyperlink{ei__geometrymanager_8h_af4774cf9094dc50890c3b767481d6336}{ei\+\_\+geometrymanager\+\_\+name\+\_\+t} name)
+\begin{DoxyCompactList}\small\item\em Returns a geometry manager structure from its name. \end{DoxyCompactList}\item 
+void \hyperlink{ei__geometrymanager_8h_a4d7abf47408b59fc6d7aabb362ef817d}{ei\+\_\+geometrymanager\+\_\+unmap} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Tell the geometry manager in charge of a widget to forget it. This removes the widget from the screen. If the widget is not currently managed, this function returns silently. Side effects\+: \end{DoxyCompactList}\item 
+void \hyperlink{ei__geometrymanager_8h_a90e44cafe03fc57166584123bb0ca6ca}{ei\+\_\+register\+\_\+placer\+\_\+manager} ()
+\begin{DoxyCompactList}\small\item\em Registers the \char`\"{}placer\char`\"{} geometry manager in the program. This must be called only once before the \hyperlink{ei__geometrymanager_8c_ad07d3ef9bc1f0efe5b45b23f8c3b9081}{ei\+\_\+place} function can be called. \end{DoxyCompactList}\item 
+void \hyperlink{ei__geometrymanager_8h_ad07d3ef9bc1f0efe5b45b23f8c3b9081}{ei\+\_\+place} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__types_8h_a3852c963af609d31d7cfcff79c4c8450}{ei\+\_\+anchor\+\_\+t} $\ast$anchor, int $\ast$x, int $\ast$y, int $\ast$width, int $\ast$height, float $\ast$rel\+\_\+x, float $\ast$rel\+\_\+y, float $\ast$rel\+\_\+width, float $\ast$rel\+\_\+height)
+\begin{DoxyCompactList}\small\item\em Configures the geometry of a widget using the \char`\"{}placer\char`\"{} geometry manager. If the widget was already managed by another geometry manager, then it is first removed from the previous geometry manager. If the widget was already managed by the \char`\"{}placer\char`\"{}, then this calls simply updates the placer parameters\+: arguments that are not N\+U\+L\+L replace previous values. When the arguments are passed as N\+U\+L\+L, the placer uses default values (detailed in the argument descriptions below). If no size is provided (either absolute or relative), then the requested size of the widget is used, i.\+e. the minimal size required to display its content. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages the positionning and sizing of widgets on the screen. 
+
+\begin{DoxyAuthor}{Author}
+Created by François Bérard on 18.\+12.\+11. Copyright 2011 Ensimag. All rights reserved. 
+\end{DoxyAuthor}
+
+
+Definition in file \hyperlink{ei__geometrymanager_8h_source}{ei\+\_\+geometrymanager.\+h}.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{ei__geometrymanager_8h_a6d6d1d1c4a949ac02568dfd2d5af7f2e}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometry\+\_\+param\+\_\+t@{ei\+\_\+geometry\+\_\+param\+\_\+t}}
+\index{ei\+\_\+geometry\+\_\+param\+\_\+t@{ei\+\_\+geometry\+\_\+param\+\_\+t}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometry\+\_\+param\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ei\+\_\+geometry\+\_\+param\+\_\+t}  {\bf ei\+\_\+geometry\+\_\+param\+\_\+t}}}\label{ei__geometrymanager_8h_a6d6d1d1c4a949ac02568dfd2d5af7f2e}
+
+
+A structure that stores information about the geometry manager managing a widget, and the widget's geometry management parameters. This a the generic type. Each geometry manager adds field after \char`\"{}manager\char`\"{}. 
+
+\hypertarget{ei__geometrymanager_8h_af4774cf9094dc50890c3b767481d6336}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+name\+\_\+t@{ei\+\_\+geometrymanager\+\_\+name\+\_\+t}}
+\index{ei\+\_\+geometrymanager\+\_\+name\+\_\+t@{ei\+\_\+geometrymanager\+\_\+name\+\_\+t}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+name\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef char ei\+\_\+geometrymanager\+\_\+name\+\_\+t\mbox{[}20\mbox{]}}}\label{ei__geometrymanager_8h_af4774cf9094dc50890c3b767481d6336}
+
+
+A name of a geometry manager. 
+
+
+
+Definition at line 21 of file ei\+\_\+geometrymanager.\+h.
+
+\hypertarget{ei__geometrymanager_8h_a66a8ffc0df10cdc7accb921fbed8a930}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t@{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t}}
+\index{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t@{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t)(struct {\bf ei\+\_\+widget\+\_\+t} $\ast$widget)}}\label{ei__geometrymanager_8h_a66a8ffc0df10cdc7accb921fbed8a930}
+
+
+A function called when a widget cease to be managed by its geometry manager. Most of the work is done in \hyperlink{ei__geometrymanager_8c_a4d7abf47408b59fc6d7aabb362ef817d}{ei\+\_\+geometrymanager\+\_\+unmap}. This function hook is only provided to trigger recomputation when the disappearance of a widget has an effect on the geometry of other widgets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget instance that must be forgotten by the geometry manager. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 39 of file ei\+\_\+geometrymanager.\+h.
+
+\hypertarget{ei__geometrymanager_8h_a29270ac9786c3b30b385c473671311af}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t@{ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t}}
+\index{ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t@{ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ ei\+\_\+geometrymanager\+\_\+runfunc\+\_\+t)(struct {\bf ei\+\_\+widget\+\_\+t} $\ast$widget)}}\label{ei__geometrymanager_8h_a29270ac9786c3b30b385c473671311af}
+
+
+A function that runs the geometry computation for this widget. This may trigger geometry computation for this widget's master and the other slaves of the master. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget instance for which to compute geometry. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 29 of file ei\+\_\+geometrymanager.\+h.
+
+\hypertarget{ei__geometrymanager_8h_a9a7bb406f58418dcd8fa9aa852c9253c}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+t@{ei\+\_\+geometrymanager\+\_\+t}}
+\index{ei\+\_\+geometrymanager\+\_\+t@{ei\+\_\+geometrymanager\+\_\+t}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ei\+\_\+geometrymanager\+\_\+t}  {\bf ei\+\_\+geometrymanager\+\_\+t}}}\label{ei__geometrymanager_8h_a9a7bb406f58418dcd8fa9aa852c9253c}
+
+
+The structure that stores information about a geometry manager. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__geometrymanager_8h_a6c505d9519b6dfb509346ca0a32d0623}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+from\+\_\+name@{ei\+\_\+geometrymanager\+\_\+from\+\_\+name}}
+\index{ei\+\_\+geometrymanager\+\_\+from\+\_\+name@{ei\+\_\+geometrymanager\+\_\+from\+\_\+name}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+from\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+geometrymanager\+\_\+t}$\ast$ ei\+\_\+geometrymanager\+\_\+from\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+geometrymanager\+\_\+name\+\_\+t}}]{name}
+\end{DoxyParamCaption}
+)}}\label{ei__geometrymanager_8h_a6c505d9519b6dfb509346ca0a32d0623}
+
+
+Returns a geometry manager structure from its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the geometry manager.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The structure describing the geometry manager. 
+\end{DoxyReturn}
+
+
+Definition at line 25 of file ei\+\_\+geometrymanager.\+c.
+
+\hypertarget{ei__geometrymanager_8h_a2928bbcaa255d39507ef43f7c27ce33b}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+register@{ei\+\_\+geometrymanager\+\_\+register}}
+\index{ei\+\_\+geometrymanager\+\_\+register@{ei\+\_\+geometrymanager\+\_\+register}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+register}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+geometrymanager\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+geometrymanager\+\_\+t} $\ast$}]{geometrymanager}
+\end{DoxyParamCaption}
+)}}\label{ei__geometrymanager_8h_a2928bbcaa255d39507ef43f7c27ce33b}
+
+
+Registers a geometry manager to the program so that it can be called to manager widgets. This must be done only once in the application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometrymanager} & The structure describing the geometry manager. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file ei\+\_\+geometrymanager.\+c.
+
+\hypertarget{ei__geometrymanager_8h_a4d7abf47408b59fc6d7aabb362ef817d}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+geometrymanager\+\_\+unmap@{ei\+\_\+geometrymanager\+\_\+unmap}}
+\index{ei\+\_\+geometrymanager\+\_\+unmap@{ei\+\_\+geometrymanager\+\_\+unmap}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+geometrymanager\+\_\+unmap}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+geometrymanager\+\_\+unmap (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__geometrymanager_8h_a4d7abf47408b59fc6d7aabb362ef817d}
+
+
+Tell the geometry manager in charge of a widget to forget it. This removes the widget from the screen. If the widget is not currently managed, this function returns silently. Side effects\+: 
+
+
+\begin{DoxyItemize}
+\item the \hyperlink{ei__geometrymanager_8h_a66a8ffc0df10cdc7accb921fbed8a930}{ei\+\_\+geometrymanager\+\_\+releasefunc\+\_\+t} of the geometry manager in charge of this widget is called,  
+\item the geom\+\_\+param field of the widget is freed,  
+\item the current screen\+\_\+location of the widget is invalided (which will trigger a redraw),  
+\item the screen\+\_\+location of the widget is reset to 0.  
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to unmap from the screen. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file ei\+\_\+geometrymanager.\+c.
+
+\hypertarget{ei__geometrymanager_8h_ad07d3ef9bc1f0efe5b45b23f8c3b9081}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+place@{ei\+\_\+place}}
+\index{ei\+\_\+place@{ei\+\_\+place}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+place}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+place (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+anchor\+\_\+t} $\ast$}]{anchor, }
+\item[{int $\ast$}]{x, }
+\item[{int $\ast$}]{y, }
+\item[{int $\ast$}]{width, }
+\item[{int $\ast$}]{height, }
+\item[{float $\ast$}]{rel\+\_\+x, }
+\item[{float $\ast$}]{rel\+\_\+y, }
+\item[{float $\ast$}]{rel\+\_\+width, }
+\item[{float $\ast$}]{rel\+\_\+height}
+\end{DoxyParamCaption}
+)}}\label{ei__geometrymanager_8h_ad07d3ef9bc1f0efe5b45b23f8c3b9081}
+
+
+Configures the geometry of a widget using the \char`\"{}placer\char`\"{} geometry manager. If the widget was already managed by another geometry manager, then it is first removed from the previous geometry manager. If the widget was already managed by the \char`\"{}placer\char`\"{}, then this calls simply updates the placer parameters\+: arguments that are not N\+U\+L\+L replace previous values. When the arguments are passed as N\+U\+L\+L, the placer uses default values (detailed in the argument descriptions below). If no size is provided (either absolute or relative), then the requested size of the widget is used, i.\+e. the minimal size required to display its content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to place. \\
+\hline
+{\em anchor} & How to anchor the widget to the position defined by the placer (defaults to ei\+\_\+anc\+\_\+northwest). \\
+\hline
+{\em x} & The absolute x position of the widget (defaults to 0). \\
+\hline
+{\em y} & The absolute y position of the widget (defaults to 0). \\
+\hline
+{\em width} & The absolute width for the widget (defaults to the requested width of the widget). \\
+\hline
+{\em height} & The absolute height for the widget (defaults to the requested height of the widget). \\
+\hline
+{\em rel\+\_\+x} & The relative x position of the widget\+: 0.\+0 corresponds to the left side of the master, 1.\+0 to the right side (defaults to 0.\+0). \\
+\hline
+{\em rel\+\_\+y} & The relative y position of the widget\+: 0.\+0 corresponds to the top side of the master, 1.\+0 to the bottom side (defaults to 0.\+0). \\
+\hline
+{\em rel\+\_\+width} & The relative width of the widget\+: 0.\+0 corresponds to a width of 0, 1.\+0 to the width of the master (defaults to 0.\+0). \\
+\hline
+{\em rel\+\_\+height} & The relative height of the widget\+: 0.\+0 corresponds to a height of 0, 1.\+0 to the height of the master (defaults to 0.\+0). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 56 of file ei\+\_\+geometrymanager.\+c.
+
+\hypertarget{ei__geometrymanager_8h_a90e44cafe03fc57166584123bb0ca6ca}{\index{ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}!ei\+\_\+register\+\_\+placer\+\_\+manager@{ei\+\_\+register\+\_\+placer\+\_\+manager}}
+\index{ei\+\_\+register\+\_\+placer\+\_\+manager@{ei\+\_\+register\+\_\+placer\+\_\+manager}!ei\+\_\+geometrymanager.\+h@{ei\+\_\+geometrymanager.\+h}}
+\subsubsection[{ei\+\_\+register\+\_\+placer\+\_\+manager}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+register\+\_\+placer\+\_\+manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__geometrymanager_8h_a90e44cafe03fc57166584123bb0ca6ca}
+
+
+Registers the \char`\"{}placer\char`\"{} geometry manager in the program. This must be called only once before the \hyperlink{ei__geometrymanager_8c_ad07d3ef9bc1f0efe5b45b23f8c3b9081}{ei\+\_\+place} function can be called. 
+
+
+
+Definition at line 46 of file ei\+\_\+geometrymanager.\+c.
+

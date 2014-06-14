@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['recompute_5fframe_5frequested_5fsize',['recompute_frame_requested_size',['../ei__widget_8c.html#a3e46af7a6f5eb24292ff593e162707e4',1,'ei_widget.c']]],
+  ['rect',['rect',['../structei__linked__rect__t.html#ae7fa184a482756ca81a340de0775cc8b',1,'ei_linked_rect_t']]],
+  ['rectangle_5fintersection',['rectangle_intersection',['../ei__utils__2_8h.html#a892c1e4490328b6017e1aa5eea6bddae',1,'rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2):&#160;ei_utils_2.c'],['../ei__utils__2_8c.html#a892c1e4490328b6017e1aa5eea6bddae',1,'rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2):&#160;ei_utils_2.c']]],
+  ['red',['red',['../structei__color__t.html#a9adf283c79176b3426ac63784f0bc17b',1,'ei_color_t']]],
+  ['rel_5fheight',['rel_height',['../structei__placer__geometry__param__t.html#aa2a20632f767399e71b3c4ce25ab756a',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fwidth',['rel_width',['../structei__placer__geometry__param__t.html#a6db90e24dd410aba70d28601c4a45848',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fx',['rel_x',['../structei__placer__geometry__param__t.html#a7ef1944c9e941e32ecc97b06d93ccde2',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fy',['rel_y',['../structei__placer__geometry__param__t.html#a0cf562b8ca4f89fc1cad3295597e281f',1,'ei_placer_geometry_param_t']]],
+  ['releasefunc',['releasefunc',['../structei__geometrymanager__t.html#adb7afc019219b29a9751b56da5a23b93',1,'ei_geometrymanager_t::releasefunc()'],['../structei__widgetclass__t.html#aebe6139b31816495e866c99ec3e83de6',1,'ei_widgetclass_t::releasefunc()']]],
+  ['relief',['relief',['../structei__frame__t.html#a4d0e33d09e4119629f4fa13107b4a9f3',1,'ei_frame_t']]],
+  ['relief_5fframe',['relief_frame',['../ei__frame_8c.html#aaa30127adbcc82ceec8cbe474fd93af2',1,'ei_frame.c']]],
+  ['requested_5fsize',['requested_size',['../structei__widget__t.html#ae82b19958b3ec72a855986dffb9b92ea',1,'ei_widget_t']]],
+  ['resizable',['resizable',['../structei__toplevel__t.html#a20ca606f2d466eaab1996942d989f11b',1,'ei_toplevel_t']]],
+  ['resize_5fbutton',['resize_button',['../structei__toplevel__t.html#a417d86f20456e1e21b57f9665b5409c8',1,'ei_toplevel_t']]],
+  ['resize_5fmouse_5fposition',['resize_mouse_position',['../ei__toplevel__resize_8c.html#aa6712b076fa9369a662a1041379b3e2b',1,'ei_toplevel_resize.c']]],
+  ['root',['root',['../ei__application_8c.html#a188f7ca657cce0f90ce29b079b6d9a9c',1,'ei_application.c']]],
+  ['root_5fsurface',['root_surface',['../ei__application_8c.html#aa43092acd84fb566fd40a390a406e0da',1,'ei_application.c']]],
+  ['rounded_5fdown',['rounded_down',['../structei__frame__t.html#a38fd04cba482eb2db2705afd10f2060f',1,'ei_frame_t']]],
+  ['rounded_5fframe',['rounded_frame',['../ei__frame_8c.html#a8eb25c7b3ba5182defa9a4c3f068ee3f',1,'ei_frame.c']]],
+  ['rounded_5fframe_5fdown',['rounded_frame_down',['../ei__frame_8c.html#a4e9406991d8599e06acb74b9eb871f6e',1,'ei_frame.c']]],
+  ['rounded_5fframe_5fup',['rounded_frame_up',['../ei__frame_8c.html#a97f79e901f16fb9991413c81938b24db',1,'ei_frame.c']]],
+  ['rounded_5fup',['rounded_up',['../structei__frame__t.html#a4e35bcc8ad8edb5032d7dce24f419928',1,'ei_frame_t']]],
+  ['runfunc',['runfunc',['../structei__geometrymanager__t.html#a49ab7a4f7b357bdd515a8e7affccdba0',1,'ei_geometrymanager_t']]]
+];
