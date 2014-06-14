@@ -1,0 +1,236 @@
+\hypertarget{ei__radiobutton_8c}{\section{ei\+\_\+radiobutton.\+c File Reference}
+\label{ei__radiobutton_8c}\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+radiobutton.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+placer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+event.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__radiobutton_8c_a9c65b667a31b00240e0654686b55bee7}{click\+\_\+button} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\item 
+void \hyperlink{ei__radiobutton_8c_aeee347db21623ba2c053c54e33c6643e}{ei\+\_\+add\+\_\+children\+\_\+radiobutton} (char $\ast$text, \hyperlink{structei__radiobutton__t}{ei\+\_\+radiobutton\+\_\+t} $\ast$radio)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+add\+\_\+children\+\_\+radiobutton Adds a field in a radiobutton \end{DoxyCompactList}\item 
+void \hyperlink{ei__radiobutton_8c_a2b61a499c65b41f13ffa49eda16966d4}{ei\+\_\+radiobutton\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+radiobutton\+\_\+setdefaultsfunc Sets all attributes of the radiobutton to default. Frame is set to defaults values with \hyperlink{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}{ei\+\_\+frame\+\_\+setdefaultsfunc} A first field is create by default with the text \char`\"{}\+First field\char`\"{} The requested size is \{150,20\} by default \end{DoxyCompactList}\item 
+void \hyperlink{ei__radiobutton_8c_a087e15cc73227d4b375c5f6ead47ff1f}{ei\+\_\+radiobutton\+\_\+configure} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__size__t}{ei\+\_\+size\+\_\+t} $\ast$requested\+\_\+size, const \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} $\ast$color, int $\ast$border\+\_\+width, \hyperlink{ei__types_8h_aa79a32b1d8ece0e44cfa394e870b270b}{ei\+\_\+relief\+\_\+t} $\ast$relief)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+radiobutton\+\_\+configure Configures the attributes of widgets of the class \char`\"{}button\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{ei__radiobutton_8c_a51eaaab029c82f07665e700d75106fd5}{ei\+\_\+radiobutton\+\_\+register\+\_\+class} ()
+\begin{DoxyCompactList}\small\item\em ei\+\_\+radiobutton\+\_\+register\+\_\+class Registers the \char`\"{}radiobutton\char`\"{} widget class in the program. This must be called only once before widgets of the class \char`\"{}radiobutton\char`\"{} can be created and configured with \hyperlink{ei__radiobutton_8c_a087e15cc73227d4b375c5f6ead47ff1f}{ei\+\_\+radiobutton\+\_\+configure}. \end{DoxyCompactList}\item 
+\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$ \hyperlink{ei__radiobutton_8c_a7516efc55a42683788a0a045d0e7c326}{ei\+\_\+find\+\_\+widget} (\hyperlink{structei__radiobutton__t}{ei\+\_\+radiobutton\+\_\+t} $\ast$radio, int number)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+find\+\_\+widget Return a field in the radiobutton \end{DoxyCompactList}\item 
+void \hyperlink{ei__radiobutton_8c_ac19d909ed8b6eb04c050e382489df39b}{ei\+\_\+destroy\+\_\+field} (\hyperlink{structei__radiobutton__t}{ei\+\_\+radiobutton\+\_\+t} $\ast$radio, int number)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+destroy\+\_\+field Destroys a field in a radiobutton \end{DoxyCompactList}\item 
+void \hyperlink{ei__radiobutton_8c_a484614ff11b6a66729b47f14fbfb871e}{ei\+\_\+edit\+\_\+field} (\hyperlink{structei__radiobutton__t}{ei\+\_\+radiobutton\+\_\+t} $\ast$radio, int number, char $\ast$text)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+edit\+\_\+field Changes text of a field \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{ei__radiobutton_8c_a471ae45cd5123964b22c6992b49afca1}{ei\+\_\+return\+\_\+field} (\hyperlink{structei__radiobutton__t}{ei\+\_\+radiobutton\+\_\+t} $\ast$radio)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+return\+\_\+field Returns the text of the field which is chosen \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__radiobutton_8c_a9c65b667a31b00240e0654686b55bee7}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!click\+\_\+button@{click\+\_\+button}}
+\index{click\+\_\+button@{click\+\_\+button}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{click\+\_\+button}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} click\+\_\+button (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a9c65b667a31b00240e0654686b55bee7}
+
+
+Definition at line 11 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_aeee347db21623ba2c053c54e33c6643e}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+add\+\_\+children\+\_\+radiobutton@{ei\+\_\+add\+\_\+children\+\_\+radiobutton}}
+\index{ei\+\_\+add\+\_\+children\+\_\+radiobutton@{ei\+\_\+add\+\_\+children\+\_\+radiobutton}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+add\+\_\+children\+\_\+radiobutton}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+add\+\_\+children\+\_\+radiobutton (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{text, }
+\item[{{\bf ei\+\_\+radiobutton\+\_\+t} $\ast$}]{radio}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_aeee347db21623ba2c053c54e33c6643e}
+
+
+ei\+\_\+add\+\_\+children\+\_\+radiobutton Adds a field in a radiobutton 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Text of this new field \\
+\hline
+{\em radio} & Radiobutton where to add the field \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_ac19d909ed8b6eb04c050e382489df39b}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+destroy\+\_\+field@{ei\+\_\+destroy\+\_\+field}}
+\index{ei\+\_\+destroy\+\_\+field@{ei\+\_\+destroy\+\_\+field}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+destroy\+\_\+field}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+destroy\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+radiobutton\+\_\+t} $\ast$}]{radio, }
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_ac19d909ed8b6eb04c050e382489df39b}
+
+
+ei\+\_\+destroy\+\_\+field Destroys a field in a radiobutton 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radio} & The radiobutton where a field will be destroy \\
+\hline
+{\em number} & Number of the field to destroy \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 195 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a484614ff11b6a66729b47f14fbfb871e}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+edit\+\_\+field@{ei\+\_\+edit\+\_\+field}}
+\index{ei\+\_\+edit\+\_\+field@{ei\+\_\+edit\+\_\+field}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+edit\+\_\+field}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+edit\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+radiobutton\+\_\+t} $\ast$}]{radio, }
+\item[{int}]{number, }
+\item[{char $\ast$}]{text}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a484614ff11b6a66729b47f14fbfb871e}
+
+
+ei\+\_\+edit\+\_\+field Changes text of a field 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radio} & The radiobutton where to change a field \\
+\hline
+{\em number} & Number of the field to change \\
+\hline
+{\em text} & New text of the field \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 222 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a7516efc55a42683788a0a045d0e7c326}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+find\+\_\+widget@{ei\+\_\+find\+\_\+widget}}
+\index{ei\+\_\+find\+\_\+widget@{ei\+\_\+find\+\_\+widget}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+find\+\_\+widget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+widget\+\_\+t}$\ast$ ei\+\_\+find\+\_\+widget (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+radiobutton\+\_\+t} $\ast$}]{radio, }
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a7516efc55a42683788a0a045d0e7c326}
+
+
+ei\+\_\+find\+\_\+widget Return a field in the radiobutton 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radio} & The radiobutton where the field is present \\
+\hline
+{\em number} & Number of the field to return \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return a field or N\+U\+L\+L if the field doesn't exist 
+\end{DoxyReturn}
+
+
+Definition at line 181 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a087e15cc73227d4b375c5f6ead47ff1f}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+radiobutton\+\_\+configure@{ei\+\_\+radiobutton\+\_\+configure}}
+\index{ei\+\_\+radiobutton\+\_\+configure@{ei\+\_\+radiobutton\+\_\+configure}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+radiobutton\+\_\+configure}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+radiobutton\+\_\+configure (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+size\+\_\+t} $\ast$}]{requested\+\_\+size, }
+\item[{const {\bf ei\+\_\+color\+\_\+t} $\ast$}]{color, }
+\item[{int $\ast$}]{border\+\_\+width, }
+\item[{{\bf ei\+\_\+relief\+\_\+t} $\ast$}]{relief}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a087e15cc73227d4b375c5f6ead47ff1f}
+
+
+ei\+\_\+radiobutton\+\_\+configure Configures the attributes of widgets of the class \char`\"{}button\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & Widget to configure \\
+\hline
+{\em requested\+\_\+size} & Size that is requested to the radiobutton with all fields \\
+\hline
+{\em color} & Color of the radiobutton \\
+\hline
+{\em border\+\_\+width} & Border width of the radiobutton \\
+\hline
+{\em relief} & Relief of the radiobuton \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 108 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a51eaaab029c82f07665e700d75106fd5}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+radiobutton\+\_\+register\+\_\+class@{ei\+\_\+radiobutton\+\_\+register\+\_\+class}}
+\index{ei\+\_\+radiobutton\+\_\+register\+\_\+class@{ei\+\_\+radiobutton\+\_\+register\+\_\+class}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+radiobutton\+\_\+register\+\_\+class}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+radiobutton\+\_\+register\+\_\+class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a51eaaab029c82f07665e700d75106fd5}
+
+
+ei\+\_\+radiobutton\+\_\+register\+\_\+class Registers the \char`\"{}radiobutton\char`\"{} widget class in the program. This must be called only once before widgets of the class \char`\"{}radiobutton\char`\"{} can be created and configured with \hyperlink{ei__radiobutton_8c_a087e15cc73227d4b375c5f6ead47ff1f}{ei\+\_\+radiobutton\+\_\+configure}. 
+
+
+
+Definition at line 167 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a2b61a499c65b41f13ffa49eda16966d4}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+radiobutton\+\_\+setdefaultsfunc@{ei\+\_\+radiobutton\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+radiobutton\+\_\+setdefaultsfunc@{ei\+\_\+radiobutton\+\_\+setdefaultsfunc}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+radiobutton\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+radiobutton\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a2b61a499c65b41f13ffa49eda16966d4}
+
+
+ei\+\_\+radiobutton\+\_\+setdefaultsfunc Sets all attributes of the radiobutton to default. Frame is set to defaults values with \hyperlink{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}{ei\+\_\+frame\+\_\+setdefaultsfunc} A first field is create by default with the text \char`\"{}\+First field\char`\"{} The requested size is \{150,20\} by default 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & Radiobutton widget to set to default \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file ei\+\_\+radiobutton.\+c.
+
+\hypertarget{ei__radiobutton_8c_a471ae45cd5123964b22c6992b49afca1}{\index{ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}!ei\+\_\+return\+\_\+field@{ei\+\_\+return\+\_\+field}}
+\index{ei\+\_\+return\+\_\+field@{ei\+\_\+return\+\_\+field}!ei\+\_\+radiobutton.\+c@{ei\+\_\+radiobutton.\+c}}
+\subsubsection[{ei\+\_\+return\+\_\+field}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ ei\+\_\+return\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+radiobutton\+\_\+t} $\ast$}]{radio}
+\end{DoxyParamCaption}
+)}}\label{ei__radiobutton_8c_a471ae45cd5123964b22c6992b49afca1}
+
+
+ei\+\_\+return\+\_\+field Returns the text of the field which is chosen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radio} & The radiobutton where to picked the chosen field \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return the text of the chosen field or N\+U\+L\+L if the field doesn't exist 
+\end{DoxyReturn}
+
+
+Definition at line 233 of file ei\+\_\+radiobutton.\+c.
+

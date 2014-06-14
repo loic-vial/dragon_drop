@@ -1,0 +1,53 @@
+\hypertarget{ei__placer_8c}{\section{ei\+\_\+placer.\+c File Reference}
+\label{ei__placer_8c}\index{ei\+\_\+placer.\+c@{ei\+\_\+placer.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+placer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+application.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__placer_8c_ae72d3bcaefd9a47146202227bb6ba9b1}{ei\+\_\+runfunc\+\_\+placer} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Places a widget correctly in the screen according to the placer's geometry parameters. \end{DoxyCompactList}\item 
+void \hyperlink{ei__placer_8c_a91a94c16e3ff106d8fbe1e2bab7d2f0d}{ei\+\_\+releasefunc\+\_\+placer} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Releases the parameters of the placer geometry manager of the widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__placer_8c_a91a94c16e3ff106d8fbe1e2bab7d2f0d}{\index{ei\+\_\+placer.\+c@{ei\+\_\+placer.\+c}!ei\+\_\+releasefunc\+\_\+placer@{ei\+\_\+releasefunc\+\_\+placer}}
+\index{ei\+\_\+releasefunc\+\_\+placer@{ei\+\_\+releasefunc\+\_\+placer}!ei\+\_\+placer.\+c@{ei\+\_\+placer.\+c}}
+\subsubsection[{ei\+\_\+releasefunc\+\_\+placer}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+releasefunc\+\_\+placer (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__placer_8c_a91a94c16e3ff106d8fbe1e2bab7d2f0d}
+
+
+Releases the parameters of the placer geometry manager of the widget. 
+
+
+
+Definition at line 53 of file ei\+\_\+placer.\+c.
+
+\hypertarget{ei__placer_8c_ae72d3bcaefd9a47146202227bb6ba9b1}{\index{ei\+\_\+placer.\+c@{ei\+\_\+placer.\+c}!ei\+\_\+runfunc\+\_\+placer@{ei\+\_\+runfunc\+\_\+placer}}
+\index{ei\+\_\+runfunc\+\_\+placer@{ei\+\_\+runfunc\+\_\+placer}!ei\+\_\+placer.\+c@{ei\+\_\+placer.\+c}}
+\subsubsection[{ei\+\_\+runfunc\+\_\+placer}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+runfunc\+\_\+placer (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__placer_8c_ae72d3bcaefd9a47146202227bb6ba9b1}
+
+
+Places a widget correctly in the screen according to the placer's geometry parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to place This function will use the parameters of the placer geometry manager of the widget to adjust the screen\+\_\+location attribute of the widget. If the screen\+\_\+location is modified between the beginning and the end of the function, then the geomnotify function of the widget is called, and both the old screen location and the new one are invalidated. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 7 of file ei\+\_\+placer.\+c.
+

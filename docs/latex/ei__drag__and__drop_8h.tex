@@ -1,0 +1,86 @@
+\hypertarget{ei__drag__and__drop_8h}{\section{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h File Reference}
+\label{ei__drag__and__drop_8h}\index{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+widget.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+event.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__drag__and__drop_8h_a86d86468f8d59f45e4311d0ab18ca0e8}{ei\+\_\+enable\+\_\+movable\+\_\+tag} ()
+\begin{DoxyCompactList}\small\item\em Enables any widget with the tag \char`\"{}movable\char`\"{} to be \char`\"{}dragged and dropped\char`\"{}. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__drag__and__drop_8h_add1883ea57bfa8b201b8f3e7fcca45ce}{ei\+\_\+movable\+\_\+drag\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button move callback for movable widgets. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__drag__and__drop_8h_abe22e9cd5b730b69078d614e3a93809b}{ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button up callback for movable widgets This function ends the drag and drop for a widget. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__drag__and__drop_8h_a4e4caa194e4d5f2eec573400b588b4c3}{ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\begin{DoxyCompactList}\small\item\em Mouse button down callback for movable widgets This function initializes the drag and drop for a widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__drag__and__drop_8h_a86d86468f8d59f45e4311d0ab18ca0e8}{\index{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}!ei\+\_\+enable\+\_\+movable\+\_\+tag@{ei\+\_\+enable\+\_\+movable\+\_\+tag}}
+\index{ei\+\_\+enable\+\_\+movable\+\_\+tag@{ei\+\_\+enable\+\_\+movable\+\_\+tag}!ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}}
+\subsubsection[{ei\+\_\+enable\+\_\+movable\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+enable\+\_\+movable\+\_\+tag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__drag__and__drop_8h_a86d86468f8d59f45e4311d0ab18ca0e8}
+
+
+Enables any widget with the tag \char`\"{}movable\char`\"{} to be \char`\"{}dragged and dropped\char`\"{}. 
+
+
+
+Definition at line 11 of file ei\+\_\+drag\+\_\+and\+\_\+drop.\+c.
+
+\hypertarget{ei__drag__and__drop_8h_add1883ea57bfa8b201b8f3e7fcca45ce}{\index{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}!ei\+\_\+movable\+\_\+drag\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+callback}}
+\index{ei\+\_\+movable\+\_\+drag\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+callback}!ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}}
+\subsubsection[{ei\+\_\+movable\+\_\+drag\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+movable\+\_\+drag\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__drag__and__drop_8h_add1883ea57bfa8b201b8f3e7fcca45ce}
+
+
+Mouse button move callback for movable widgets. 
+
+
+
+Definition at line 28 of file ei\+\_\+drag\+\_\+and\+\_\+drop.\+c.
+
+\hypertarget{ei__drag__and__drop_8h_a4e4caa194e4d5f2eec573400b588b4c3}{\index{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}!ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback}}
+\index{ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback}!ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}}
+\subsubsection[{ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+movable\+\_\+drag\+\_\+start\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__drag__and__drop_8h_a4e4caa194e4d5f2eec573400b588b4c3}
+
+
+Mouse button down callback for movable widgets This function initializes the drag and drop for a widget. 
+
+
+
+Definition at line 16 of file ei\+\_\+drag\+\_\+and\+\_\+drop.\+c.
+
+\hypertarget{ei__drag__and__drop_8h_abe22e9cd5b730b69078d614e3a93809b}{\index{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}!ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback}}
+\index{ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback@{ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback}!ei\+\_\+drag\+\_\+and\+\_\+drop.\+h@{ei\+\_\+drag\+\_\+and\+\_\+drop.\+h}}
+\subsubsection[{ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+movable\+\_\+drag\+\_\+stop\+\_\+callback (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__drag__and__drop_8h_abe22e9cd5b730b69078d614e3a93809b}
+
+
+Mouse button up callback for movable widgets This function ends the drag and drop for a widget. 
+
+
+
+Definition at line 42 of file ei\+\_\+drag\+\_\+and\+\_\+drop.\+c.
+

@@ -1,0 +1,160 @@
+\hypertarget{structei__toplevel__t}{\section{ei\+\_\+toplevel\+\_\+t Struct Reference}
+\label{structei__toplevel__t}\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+}
+
+
+Structure that defines a Top\+Level widget A toplevel is a kind of window, it can be moved by clicking on its banner, it can be resized by clicking on its bottom right button, and it can be closed by clicking on its top left 'X' button.  
+
+
+
+
+{\ttfamily \#include $<$ei\+\_\+toplevel.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structei__frame__t}{ei\+\_\+frame\+\_\+t} \hyperlink{structei__toplevel__t_a03509f8ae2983cc3777569d7e10deae6}{frame}
+\begin{DoxyCompactList}\small\item\em Allows the inheritance with frame and give all frame attributes to the toplevel. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{structei__toplevel__t_ad3b3d6a03d225a21c7b414357c678b1b}{title}
+\begin{DoxyCompactList}\small\item\em The title of the toplevel, wich will be displayed in the upper banner. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{structei__toplevel__t_a462595f505435050c9e1362fedd71fe5}{closable}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the toplevel window is closable or not. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_ab5d9ff46ba9b2c9fa6d6fbd2594c6439}{ei\+\_\+axis\+\_\+set\+\_\+t} \hyperlink{structei__toplevel__t_a20ca606f2d466eaab1996942d989f11b}{resizable}
+\begin{DoxyCompactList}\small\item\em Defines the axis where you can resize the toplevel. \end{DoxyCompactList}\item 
+\hyperlink{structei__size__t}{ei\+\_\+size\+\_\+t} $\ast$ \hyperlink{structei__toplevel__t_a0eda3e2e2012df72477221731a6c2bd3}{min\+\_\+size}
+\begin{DoxyCompactList}\small\item\em The minimum size that the toplevel can take when resizing (N\+U\+L\+L means no minimum size) \end{DoxyCompactList}\item 
+\hyperlink{structei__frame__t}{ei\+\_\+frame\+\_\+t} $\ast$ \hyperlink{structei__toplevel__t_a0adebbd97cffba4f38d5f7da127ba8fd}{banner}
+\begin{DoxyCompactList}\small\item\em The upper banner of the toplevel (Child of the toplevel) \end{DoxyCompactList}\item 
+\hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} $\ast$ \hyperlink{structei__toplevel__t_a4efd970ca149d9e9f8e5d8dcabd5441b}{close\+\_\+button}
+\begin{DoxyCompactList}\small\item\em The close button (Child of the banner) \end{DoxyCompactList}\item 
+\hyperlink{structei__button__t}{ei\+\_\+button\+\_\+t} $\ast$ \hyperlink{structei__toplevel__t_a417d86f20456e1e21b57f9665b5409c8}{resize\+\_\+button}
+\begin{DoxyCompactList}\small\item\em The resize button (Child of the toplevel) \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a22c8198e4d641e4bc67bb17f9c6bcda7}{ei\+\_\+font\+\_\+t} \hyperlink{structei__toplevel__t_aec35a67c16125a0aa3adf345f1c597a9}{close\+\_\+button\+\_\+font}
+\begin{DoxyCompactList}\small\item\em The font of the close button. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a22c8198e4d641e4bc67bb17f9c6bcda7}{ei\+\_\+font\+\_\+t} \hyperlink{structei__toplevel__t_a7d5368e56c6d56ae26536bce28499b32}{banner\+\_\+font}
+\begin{DoxyCompactList}\small\item\em The font of the banner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure that defines a Top\+Level widget A toplevel is a kind of window, it can be moved by clicking on its banner, it can be resized by clicking on its bottom right button, and it can be closed by clicking on its top left 'X' button. 
+
+Definition at line 12 of file ei\+\_\+toplevel.\+h.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{structei__toplevel__t_a0adebbd97cffba4f38d5f7da127ba8fd}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!banner@{banner}}
+\index{banner@{banner}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{banner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+frame\+\_\+t}$\ast$ ei\+\_\+toplevel\+\_\+t\+::banner}}\label{structei__toplevel__t_a0adebbd97cffba4f38d5f7da127ba8fd}
+
+
+The upper banner of the toplevel (Child of the toplevel) 
+
+
+
+Definition at line 19 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a7d5368e56c6d56ae26536bce28499b32}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!banner\+\_\+font@{banner\+\_\+font}}
+\index{banner\+\_\+font@{banner\+\_\+font}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{banner\+\_\+font}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+font\+\_\+t} ei\+\_\+toplevel\+\_\+t\+::banner\+\_\+font}}\label{structei__toplevel__t_a7d5368e56c6d56ae26536bce28499b32}
+
+
+The font of the banner. 
+
+
+
+Definition at line 23 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a462595f505435050c9e1362fedd71fe5}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!closable@{closable}}
+\index{closable@{closable}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{closable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+toplevel\+\_\+t\+::closable}}\label{structei__toplevel__t_a462595f505435050c9e1362fedd71fe5}
+
+
+A boolean that indicates if the toplevel window is closable or not. 
+
+
+
+Definition at line 16 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a4efd970ca149d9e9f8e5d8dcabd5441b}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!close\+\_\+button@{close\+\_\+button}}
+\index{close\+\_\+button@{close\+\_\+button}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{close\+\_\+button}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+button\+\_\+t}$\ast$ ei\+\_\+toplevel\+\_\+t\+::close\+\_\+button}}\label{structei__toplevel__t_a4efd970ca149d9e9f8e5d8dcabd5441b}
+
+
+The close button (Child of the banner) 
+
+
+
+Definition at line 20 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_aec35a67c16125a0aa3adf345f1c597a9}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!close\+\_\+button\+\_\+font@{close\+\_\+button\+\_\+font}}
+\index{close\+\_\+button\+\_\+font@{close\+\_\+button\+\_\+font}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{close\+\_\+button\+\_\+font}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+font\+\_\+t} ei\+\_\+toplevel\+\_\+t\+::close\+\_\+button\+\_\+font}}\label{structei__toplevel__t_aec35a67c16125a0aa3adf345f1c597a9}
+
+
+The font of the close button. 
+
+
+
+Definition at line 22 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a03509f8ae2983cc3777569d7e10deae6}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!frame@{frame}}
+\index{frame@{frame}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{frame}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+frame\+\_\+t} ei\+\_\+toplevel\+\_\+t\+::frame}}\label{structei__toplevel__t_a03509f8ae2983cc3777569d7e10deae6}
+
+
+Allows the inheritance with frame and give all frame attributes to the toplevel. 
+
+
+
+Definition at line 14 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a0eda3e2e2012df72477221731a6c2bd3}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!min\+\_\+size@{min\+\_\+size}}
+\index{min\+\_\+size@{min\+\_\+size}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{min\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+size\+\_\+t}$\ast$ ei\+\_\+toplevel\+\_\+t\+::min\+\_\+size}}\label{structei__toplevel__t_a0eda3e2e2012df72477221731a6c2bd3}
+
+
+The minimum size that the toplevel can take when resizing (N\+U\+L\+L means no minimum size) 
+
+
+
+Definition at line 18 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a20ca606f2d466eaab1996942d989f11b}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!resizable@{resizable}}
+\index{resizable@{resizable}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{resizable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+axis\+\_\+set\+\_\+t} ei\+\_\+toplevel\+\_\+t\+::resizable}}\label{structei__toplevel__t_a20ca606f2d466eaab1996942d989f11b}
+
+
+Defines the axis where you can resize the toplevel. 
+
+
+
+Definition at line 17 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_a417d86f20456e1e21b57f9665b5409c8}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!resize\+\_\+button@{resize\+\_\+button}}
+\index{resize\+\_\+button@{resize\+\_\+button}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{resize\+\_\+button}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+button\+\_\+t}$\ast$ ei\+\_\+toplevel\+\_\+t\+::resize\+\_\+button}}\label{structei__toplevel__t_a417d86f20456e1e21b57f9665b5409c8}
+
+
+The resize button (Child of the toplevel) 
+
+
+
+Definition at line 21 of file ei\+\_\+toplevel.\+h.
+
+\hypertarget{structei__toplevel__t_ad3b3d6a03d225a21c7b414357c678b1b}{\index{ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}!title@{title}}
+\index{title@{title}!ei\+\_\+toplevel\+\_\+t@{ei\+\_\+toplevel\+\_\+t}}
+\subsubsection[{title}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ ei\+\_\+toplevel\+\_\+t\+::title}}\label{structei__toplevel__t_ad3b3d6a03d225a21c7b414357c678b1b}
+
+
+The title of the toplevel, wich will be displayed in the upper banner. 
+
+
+
+Definition at line 15 of file ei\+\_\+toplevel.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ei__toplevel_8h}{ei\+\_\+toplevel.\+h}\end{DoxyCompactItemize}

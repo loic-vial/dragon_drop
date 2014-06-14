@@ -1,0 +1,132 @@
+\hypertarget{ei__toplevel_8c}{\section{ei\+\_\+toplevel.\+c File Reference}
+\label{ei__toplevel_8c}\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+toplevel.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+placer.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{ei__toplevel_8c_a09c9a142a28ff1dc594bdb839ec72394}{ei\+\_\+toplevel\+\_\+allocfunc} ()
+\begin{DoxyCompactList}\small\item\em Allocates the required memory to all the attributes of a toplevel widget. \end{DoxyCompactList}\item 
+void \hyperlink{ei__toplevel_8c_af3358aa7525d38f6b2429e71d61a63a0}{ei\+\_\+toplevel\+\_\+releasefunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Releases the attributes of a toplevel widget. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__toplevel_8c_a0ba96a6df87714b392a8d22023cd5634}{close\+\_\+button\+\_\+click} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{structei__event__t}{ei\+\_\+event\+\_\+t} $\ast$event, void $\ast$user\+\_\+param)
+\item 
+void \hyperlink{ei__toplevel_8c_ae2b3cf24153a67c0e2d3474a23b855ef}{toplevel\+\_\+frame\+\_\+init} (\hyperlink{structei__toplevel__t}{ei\+\_\+toplevel\+\_\+t} $\ast$toplevel)
+\item 
+void \hyperlink{ei__toplevel_8c_a66975e55a0e0fe1b9c16a520c42ffbae}{toplevel\+\_\+banner\+\_\+init} (\hyperlink{structei__toplevel__t}{ei\+\_\+toplevel\+\_\+t} $\ast$toplevel)
+\item 
+void \hyperlink{ei__toplevel_8c_a2f01b023cd167d8920a3a4a7047fa992}{toplevel\+\_\+close\+\_\+button\+\_\+init} (\hyperlink{structei__toplevel__t}{ei\+\_\+toplevel\+\_\+t} $\ast$toplevel)
+\item 
+void \hyperlink{ei__toplevel_8c_a56c6315f34097425c5ee836b00367ea3}{toplevel\+\_\+resize\+\_\+button\+\_\+init} (\hyperlink{structei__toplevel__t}{ei\+\_\+toplevel\+\_\+t} $\ast$toplevel)
+\item 
+void \hyperlink{ei__toplevel_8c_ac7677ba5d7a349fe11e4222195739d11}{ei\+\_\+toplevel\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Sets the default attributes of a toplevel widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__toplevel_8c_a0ba96a6df87714b392a8d22023cd5634}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!close\+\_\+button\+\_\+click@{close\+\_\+button\+\_\+click}}
+\index{close\+\_\+button\+\_\+click@{close\+\_\+button\+\_\+click}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{close\+\_\+button\+\_\+click}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} close\+\_\+button\+\_\+click (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+event\+\_\+t} $\ast$}]{event, }
+\item[{void $\ast$}]{user\+\_\+param}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_a0ba96a6df87714b392a8d22023cd5634}
+
+
+Definition at line 24 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_a09c9a142a28ff1dc594bdb839ec72394}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!ei\+\_\+toplevel\+\_\+allocfunc@{ei\+\_\+toplevel\+\_\+allocfunc}}
+\index{ei\+\_\+toplevel\+\_\+allocfunc@{ei\+\_\+toplevel\+\_\+allocfunc}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+allocfunc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ ei\+\_\+toplevel\+\_\+allocfunc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_a09c9a142a28ff1dc594bdb839ec72394}
+
+
+Allocates the required memory to all the attributes of a toplevel widget. 
+
+
+
+Definition at line 7 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_af3358aa7525d38f6b2429e71d61a63a0}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!ei\+\_\+toplevel\+\_\+releasefunc@{ei\+\_\+toplevel\+\_\+releasefunc}}
+\index{ei\+\_\+toplevel\+\_\+releasefunc@{ei\+\_\+toplevel\+\_\+releasefunc}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+releasefunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+toplevel\+\_\+releasefunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_af3358aa7525d38f6b2429e71d61a63a0}
+
+
+Releases the attributes of a toplevel widget. 
+
+
+
+Definition at line 12 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_ac7677ba5d7a349fe11e4222195739d11}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!ei\+\_\+toplevel\+\_\+setdefaultsfunc@{ei\+\_\+toplevel\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+toplevel\+\_\+setdefaultsfunc@{ei\+\_\+toplevel\+\_\+setdefaultsfunc}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{ei\+\_\+toplevel\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+toplevel\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_ac7677ba5d7a349fe11e4222195739d11}
+
+
+Sets the default attributes of a toplevel widget. 
+
+
+
+Definition at line 101 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_a66975e55a0e0fe1b9c16a520c42ffbae}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!toplevel\+\_\+banner\+\_\+init@{toplevel\+\_\+banner\+\_\+init}}
+\index{toplevel\+\_\+banner\+\_\+init@{toplevel\+\_\+banner\+\_\+init}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{toplevel\+\_\+banner\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}void toplevel\+\_\+banner\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+toplevel\+\_\+t} $\ast$}]{toplevel}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_a66975e55a0e0fe1b9c16a520c42ffbae}
+
+
+Definition at line 44 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_a2f01b023cd167d8920a3a4a7047fa992}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!toplevel\+\_\+close\+\_\+button\+\_\+init@{toplevel\+\_\+close\+\_\+button\+\_\+init}}
+\index{toplevel\+\_\+close\+\_\+button\+\_\+init@{toplevel\+\_\+close\+\_\+button\+\_\+init}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{toplevel\+\_\+close\+\_\+button\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}void toplevel\+\_\+close\+\_\+button\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+toplevel\+\_\+t} $\ast$}]{toplevel}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_a2f01b023cd167d8920a3a4a7047fa992}
+
+
+Definition at line 65 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_ae2b3cf24153a67c0e2d3474a23b855ef}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!toplevel\+\_\+frame\+\_\+init@{toplevel\+\_\+frame\+\_\+init}}
+\index{toplevel\+\_\+frame\+\_\+init@{toplevel\+\_\+frame\+\_\+init}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{toplevel\+\_\+frame\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}void toplevel\+\_\+frame\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+toplevel\+\_\+t} $\ast$}]{toplevel}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_ae2b3cf24153a67c0e2d3474a23b855ef}
+
+
+Definition at line 30 of file ei\+\_\+toplevel.\+c.
+
+\hypertarget{ei__toplevel_8c_a56c6315f34097425c5ee836b00367ea3}{\index{ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}!toplevel\+\_\+resize\+\_\+button\+\_\+init@{toplevel\+\_\+resize\+\_\+button\+\_\+init}}
+\index{toplevel\+\_\+resize\+\_\+button\+\_\+init@{toplevel\+\_\+resize\+\_\+button\+\_\+init}!ei\+\_\+toplevel.\+c@{ei\+\_\+toplevel.\+c}}
+\subsubsection[{toplevel\+\_\+resize\+\_\+button\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}void toplevel\+\_\+resize\+\_\+button\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+toplevel\+\_\+t} $\ast$}]{toplevel}
+\end{DoxyParamCaption}
+)}}\label{ei__toplevel_8c_a56c6315f34097425c5ee836b00367ea3}
+
+
+Definition at line 91 of file ei\+\_\+toplevel.\+c.
+

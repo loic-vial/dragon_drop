@@ -1,0 +1,187 @@
+\hypertarget{ei__utils__2_8c}{\section{ei\+\_\+utils\+\_\+2.\+c File Reference}
+\label{ei__utils__2_8c}\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+application.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structei__point__t}{ei\+\_\+point\+\_\+t} \hyperlink{ei__utils__2_8c_a04c9cd58e65ea18adcc8556d65a34632}{ei\+\_\+position\+\_\+from\+\_\+anchor} (\hyperlink{structei__point__t}{ei\+\_\+point\+\_\+t} top\+\_\+left\+\_\+corner, \hyperlink{structei__size__t}{ei\+\_\+size\+\_\+t} parent\+\_\+size, \hyperlink{structei__size__t}{ei\+\_\+size\+\_\+t} child\+\_\+size, \hyperlink{ei__types_8h_a3852c963af609d31d7cfcff79c4c8450}{ei\+\_\+anchor\+\_\+t} anchor)
+\begin{DoxyCompactList}\small\item\em Computes the position of a child inside its parent at a specific anchor. \end{DoxyCompactList}\item 
+\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} \hyperlink{ei__utils__2_8c_a4327f008bdde0bfa63535bbd6a9ed8ee}{ei\+\_\+color} (unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
+\begin{DoxyCompactList}\small\item\em Creates a new R\+G\+B\+A color inline. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__utils__2_8c_a760f4ee8f2949549ba35b79e2633c09e}{is\+\_\+same\+\_\+color} (\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} color1, \hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} color2)
+\begin{DoxyCompactList}\small\item\em Tests if two colors are equal. \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__utils__2_8c_a5718904478b20649c3fbc3a5ef8c3c87}{is\+\_\+same\+\_\+rect} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rect1, \hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rect2)
+\begin{DoxyCompactList}\small\item\em Tests if two rectangles are equal. \end{DoxyCompactList}\item 
+void \hyperlink{ei__utils__2_8c_a6b1e2492fb0a6478ecadb417211faa2d}{ei\+\_\+clear\+\_\+rect\+\_\+list} (\hyperlink{structei__linked__rect__t}{ei\+\_\+linked\+\_\+rect\+\_\+t} $\ast$$\ast$rects)
+\begin{DoxyCompactList}\small\item\em Empty a linked list of rectangles. \end{DoxyCompactList}\item 
+int \hyperlink{ei__utils__2_8c_a0cb0f16e06a0556633b19a97a819b209}{min} (int x1, int x2)
+\begin{DoxyCompactList}\small\item\em Computes the minimum of two integers. \end{DoxyCompactList}\item 
+int \hyperlink{ei__utils__2_8c_aac1e6b2e4ead5ef3b5c66dab6d697a54}{max} (int x1, int x2)
+\begin{DoxyCompactList}\small\item\em Computes the maximum of two integers. \end{DoxyCompactList}\item 
+\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} \hyperlink{ei__utils__2_8c_a892c1e4490328b6017e1aa5eea6bddae}{rectangle\+\_\+intersection} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rect1, \hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rect2)
+\begin{DoxyCompactList}\small\item\em Computes the rectangle which intersects two rectangles. \end{DoxyCompactList}\item 
+void \hyperlink{ei__utils__2_8c_a57cb8bfc0c8a9ae198f9f1c6d7aa7b61}{ei\+\_\+tail} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Moves a widget at the end (the tail) of its parent The consequence is that this widget will be displayed in front of its siblings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__utils__2_8c_a6b1e2492fb0a6478ecadb417211faa2d}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!ei\+\_\+clear\+\_\+rect\+\_\+list@{ei\+\_\+clear\+\_\+rect\+\_\+list}}
+\index{ei\+\_\+clear\+\_\+rect\+\_\+list@{ei\+\_\+clear\+\_\+rect\+\_\+list}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{ei\+\_\+clear\+\_\+rect\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+clear\+\_\+rect\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+rect\+\_\+t} $\ast$$\ast$}]{rects}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a6b1e2492fb0a6478ecadb417211faa2d}
+
+
+Empty a linked list of rectangles. 
+
+
+
+Definition at line 89 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a4327f008bdde0bfa63535bbd6a9ed8ee}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!ei\+\_\+color@{ei\+\_\+color}}
+\index{ei\+\_\+color@{ei\+\_\+color}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{ei\+\_\+color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+color\+\_\+t} ei\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{red, }
+\item[{unsigned char}]{green, }
+\item[{unsigned char}]{blue, }
+\item[{unsigned char}]{alpha}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a4327f008bdde0bfa63535bbd6a9ed8ee}
+
+
+Creates a new R\+G\+B\+A color inline. 
+
+
+
+Definition at line 63 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a04c9cd58e65ea18adcc8556d65a34632}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!ei\+\_\+position\+\_\+from\+\_\+anchor@{ei\+\_\+position\+\_\+from\+\_\+anchor}}
+\index{ei\+\_\+position\+\_\+from\+\_\+anchor@{ei\+\_\+position\+\_\+from\+\_\+anchor}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{ei\+\_\+position\+\_\+from\+\_\+anchor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+point\+\_\+t} ei\+\_\+position\+\_\+from\+\_\+anchor (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+point\+\_\+t}}]{parent\+\_\+top\+\_\+left\+\_\+corner, }
+\item[{{\bf ei\+\_\+size\+\_\+t}}]{parent\+\_\+size, }
+\item[{{\bf ei\+\_\+size\+\_\+t}}]{child\+\_\+size, }
+\item[{{\bf ei\+\_\+anchor\+\_\+t}}]{anchor}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a04c9cd58e65ea18adcc8556d65a34632}
+
+
+Computes the position of a child inside its parent at a specific anchor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent\+\_\+top\+\_\+left\+\_\+corner} & The top left corner of the parent \\
+\hline
+{\em parent\+\_\+size} & The size of the parent \\
+\hline
+{\em child\+\_\+size} & The size of the child \\
+\hline
+{\em anchor} & The anchor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a57cb8bfc0c8a9ae198f9f1c6d7aa7b61}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!ei\+\_\+tail@{ei\+\_\+tail}}
+\index{ei\+\_\+tail@{ei\+\_\+tail}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{ei\+\_\+tail}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+tail (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a57cb8bfc0c8a9ae198f9f1c6d7aa7b61}
+
+
+Moves a widget at the end (the tail) of its parent The consequence is that this widget will be displayed in front of its siblings. 
+
+
+
+Definition at line 138 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a760f4ee8f2949549ba35b79e2633c09e}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!is\+\_\+same\+\_\+color@{is\+\_\+same\+\_\+color}}
+\index{is\+\_\+same\+\_\+color@{is\+\_\+same\+\_\+color}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{is\+\_\+same\+\_\+color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} is\+\_\+same\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+color\+\_\+t}}]{color1, }
+\item[{{\bf ei\+\_\+color\+\_\+t}}]{color2}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a760f4ee8f2949549ba35b79e2633c09e}
+
+
+Tests if two colors are equal. 
+
+
+
+Definition at line 73 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a5718904478b20649c3fbc3a5ef8c3c87}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!is\+\_\+same\+\_\+rect@{is\+\_\+same\+\_\+rect}}
+\index{is\+\_\+same\+\_\+rect@{is\+\_\+same\+\_\+rect}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{is\+\_\+same\+\_\+rect}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} is\+\_\+same\+\_\+rect (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rect1, }
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rect2}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a5718904478b20649c3fbc3a5ef8c3c87}
+
+
+Tests if two rectangles are equal. 
+
+
+
+Definition at line 81 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_aac1e6b2e4ead5ef3b5c66dab6d697a54}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!max@{max}}
+\index{max@{max}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{max}]{\setlength{\rightskip}{0pt plus 5cm}int max (
+\begin{DoxyParamCaption}
+\item[{int}]{x1, }
+\item[{int}]{x2}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_aac1e6b2e4ead5ef3b5c66dab6d697a54}
+
+
+Computes the maximum of two integers. 
+
+
+
+Definition at line 107 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a0cb0f16e06a0556633b19a97a819b209}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!min@{min}}
+\index{min@{min}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{min}]{\setlength{\rightskip}{0pt plus 5cm}int min (
+\begin{DoxyParamCaption}
+\item[{int}]{x1, }
+\item[{int}]{x2}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a0cb0f16e06a0556633b19a97a819b209}
+
+
+Computes the minimum of two integers. 
+
+
+
+Definition at line 102 of file ei\+\_\+utils\+\_\+2.\+c.
+
+\hypertarget{ei__utils__2_8c_a892c1e4490328b6017e1aa5eea6bddae}{\index{ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}!rectangle\+\_\+intersection@{rectangle\+\_\+intersection}}
+\index{rectangle\+\_\+intersection@{rectangle\+\_\+intersection}!ei\+\_\+utils\+\_\+2.\+c@{ei\+\_\+utils\+\_\+2.\+c}}
+\subsubsection[{rectangle\+\_\+intersection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+rect\+\_\+t} rectangle\+\_\+intersection (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rect1, }
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rect2}
+\end{DoxyParamCaption}
+)}}\label{ei__utils__2_8c_a892c1e4490328b6017e1aa5eea6bddae}
+
+
+Computes the rectangle which intersects two rectangles. 
+
+
+
+Definition at line 112 of file ei\+\_\+utils\+\_\+2.\+c.
+

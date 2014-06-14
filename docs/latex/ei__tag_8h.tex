@@ -1,0 +1,380 @@
+\hypertarget{ei__tag_8h}{\section{ei\+\_\+tag.\+h File Reference}
+\label{ei__tag_8h}\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+event.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ei__tag_8h_a0c7cc6b48a3d50bb3cc1743530239232}{ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list} (\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$tag\+\_\+list, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list Adds a tag to a list \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a564a08bad60a7c301b57c8f833713549}{ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list} (\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$tag\+\_\+list, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list Removes a tag to a list \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a371e455269db9668874c08a5b792c155}{ei\+\_\+clear\+\_\+tag\+\_\+list} (\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$tag\+\_\+list)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+clear\+\_\+tag\+\_\+list Destroys all tags in a list \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_aa2a531ba2b6269069e8999736d02aaba}{ei\+\_\+set\+\_\+initial\+\_\+tags} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+set\+\_\+initial\+\_\+tags Adds the tag "all and the name of the class of the widget when a widget is set to default \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a661006c74e371ce4b1915684dd1ccab5}{ei\+\_\+add\+\_\+tag\+\_\+widget} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+add\+\_\+tag\+\_\+widget Adds a tag to a widget \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a626c8cfe29a2ee703c8983629d814952}{ei\+\_\+destroy\+\_\+tag\+\_\+widget} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+destroy\+\_\+tag\+\_\+widget Destroys a tag to a widget \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a3dd500888b8edb601ce068972823bfad}{add\+\_\+tag} (\hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em add\+\_\+tag Adds a tag in the list \hyperlink{ei__tag_8c_ac6f7c4ba0509250f889544502ed48431}{first\+\_\+tag} \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a1cf87ba14d30503da7c1728205799284}{ei\+\_\+destroy\+\_\+tag} (\hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+destroy\+\_\+tag Destroys a tag in the list \hyperlink{ei__tag_8c_ac6f7c4ba0509250f889544502ed48431}{first\+\_\+tag} If a tag is destroy in this list, all events linked to this tag become useless \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__tag_8h_acf24e66e881315c3389ebd44aae85d31}{widget\+\_\+has\+\_\+tags} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em widget\+\_\+has\+\_\+tags A function to know if a widget has a list of tags \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__tag_8h_a46b35b246c60e4c7d7623f4c58fe17e2}{widget\+\_\+has\+\_\+this\+\_\+tag} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em widget\+\_\+has\+\_\+this\+\_\+tag A function to know if a widget has one of particular tag \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__tag_8h_ab810ed6e42f83f5f9cc84cdcfa66e429}{has\+\_\+this\+\_\+tag} (\hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em has\+\_\+this\+\_\+tag A function to know if a particular tag is present in the list of all tags of the application \end{DoxyCompactList}\item 
+\hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} \hyperlink{ei__tag_8h_a72f46474c13b6ad17d0136d6110aa3a9}{ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag} (\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$tag\+\_\+list, \hyperlink{ei__event_8h_a24a8242260cfd8ddb6ef915f3de5a10f}{ei\+\_\+tag\+\_\+t} tag)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag A function to know if a tag is present in a list \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a85345243ddd5481e860b8a669ab42534}{display\+\_\+list\+\_\+tag} ()
+\begin{DoxyCompactList}\small\item\em display\+\_\+list\+\_\+tag Displays the list of tags of the application \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_af3bf66afdf65edb0d2febf8ffd2035f0}{display\+\_\+tag} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em display\+\_\+tag Displays all tags of a widget; \end{DoxyCompactList}\item 
+void \hyperlink{ei__tag_8h_a2231c42212bb67398d82dbf06267ff2b}{display\+\_\+list} (\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$linked\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em display\+\_\+list Displays all tags of a list \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structei__linked__tag__t}{ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$ \hyperlink{ei__tag_8h_ac6f7c4ba0509250f889544502ed48431}{first\+\_\+tag}
+\begin{DoxyCompactList}\small\item\em first\+\_\+tag A pointer to a list of all tags present in the application \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__tag_8h_a3dd500888b8edb601ce068972823bfad}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!add\+\_\+tag@{add\+\_\+tag}}
+\index{add\+\_\+tag@{add\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{add\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}void add\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a3dd500888b8edb601ce068972823bfad}
+
+
+add\+\_\+tag Adds a tag in the list \hyperlink{ei__tag_8c_ac6f7c4ba0509250f889544502ed48431}{first\+\_\+tag} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & The tag to add \\
+\hline
+\end{DoxyParams}
+\hypertarget{ei__tag_8h_a2231c42212bb67398d82dbf06267ff2b}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!display\+\_\+list@{display\+\_\+list}}
+\index{display\+\_\+list@{display\+\_\+list}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{display\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}void display\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$}]{linked\+\_\+tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a2231c42212bb67398d82dbf06267ff2b}
+
+
+display\+\_\+list Displays all tags of a list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em linked\+\_\+tag} & The list of tags to display \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 168 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a85345243ddd5481e860b8a669ab42534}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!display\+\_\+list\+\_\+tag@{display\+\_\+list\+\_\+tag}}
+\index{display\+\_\+list\+\_\+tag@{display\+\_\+list\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{display\+\_\+list\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}void display\+\_\+list\+\_\+tag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a85345243ddd5481e860b8a669ab42534}
+
+
+display\+\_\+list\+\_\+tag Displays the list of tags of the application 
+
+
+
+Definition at line 156 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_af3bf66afdf65edb0d2febf8ffd2035f0}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!display\+\_\+tag@{display\+\_\+tag}}
+\index{display\+\_\+tag@{display\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{display\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}void display\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_af3bf66afdf65edb0d2febf8ffd2035f0}
+
+
+display\+\_\+tag Displays all tags of a widget; 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget which tags will be displayed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 162 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a0c7cc6b48a3d50bb3cc1743530239232}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list@{ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list}}
+\index{ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list@{ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$}]{tag\+\_\+list, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a0c7cc6b48a3d50bb3cc1743530239232}
+
+
+ei\+\_\+add\+\_\+tag\+\_\+to\+\_\+list Adds a tag to a list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag\+\_\+list} & The list where to add the tag \\
+\hline
+{\em tag} & The tag to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 9 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a661006c74e371ce4b1915684dd1ccab5}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+add\+\_\+tag\+\_\+widget@{ei\+\_\+add\+\_\+tag\+\_\+widget}}
+\index{ei\+\_\+add\+\_\+tag\+\_\+widget@{ei\+\_\+add\+\_\+tag\+\_\+widget}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+add\+\_\+tag\+\_\+widget}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+add\+\_\+tag\+\_\+widget (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a661006c74e371ce4b1915684dd1ccab5}
+
+
+ei\+\_\+add\+\_\+tag\+\_\+widget Adds a tag to a widget 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget where to add the tag \\
+\hline
+{\em tag} & The tag to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a371e455269db9668874c08a5b792c155}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+clear\+\_\+tag\+\_\+list@{ei\+\_\+clear\+\_\+tag\+\_\+list}}
+\index{ei\+\_\+clear\+\_\+tag\+\_\+list@{ei\+\_\+clear\+\_\+tag\+\_\+list}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+clear\+\_\+tag\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+clear\+\_\+tag\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$}]{tag\+\_\+list}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a371e455269db9668874c08a5b792c155}
+
+
+ei\+\_\+clear\+\_\+tag\+\_\+list Destroys all tags in a list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag\+\_\+list} & The list to clear \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a1cf87ba14d30503da7c1728205799284}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+destroy\+\_\+tag@{ei\+\_\+destroy\+\_\+tag}}
+\index{ei\+\_\+destroy\+\_\+tag@{ei\+\_\+destroy\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+destroy\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+destroy\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a1cf87ba14d30503da7c1728205799284}
+
+
+ei\+\_\+destroy\+\_\+tag Destroys a tag in the list \hyperlink{ei__tag_8c_ac6f7c4ba0509250f889544502ed48431}{first\+\_\+tag} If a tag is destroy in this list, all events linked to this tag become useless 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & The tag to destroy \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a626c8cfe29a2ee703c8983629d814952}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+destroy\+\_\+tag\+\_\+widget@{ei\+\_\+destroy\+\_\+tag\+\_\+widget}}
+\index{ei\+\_\+destroy\+\_\+tag\+\_\+widget@{ei\+\_\+destroy\+\_\+tag\+\_\+widget}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+destroy\+\_\+tag\+\_\+widget}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+destroy\+\_\+tag\+\_\+widget (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a626c8cfe29a2ee703c8983629d814952}
+
+
+ei\+\_\+destroy\+\_\+tag\+\_\+widget Destroys a tag to a widget 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget where to destroy the tag \\
+\hline
+{\em tag} & The tag to destroy \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 100 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a72f46474c13b6ad17d0136d6110aa3a9}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag@{ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag}}
+\index{ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag@{ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$}]{tag\+\_\+list, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a72f46474c13b6ad17d0136d6110aa3a9}
+
+
+ei\+\_\+list\+\_\+has\+\_\+this\+\_\+tag A function to know if a tag is present in a list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag\+\_\+list} & The list where to seek the tag \\
+\hline
+{\em tag} & The tag to test if it is present in the list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+I\+\_\+\+T\+R\+U\+E if the tag is present in the list 
+\end{DoxyReturn}
+
+
+Definition at line 136 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a564a08bad60a7c301b57c8f833713549}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list@{ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list}}
+\index{ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list@{ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+tag\+\_\+t} $\ast$$\ast$}]{tag\+\_\+list, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a564a08bad60a7c301b57c8f833713549}
+
+
+ei\+\_\+remove\+\_\+tag\+\_\+from\+\_\+list Removes a tag to a list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag\+\_\+list} & The list where to remove the tag \\
+\hline
+{\em tag} & The tag to remove \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_aa2a531ba2b6269069e8999736d02aaba}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!ei\+\_\+set\+\_\+initial\+\_\+tags@{ei\+\_\+set\+\_\+initial\+\_\+tags}}
+\index{ei\+\_\+set\+\_\+initial\+\_\+tags@{ei\+\_\+set\+\_\+initial\+\_\+tags}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{ei\+\_\+set\+\_\+initial\+\_\+tags}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+set\+\_\+initial\+\_\+tags (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_aa2a531ba2b6269069e8999736d02aaba}
+
+
+ei\+\_\+set\+\_\+initial\+\_\+tags Adds the tag "all and the name of the class of the widget when a widget is set to default 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & Widget where to add these two tags \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_ab810ed6e42f83f5f9cc84cdcfa66e429}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!has\+\_\+this\+\_\+tag@{has\+\_\+this\+\_\+tag}}
+\index{has\+\_\+this\+\_\+tag@{has\+\_\+this\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{has\+\_\+this\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} has\+\_\+this\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_ab810ed6e42f83f5f9cc84cdcfa66e429}
+
+
+has\+\_\+this\+\_\+tag A function to know if a particular tag is present in the list of all tags of the application 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & The tag to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+I\+\_\+\+T\+R\+U\+E if the tag is present in the list of tags of the application 
+\end{DoxyReturn}
+
+
+Definition at line 131 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_acf24e66e881315c3389ebd44aae85d31}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!widget\+\_\+has\+\_\+tags@{widget\+\_\+has\+\_\+tags}}
+\index{widget\+\_\+has\+\_\+tags@{widget\+\_\+has\+\_\+tags}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{widget\+\_\+has\+\_\+tags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} widget\+\_\+has\+\_\+tags (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_acf24e66e881315c3389ebd44aae85d31}
+
+
+widget\+\_\+has\+\_\+tags A function to know if a widget has a list of tags 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to test if it has tags or not \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return E\+I\+\_\+\+T\+R\+U\+E if the widget has a list of tags 
+\end{DoxyReturn}
+
+
+Definition at line 107 of file ei\+\_\+tag.\+c.
+
+\hypertarget{ei__tag_8h_a46b35b246c60e4c7d7623f4c58fe17e2}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!widget\+\_\+has\+\_\+this\+\_\+tag@{widget\+\_\+has\+\_\+this\+\_\+tag}}
+\index{widget\+\_\+has\+\_\+this\+\_\+tag@{widget\+\_\+has\+\_\+this\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{widget\+\_\+has\+\_\+this\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+bool\+\_\+t} widget\+\_\+has\+\_\+this\+\_\+tag (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+tag\+\_\+t}}]{tag}
+\end{DoxyParamCaption}
+)}}\label{ei__tag_8h_a46b35b246c60e4c7d7623f4c58fe17e2}
+
+
+widget\+\_\+has\+\_\+this\+\_\+tag A function to know if a widget has one of particular tag 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to test \\
+\hline
+{\em tag} & The tag to test if it is present or not in the list of tags of the widget \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+I\+\_\+\+T\+R\+U\+E if the tag is present in the list of tags of the widget 
+\end{DoxyReturn}
+
+
+Definition at line 124 of file ei\+\_\+tag.\+c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{ei__tag_8h_ac6f7c4ba0509250f889544502ed48431}{\index{ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}!first\+\_\+tag@{first\+\_\+tag}}
+\index{first\+\_\+tag@{first\+\_\+tag}!ei\+\_\+tag.\+h@{ei\+\_\+tag.\+h}}
+\subsubsection[{first\+\_\+tag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+tag\+\_\+t}$\ast$ first\+\_\+tag}}\label{ei__tag_8h_ac6f7c4ba0509250f889544502ed48431}
+
+
+first\+\_\+tag A pointer to a list of all tags present in the application 
+
+
+
+Definition at line 7 of file ei\+\_\+tag.\+c.
+

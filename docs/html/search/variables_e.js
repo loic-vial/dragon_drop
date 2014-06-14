@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['rect',['rect',['../structei__linked__rect__t.html#ae7fa184a482756ca81a340de0775cc8b',1,'ei_linked_rect_t']]],
+  ['red',['red',['../structei__color__t.html#a9adf283c79176b3426ac63784f0bc17b',1,'ei_color_t']]],
+  ['rel_5fheight',['rel_height',['../structei__placer__geometry__param__t.html#aa2a20632f767399e71b3c4ce25ab756a',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fwidth',['rel_width',['../structei__placer__geometry__param__t.html#a6db90e24dd410aba70d28601c4a45848',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fx',['rel_x',['../structei__placer__geometry__param__t.html#a7ef1944c9e941e32ecc97b06d93ccde2',1,'ei_placer_geometry_param_t']]],
+  ['rel_5fy',['rel_y',['../structei__placer__geometry__param__t.html#a0cf562b8ca4f89fc1cad3295597e281f',1,'ei_placer_geometry_param_t']]],
+  ['releasefunc',['releasefunc',['../structei__geometrymanager__t.html#adb7afc019219b29a9751b56da5a23b93',1,'ei_geometrymanager_t::releasefunc()'],['../structei__widgetclass__t.html#aebe6139b31816495e866c99ec3e83de6',1,'ei_widgetclass_t::releasefunc()']]],
+  ['relief',['relief',['../structei__frame__t.html#a4d0e33d09e4119629f4fa13107b4a9f3',1,'ei_frame_t']]],
+  ['requested_5fsize',['requested_size',['../structei__widget__t.html#ae82b19958b3ec72a855986dffb9b92ea',1,'ei_widget_t']]],
+  ['resizable',['resizable',['../structei__toplevel__t.html#a20ca606f2d466eaab1996942d989f11b',1,'ei_toplevel_t']]],
+  ['resize_5fbutton',['resize_button',['../structei__toplevel__t.html#a417d86f20456e1e21b57f9665b5409c8',1,'ei_toplevel_t']]],
+  ['resize_5fmouse_5fposition',['resize_mouse_position',['../ei__toplevel__resize_8c.html#aa6712b076fa9369a662a1041379b3e2b',1,'ei_toplevel_resize.c']]],
+  ['root',['root',['../ei__application_8c.html#a188f7ca657cce0f90ce29b079b6d9a9c',1,'ei_application.c']]],
+  ['root_5fsurface',['root_surface',['../ei__application_8c.html#aa43092acd84fb566fd40a390a406e0da',1,'ei_application.c']]],
+  ['rounded_5fdown',['rounded_down',['../structei__frame__t.html#a38fd04cba482eb2db2705afd10f2060f',1,'ei_frame_t']]],
+  ['rounded_5fup',['rounded_up',['../structei__frame__t.html#a4e35bcc8ad8edb5032d7dce24f419928',1,'ei_frame_t']]],
+  ['runfunc',['runfunc',['../structei__geometrymanager__t.html#a49ab7a4f7b357bdd515a8e7affccdba0',1,'ei_geometrymanager_t']]]
+];

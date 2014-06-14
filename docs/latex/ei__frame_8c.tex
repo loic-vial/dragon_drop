@@ -1,0 +1,258 @@
+\hypertarget{ei__frame_8c}{\section{ei\+\_\+frame.\+c File Reference}
+\label{ei__frame_8c}\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+}
+{\ttfamily \#include \char`\"{}ei\+\_\+frame.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ei\+\_\+utils\+\_\+2.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ei__frame_8c_a598a3330b3c21701223ee0ca14316eca}{P\+I}~3.\+14159265
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{ei__frame_8c_a9103b7e72d4f77c82f07c7287ca07381}{ei\+\_\+frame\+\_\+allocfunc} ()
+\begin{DoxyCompactList}\small\item\em ei\+\_\+frame\+\_\+allocfunc Allocates a block in the memory the size of a \hyperlink{structei__frame__t}{ei\+\_\+frame\+\_\+t}, initialized to zero \end{DoxyCompactList}\item 
+void \hyperlink{ei__frame_8c_a0cd94064787ab41641fb9a9a71b3c651}{ei\+\_\+frame\+\_\+releasefunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+frame\+\_\+releasefunc Releases all parameters of a frame \end{DoxyCompactList}\item 
+\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$ \hyperlink{ei__frame_8c_a9b969d378b9722df12090bfc7b788891}{arc} (\hyperlink{structei__point__t}{ei\+\_\+point\+\_\+t} centre, float radius, float angle\+\_\+debut, float angle\+\_\+fin)
+\begin{DoxyCompactList}\small\item\em arc Creates a list a point in a circle, and only a part of this circle is returned \end{DoxyCompactList}\item 
+\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$ \hyperlink{ei__frame_8c_a97f79e901f16fb9991413c81938b24db}{rounded\+\_\+frame\+\_\+up} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rectangle, float rayon)
+\item 
+\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$ \hyperlink{ei__frame_8c_a4e9406991d8599e06acb74b9eb871f6e}{rounded\+\_\+frame\+\_\+down} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rectangle, float rayon)
+\item 
+\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$ \hyperlink{ei__frame_8c_a8eb25c7b3ba5182defa9a4c3f068ee3f}{rounded\+\_\+frame} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rectangle, float rayon, \hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} top, \hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} bot)
+\item 
+\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$ \hyperlink{ei__frame_8c_aaa30127adbcc82ceec8cbe474fd93af2}{relief\+\_\+frame} (\hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} rectangle, float radius, \hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} top, \hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} bot, \hyperlink{ei__types_8h_a383b9af13bd6a0a893096ead3c4d8e28}{ei\+\_\+bool\+\_\+t} sup)
+\item 
+\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} \hyperlink{ei__frame_8c_acf40620223dd930bbc447e2e55c1171e}{light\+\_\+color} (\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} color)
+\item 
+\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} \hyperlink{ei__frame_8c_a4aa265af64258cc4d95b62e42f98374c}{dark\+\_\+color} (\hyperlink{structei__color__t}{ei\+\_\+color\+\_\+t} color)
+\item 
+void \hyperlink{ei__frame_8c_a0c257692d1355d0403f243fd77c2f6fb}{free\+\_\+points} (\hyperlink{structei__linked__point__t}{ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$points)
+\item 
+void \hyperlink{ei__frame_8c_a4b7e9e52d56e98c75662c5fc1f549c0b}{ei\+\_\+frame\+\_\+drawfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget, \hyperlink{hw__interface_8h_ad9970ae727c438faaf09c58c5defb796}{ei\+\_\+surface\+\_\+t} surface, \hyperlink{hw__interface_8h_ad9970ae727c438faaf09c58c5defb796}{ei\+\_\+surface\+\_\+t} pick\+\_\+surface, \hyperlink{structei__rect__t}{ei\+\_\+rect\+\_\+t} $\ast$clipper)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+frame\+\_\+drawfunc Draws a frame \end{DoxyCompactList}\item 
+void \hyperlink{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}{ei\+\_\+frame\+\_\+setdefaultsfunc} (\hyperlink{structei__widget__t}{ei\+\_\+widget\+\_\+t} $\ast$widget)
+\begin{DoxyCompactList}\small\item\em ei\+\_\+frame\+\_\+setdefaultsfunc Sets default all attributes of a frame \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{ei__frame_8c_a598a3330b3c21701223ee0ca14316eca}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!P\+I@{P\+I}}
+\index{P\+I@{P\+I}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{P\+I}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+I~3.\+14159265}}\label{ei__frame_8c_a598a3330b3c21701223ee0ca14316eca}
+
+
+Definition at line 7 of file ei\+\_\+frame.\+c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{ei__frame_8c_a9b969d378b9722df12090bfc7b788891}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!arc@{arc}}
+\index{arc@{arc}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{arc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+point\+\_\+t}$\ast$ arc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+point\+\_\+t}}]{centre, }
+\item[{float}]{radius, }
+\item[{float}]{angle\+\_\+debut, }
+\item[{float}]{angle\+\_\+fin}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a9b969d378b9722df12090bfc7b788891}
+
+
+arc Creates a list a point in a circle, and only a part of this circle is returned 
+
+
+\begin{DoxyParams}{Parameters}
+{\em centre} & Center of the circle \\
+\hline
+{\em radius} & Radius of the circle \\
+\hline
+{\em angle\+\_\+debut} & Angle where is the first point \\
+\hline
+{\em angle\+\_\+fin} & Angle where is the last point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of point wich represents only a piece of circle 
+\end{DoxyReturn}
+
+
+Definition at line 28 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a4aa265af64258cc4d95b62e42f98374c}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!dark\+\_\+color@{dark\+\_\+color}}
+\index{dark\+\_\+color@{dark\+\_\+color}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{dark\+\_\+color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+color\+\_\+t} dark\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+color\+\_\+t}}]{color}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a4aa265af64258cc4d95b62e42f98374c}
+
+
+Definition at line 261 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a9103b7e72d4f77c82f07c7287ca07381}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!ei\+\_\+frame\+\_\+allocfunc@{ei\+\_\+frame\+\_\+allocfunc}}
+\index{ei\+\_\+frame\+\_\+allocfunc@{ei\+\_\+frame\+\_\+allocfunc}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{ei\+\_\+frame\+\_\+allocfunc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ ei\+\_\+frame\+\_\+allocfunc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a9103b7e72d4f77c82f07c7287ca07381}
+
+
+ei\+\_\+frame\+\_\+allocfunc Allocates a block in the memory the size of a \hyperlink{structei__frame__t}{ei\+\_\+frame\+\_\+t}, initialized to zero 
+
+\begin{DoxyReturn}{Returns}
+Returns a pointer to a frame 
+\end{DoxyReturn}
+
+
+Definition at line 9 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a4b7e9e52d56e98c75662c5fc1f549c0b}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!ei\+\_\+frame\+\_\+drawfunc@{ei\+\_\+frame\+\_\+drawfunc}}
+\index{ei\+\_\+frame\+\_\+drawfunc@{ei\+\_\+frame\+\_\+drawfunc}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{ei\+\_\+frame\+\_\+drawfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+frame\+\_\+drawfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget, }
+\item[{{\bf ei\+\_\+surface\+\_\+t}}]{surface, }
+\item[{{\bf ei\+\_\+surface\+\_\+t}}]{pick\+\_\+surface, }
+\item[{{\bf ei\+\_\+rect\+\_\+t} $\ast$}]{clipper}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a4b7e9e52d56e98c75662c5fc1f549c0b}
+
+
+ei\+\_\+frame\+\_\+drawfunc Draws a frame 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The frame to draw \\
+\hline
+{\em surface} & The root surface where to draw the widget \\
+\hline
+{\em pick\+\_\+surface} & The offscreen surface where to draw the widget with it pick\+\_\+color \\
+\hline
+{\em clipper} & Defines the surface where to draw the widget \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 280 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a0cd94064787ab41641fb9a9a71b3c651}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!ei\+\_\+frame\+\_\+releasefunc@{ei\+\_\+frame\+\_\+releasefunc}}
+\index{ei\+\_\+frame\+\_\+releasefunc@{ei\+\_\+frame\+\_\+releasefunc}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{ei\+\_\+frame\+\_\+releasefunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+frame\+\_\+releasefunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a0cd94064787ab41641fb9a9a71b3c651}
+
+
+ei\+\_\+frame\+\_\+releasefunc Releases all parameters of a frame 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The widget to release \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 14 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!ei\+\_\+frame\+\_\+setdefaultsfunc@{ei\+\_\+frame\+\_\+setdefaultsfunc}}
+\index{ei\+\_\+frame\+\_\+setdefaultsfunc@{ei\+\_\+frame\+\_\+setdefaultsfunc}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{ei\+\_\+frame\+\_\+setdefaultsfunc}]{\setlength{\rightskip}{0pt plus 5cm}void ei\+\_\+frame\+\_\+setdefaultsfunc (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+widget\+\_\+t} $\ast$}]{widget}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a77a1fc654d6d3f40cd64565e844c77b4}
+
+
+ei\+\_\+frame\+\_\+setdefaultsfunc Sets default all attributes of a frame 
+
+
+\begin{DoxyParams}{Parameters}
+{\em widget} & The frame widget to set to defaults values \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 384 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a0c257692d1355d0403f243fd77c2f6fb}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!free\+\_\+points@{free\+\_\+points}}
+\index{free\+\_\+points@{free\+\_\+points}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{free\+\_\+points}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+points (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+linked\+\_\+point\+\_\+t} $\ast$}]{points}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a0c257692d1355d0403f243fd77c2f6fb}
+
+
+Definition at line 269 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_acf40620223dd930bbc447e2e55c1171e}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!light\+\_\+color@{light\+\_\+color}}
+\index{light\+\_\+color@{light\+\_\+color}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{light\+\_\+color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+color\+\_\+t} light\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+color\+\_\+t}}]{color}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_acf40620223dd930bbc447e2e55c1171e}
+
+
+Definition at line 253 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_aaa30127adbcc82ceec8cbe474fd93af2}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!relief\+\_\+frame@{relief\+\_\+frame}}
+\index{relief\+\_\+frame@{relief\+\_\+frame}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{relief\+\_\+frame}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+point\+\_\+t}$\ast$ relief\+\_\+frame (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rectangle, }
+\item[{float}]{radius, }
+\item[{{\bf ei\+\_\+bool\+\_\+t}}]{top, }
+\item[{{\bf ei\+\_\+bool\+\_\+t}}]{bot, }
+\item[{{\bf ei\+\_\+bool\+\_\+t}}]{sup}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_aaa30127adbcc82ceec8cbe474fd93af2}
+
+
+Definition at line 109 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a8eb25c7b3ba5182defa9a4c3f068ee3f}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!rounded\+\_\+frame@{rounded\+\_\+frame}}
+\index{rounded\+\_\+frame@{rounded\+\_\+frame}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{rounded\+\_\+frame}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+point\+\_\+t}$\ast$ rounded\+\_\+frame (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rectangle, }
+\item[{float}]{rayon, }
+\item[{{\bf ei\+\_\+bool\+\_\+t}}]{top, }
+\item[{{\bf ei\+\_\+bool\+\_\+t}}]{bot}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a8eb25c7b3ba5182defa9a4c3f068ee3f}
+
+
+Definition at line 73 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a4e9406991d8599e06acb74b9eb871f6e}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!rounded\+\_\+frame\+\_\+down@{rounded\+\_\+frame\+\_\+down}}
+\index{rounded\+\_\+frame\+\_\+down@{rounded\+\_\+frame\+\_\+down}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{rounded\+\_\+frame\+\_\+down}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+point\+\_\+t}$\ast$ rounded\+\_\+frame\+\_\+down (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rectangle, }
+\item[{float}]{rayon}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a4e9406991d8599e06acb74b9eb871f6e}
+
+
+Definition at line 60 of file ei\+\_\+frame.\+c.
+
+\hypertarget{ei__frame_8c_a97f79e901f16fb9991413c81938b24db}{\index{ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}!rounded\+\_\+frame\+\_\+up@{rounded\+\_\+frame\+\_\+up}}
+\index{rounded\+\_\+frame\+\_\+up@{rounded\+\_\+frame\+\_\+up}!ei\+\_\+frame.\+c@{ei\+\_\+frame.\+c}}
+\subsubsection[{rounded\+\_\+frame\+\_\+up}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ei\+\_\+linked\+\_\+point\+\_\+t}$\ast$ rounded\+\_\+frame\+\_\+up (
+\begin{DoxyParamCaption}
+\item[{{\bf ei\+\_\+rect\+\_\+t}}]{rectangle, }
+\item[{float}]{rayon}
+\end{DoxyParamCaption}
+)}}\label{ei__frame_8c_a97f79e901f16fb9991413c81938b24db}
+
+
+Definition at line 48 of file ei\+\_\+frame.\+c.
+
