@@ -83,7 +83,11 @@ void manage_event(ei_event_t event)
                 event.type == ei_ev_mouse_move)
             {
                 ei_widget_t* widget_picked = ei_widget_pick(&event.param.mouse.where);
-                if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget))
+                if (widget_picked == NULL)
+                {
+                    ;
+                }
+                else if ((event_tmp->tag == NULL && widget_picked == event_tmp->widget))
                 {
                     event_tmp->callback(widget_picked, &event, event_tmp->user_param);
                 }

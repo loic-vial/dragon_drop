@@ -340,28 +340,35 @@ void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
 
     if (frame->img != NULL)
     {
-        ei_size_t size = frame->img_rect->size;
-
-        ei_point_t top_left_corner = ei_position_from_anchor(widget->screen_location.top_left,
-                                                             widget->screen_location.size,
-                                                             size,
-                                                             frame->img_anchor);
-
-        ei_rect_t rect = rectangle_intersection(*clipper, widget->screen_location);
-        ei_rect_t bon_top;
-        bon_top.top_left = top_left_corner;
-        bon_top.size = size;
-        rect = rectangle_intersection(bon_top,rect);
-        ei_rect_t rect_2;
-        rect_2.size = rect.size;
-        rect_2.top_left = frame->img_rect->top_left;
-        if(bon_top.top_left.x > clipper->top_left.x)
+        ei_rect_t img_rect;
+        if (frame->img_rect != NULL)
         {
-            rect_2.top_left.x = frame->img_rect->top_left.x;
+            img_rect = *frame->img_rect;
         }
         else
         {
-            rect_2.top_left.x = frame->img_rect->top_left.x -bon_top.top_left.x;
+            img_rect = ei_rect(ei_point_zero(), hw_surface_get_size(frame->img));
+        }
+
+        ei_point_t top_left_corner = ei_position_from_anchor(widget->screen_location.top_left,
+                                                             widget->screen_location.size,
+                                                             img_rect.size,
+                                                             frame->img_anchor);
+
+        ei_rect_t rect = ei_rect(top_left_corner, img_rect.size);
+        ei_rect_t rect_2 = img_rect;
+
+        rect = rectangle_intersection(*clipper, rect);
+        rect_2.size = rect.size;
+
+        if (top_left_corner.x < clipper->top_left.x)
+        {
+            rect_2.top_left.x += clipper->top_left.x - top_left_corner.x;
+        }
+
+        if (top_left_corner.y < clipper->top_left.y)
+        {
+            rect_2.top_left.y += clipper->top_left.y - top_left_corner.y;
         }
 
         hw_surface_lock(frame->img);
