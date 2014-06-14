@@ -39,7 +39,7 @@ ei_bool_t field(ei_widget_t * widget, ei_event_t * event, void *user_param)
 	ei_frame_t *ttext = (ei_frame_t *) text_debut;
 	ttext->text_font = font;
 	ttext->text = text1;
-	return EI_TRUE;
+    return EI_FALSE;
 
 }
 

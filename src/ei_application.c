@@ -79,7 +79,8 @@ void draw_widget(ei_widget_t * widget)
 void manage_event(ei_event_t event)
 {
 	ei_eventlist_t *event_tmp = first_event;
-	while (event_tmp != NULL) {
+    ei_bool_t callback_return = EI_FALSE;
+    while (event_tmp != NULL && callback_return == EI_FALSE) {
 		ei_eventlist_t *next_event = event_tmp->next;
 		if (event_tmp->eventtype == event.type) {
 			if (event.type == ei_ev_mouse_buttondown ||
@@ -94,19 +95,20 @@ void manage_event(ei_event_t event)
 				    if ((event_tmp->tag == NULL
 					 && widget_picked ==
 					 event_tmp->widget)) {
-					event_tmp->callback(widget_picked,
+                    callback_return =
+                            event_tmp->callback(widget_picked,
 							    &event,
 							    event_tmp->user_param);
 				} else
 				    if (widget_has_this_tag
 					(widget_picked, event_tmp->tag)
 					&& has_this_tag(event_tmp->tag)) {
-					event_tmp->callback(widget_picked,
+                    callback_return = event_tmp->callback(widget_picked,
 							    &event,
 							    event_tmp->user_param);
 				}
 			} else {
-				event_tmp->callback(event_tmp->widget,
+                callback_return = event_tmp->callback(event_tmp->widget,
 						    &event,
 						    event_tmp->user_param);
 			}

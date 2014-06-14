@@ -68,7 +68,7 @@ ei_bool_t ei_toplevel_drag_start_callback(ei_widget_t * widget,
 		widget->parent);
 	ei_bind(ei_ev_mouse_buttonup, NULL, "all",
 		ei_toplevel_drag_stop_callback, widget->parent);
-	return EI_TRUE;
+    return EI_FALSE;
 }
 
 ei_bool_t ei_toplevel_drag_callback(ei_widget_t * widget,
@@ -85,7 +85,7 @@ ei_bool_t ei_toplevel_drag_callback(ei_widget_t * widget,
 		placer->y += diff_position.y;
 		drag_mouse_position = event->param.mouse.where;
 	}
-	return EI_TRUE;
+    return EI_FALSE;
 }
 
 ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t * widget,
@@ -96,5 +96,5 @@ ei_bool_t ei_toplevel_drag_stop_callback(ei_widget_t * widget,
 		  user_param);
 	ei_unbind(ei_ev_mouse_buttonup, NULL, "all",
 		  ei_toplevel_drag_stop_callback, user_param);
-	return EI_TRUE;
+    return EI_FALSE;
 }

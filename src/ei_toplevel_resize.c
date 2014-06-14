@@ -42,7 +42,7 @@ ei_bool_t ei_toplevel_resize_start_callback(ei_widget_t * widget,
 		widget->parent);
 	ei_bind(ei_ev_mouse_buttonup, NULL, "all",
 		ei_toplevel_resize_stop_callback, widget->parent);
-	return EI_TRUE;
+    return EI_FALSE;
 }
 
 ei_bool_t ei_toplevel_resize_callback(ei_widget_t * widget,
@@ -59,7 +59,7 @@ ei_bool_t ei_toplevel_resize_callback(ei_widget_t * widget,
 		ei_size_t new_size = toplevel->frame.widget.requested_size;
 
 		if (toplevel->resizable == ei_axis_none)
-			return EI_TRUE;
+            return EI_FALSE;
 		else if (toplevel->resizable == ei_axis_x)
 			diff_position.y = 0;
 		else if (toplevel->resizable == ei_axis_y)
@@ -86,7 +86,7 @@ ei_bool_t ei_toplevel_resize_callback(ei_widget_t * widget,
 			resize_mouse_position.y =
 			    event->param.mouse.where.y;
 	}
-	return EI_TRUE;
+    return EI_FALSE;
 }
 
 ei_bool_t ei_toplevel_resize_stop_callback(ei_widget_t * widget,
@@ -97,5 +97,5 @@ ei_bool_t ei_toplevel_resize_stop_callback(ei_widget_t * widget,
 		  ei_toplevel_resize_callback, user_param);
 	ei_unbind(ei_ev_mouse_buttonup, NULL, "all",
 		  ei_toplevel_resize_stop_callback, user_param);
-	return EI_TRUE;
+    return EI_FALSE;
 }

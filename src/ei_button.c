@@ -29,7 +29,7 @@ ei_bool_t ei_button_click_down(ei_widget_t * widget, ei_event_t * event,
 {
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	frame->relief = ei_relief_sunken;
-	return EI_TRUE;
+    return EI_FALSE;
 }
 
 ei_bool_t ei_button_click_up(ei_widget_t * widget, ei_event_t * event,
@@ -37,5 +37,5 @@ ei_bool_t ei_button_click_up(ei_widget_t * widget, ei_event_t * event,
 {
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	frame->relief = ei_relief_raised;
-	return EI_TRUE;
+    return EI_FALSE;
 }
