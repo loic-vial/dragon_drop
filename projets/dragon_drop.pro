@@ -54,4 +54,4 @@ SOURCES += \
     ../src/ei_drag_and_drop.c \
     ../src/ei_button.c \
     ../src/ei_application.c \
-    ../tests/test_toplevel.c
+    ../tests/test_radiobutton.c

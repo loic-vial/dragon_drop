@@ -97,7 +97,7 @@ void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget)
     radio->number=0;
     widget->requested_size.width = 150;
     widget->requested_size.height = 20;
-    ei_add_children_radiobutton("premier champ",radio);
+    ei_add_children_radiobutton("First field",radio);
     ei_set_initial_tags(widget);
 }
 

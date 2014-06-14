@@ -1,4 +1,4 @@
-#ifndef EI_FRAME_H
+﻿#ifndef EI_FRAME_H
 #define EI_FRAME_H
 
 #include "ei_widget.h"
@@ -10,9 +10,9 @@
 */
 typedef struct ei_frame_t
 {
-    ei_widget_t widget; ///< A widget to memorize the place in the hierarchie of widget
+    ei_widget_t widget; ///< Memorize the place in the hierarchie of widget
     ei_color_t color; ///< Color of the frame
-    int border_width; ///<A border width around the frame
+    int border_width; ///<Border width around the frame
     ei_relief_t relief; /// Relief of the frame, the size of the border width
     char* text; ///< Text inside the frame
     ei_font_t text_font ; ///<Font of the text
@@ -29,40 +29,40 @@ typedef struct ei_frame_t
 ei_frame_t;
 
 /**
- * @brief ei_frame_allocfunc    A function that allocate a block in the memory the size of a \ref ei_frame_t, initialized to zero
- * @return
+ * @brief ei_frame_allocfunc    Allocates a block in the memory the size of a \ref ei_frame_t, initialized to zero
+ * @return                      Returns a pointer to a frame
  */
 void* ei_frame_allocfunc();
 
 /**
- * @brief ei_frame_releasefunc  A function that released all parameters of a frame
- * @param widget
+ * @brief ei_frame_releasefunc  Releases all parameters of a frame
+ * @param widget                The widget to release
  */
 void ei_frame_releasefunc(ei_widget_t* widget);
 
 /**
- * @brief ei_frame_drawfunc     A function that draw a frame
+ * @brief ei_frame_drawfunc     Draws a frame
  * @param widget                The frame to draw
  * @param surface               The root surface where to draw the widget
  * @param pick_surface          The offscreen surface where to draw the widget with it pick_color
- * @param clipper               A surface that delimited the surface where to draw the widget
+ * @param clipper               Defines the surface where to draw the widget
  */
 void ei_frame_drawfunc(ei_widget_t* widget, ei_surface_t surface,
                       ei_surface_t pick_surface, ei_rect_t* clipper);
 
 /**
- * @brief ei_frame_setdefaultsfunc      A function that set to default all parameters of a frame
+ * @brief ei_frame_setdefaultsfunc      Sets default all attributes of a frame
  * @param widget                        The frame widget to set to defaults values
  */
 void ei_frame_setdefaultsfunc(ei_widget_t* widget);
 
 /**
- * @brief arc           A function that create a list a point in a circle, and only a part of this circle is returned
+ * @brief arc           Creates a list a point in a circle, and only a part of this circle is returned
  * @param centre        Center of the circle
  * @param radius        Radius of the circle
  * @param angle_debut   Angle where is the first point
  * @param angle_fin     Angle where is the last point
- * @return              A list of point wich represent only a piece of circle
+ * @return              A list of point wich represents only a piece of circle
  */
 ei_linked_point_t* arc(ei_point_t centre, float radius, float angle_debut, float angle_fin);
 
