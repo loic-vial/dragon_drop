@@ -69,25 +69,30 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio)
 
     ei_place(&frame->widget, NULL,&point.x,&point.y, NULL, &height, NULL, NULL, &rel_width, NULL );
 
-    ei_button_t* close_button = (ei_button_t*) ei_widget_create("button", &frame->widget);
-    close_button->frame.widget.requested_size = ei_size(12, 12);
-    close_button->frame.border_width =0;
-    close_button->frame.color = ei_color(255, 255, 255, 150);
-    close_button->frame.corner_radius = 6;
-    close_button->frame.text_anchor = ei_anc_center;
-    close_button->frame.rounded_down=EI_TRUE;
-    close_button->frame.rounded_up=EI_TRUE;
-    close_button->callback = click_button;
-    ei_bind(ei_ev_mouse_buttonup, &close_button->frame.widget, NULL, click_button, NULL);
+    ei_button_t* select_button = (ei_button_t*) ei_widget_create("button", &frame->widget);
+    select_button->frame.widget.requested_size = ei_size(12, 12);
+    select_button->frame.border_width =0;
+    select_button->frame.color = ei_color(255, 255, 255, 150);
+    select_button->frame.corner_radius = 6;
+    select_button->frame.text_anchor = ei_anc_center;
+    select_button->frame.rounded_down=EI_TRUE;
+    select_button->frame.rounded_up=EI_TRUE;
+    select_button->callback = click_button;
+    ei_bind(ei_ev_mouse_buttonup, &select_button->frame.widget, NULL, click_button, NULL);
     ei_anchor_t anchor = ei_anc_west;
     int position_x = 4;
-    ei_place(&close_button->frame.widget, &anchor, &position_x, NULL, NULL,
+    ei_place(&select_button->frame.widget, &anchor, &position_x, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
 
     radio->number++;
     widget->requested_size.height = radio->number*height;
-    ei_place(widget, NULL, NULL, NULL, NULL,
-             NULL, NULL, NULL, NULL, NULL);
+    if(widget->geom_params !=NULL)
+    {
+    ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)widget->geom_params->manager;
+    ei_place(widget, &placer->anchor, &placer->x,&placer->y,&placer->width,&placer->height,&placer->rel_x,&placer->rel_y,
+             &placer->rel_width, &placer->rel_height);
+    }
+    else ei_place(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 }
 
 void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget)
@@ -220,7 +225,11 @@ void ei_edit_field(ei_radiobutton_t* radio,int number, char* text)
     if (widget !=NULL)
     {
         ei_frame_t* frame = (ei_frame_t*)widget;
-        frame->text=text;
+        char* str ;
+        str = (char*)malloc(80*sizeof(char));
+        strcpy(str,"      ");
+        strcat(str,text);
+        frame->text=str;
     }
 }
 
