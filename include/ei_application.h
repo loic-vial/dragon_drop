@@ -36,7 +36,7 @@
  * @param	fullScreen		If true, the root window is the entire screen. Otherwise, it
  *					is a system window.
  */
-void ei_app_create(ei_size_t* main_window_size, ei_bool_t fullscreen);
+void ei_app_create(ei_size_t * main_window_size, ei_bool_t fullscreen);
 
 /**
  * \brief	Releases all the resources of the application, and releases the hardware
@@ -57,7 +57,7 @@ void ei_app_run();
  * @param	rect		The rectangle to add, expressed in the root window coordinates.
  *				A copy is made, so it is safe to release the rectangle on return.
  */
-void ei_app_invalidate_rect(ei_rect_t* rect);
+void ei_app_invalidate_rect(ei_rect_t * rect);
 
 /**
  * \brief	Tells the application to quite. Is usually called by an event handler (for example
@@ -71,7 +71,7 @@ void ei_app_quit_request();
  *
  * @return 			The root widget.
  */
-ei_widget_t* ei_app_root_widget();
+ei_widget_t *ei_app_root_widget();
 
 /**
  * \brief	Returns the surface of the root window. Used to create surfaces with similar r, g, b
@@ -85,4 +85,3 @@ ei_surface_t ei_app_root_surface();
 
 
 #endif
-

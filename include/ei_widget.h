@@ -22,22 +22,21 @@ struct ei_geometry_param_t;
  *		class by adding its own fields. 
  */
 typedef struct ei_widget_t {
-	ei_widgetclass_t*	wclass;		///< The class of widget of this widget. Avoid the field name "class" which is a keyword in C++.
-	uint32_t		pick_id;	///< Id of this widget in the picking offscreen.
-	ei_color_t*		pick_color;	///< pick_id encoded as a color.
+	ei_widgetclass_t *wclass;	///< The class of widget of this widget. Avoid the field name "class" which is a keyword in C++.
+	uint32_t pick_id;	///< Id of this widget in the picking offscreen.
+	ei_color_t *pick_color;	///< pick_id encoded as a color.
 
 	/* Widget Hierachy Management */
-	struct ei_widget_t*	parent;		///< Pointer to the parent of this widget.
-	struct ei_widget_t*	children_head;	///< Pointer to the first child of this widget.	Children are chained with the "next_sibling" field.
-	struct ei_widget_t*	children_tail;	///< Pointer to the last child of this widget.
-	struct ei_widget_t*	next_sibling;	///< Pointer to the next child of this widget's parent widget.
+	struct ei_widget_t *parent;	///< Pointer to the parent of this widget.
+	struct ei_widget_t *children_head;	///< Pointer to the first child of this widget. Children are chained with the "next_sibling" field.
+	struct ei_widget_t *children_tail;	///< Pointer to the last child of this widget.
+	struct ei_widget_t *next_sibling;	///< Pointer to the next child of this widget's parent widget.
 
 	/* Geometry Management */
-	struct ei_geometry_param_t*
-				geom_params;	///< Pointer to the geometry management parameters for this widget. If NULL, the widget is not currently managed and thus, is not mapped on the screen.
-	ei_size_t		requested_size;	///< Size requested by the widget (big enough for its label, for example), or by the programmer. This can be different than its screen size defined by the placer.
-	ei_rect_t		screen_location;///< Position and size of the widget expressed in the root window reference.
-	ei_rect_t*		content_rect;	///< Where to place children, when this widget is used as a container. By defaults, points to the screen_location.
+	struct ei_geometry_param_t *geom_params;	///< Pointer to the geometry management parameters for this widget. If NULL, the widget is not currently managed and thus, is not mapped on the screen.
+	ei_size_t requested_size;	///< Size requested by the widget (big enough for its label, for example), or by the programmer. This can be different than its screen size defined by the placer.
+	ei_rect_t screen_location;	///< Position and size of the widget expressed in the root window reference.
+	ei_rect_t *content_rect;	///< Where to place children, when this widget is used as a container. By defaults, points to the screen_location.
 } ei_widget_t;
 
 
@@ -58,9 +57,9 @@ struct ei_event_t;
  *				Note: The callback may execute many operations and still return
  *				FALSE, or return TRUE without having done anything.
  */
-typedef ei_bool_t	(*ei_callback_t)	(ei_widget_t*		widget,
-						struct ei_event_t*	event,
-						void*			user_param);
+typedef ei_bool_t(*ei_callback_t) (ei_widget_t * widget,
+				   struct ei_event_t * event,
+				   void *user_param);
 
 
 
@@ -76,8 +75,8 @@ typedef ei_bool_t	(*ei_callback_t)	(ei_widget_t*		widget,
  *
  * @return			The newly created widget, or NULL if there was an error.
  */
-ei_widget_t*		ei_widget_create		(ei_widgetclass_name_t	class_name,
-							 ei_widget_t*		parent);
+ei_widget_t *ei_widget_create(ei_widgetclass_name_t class_name,
+			      ei_widget_t * parent);
 
 /**
  * @brief	Destroys a widget. Removes it from screen if it is managed by a geometry manager.
@@ -85,7 +84,7 @@ ei_widget_t*		ei_widget_create		(ei_widgetclass_name_t	class_name,
  *
  * @param	widget		The widget that is to be destroyed.
  */
-void			ei_widget_destroy		(ei_widget_t*		widget);
+void ei_widget_destroy(ei_widget_t * widget);
 
 
 /**
@@ -96,7 +95,7 @@ void			ei_widget_destroy		(ei_widget_t*		widget);
  * @return			The top-most widget at this location, or NULL if there is no widget
  *				at this location (except for the root widget).
  */
-ei_widget_t*		ei_widget_pick			(ei_point_t*		where);
+ei_widget_t *ei_widget_pick(ei_point_t * where);
 
 
 
@@ -140,22 +139,21 @@ ei_widget_t*		ei_widget_pick			(ei_point_t*		where);
  *				when the size of the widget is bigger than the size of the image.
  *				Defaults to \ref ei_anc_center.
  */
-void			ei_frame_configure		(ei_widget_t*		widget,
-							 ei_size_t*		requested_size,
-							 const ei_color_t*	color,
-							 int*			border_width,
-							 ei_relief_t*		relief,
-							 char**			text,
-							 ei_font_t*		text_font,
-							 ei_color_t*		text_color,
-							 ei_anchor_t*		text_anchor,
-							 ei_surface_t*		img,
-							 ei_rect_t**		img_rect,
-							 ei_anchor_t*		img_anchor);
+void ei_frame_configure(ei_widget_t * widget,
+			ei_size_t * requested_size,
+			const ei_color_t * color,
+			int *border_width,
+			ei_relief_t * relief,
+			char **text,
+			ei_font_t * text_font,
+			ei_color_t * text_color,
+			ei_anchor_t * text_anchor,
+			ei_surface_t * img,
+			ei_rect_t ** img_rect, ei_anchor_t * img_anchor);
 
 
 
-static const int	k_default_button_corner_radius	= 10;
+static const int k_default_button_corner_radius = 10;
 
 /**
  * @brief	Configures the attributes of widgets of the class "button".
@@ -171,21 +169,20 @@ static const int	k_default_button_corner_radius	= 10;
  * @param	user_param	A programmer supplied parameter that will be passed to the callback
  *				when called. Defaults to NULL.
  */
-void			ei_button_configure		(ei_widget_t*		widget,
-							 ei_size_t*		requested_size,
-							 const ei_color_t*	color,
-							 int*			border_width,
-							 int*			corner_radius,
-							 ei_relief_t*		relief,
-							 char**			text,
-							 ei_font_t*		text_font,
-							 ei_color_t*		text_color,
-							 ei_anchor_t*		text_anchor,
-							 ei_surface_t*		img,
-							 ei_rect_t**		img_rect,
-							 ei_anchor_t*		img_anchor,
-							 ei_callback_t*		callback,
-							 void**			user_param);
+void ei_button_configure(ei_widget_t * widget,
+			 ei_size_t * requested_size,
+			 const ei_color_t * color,
+			 int *border_width,
+			 int *corner_radius,
+			 ei_relief_t * relief,
+			 char **text,
+			 ei_font_t * text_font,
+			 ei_color_t * text_color,
+			 ei_anchor_t * text_anchor,
+			 ei_surface_t * img,
+			 ei_rect_t ** img_rect,
+			 ei_anchor_t * img_anchor,
+			 ei_callback_t * callback, void **user_param);
 
 /**
  * @brief	Configures the attributes of widgets of the class "toplevel".
@@ -206,14 +203,14 @@ void			ei_button_configure		(ei_widget_t*		widget,
  * @param	min_size	For resizable widgets, defines the minimum size. Defaults to
  *				(160, 120).
  */
-void			ei_toplevel_configure		(ei_widget_t*		widget,
-							 ei_size_t*		requested_size,
-							 ei_color_t*		color,
-							 int*			border_width,
-							 char**			title,
-							 ei_bool_t*		closable,
-							 ei_axis_set_t*		resizable,
-						 	 ei_size_t**		min_size);
+void ei_toplevel_configure(ei_widget_t * widget,
+			   ei_size_t * requested_size,
+			   ei_color_t * color,
+			   int *border_width,
+			   char **title,
+			   ei_bool_t * closable,
+			   ei_axis_set_t * resizable,
+			   ei_size_t ** min_size);
 
 
 #endif

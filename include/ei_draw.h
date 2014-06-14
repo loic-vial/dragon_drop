@@ -30,7 +30,7 @@
  *				of the color is ignored in the case of surfaces the don't have an
  *				alpha channel.
  */
-uint32_t		ei_map_rgba		(ei_surface_t surface, const ei_color_t* color);
+uint32_t ei_map_rgba(ei_surface_t surface, const ei_color_t * color);
 
 
 
@@ -46,10 +46,9 @@ uint32_t		ei_map_rgba		(ei_surface_t surface, const ei_color_t* color);
  * @param	color		The color used to draw the line, alpha channel is managed.
  * @param	clipper		If not NULL, the drawing is restricted within this rectangle.
  */
-void			ei_draw_polyline	(ei_surface_t			surface,
-						 const ei_linked_point_t*	first_point,
-						 const ei_color_t		color,
-						 const ei_rect_t*		clipper);
+void ei_draw_polyline(ei_surface_t surface,
+		      const ei_linked_point_t * first_point,
+		      const ei_color_t color, const ei_rect_t * clipper);
 
 /**
  * \brief	Draws a filled polygon.
@@ -61,10 +60,9 @@ void			ei_draw_polyline	(ei_surface_t			surface,
  * @param	color		The color used to draw the polygon, alpha channel is managed.
  * @param	clipper		If not NULL, the drawing is restricted within this rectangle.
  */
-void			ei_draw_polygon		(ei_surface_t			surface,
-						 const ei_linked_point_t*	first_point,
-						 const ei_color_t		color,
-						 const ei_rect_t*		clipper);
+void ei_draw_polygon(ei_surface_t surface,
+		     const ei_linked_point_t * first_point,
+		     const ei_color_t color, const ei_rect_t * clipper);
 
 /**
  * \brief	Draws text by calling \ref hw_text_create_surface.
@@ -79,12 +77,11 @@ void			ei_draw_polygon		(ei_surface_t			surface,
  * @param	color		The text color. Can't be NULL. The alpha parameter is not used.
  * @param	clipper		If not NULL, the drawing is restricted within this rectangle.
  */
-void			ei_draw_text		(ei_surface_t		surface,
-						 const ei_point_t*	where,
-						 const char*		text,
-						 const ei_font_t	font,
-						 const ei_color_t*	color,
-						 const ei_rect_t*	clipper);
+void ei_draw_text(ei_surface_t surface,
+		  const ei_point_t * where,
+		  const char *text,
+		  const ei_font_t font,
+		  const ei_color_t * color, const ei_rect_t * clipper);
 
 /**
  * \brief	Fills the surface with the specified color.
@@ -95,9 +92,8 @@ void			ei_draw_text		(ei_surface_t		surface,
  *				caller want it painted black (opaque).
  * @param	clipper		If not NULL, the drawing is restricted within this rectangle.
  */
-void			ei_fill			(ei_surface_t		surface,
-						 const ei_color_t*	color,
-						 const ei_rect_t*	clipper);
+void ei_fill(ei_surface_t surface,
+	     const ei_color_t * color, const ei_rect_t * clipper);
 
 
 /**
@@ -121,11 +117,10 @@ void			ei_fill			(ei_surface_t		surface,
  *
  * @return			Returns 0 on success, 1 on failure (different ROI size).
  */
-int			ei_copy_surface		(ei_surface_t		destination,
-						 const ei_rect_t*	dst_rect,
-						 const ei_surface_t	source,
-						 const ei_rect_t*	src_rect,
-						 const ei_bool_t	alpha);
+int ei_copy_surface(ei_surface_t destination,
+		    const ei_rect_t * dst_rect,
+		    const ei_surface_t source,
+		    const ei_rect_t * src_rect, const ei_bool_t alpha);
 
 
 

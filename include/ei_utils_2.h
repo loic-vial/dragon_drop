@@ -10,13 +10,16 @@
  * @param child_size The size of the child
  * @param anchor The anchor
  */
-ei_point_t ei_position_from_anchor(ei_point_t parent_top_left_corner, ei_size_t parent_size,
-                              ei_size_t child_size, ei_anchor_t anchor);
+ei_point_t ei_position_from_anchor(ei_point_t parent_top_left_corner,
+				   ei_size_t parent_size,
+				   ei_size_t child_size,
+				   ei_anchor_t anchor);
 
 /**
  * @brief Creates a new RGBA color inline
  */
-ei_color_t ei_color(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
+ei_color_t ei_color(unsigned char red, unsigned char green,
+		    unsigned char blue, unsigned char alpha);
 
 /**
  * @brief Tests if two colors are equal
@@ -31,7 +34,7 @@ ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
 /**
  * @brief Empty a linked list of rectangles
  */
-void ei_clear_rect_list(ei_linked_rect_t** rects);
+void ei_clear_rect_list(ei_linked_rect_t ** rects);
 
 /**
  * @brief Computes the minimum of two integers
@@ -52,6 +55,6 @@ ei_rect_t rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2);
  * @brief Moves a widget at the end (the tail) of its parent
  * The consequence is that this widget will be displayed in front of its siblings
  */
-void ei_tail(ei_widget_t* widget);
+void ei_tail(ei_widget_t * widget);
 
 #endif

@@ -20,7 +20,7 @@
 /**
  * \brief	A name of a class of widget.
  */
-typedef char 		ei_widgetclass_name_t[20];
+typedef char ei_widgetclass_name_t[20];
 
 struct ei_widget_t;
 
@@ -31,7 +31,7 @@ struct ei_widget_t;
  *
  * @return		A block of memory with all bytes set to 0.
  */
-typedef void*	(*ei_widgetclass_allocfunc_t)		();
+typedef void *(*ei_widgetclass_allocfunc_t) ();
 
 /**
  * \brief	A function that releases the memory used by a widget before it is destroyed.
@@ -41,7 +41,7 @@ typedef void*	(*ei_widgetclass_allocfunc_t)		();
  *
  * @param	widget		The widget which resources are to be freed.
  */
-typedef void	(*ei_widgetclass_releasefunc_t)		(struct ei_widget_t*	widget);
+typedef void (*ei_widgetclass_releasefunc_t) (struct ei_widget_t * widget);
 
 /**
  * \brief	A function that draws widgets of a class.
@@ -52,17 +52,18 @@ typedef void	(*ei_widgetclass_releasefunc_t)		(struct ei_widget_t*	widget);
  * @param	clipper		If not NULL, the drawing is restricted within this rectangle
  *				(expressed in the surface reference frame).
  */
-typedef void	(*ei_widgetclass_drawfunc_t)		(struct ei_widget_t*	widget,
-							 ei_surface_t		surface,
-							 ei_surface_t		pick_surface,
-							 ei_rect_t*		clipper);
+typedef void (*ei_widgetclass_drawfunc_t) (struct ei_widget_t * widget,
+					   ei_surface_t surface,
+					   ei_surface_t pick_surface,
+					   ei_rect_t * clipper);
 
 /**
  * \brief	A function that sets the default values for a class.
  *
  * @param	widget		A pointer to the widget instance to intialize.
  */
-typedef void	(*ei_widgetclass_setdefaultsfunc_t)	(struct ei_widget_t*	widget);
+typedef void (*ei_widgetclass_setdefaultsfunc_t) (struct ei_widget_t *
+						  widget);
 
 /**
  * \brief 	A function that is called to notify the widget that its geometry has been modified
@@ -72,20 +73,20 @@ typedef void	(*ei_widgetclass_setdefaultsfunc_t)	(struct ei_widget_t*	widget);
  * @param	rect		The new rectangular screen location of the widget
  *				(i.e. = widget->screen_location).
  */
-typedef void	(*ei_widgetclass_geomnotifyfunc_t)	(struct ei_widget_t*	widget,
-							 ei_rect_t		rect);
+typedef void (*ei_widgetclass_geomnotifyfunc_t) (struct ei_widget_t *
+						 widget, ei_rect_t rect);
 
 /**
  * \brief	A structure that stores information about a class of widgets.
  */
 typedef struct ei_widgetclass_t {
-	ei_widgetclass_name_t			name;			///< The string name of this class of widget.
-	ei_widgetclass_allocfunc_t		allocfunc;		///< The function that allocated instances of this class of widget.
-	ei_widgetclass_releasefunc_t		releasefunc;		///< The function that releases all the resources used by an instance of this class of widget.
-	ei_widgetclass_drawfunc_t		drawfunc;		///< The function that draws on screen an instance of this class of widget.
-	ei_widgetclass_setdefaultsfunc_t	setdefaultsfunc;	///< The function that sets the default values to all the parameters of an instance of this class of widget.
-	ei_widgetclass_geomnotifyfunc_t		geomnotifyfunc;		///< The function that is called to notify an instance of widget of this class that its geometry has changed.
-	struct ei_widgetclass_t*		next;			///< A pointer to the next instance of ei_widget_class_t, allows widget class descriptions to be chained.
+	ei_widgetclass_name_t name;	///< The string name of this class of widget.
+	ei_widgetclass_allocfunc_t allocfunc;	///< The function that allocated instances of this class of widget.
+	ei_widgetclass_releasefunc_t releasefunc;	///< The function that releases all the resources used by an instance of this class of widget.
+	ei_widgetclass_drawfunc_t drawfunc;	///< The function that draws on screen an instance of this class of widget.
+	ei_widgetclass_setdefaultsfunc_t setdefaultsfunc;	///< The function that sets the default values to all the parameters of an instance of this class of widget.
+	ei_widgetclass_geomnotifyfunc_t geomnotifyfunc;	///< The function that is called to notify an instance of widget of this class that its geometry has changed.
+	struct ei_widgetclass_t *next;	///< A pointer to the next instance of ei_widget_class_t, allows widget class descriptions to be chained.
 } ei_widgetclass_t;
 
 
@@ -99,7 +100,7 @@ typedef struct ei_widgetclass_t {
  *
  * @return			The string representing the name of the class.
  */
-static inline char*	ei_widgetclass_stringname	(ei_widgetclass_name_t name);
+static inline char *ei_widgetclass_stringname(ei_widgetclass_name_t name);
 
 /**
  * @brief	Registers a class to the program so that widgets of this class can be created.
@@ -107,7 +108,7 @@ static inline char*	ei_widgetclass_stringname	(ei_widgetclass_name_t name);
  *
  * @param	widgetclass	The structure describing the class.
  */
-void			ei_widgetclass_register		(ei_widgetclass_t* widgetclass);
+void ei_widgetclass_register(ei_widgetclass_t * widgetclass);
 
 
 /**
@@ -117,35 +118,35 @@ void			ei_widgetclass_register		(ei_widgetclass_t* widgetclass);
  *
  * @return			The structure describing the class.
  */
-ei_widgetclass_t*	ei_widgetclass_from_name	(ei_widgetclass_name_t name);
+ei_widgetclass_t *ei_widgetclass_from_name(ei_widgetclass_name_t name);
 
 /**
  * \brief	Registers the "frame" widget class in the program. This must be called only
  *		once before widgets of the class "frame" can be created and configured with
  *		\ref ei_frame_configure.
  */
-void			ei_frame_register_class 	();
+void ei_frame_register_class();
 
 /**
  * \brief	Registers the "button" widget class in the program. This must be called only
  *		once before widgets of the class "button" can be created and configured with
  *		\ref ei_button_configure.
  */
-void			ei_button_register_class 	();
+void ei_button_register_class();
 
 /**
  * \brief	Registers the "toplevel" widget class in the program. This must be called only
  *		once before widgets of the class "toplevel" can be created and configured with
  *		\ref ei_toplevel_configure.
  */
-void			ei_toplevel_register_class 	();
+void ei_toplevel_register_class();
 
 
 /* Inline function definitions. */
 
-static inline char*	ei_widgetclass_stringname	(ei_widgetclass_name_t name)
+static inline char *ei_widgetclass_stringname(ei_widgetclass_name_t name)
 {
-	return (char*)name;
+	return (char *) name;
 }
 
 #endif

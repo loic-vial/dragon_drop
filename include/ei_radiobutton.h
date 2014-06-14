@@ -1,26 +1,22 @@
-﻿#ifndef EI_RADIOBUTTON_H
+#ifndef EI_RADIOBUTTON_H
 #define EI_RADIOBUTTON_H
-
 #include "ei_button.h"
-
 /**
  * \brief ei_radiobutton_t A type of widget wich represent a radiobutton
  *
  */
-typedef struct ei_radiobutton_t
-{
-    ei_frame_t frame; ///< Frame to memorize all common field between frame and radiobutton. All fields of the radiobutton
-                       /// will be children of this frame
-    int number; ///< Number of field in the radiobutton
-}
-ei_radiobutton_t;
+    typedef struct ei_radiobutton_t {
+	ei_frame_t frame;	///< Frame to memorize all common field between frame and radiobutton. All fields of the radiobutton
+	/// will be children of this frame
+	int number;		///< Number of field in the radiobutton
+} ei_radiobutton_t;
 
 /**
  * @brief ei_add_children_radiobutton       Adds a field in a radiobutton
  * @param text                              Text of this new field
  * @param radio                             Radiobutton where to add the field
  */
-void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio);
+void ei_add_children_radiobutton(char *text, ei_radiobutton_t * radio);
 
 /**
  * @brief ei_radiobutton_register_class     	Registers the "radiobutton" widget class in the program. This must be called only
@@ -36,7 +32,7 @@ void ei_radiobutton_register_class();
  *                                              The requested size is {150,20} by default
  * @param widget                                Radiobutton widget to set to default
  */
-void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget);
+void ei_radiobutton_setdefaultsfunc(ei_widget_t * widget);
 
 /**
  * @brief ei_radiobutton_configure              Configures the attributes of widgets of the class "button".
@@ -47,15 +43,17 @@ void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget);
  * @param border_width                          Border width of the radiobutton
  * @param relief                                Relief of the radiobuton
  */
-void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, const ei_color_t* color,
-                              int* border_width, ei_relief_t* relief);
+void ei_radiobutton_configure(ei_widget_t * widget,
+			      ei_size_t * requested_size,
+			      const ei_color_t * color, int *border_width,
+			      ei_relief_t * relief);
 
 /**
  * @brief ei_destroy_field         Destroys a field in a radiobutton
  * @param radio                    The radiobutton where a field will be destroy
  * @param number                   Number of the field to destroy
  */
-void ei_destroy_field(ei_radiobutton_t* radio,int number);
+void ei_destroy_field(ei_radiobutton_t * radio, int number);
 
 /**
  * @brief ei_edit_field         Changes text of a field
@@ -63,14 +61,14 @@ void ei_destroy_field(ei_radiobutton_t* radio,int number);
  * @param number                Number of the field to change
  * @param text                  New text of the field
  */
-void ei_edit_field(ei_radiobutton_t* radio,int number, char* text);
+void ei_edit_field(ei_radiobutton_t * radio, int number, char *text);
 
 /**
  * @brief ei_return_field       Returns the text of the field which is chosen
  * @param radio                 The radiobutton where to picked the chosen field
  * @return                      Return the text of the chosen field or NULL if the field doesn't exist
  */
-char* ei_return_field(ei_radiobutton_t* radio);
+char *ei_return_field(ei_radiobutton_t * radio);
 
 /**
  * @brief ei_find_widget        Return a field in the radiobutton
@@ -78,6 +76,6 @@ char* ei_return_field(ei_radiobutton_t* radio);
  * @param number                Number of the field to return
  * @return                      Return a field or NULL if the field doesn't exist
  */
-ei_widget_t* ei_find_widget(ei_radiobutton_t* radio,int number);
+ei_widget_t *ei_find_widget(ei_radiobutton_t * radio, int number);
 
 #endif
