@@ -52,7 +52,7 @@ int ei_main(int argc, char **argv)
 	ei_frame_configure(ei_app_root_widget(), NULL, &root_bgcol, NULL,
 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
-	ei_size_t size = { 275, 300 };
+    ei_size_t size = { 250, 250 };
 	ei_widget_t *frame_title =
 	    ei_widget_create("frame", ei_app_root_widget());
 	ei_font_t font =
@@ -61,8 +61,8 @@ int ei_main(int argc, char **argv)
 	char *text = "Quelle musique aimez vous ?";
 	ei_anchor_t anc = ei_anc_west;
 	ei_anchor_t anc_text = ei_anc_north;
-	ei_frame_configure(frame_title, &size, NULL, NULL, NULL, &text,
-			   &font, NULL, &anc_text, NULL, NULL, NULL);
+    ei_frame_configure(frame_title, &size, NULL, NULL, NULL, NULL,
+               NULL, NULL, NULL, NULL, NULL, NULL);
 	int x = 10;
 	ei_place(frame_title, &anc, &x, NULL, NULL, NULL, NULL, NULL, NULL,
 		 NULL);
@@ -91,11 +91,12 @@ int ei_main(int argc, char **argv)
 	ei_add_children_radiobutton("Electro Swing",
 				    (ei_radiobutton_t *) radio);
 
-	ei_size_t frame_size = { 200, 200 };
+    ei_size_t frame_size = { 200, 200 };
 
 	frame = ei_widget_create("frame", ei_app_root_widget());
-	ei_frame_configure(frame, &frame_size, &color, &border, NULL, NULL,
-			   NULL, NULL, NULL, NULL, NULL, NULL);
+    ei_anchor_t center=ei_anc_center;
+    ei_frame_configure(frame, &frame_size, &color, &border, NULL, &text,&font,
+                        NULL, &center, NULL, NULL, NULL);
 	ei_anchor_t frame_anc = ei_anc_east;
 	x = -10;
 	ei_place(frame, &frame_anc, &x, NULL, NULL, NULL, NULL, NULL, NULL,
