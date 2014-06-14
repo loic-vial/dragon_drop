@@ -279,7 +279,7 @@ void ei_toplevel_configure (ei_widget_t* widget, ei_size_t* requested_size, ei_c
     if (title != NULL)
     {
         toplevel->title = *title;
-        toplevel->border->text=*title;
+        toplevel->banner->text=*title;
     }
 
     if (closable != NULL)
