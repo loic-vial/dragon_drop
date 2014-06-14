@@ -18,6 +18,7 @@ void ei_button_setdefaultsfunc(ei_widget_t* widget)
     ei_button_t* button = (ei_button_t*) widget;
     button->callback = NULL;
     button->user_param = NULL;
+    button->frame.border_width = 3;
     button->frame.relief = ei_relief_raised;
     ei_set_initial_tags(widget);
 }
