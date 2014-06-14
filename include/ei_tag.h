@@ -52,7 +52,7 @@ void ei_destroy_tag_widget(ei_widget_t * widget, ei_tag_t tag);
  * @brief Adds a tag in the list \ref first_tag
  * @param tag               The tag to add
  */
-void add_tag(ei_tag_t tag);
+void ei_add_tag(ei_tag_t tag);
 
 /**
  * @brief Destroys a tag in the list \ref first_tag
@@ -66,7 +66,7 @@ void ei_destroy_tag(ei_tag_t tag);
  * @param widget            The widget to test if it has tags or not
  * @return                  Return EI_TRUE if the widget has a list of tags
  */
-ei_bool_t widget_has_tags(ei_widget_t * widget);
+ei_bool_t ei_widget_has_tags(ei_widget_t * widget);
 
 /**
  * @brief A function to know if a widget has one of particular tag
@@ -75,14 +75,14 @@ ei_bool_t widget_has_tags(ei_widget_t * widget);
  * @return                      Returns EI_TRUE if the tag is present in the list of tags of the widget
  */
 
-ei_bool_t widget_has_this_tag(ei_widget_t * widget, ei_tag_t tag);
+ei_bool_t ei_widget_has_this_tag(ei_widget_t * widget, ei_tag_t tag);
 
 /**
  * @brief A function to know if a particular tag is present in the list of all tags of the application
  * @param tag                   The tag to test
  * @return                      Returns EI_TRUE if the tag is present in the list of tags of the application
  */
-ei_bool_t has_this_tag(ei_tag_t tag);
+ei_bool_t ei_has_this_tag(ei_tag_t tag);
 
 /**
  * @brief A function to know if a tag is present in a list
@@ -95,17 +95,17 @@ ei_bool_t ei_list_has_this_tag(ei_linked_tag_t * tag_list, ei_tag_t tag);
 /**
  * @brief Displays the list of tags of the application
  */
-void display_list_tag();
+void ei_display_list_tag();
 
 /**
  * @brief Displays all tags of a widget;
  * @param widget                The widget which tags will be displayed
  */
-void display_tag(ei_widget_t * widget);
+void ei_display_tag(ei_widget_t * widget);
 
 /**
   * @brief Displays all tags of a list
   * @param linked_tag           The list of tags to display
   */
-void display_list(ei_linked_tag_t * linked_tag);
+void ei_display_list(ei_linked_tag_t * linked_tag);
 #endif

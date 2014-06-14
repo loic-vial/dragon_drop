@@ -23,7 +23,7 @@ void ei_frame_releasefunc(ei_widget_t * widget)
 	ei_clear_tag_list(&frame->tag);
 }
 
-ei_linked_point_t *arc(ei_point_t centre, float radius, float angle_debut,
+ei_linked_point_t *ei_arc(ei_point_t centre, float radius, float angle_debut,
 		       float angle_fin)
 {
 	ei_linked_point_t *liste_points =
@@ -45,28 +45,28 @@ ei_linked_point_t *arc(ei_point_t centre, float radius, float angle_debut,
 	return (liste_points);
 }
 
-ei_linked_point_t *rounded_frame_up(ei_rect_t rectangle, float rayon)
+ei_linked_point_t *ei_rounded_frame_up(ei_rect_t rectangle, float rayon)
 {
 	ei_point_t centre = ei_point_add(rectangle.top_left,
 					 ei_point(rectangle.size.width,
 						  0));
 	centre = ei_point_add(centre, ei_point(-rayon, rayon));
-	ei_linked_point_t *liste_points = arc(centre, rayon, 0, 90);
+    ei_linked_point_t *liste_points = ei_arc(centre, rayon, 0, 90);
 	ei_linked_point_t *current_point;
 	for (current_point = liste_points; current_point->next != NULL;
 	     current_point = current_point->next);
 	centre = ei_point_add(rectangle.top_left, ei_point(rayon, rayon));
-	current_point->next = arc(centre, rayon, 90, 180);
+    current_point->next = ei_arc(centre, rayon, 90, 180);
 	return liste_points;
 }
 
-ei_linked_point_t *rounded_frame_down(ei_rect_t rectangle, float rayon)
+ei_linked_point_t *ei_rounded_frame_down(ei_rect_t rectangle, float rayon)
 {
 	ei_point_t centre = ei_point_add(rectangle.top_left,
 					 ei_point(0,
 						  rectangle.size.height));
 	centre = ei_point_add(centre, ei_point(rayon, -rayon));
-	ei_linked_point_t *liste_points = arc(centre, rayon, -180, -90);
+    ei_linked_point_t *liste_points = ei_arc(centre, rayon, -180, -90);
 	ei_linked_point_t *current_point;
 	for (current_point = liste_points; current_point->next != NULL;
 	     current_point = current_point->next);
@@ -75,17 +75,17 @@ ei_linked_point_t *rounded_frame_down(ei_rect_t rectangle, float rayon)
 			 ei_point(rectangle.size.width,
 				  rectangle.size.height));
 	centre = ei_point_add(centre, ei_point(-rayon, -rayon));
-	current_point->next = arc(centre, rayon, -90, 0);
+    current_point->next = ei_arc(centre, rayon, -90, 0);
 	return liste_points;
 }
 
-ei_linked_point_t *rounded_frame(ei_rect_t rectangle, float rayon,
+ei_linked_point_t *ei_rounded_frame(ei_rect_t rectangle, float rayon,
 				 ei_bool_t top, ei_bool_t bot)
 {
 	ei_linked_point_t *liste_points;
 	ei_linked_point_t *current_point;
 	if (top) {
-		liste_points = rounded_frame_up(rectangle, rayon);
+        liste_points = ei_rounded_frame_up(rectangle, rayon);
 		for (current_point = liste_points;
 		     current_point->next != NULL;
 		     current_point = current_point->next);
@@ -102,7 +102,7 @@ ei_linked_point_t *rounded_frame(ei_rect_t rectangle, float rayon,
 		current_point = liste_points->next;
 	}
 	if (bot) {
-		current_point->next = rounded_frame_down(rectangle, rayon);
+        current_point->next = ei_rounded_frame_down(rectangle, rayon);
 		for (current_point = liste_points;
 		     current_point->next != NULL;
 		     current_point = current_point->next);
@@ -124,7 +124,7 @@ ei_linked_point_t *rounded_frame(ei_rect_t rectangle, float rayon,
 }
 
 
-ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
+ei_linked_point_t *ei_relief_frame(ei_rect_t rectangle, float radius,
 				ei_bool_t top, ei_bool_t bot,
 				ei_bool_t sup)
 {
@@ -146,7 +146,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 		if (top) {
 			centre.x = vertex.x + radius;
 			centre.y = vertex.y + radius;
-			point_list = arc(centre, radius, 90, 180);
+            point_list = ei_arc(centre, radius, 90, 180);
 			current_point = point_list;
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
@@ -164,7 +164,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 			centre.x = vertex.x + radius;
 			centre.y = vertex.y - radius;
 			current_point->next =
-			    arc(centre, radius, -180, -135);
+                ei_arc(centre, radius, -180, -135);
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
 			}
@@ -192,7 +192,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 		if (top) {
 			centre.x = vertex.x - radius;
 			centre.y = vertex.y + radius;
-			current_point->next = arc(centre, radius, 45, 90);
+            current_point->next = ei_arc(centre, radius, 45, 90);
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
 			}
@@ -208,7 +208,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 		if (bot) {
 			centre.x = vertex.x + radius;
 			centre.y = vertex.y - radius;
-			point_list = arc(centre, radius, -135, -90);
+            point_list = ei_arc(centre, radius, -135, -90);
 			current_point = point_list;
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
@@ -225,7 +225,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 		if (bot) {
 			centre.x = vertex.x - radius;
 			centre.y = vertex.y - radius;
-			current_point->next = arc(centre, radius, -90, 0);
+            current_point->next = ei_arc(centre, radius, -90, 0);
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
 			}
@@ -240,7 +240,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 		if (top) {
 			centre.x = vertex.x - radius;
 			centre.y = vertex.y + radius;
-			current_point->next = arc(centre, radius, 0, 45);
+            current_point->next = ei_arc(centre, radius, 0, 45);
 			while (current_point->next != NULL) {
 				current_point = current_point->next;
 			}
@@ -269,7 +269,7 @@ ei_linked_point_t *relief_frame(ei_rect_t rectangle, float radius,
 	return (point_list);
 }
 
-ei_color_t light_color(ei_color_t color)
+ei_color_t ei_light_color(ei_color_t color)
 {
 	int percent = 70;
 	color.red =
@@ -283,7 +283,7 @@ ei_color_t light_color(ei_color_t color)
 	return color;
 }
 
-ei_color_t dark_color(ei_color_t color)
+ei_color_t ei_dark_color(ei_color_t color)
 {
 	int percent = 70;
 	color.red = max(min(round(color.red * percent / 100), 255), 0);
@@ -292,7 +292,7 @@ ei_color_t dark_color(ei_color_t color)
 	return color;
 }
 
-void free_points(ei_linked_point_t * points)
+void ei_free_points(ei_linked_point_t * points)
 {
 	ei_linked_point_t *point = points;
 	while (point != NULL) {
@@ -308,7 +308,7 @@ void ei_frame_drawfunc(ei_widget_t * widget, ei_surface_t surface,
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	ei_rect_t rect = widget->screen_location;
 	ei_linked_point_t *points =
-	    rounded_frame(rect, frame->corner_radius, frame->rounded_up,
+        ei_rounded_frame(rect, frame->corner_radius, frame->rounded_up,
 			  frame->rounded_down);
 	if (frame->border_width != 0) {
 		ei_rect_t rect_2;
@@ -321,16 +321,16 @@ void ei_frame_drawfunc(ei_widget_t * widget, ei_surface_t surface,
 		int radius_2 = frame->corner_radius - frame->border_width;
 		radius_2 = radius_2 < 0 ? 0 : radius_2;
 		ei_linked_point_t *points_2 =
-		    rounded_frame(rect_2, radius_2, frame->rounded_up,
+            ei_rounded_frame(rect_2, radius_2, frame->rounded_up,
 				  frame->rounded_down);
-		ei_color_t light = light_color(frame->color);
-		ei_color_t dark = dark_color(frame->color);
+        ei_color_t light = ei_light_color(frame->color);
+        ei_color_t dark = ei_dark_color(frame->color);
 		ei_linked_point_t *points_up =
-		    relief_frame(rect, frame->corner_radius,
+            ei_relief_frame(rect, frame->corner_radius,
 				 frame->rounded_up, frame->rounded_down,
 				 EI_TRUE);
 		ei_linked_point_t *points_down =
-		    relief_frame(rect, frame->corner_radius,
+            ei_relief_frame(rect, frame->corner_radius,
 				 frame->rounded_up, frame->rounded_down,
 				 EI_FALSE);
 		if (frame->relief == ei_relief_raised) {
@@ -352,9 +352,9 @@ void ei_frame_drawfunc(ei_widget_t * widget, ei_surface_t surface,
 					clipper);
 		}
 
-		free_points(points_up);
-		free_points(points_down);
-		free_points(points_2);
+        ei_free_points(points_up);
+        ei_free_points(points_down);
+        ei_free_points(points_2);
 	} else {
 		ei_draw_polygon(surface, points, frame->color, clipper);
 	}
@@ -395,7 +395,7 @@ void ei_frame_drawfunc(ei_widget_t * widget, ei_surface_t surface,
 		ei_rect_t rect = ei_rect(top_left_corner, img_rect.size);
 		ei_rect_t rect_2 = img_rect;
 
-		rect = rectangle_intersection(*clipper, rect);
+        rect = ei_rectangle_intersection(*clipper, rect);
 		rect_2.size = rect.size;
 
 		if (top_left_corner.x < clipper->top_left.x) {
@@ -417,7 +417,7 @@ void ei_frame_drawfunc(ei_widget_t * widget, ei_surface_t surface,
 	ei_draw_polygon(pick_surface, points, *widget->pick_color,
 			clipper);
 
-	free_points(points);
+    ei_free_points(points);
 }
 
 void ei_frame_setdefaultsfunc(ei_widget_t * widget)

@@ -20,14 +20,14 @@ void ei_toplevel_releasefunc(ei_widget_t * widget)
 	hw_text_font_free(toplevel->banner_font);
 }
 
-ei_bool_t close_button_click(ei_widget_t * widget, ei_event_t * event,
+ei_bool_t ei_close_button_click(ei_widget_t * widget, ei_event_t * event,
 			     void *user_param)
 {
 	ei_widget_destroy(widget->parent->parent);
 	return EI_FALSE;
 }
 
-void toplevel_frame_init(ei_toplevel_t * toplevel)
+void ei_toplevel_frame_init(ei_toplevel_t * toplevel)
 {
 	toplevel->frame.widget.requested_size = ei_size(320, 240);
 	toplevel->frame.border_width = 4;
@@ -41,7 +41,7 @@ void toplevel_frame_init(ei_toplevel_t * toplevel)
 	toplevel->frame.corner_radius = 5;
 }
 
-void toplevel_banner_init(ei_toplevel_t * toplevel)
+void ei_toplevel_banner_init(ei_toplevel_t * toplevel)
 {
 	toplevel->banner =
 	    (ei_frame_t *) ei_widget_create("banner",
@@ -65,7 +65,7 @@ void toplevel_banner_init(ei_toplevel_t * toplevel)
 		 NULL, NULL, NULL, NULL, &rel_width, NULL);
 }
 
-void toplevel_close_button_init(ei_toplevel_t * toplevel)
+void ei_toplevel_close_button_init(ei_toplevel_t * toplevel)
 {
 	toplevel->close_button =
 	    (ei_button_t *) ei_widget_create("button",
@@ -90,17 +90,17 @@ void toplevel_close_button_init(ei_toplevel_t * toplevel)
 	toplevel->close_button->frame.text_anchor = ei_anc_center;
 	toplevel->close_button->frame.rounded_down = EI_TRUE;
 	toplevel->close_button->frame.rounded_up = EI_TRUE;
-	toplevel->close_button->callback = close_button_click;
+    toplevel->close_button->callback = ei_close_button_click;
 	ei_bind(ei_ev_mouse_buttonup,
 		&toplevel->close_button->frame.widget, NULL,
-		close_button_click, NULL);
+        ei_close_button_click, NULL);
 	ei_anchor_t anchor = ei_anc_west;
 	int position_x = 4;
 	ei_place(&toplevel->close_button->frame.widget, &anchor,
 		 &position_x, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 }
 
-void toplevel_resize_button_init(ei_toplevel_t * toplevel)
+void ei_toplevel_resize_button_init(ei_toplevel_t * toplevel)
 {
 	toplevel->resize_button =
 	    (ei_button_t *) ei_widget_create("resize",
@@ -117,9 +117,9 @@ void ei_toplevel_setdefaultsfunc(ei_widget_t * widget)
 {
 	ei_frame_setdefaultsfunc(widget);
 	ei_toplevel_t *toplevel = (ei_toplevel_t *) widget;
-	toplevel_frame_init(toplevel);
-	toplevel_banner_init(toplevel);
-	toplevel_close_button_init(toplevel);
-	toplevel_resize_button_init(toplevel);
+    ei_toplevel_frame_init(toplevel);
+    ei_toplevel_banner_init(toplevel);
+    ei_toplevel_close_button_init(toplevel);
+    ei_toplevel_resize_button_init(toplevel);
 	ei_set_initial_tags(widget);
 }

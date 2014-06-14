@@ -24,12 +24,12 @@ ei_color_t ei_color(unsigned char red, unsigned char green,
 /**
  * @brief Tests if two colors are equal
  */
-ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2);
+ei_bool_t ei_is_same_color(ei_color_t color1, ei_color_t color2);
 
 /**
  * @brief Tests if two rectangles are equal
  */
-ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
+ei_bool_t ei_is_same_rect(ei_rect_t rect1, ei_rect_t rect2);
 
 /**
  * @brief Empty a linked list of rectangles
@@ -49,7 +49,7 @@ int max(int x1, int x2);
 /**
  * @brief Computes the rectangle which intersects two rectangles
  */
-ei_rect_t rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2);
+ei_rect_t ei_rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2);
 
 /**
  * @brief Moves a widget at the end (the tail) of its parent

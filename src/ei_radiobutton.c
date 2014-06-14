@@ -7,7 +7,7 @@
 #include "ei_utils_2.h"
 #include "ei_event.h"
 
-ei_bool_t click_button(ei_widget_t * widget, ei_event_t * event,
+ei_bool_t ei_click_button(ei_widget_t * widget, ei_event_t * event,
 		       void *user_param)
 {
 	ei_button_t *field_button = (ei_button_t *) widget;
@@ -80,7 +80,7 @@ void ei_add_children_radiobutton(char *text, ei_radiobutton_t * radio)
 	select_button->frame.text_anchor = ei_anc_center;
 	select_button->frame.rounded_down = EI_TRUE;
 	select_button->frame.rounded_up = EI_TRUE;
-	select_button->callback = click_button;
+    select_button->callback = ei_click_button;
 
 	ei_anchor_t anchor = ei_anc_west;
 	int position_x = 4;
@@ -187,7 +187,7 @@ void ei_radiobutton_register_class()
 	radiobuttonclass->geomnotifyfunc = NULL;
 	radiobuttonclass->next = NULL;
 	ei_widgetclass_register(radiobuttonclass);
-	ei_bind(ei_ev_mouse_buttonup, NULL, "select_button", click_button,
+    ei_bind(ei_ev_mouse_buttonup, NULL, "select_button", ei_click_button,
 		NULL);
 }
 
@@ -257,7 +257,7 @@ char *ei_return_field(ei_radiobutton_t * radio)
 		    (ei_button_t *) field->widget.children_tail;
 		ei_frame_t *frame =
 		    (ei_frame_t *) field->widget.children_head;
-		if (is_same_color(button->frame.color, color)) {
+        if (ei_is_same_color(button->frame.color, color)) {
 			return frame->text;
 		} else {
 			field = (ei_frame_t *) field->widget.next_sibling;

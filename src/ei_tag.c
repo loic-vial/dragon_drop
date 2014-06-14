@@ -80,7 +80,7 @@ void ei_destroy_tag(ei_tag_t tag)
 
 void ei_set_initial_tags(ei_widget_t * widget)
 {
-	if (!widget_has_tags(widget))
+	if (!ei_widget_has_tags(widget))
 		return;
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	ei_clear_tag_list(&frame->tag);
@@ -91,7 +91,7 @@ void ei_set_initial_tags(ei_widget_t * widget)
 
 void ei_add_tag_widget(ei_widget_t * widget, ei_tag_t tag)
 {
-	if (!widget_has_tags(widget))
+	if (!ei_widget_has_tags(widget))
 		return;
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	ei_add_tag_to_list(&frame->tag, tag);
@@ -100,13 +100,13 @@ void ei_add_tag_widget(ei_widget_t * widget, ei_tag_t tag)
 
 void ei_destroy_tag_widget(ei_widget_t * widget, ei_tag_t tag)
 {
-	if (!widget_has_tags(widget))
+	if (!ei_widget_has_tags(widget))
 		return;
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	ei_remove_tag_from_list(&frame->tag, tag);
 }
 
-ei_bool_t widget_has_tags(ei_widget_t * widget)
+ei_bool_t ei_widget_has_tags(ei_widget_t * widget)
 {
 	if (strcmp(widget->wclass->name, "frame") == 0 ||
 	    strcmp(widget->wclass->name, "button") == 0 ||
@@ -120,15 +120,15 @@ ei_bool_t widget_has_tags(ei_widget_t * widget)
 	}
 }
 
-ei_bool_t widget_has_this_tag(ei_widget_t * widget, ei_tag_t tag)
+ei_bool_t ei_widget_has_this_tag(ei_widget_t * widget, ei_tag_t tag)
 {
-	if (!widget_has_tags(widget))
+	if (!ei_widget_has_tags(widget))
 		return EI_FALSE;
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	return ei_list_has_this_tag(frame->tag, tag);
 }
 
-ei_bool_t has_this_tag(ei_tag_t tag)
+ei_bool_t ei_has_this_tag(ei_tag_t tag)
 {
 	return ei_list_has_this_tag(first_tag, tag);
 }
@@ -152,20 +152,20 @@ ei_bool_t ei_list_has_this_tag(ei_linked_tag_t * tag_list, ei_tag_t tag)
 
 
 
-void display_list_tag()
+void ei_display_list_tag()
 {
 	ei_linked_tag_t *last_tag = first_tag;
-	display_list(last_tag);
+	ei_display_list(last_tag);
 }
 
-void display_tag(ei_widget_t * widget)
+void ei_display_tag(ei_widget_t * widget)
 {
 	ei_frame_t *frame = (ei_frame_t *) widget;
 	ei_linked_tag_t *last_tag = frame->tag;
-	display_list(last_tag);
+	ei_display_list(last_tag);
 }
 
-void display_list(ei_linked_tag_t * linked_tag)
+void ei_display_list(ei_linked_tag_t * linked_tag)
 {
 	while (linked_tag != NULL) {
 		printf("%s \n", (char *) linked_tag->tag);

@@ -42,41 +42,41 @@ void ei_app_create(ei_size_t * main_window_size, ei_bool_t fullscreen)
 	ei_enable_movable_tag();
 }
 
-ei_rect_t compute_clipper(ei_widget_t * widget)
+ei_rect_t ei_compute_clipper(ei_widget_t * widget)
 {
 	ei_rect_t clipper =
 	    ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
 	while (widget->parent != NULL) {
 		ei_rect_t rect = *widget->parent->content_rect;
-		if (widget_has_this_tag(widget, "banner")) {
+		if (ei_widget_has_this_tag(widget, "banner")) {
 			rect.top_left.y -=
 			    widget->content_rect->size.height;
 			rect.size.height =
 			    widget->content_rect->size.height;
 		}
-		clipper = rectangle_intersection(rect, clipper);
+        clipper = ei_rectangle_intersection(rect, clipper);
 		widget = widget->parent;
 	}
 	return clipper;
 }
 
-void draw_widget(ei_widget_t * widget)
+void ei_draw_widget(ei_widget_t * widget)
 {
 	if (widget == NULL)
 		return;
 	if (widget->geom_params == NULL)
 		return;
 	widget->geom_params->manager->runfunc(widget);
-	ei_rect_t clipper = compute_clipper(widget);
+    ei_rect_t clipper = ei_compute_clipper(widget);
 	widget->wclass->drawfunc(widget, root_surface, offscreen_surface,
 				 &clipper);
 	for (ei_widget_t * current = widget->children_head;
 	     current != NULL; current = current->next_sibling) {
-		draw_widget(current);
+        ei_draw_widget(current);
 	}
 }
 
-void manage_event(ei_event_t event)
+void ei_manage_event(ei_event_t event)
 {
 	ei_eventlist_t *event_tmp = first_event;
     ei_bool_t callback_return = EI_FALSE;
@@ -100,9 +100,9 @@ void manage_event(ei_event_t event)
 							    &event,
 							    event_tmp->user_param);
 				} else
-				    if (widget_has_this_tag
+				    if (ei_widget_has_this_tag
 					(widget_picked, event_tmp->tag)
-					&& has_this_tag(event_tmp->tag)) {
+					&& ei_has_this_tag(event_tmp->tag)) {
                     callback_return = event_tmp->callback(widget_picked,
 							    &event,
 							    event_tmp->user_param);
@@ -124,14 +124,14 @@ void ei_app_run()
 	while (!want_quit) {
 		hw_surface_lock(root_surface);
 		hw_surface_lock(offscreen_surface);
-		draw_widget(&root->widget);
+        ei_draw_widget(&root->widget);
 		hw_surface_unlock(root_surface);
 		hw_surface_unlock(offscreen_surface);
 		hw_surface_update_rects(root_surface, NULL);
 		hw_surface_update_rects(offscreen_surface, NULL);
 		ei_clear_rect_list(&invalid_rects);
 		hw_event_wait_next(&event);
-		manage_event(event);
+        ei_manage_event(event);
 	}
 }
 
@@ -139,7 +139,7 @@ void ei_app_invalidate_rect(ei_rect_t * rect)
 {
 	ei_rect_t root_rect =
 	    ei_rect(ei_point_zero(), hw_surface_get_size(root_surface));
-	ei_rect_t new_rect = rectangle_intersection(*rect, root_rect);
+    ei_rect_t new_rect = ei_rectangle_intersection(*rect, root_rect);
 	if (invalid_rects == NULL) {
 		invalid_rects =
 		    (ei_linked_rect_t *) malloc(sizeof(ei_linked_rect_t));

@@ -56,7 +56,7 @@ ei_color_t ei_color(unsigned char red, unsigned char green,
 	return color;
 }
 
-ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2)
+ei_bool_t ei_is_same_color(ei_color_t color1, ei_color_t color2)
 {
 	return (color1.red == color2.red &&
 		color1.green == color2.green &&
@@ -64,7 +64,7 @@ ei_bool_t is_same_color(ei_color_t color1, ei_color_t color2)
 		color1.alpha == color2.alpha);
 }
 
-ei_bool_t is_same_rect(ei_rect_t rect1, ei_rect_t rect2)
+ei_bool_t ei_is_same_rect(ei_rect_t rect1, ei_rect_t rect2)
 {
 	return (rect1.size.height == rect2.size.height &&
 		rect1.size.width == rect2.size.width &&
@@ -95,7 +95,7 @@ int max(int x1, int x2)
 	return (x1 > x2) ? x1 : x2;
 }
 
-ei_rect_t rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2)
+ei_rect_t ei_rectangle_intersection(ei_rect_t rect1, ei_rect_t rect2)
 {
 	ei_rect_t rect;
 	int maxgauche = max(rect1.top_left.x, rect2.top_left.x);

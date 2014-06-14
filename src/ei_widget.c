@@ -82,17 +82,17 @@ void ei_widget_destroy(ei_widget_t * widget)
 	free(widget);
 }
 
-ei_widget_t *get_widget_with_pick_color(ei_widget_t * widget,
+ei_widget_t *ei_get_widget_with_pick_color(ei_widget_t * widget,
 					ei_color_t color)
 {
 	if (widget == NULL)
 		return NULL;
-	if (is_same_color(*widget->pick_color, color))
+    if (ei_is_same_color(*widget->pick_color, color))
 		return widget;
 	ei_widget_t *current = widget->children_head;
 	while (current != NULL) {
 		ei_widget_t *tmp =
-		    get_widget_with_pick_color(current, color);
+            ei_get_widget_with_pick_color(current, color);
 		if (tmp != NULL)
 			return tmp;
 		current = current->next_sibling;
@@ -114,10 +114,10 @@ ei_widget_t *ei_widget_pick(ei_point_t * where)
 				       &ia);
 	ei_color_t color =
 	    ei_color(buffer[ir], buffer[ig], buffer[ib], 255);
-	return get_widget_with_pick_color(ei_app_root_widget(), color);
+    return ei_get_widget_with_pick_color(ei_app_root_widget(), color);
 }
 
-void recompute_frame_requested_size(ei_frame_t * frame)
+void ei_recompute_frame_requested_size(ei_frame_t * frame)
 {
 	ei_widget_t *widget = &frame->widget;
 	if (frame->img != NULL) {
@@ -227,7 +227,7 @@ void ei_frame_configure(ei_widget_t * widget, ei_size_t * requested_size,
 		frame->img_anchor = *img_anchor;
 
 	if (need_recompute_requested_size)
-		recompute_frame_requested_size(frame);
+        ei_recompute_frame_requested_size(frame);
 
 	ei_app_invalidate_rect(&widget->screen_location);
 }

@@ -10,11 +10,11 @@ ei_widget_t *frame;
 ei_widget_t *text_debut;
 ei_bool_t button_press(ei_widget_t * widget, ei_event_t * event,
 		       void *user_param);
-ei_bool_t process_key(ei_widget_t * widget, ei_event_t * event,
+ei_bool_t ei_process_key(ei_widget_t * widget, ei_event_t * event,
 		      void *user_param);
 
 
-ei_bool_t process_key(ei_widget_t * widget, ei_event_t * event,
+ei_bool_t ei_process_key(ei_widget_t * widget, ei_event_t * event,
 		      void *user_param)
 {
 	if (event->param.key.key_sym == SDLK_ESCAPE) {
@@ -26,7 +26,7 @@ ei_bool_t process_key(ei_widget_t * widget, ei_event_t * event,
 }
 
 
-ei_bool_t field(ei_widget_t * widget, ei_event_t * event, void *user_param)
+ei_bool_t ei_field(ei_widget_t * widget, ei_event_t * event, void *user_param)
 {
 	char *text =
 	    ei_return_field((ei_radiobutton_t *) widget->parent->parent);
@@ -111,13 +111,13 @@ int ei_main(int argc, char **argv)
 	ei_place(text_debut, &frame_anc_debut, NULL, &y, NULL, NULL, NULL,
 		 NULL, NULL, NULL);
 
-	ei_bind(ei_ev_keydown, NULL, "all", process_key, NULL);
+    ei_bind(ei_ev_keydown, NULL, "all", ei_process_key, NULL);
 
-	ei_bind(ei_ev_mouse_buttonup, NULL, "select_button", field, NULL);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "select_button", ei_field, NULL);
 	ei_app_run();
 
-	ei_unbind(ei_ev_keydown, NULL, "all", process_key, NULL);
-	ei_unbind(ei_ev_mouse_buttonup, NULL, "select_button", field,
+    ei_unbind(ei_ev_keydown, NULL, "all", ei_process_key, NULL);
+    ei_unbind(ei_ev_mouse_buttonup, NULL, "select_button", ei_field,
 		  NULL);
 	ei_app_free();
 

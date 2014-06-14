@@ -60,7 +60,7 @@ void ei_frame_setdefaultsfunc(ei_widget_t * widget);
  * @param angle_fin     Angle where is the last point
  * @return              A list of point wich represents only a piece of circle
  */
-ei_linked_point_t *arc(ei_point_t centre, float radius, float angle_debut,
+ei_linked_point_t *ei_arc(ei_point_t centre, float radius, float angle_debut,
 		       float angle_fin);
 
 #endif
