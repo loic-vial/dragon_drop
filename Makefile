@@ -9,7 +9,7 @@ INCLUDES	= ./include
 INCFLAGS	:= -I${INCLUDES}
 OPTFLAGS	:= -Os -DNDEBUG
 #OPTFLAGS	:= -g
-CCFLAGS		:= -c ${OPTFLAGS} -Wno-unused -Wall -Wextra -std=c99
+CCFLAGS		:= -c ${OPTFLAGS} -Wno-unused -Wall -Wextra -Wno-unused -std=c99
 
 # The list of objects to include in the library
 
