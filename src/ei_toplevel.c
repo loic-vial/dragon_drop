@@ -18,7 +18,7 @@ void ei_toplevel_releasefunc(ei_widget_t* widget)
         toplevel->min_size = NULL;
     }
     hw_text_font_free(toplevel->close_button_font);
-    hw_text_font_free(toplevel->border_font);
+    hw_text_font_free(toplevel->banner_font);
 }
 
 ei_bool_t close_button_click(ei_widget_t* widget, ei_event_t* event, void* user_param)
@@ -43,28 +43,28 @@ void toplevel_frame_init(ei_toplevel_t* toplevel)
 
 void toplevel_banner_init(ei_toplevel_t* toplevel)
 {
-    toplevel->border = (ei_frame_t*) ei_widget_create("banner", &toplevel->frame.widget);
-    toplevel->border->text = "Toplevel";
-    toplevel->border->border_width = 0;
-    toplevel->border->widget.requested_size.height = 20;
-    toplevel->border->rounded_up = EI_TRUE;
-    toplevel->border->rounded_down = EI_FALSE;
-    toplevel->border->corner_radius = 5;
-    toplevel->border->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
-    toplevel->border_font = toplevel->border->text_font;
-    toplevel->border->color = ei_color(0, 0, 0, 255);
-    toplevel->border->text_color = ei_color(255, 255, 255, 255);
-    toplevel->border->border_width = 0;
+    toplevel->banner = (ei_frame_t*) ei_widget_create("banner", &toplevel->frame.widget);
+    toplevel->banner->text = "Toplevel";
+    toplevel->banner->border_width = 0;
+    toplevel->banner->widget.requested_size.height = 20;
+    toplevel->banner->rounded_up = EI_TRUE;
+    toplevel->banner->rounded_down = EI_FALSE;
+    toplevel->banner->corner_radius = 5;
+    toplevel->banner->text_font = hw_text_font_create("misc/font.ttf", ei_style_normal, 16);
+    toplevel->banner_font = toplevel->banner->text_font;
+    toplevel->banner->color = ei_color(0, 0, 0, 255);
+    toplevel->banner->text_color = ei_color(255, 255, 255, 255);
+    toplevel->banner->border_width = 0;
     ei_anchor_t anchor = ei_anc_north;
-    int position_y = -toplevel->border->widget.requested_size.height;
+    int position_y = -toplevel->banner->widget.requested_size.height;
     float rel_width = 1;
-    ei_place(&toplevel->border->widget, &anchor, NULL, &position_y, NULL,
+    ei_place(&toplevel->banner->widget, &anchor, NULL, &position_y, NULL,
              NULL, NULL, NULL, &rel_width, NULL);
 }
 
 void toplevel_close_button_init(ei_toplevel_t* toplevel)
 {
-    toplevel->close_button = (ei_button_t*) ei_widget_create("button", &toplevel->border->widget);
+    toplevel->close_button = (ei_button_t*) ei_widget_create("button", &toplevel->banner->widget);
 
     toplevel->close_button->frame.border_width = 0;
     toplevel->close_button->frame.color = ei_color(255, 0, 0, 255);

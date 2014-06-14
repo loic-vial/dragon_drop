@@ -98,16 +98,18 @@ void ei_place(ei_widget_t* widget, ei_anchor_t* anchor,
 
         if (y != NULL)
         {
+
             place->y = *y;
             if (strcmp(widget->wclass->name,"toplevel") == 0)
             {
                 ei_toplevel_t* toplevel = (ei_toplevel_t*) widget;
-                place->y += toplevel->border->widget.requested_size.height;
+                place->y += toplevel->banner->widget.requested_size.height;
             }
         }
         else
         {
             place->y = 0;
+
         }
 
         if (rel_x != NULL)
