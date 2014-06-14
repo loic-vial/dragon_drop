@@ -9,53 +9,53 @@
 extern ei_linked_tag_t* first_tag;
 
 /**
- * @brief ei_add_tag_to_list        A function that adds a tag to a list
+ * @brief ei_add_tag_to_list        Adds a tag to a list
  * @param tag_list                  The list where to add the tag
  * @param tag                       The tag to add
  */
 void ei_add_tag_to_list(ei_linked_tag_t** tag_list, ei_tag_t tag);
 
 /**
- * @brief ei_remove_tag_from_list      A function that remove a tag to a list
+ * @brief ei_remove_tag_from_list      Removes a tag to a list
  * @param tag_list                     The list where to remove the tag
  * @param tag                          The tag to remove
  */
 void ei_remove_tag_from_list(ei_linked_tag_t** tag_list, ei_tag_t tag);
 
 /**
- * @brief ei_clear_tag_list            A function that destroy all tags in a list
+ * @brief ei_clear_tag_list            Destroys all tags in a list
  * @param tag_list                     The list to clear
  */
 void ei_clear_tag_list(ei_linked_tag_t** tag_list);
 
 /**
- * @brief ei_set_initial_tags           A function that add the tag "all and the name of the class when a widget is set to default
+ * @brief ei_set_initial_tags           Adds the tag "all and the name of the class of the widget when a widget is set to default
  * @param widget                        Widget where to add these two tags
  */
 void ei_set_initial_tags(ei_widget_t* widget);
 
 /**
- * @brief ei_add_tag_widget         A function that add a tag to a widget
+ * @brief ei_add_tag_widget         Adds a tag to a widget
  * @param widget                    The widget where to add the tag
  * @param tag                       The tag to add
  */
 void ei_add_tag_widget(ei_widget_t* widget, ei_tag_t tag);
 
 /**
- * @brief ei_destroy_tag_widget     A function that destroy a tag to a widget
+ * @brief ei_destroy_tag_widget     Destroys a tag to a widget
  * @param widget                    The widget where to destroy the tag
  * @param tag                       The tag to destroy
  */
 void ei_destroy_tag_widget(ei_widget_t* widget, ei_tag_t tag);
 
 /**
- * @brief add_tag           A function that add a tag in the list \ref first_tag
+ * @brief add_tag           Adds a tag in the list \ref first_tag
  * @param tag               The tag to add
  */
 void add_tag(ei_tag_t tag);
 
 /**
- * @brief ei_destroy_tag    A function that destroy a tag in the list \ref first_tag
+ * @brief ei_destroy_tag    Destroys a tag in the list \ref first_tag
  *                          If a tag is destroy in this list, all events linked to this tag become useless
  * @param tag               The tag to destroy
  */
@@ -69,7 +69,7 @@ void ei_destroy_tag(ei_tag_t tag);
 ei_bool_t widget_has_tags(ei_widget_t* widget);
 
 /**
- * @brief widget_has_this_tag   A function to knows if a widget has one of particular tag
+ * @brief widget_has_this_tag   A function to know if a widget has one of particular tag
  * @param widget                The widget to test
  * @param tag                   The tag to test if it is present or not in the list of tags of the widget
  * @return                      Returns EI_TRUE if the tag is present in the list of tags of the widget

@@ -1,4 +1,4 @@
-#ifndef EI_RADIOBUTTON_H
+﻿#ifndef EI_RADIOBUTTON_H
 #define EI_RADIOBUTTON_H
 
 #include "ei_button.h"
@@ -16,7 +16,7 @@ typedef struct ei_radiobutton_t
 ei_radiobutton_t;
 
 /**
- * @brief ei_add_children_radiobutton       A function that add a field in a radiobutton
+ * @brief ei_add_children_radiobutton       Adds a field in a radiobutton
  * @param text                              Text of this new field
  * @param radio                             Radiobutton where to add the field
  */
@@ -30,7 +30,10 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio);
 void ei_radiobutton_register_class();
 
 /**
- * @brief ei_radiobutton_setdefaultsfunc        A function that sets all parameters of the radiobutton to default. A first field is create by default
+ * @brief ei_radiobutton_setdefaultsfunc        Sets all attributes of the radiobutton to default.
+ *                                              Frame is set to defaults values with \ref ei_frame_setdefaultsfunc
+ *                                              A first field is create by default with the text "First field"
+ *                                              The requested size is {150,20} by default
  * @param widget                                Radiobutton widget to set to default
  */
 void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget);
@@ -48,14 +51,14 @@ void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, co
                               int* border_width, ei_relief_t* relief);
 
 /**
- * @brief ei_destroy_field         A function that destroy a field in a radiobutton
+ * @brief ei_destroy_field         Destroys a field in a radiobutton
  * @param radio                    The radiobutton where a field will be destroy
  * @param number                   Number of the field to destroy
  */
 void ei_destroy_field(ei_radiobutton_t* radio,int number);
 
 /**
- * @brief ei_edit_field         A function that change the text of a field
+ * @brief ei_edit_field         Changes text of a field
  * @param radio                 The radiobutton where to change a field
  * @param number                Number of the field to change
  * @param text                  New text of the field
@@ -63,17 +66,17 @@ void ei_destroy_field(ei_radiobutton_t* radio,int number);
 void ei_edit_field(ei_radiobutton_t* radio,int number, char* text);
 
 /**
- * @brief ei_return_field       A function that returns the text of the field which is chosen
+ * @brief ei_return_field       Returns the text of the field which is chosen
  * @param radio                 The radiobutton where to picked the chosen field
- * @return                      Return the text of the chosen field
+ * @return                      Return the text of the chosen field or NULL if the field doesn't exist
  */
 char* ei_return_field(ei_radiobutton_t* radio);
 
 /**
- * @brief ei_find_widget        A function that return a field in the radiobutton
- * @param radio                 The radiobutton where the field is
+ * @brief ei_find_widget        Return a field in the radiobutton
+ * @param radio                 The radiobutton where the field is present
  * @param number                Number of the field to return
- * @return                      Return a field
+ * @return                      Return a field or NULL if the field doesn't exist
  */
 ei_widget_t* ei_find_widget(ei_radiobutton_t* radio,int number);
 
