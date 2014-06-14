@@ -2,6 +2,7 @@
 #include "ei_frame.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 ei_linked_tag_t* first_tag = NULL;
 
@@ -148,3 +149,27 @@ ei_bool_t ei_list_has_this_tag(ei_linked_tag_t* tag_list, ei_tag_t tag)
     }
     return EI_FALSE;
 }
+
+
+
+
+void display_list_tag()
+{
+    ei_linked_tag_t* last_tag = first_tag;
+   display_list(last_tag);
+}
+
+void display_tag(ei_widget_t* widget)
+{
+    ei_frame_t* frame=(ei_frame_t*)widget;
+    ei_linked_tag_t* last_tag = frame->tag;
+   display_list(last_tag);
+}
+ void display_list(ei_linked_tag_t* linked_tag)
+ {
+     while(linked_tag !=NULL)
+     {
+         printf("%s \n", (char*)linked_tag->tag);
+         linked_tag=linked_tag->next;
+     }
+ }

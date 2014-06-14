@@ -12,10 +12,10 @@ ei_bool_t click_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_button_t* field_button = (ei_button_t*)widget;
     ei_frame_t* field= (ei_frame_t*)widget->parent->parent->children_head;
+
     while(field !=NULL)
     {
-        //ei_frame_t* parent= (ei_frame_t*)field_button->frame.widget.parent;
-        ei_button_t* button_tmp=(ei_button_t*) field->widget.children_head;
+        ei_button_t* button_tmp=(ei_button_t*) field->widget.children_tail;
         button_tmp->frame.color=ei_color(255,255,255,150);
         field=(ei_frame_t*)field->widget.next_sibling;
     }
@@ -31,16 +31,12 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio)
 {
 
     ei_widget_t* widget = (ei_widget_t*)radio;
-    ei_frame_t* frame = (ei_frame_t*)ei_widget_create("frame",widget);
+    ei_frame_t* field = (ei_frame_t*)ei_widget_create("frame",widget);
+    ei_frame_t* frame = (ei_frame_t*)ei_widget_create("frame",(ei_widget_t*)field);
     ei_anchor_t anc= ei_anc_west;
-
-    char* str ;
-    str = (char*)malloc(80*sizeof(char));
-    strcpy(str,"      ");
-    strcat(str,text);
     ei_font_t font = hw_text_font_create("misc/font.ttf", ei_style_normal, 15);
-    ei_frame_configure(&frame->widget,NULL,&radio->frame.color,NULL,NULL,&str,&font,NULL,&anc,NULL,NULL,NULL);
-
+    ei_frame_configure(&frame->widget,NULL,&radio->frame.color,NULL,NULL,&text,&font,NULL,&anc,NULL,NULL,NULL);
+    ei_frame_configure(&field->widget,NULL,&radio->frame.color,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
     float rel_width = 1;
     int height;
     if (radio->number == 0)
@@ -51,43 +47,51 @@ void ei_add_children_radiobutton(char * text, ei_radiobutton_t* radio)
         height = widget->requested_size.height/(radio->number);
     }
     ei_point_t point;
-    if ((ei_widget_t*)frame == widget->children_head)
+    if ((ei_widget_t*)field == widget->children_head)
     {
         point.x=0;
         point.y=0;
-        frame->widget.screen_location.top_left.x=0;
-        frame->widget.screen_location.top_left.y=0;
+        field->widget.screen_location.top_left.x=0;
+        field->widget.screen_location.top_left.y=0;
 
     }
     else
     {
         point.x=0;
         point.y=height*radio->number;
-        frame->widget.screen_location.top_left.x=0;
-        frame->widget.screen_location.top_left.y=point.y;
+        field->widget.screen_location.top_left.x=0;
+        field->widget.screen_location.top_left.y=point.y;
     }
 
-    ei_place(&frame->widget, NULL,&point.x,&point.y, NULL, &height, NULL, NULL, &rel_width, NULL );
+    ei_place(&field->widget, NULL,&point.x,&point.y, NULL, &height, NULL, NULL, &rel_width, NULL );
+    int x_frame=20;
+ ei_place(&frame->widget, NULL,&x_frame,NULL, NULL, &height, NULL, NULL, &rel_width, NULL );
+    ei_button_t* select_button = (ei_button_t*) ei_widget_create("button", &field->widget);
+    select_button->frame.widget.requested_size = ei_size(12, 12);
+    select_button->frame.border_width =0;
+    select_button->frame.color = ei_color(255, 255, 255, 150);
+    select_button->frame.corner_radius = 6;
+    select_button->frame.text_anchor = ei_anc_center;
+    select_button->frame.rounded_down=EI_TRUE;
+    select_button->frame.rounded_up=EI_TRUE;
+    select_button->callback = click_button;
 
-    ei_button_t* close_button = (ei_button_t*) ei_widget_create("button", &frame->widget);
-    close_button->frame.widget.requested_size = ei_size(12, 12);
-    close_button->frame.border_width =0;
-    close_button->frame.color = ei_color(255, 255, 255, 150);
-    close_button->frame.corner_radius = 6;
-    close_button->frame.text_anchor = ei_anc_center;
-    close_button->frame.rounded_down=EI_TRUE;
-    close_button->frame.rounded_up=EI_TRUE;
-    close_button->callback = click_button;
-    ei_bind(ei_ev_mouse_buttonup, &close_button->frame.widget, NULL, click_button, NULL);
     ei_anchor_t anchor = ei_anc_west;
     int position_x = 4;
-    ei_place(&close_button->frame.widget, &anchor, &position_x, NULL, NULL,
+    ei_place(&select_button->frame.widget, &anchor, &position_x, NULL, NULL,
              NULL, NULL, NULL, NULL, NULL);
-
+    ei_add_tag_widget((ei_widget_t*)select_button,"select_button");
+ei_add_tag_widget((ei_widget_t*)field,"field");
     radio->number++;
     widget->requested_size.height = radio->number*height;
-    ei_place(widget, NULL, NULL, NULL, NULL,
-             NULL, NULL, NULL, NULL, NULL);
+    if(widget->geom_params !=NULL)
+    {
+
+        ei_placer_geometry_param_t* placer = (ei_placer_geometry_param_t*)widget->geom_params;
+        ei_place(widget, &placer->anchor, &placer->x,&placer->y,NULL,NULL,&placer->rel_x,&placer->rel_y,
+                 NULL, NULL);
+    }
+    else ei_place(widget,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 }
 
 void ei_radiobutton_setdefaultsfunc(ei_widget_t* widget)
@@ -120,8 +124,8 @@ void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, co
         while(tpr !=NULL)
         {
             ei_frame_t* tmp=(ei_frame_t*)tpr;
-
-            hw_text_compute_size(tmp->text, tmp->text_font, &width, &height);
+            ei_frame_t* frame=(ei_frame_t*)tmp->widget.children_head;
+            hw_text_compute_size(frame->text, tmp->text_font, &width, &height);
             if(width > size.width) //TODO fct max
             {
                 size.width=width;
@@ -129,6 +133,7 @@ void ei_radiobutton_configure(ei_widget_t* widget, ei_size_t* requested_size, co
             if(color !=NULL)
             {
                 tmp->color=*color;
+                frame->color=*color;
             }
             tpr->requested_size.height=height_frame;
             tpr=tpr->next_sibling;
@@ -170,6 +175,7 @@ void ei_radiobutton_register_class()
     radiobuttonclass->geomnotifyfunc = NULL;
     radiobuttonclass->next = NULL;
     ei_widgetclass_register(radiobuttonclass);
+    ei_bind(ei_ev_mouse_buttonup, NULL, "select_button", click_button, NULL);
 }
 
 ei_widget_t* ei_find_widget(ei_radiobutton_t* radio,int number)
@@ -219,29 +225,28 @@ void ei_edit_field(ei_radiobutton_t* radio,int number, char* text)
     widget= ei_find_widget( radio, number);
     if (widget !=NULL)
     {
-        ei_frame_t* frame = (ei_frame_t*)widget;
+        ei_frame_t* frame = (ei_frame_t*)widget->children_head;
         frame->text=text;
     }
 }
 
 char* ei_return_field(ei_radiobutton_t* radio)
 {
-    ei_frame_t* frame = (ei_frame_t*)radio->frame.widget.children_head;
+    ei_frame_t* field = (ei_frame_t*)radio->frame.widget.children_head;
     ei_color_t color={0x00,0x00,0x00,0xff};
 
-    while(frame !=NULL)
+    while(field !=NULL)
     {
-        ei_button_t* button=(ei_button_t*)frame->widget.children_head;
-
+        ei_button_t* button=(ei_button_t*)field->widget.children_tail;
+ei_frame_t* frame=(ei_frame_t*)field->widget.children_head;
         if (is_same_color(button->frame.color,color))
         {
             return frame->text;
         }
         else
         {
-            frame=(ei_frame_t*)frame->widget.next_sibling;
+            field=(ei_frame_t*)field->widget.next_sibling;
         }
-        return NULL;
     }
     return NULL;
 }

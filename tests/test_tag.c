@@ -80,27 +80,6 @@ ei_bool_t desactivation(ei_widget_t* widget, ei_event_t* event, void* user_param
     return EI_FALSE;
 }
 
-void display_list_tag()
-{
-    ei_linked_tag_t* last_tag = first_tag;
-    while(last_tag !=NULL)
-    {
-        printf("%s \n", (char*)last_tag->tag);
-        last_tag=last_tag->next;
-    }
-}
-
-void display_tag(ei_widget_t* widget)
-{
-    ei_frame_t* frame=(ei_frame_t*)widget;
-    ei_linked_tag_t* last_tag = frame->tag;
-    while(last_tag !=NULL)
-    {
-        printf("%s \n", (char*)last_tag->tag);
-        last_tag=last_tag->next;
-    }
-}
-
 int ei_main(int argc, char** argv)
 {
     ei_size_t	screen_size		= {600, 600};
@@ -204,21 +183,21 @@ int ei_main(int argc, char** argv)
                        NULL, NULL, NULL);
 
     /*test d'ajout et de suppression*/
-    printf("On affiche la liste initiale de tag \n");
+    printf("On affiche la liste initiale de tags dans l'application' \n");
     display_list_tag();
-    printf("on ajoute le tag bullet au widget fframe \n");
+    printf("on ajoute le tag bullet au widget frame \n");
 
     tag = (ei_tag_t)"bullet";
     ei_add_tag_widget(frame,tag);
     display_list_tag();
-    printf("On affiche les tag de frame \n");
+    printf("On affiche les tags de frame \n");
     display_tag(frame);
     printf("On va detruire frame dans frame \n");
     tag=(ei_tag_t)"frame";
 
     ei_destroy_tag_widget(frame,tag);
     display_tag(frame);
-    printf("on va detruire le tag frame dans tout les widget \n");
+    printf("on va detruire le tag frame dans tous les widgets \n");
     tag=(ei_tag_t)"frame";
     ei_destroy_tag(tag);
     display_list_tag();
