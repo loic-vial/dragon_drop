@@ -126,7 +126,7 @@ void ei_radiobutton_configure(ei_widget_t * widget,
 		size = ei_size_zero();
 		ei_radiobutton_t *radio = (ei_radiobutton_t *) widget;
 		int height_frame = requested_size->height / radio->number;
-		if (height_frame < 20)	//TODO min
+        if (height_frame < 20)
 		{
 			height_frame = 20;
 		}
@@ -136,7 +136,7 @@ void ei_radiobutton_configure(ei_widget_t * widget,
 			    (ei_frame_t *) tmp->widget.children_head;
 			hw_text_compute_size(frame->text, tmp->text_font,
 					     &width, &height);
-			if (width > size.width)	//TODO fct max
+            if (width > size.width)
 			{
 				size.width = width;
 			}
