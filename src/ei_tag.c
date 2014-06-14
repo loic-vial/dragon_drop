@@ -2,6 +2,7 @@
 #include "ei_frame.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 ei_linked_tag_t* first_tag = NULL;
 

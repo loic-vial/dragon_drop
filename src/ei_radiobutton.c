@@ -12,7 +12,7 @@ ei_bool_t click_button(ei_widget_t* widget, ei_event_t* event, void* user_param)
 {
     ei_button_t* field_button = (ei_button_t*)widget;
     ei_frame_t* field= (ei_frame_t*)widget->parent->parent->children_head;
-    ei_frame_t* frame=(ei_frame_t*)widget->parent->children_head;
+
     while(field !=NULL)
     {
         ei_button_t* button_tmp=(ei_button_t*) field->widget.children_tail;
@@ -238,7 +238,7 @@ char* ei_return_field(ei_radiobutton_t* radio)
     while(field !=NULL)
     {
         ei_button_t* button=(ei_button_t*)field->widget.children_tail;
-ei_frame_t* frame=(ei_frame_t*)field->widget.children_tail;
+ei_frame_t* frame=(ei_frame_t*)field->widget.children_head;
         if (is_same_color(button->frame.color,color))
         {
             return frame->text;

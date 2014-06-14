@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ei_radiobutton.h"
 #include "ei_geometrymanager.h"
 #include "ei_application.h"
@@ -68,13 +69,31 @@ int ei_main(int argc, char** argv)
     ei_size_t frame_size={200,200};
 
     frame=ei_widget_create("frame",ei_app_root_widget());
+
     ei_frame_configure(frame,&frame_size,&color,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
     ei_anchor_t frame_anc=ei_anc_east;
     x = -10;
     ei_place(frame,&frame_anc,&x,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
+
+
+      char* text1= "Vous aimez la musique";
+     ei_widget_t* text_debut=ei_widget_create("frame",frame);
+ei_font_t font = hw_text_font_create("misc/font.ttf", ei_style_normal, 15);
+      ei_frame_configure(frame,NULL,&color,NULL,NULL,&text1,&font,NULL,NULL,NULL,NULL,NULL);
+      ei_anchor_t frame_anc_debut=ei_anc_south;
+
+    int  y = -100;
+      ei_place(text_debut,&frame_anc_debut,NULL,&y,NULL,NULL,NULL,NULL,NULL,NULL);
+
+
+
     ei_bind(ei_ev_keydown, 		NULL, "all", process_key, NULL);
 
+    display_tag(radio);
+    printf("\n");
+    display_tag(radio->children_head);
+    printf("\n");
 
     display_tag(radio->children_head->children_tail);
 
